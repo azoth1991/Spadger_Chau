@@ -13,6 +13,7 @@
 		"bin-debug/AssetAdapter.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
+		"bin-debug/MainScence.js",
 		"bin-debug/ThemeAdapter.js"
 	]
 }
