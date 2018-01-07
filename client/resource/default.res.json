@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,egret_icon_png,description_json,b-current_png,bg_jpg,create-room-i-down_png,create-room-i_png,enter-room-b-down_png,enter-room-b_png,guajian-i_png,mail-b_png,military-b_png,more-b-down_png,more-b_png,my-b_png,room-b_png,room-card-b-down_png,room-card-b_png,room1-b-down_png,room1-i_png,roomcard-i_png,setting-b_png,share-b_png,bgtest_jpg",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,egret_icon_png,description_json,setting-i-down_png,tools-i-down_png,play-i-down_png,my-i-down_png,news-i-down_png,zhanji-i-down_png,plus-b-down_png,plus-b_png",
 			"name": "preload"
 		}
 	],
@@ -97,6 +97,11 @@
 			"name": "on_png"
 		},
 		{
+			"url": "assets/Button/button_down.png",
+			"type": "image",
+			"name": "button_down_png"
+		},
+		{
 			"url": "assets/Button/button_up.png",
 			"type": "image",
 			"name": "button_up_png"
@@ -127,669 +132,154 @@
 			"name": "description_json"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_select_disabled.png",
+			"url": "eui_main/imgs/bg.jpg",
 			"type": "image",
-			"name": "checkbox_select_disabled2_png"
+			"name": "bg_jpg"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_select_down.png",
+			"url": "eui_main/imgs/chat-bg-2.png",
 			"type": "image",
-			"name": "checkbox_select_down2_png"
+			"name": "chat-bg-2_png"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_select_up.png",
+			"url": "eui_main/imgs/chat-bg.png",
 			"type": "image",
-			"name": "checkbox_select_up2_png"
+			"name": "chat-bg_png"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_unselect.png",
+			"url": "eui_main/imgs/create-room-down.png",
 			"type": "image",
-			"name": "checkbox_unselect2_png"
+			"name": "create-room-down_png"
 		},
 		{
-			"url": "assets/ItemRenderer/selected.png",
+			"url": "eui_main/imgs/create-room-i.png",
 			"type": "image",
-			"name": "selected2_png"
+			"name": "create-room-i_png"
 		},
 		{
-			"url": "assets/Panel/border.png",
+			"url": "eui_main/imgs/damon-i.png",
 			"type": "image",
-			"name": "border2_png"
+			"name": "damon-i_png"
 		},
 		{
-			"url": "assets/Panel/header.png",
+			"url": "eui_main/imgs/enter-b-down.png",
 			"type": "image",
-			"name": "header2_png"
+			"name": "enter-b-down_png"
 		},
 		{
-			"url": "assets/ProgressBar/thumb_pb.png",
+			"url": "eui_main/imgs/enter-b.png",
 			"type": "image",
-			"name": "thumb_pb2_png"
+			"name": "enter-b_png"
 		},
 		{
-			"url": "assets/ProgressBar/track_pb.png",
+			"url": "eui_main/imgs/head-i-2.png",
 			"type": "image",
-			"name": "track_pb2_png"
+			"name": "head-i-2_png"
 		},
 		{
-			"url": "assets/RadioButton/radiobutton_select_disabled.png",
+			"url": "eui_main/imgs/head-i.png",
 			"type": "image",
-			"name": "radiobutton_select_disabled2_png"
+			"name": "head-i_png"
 		},
 		{
-			"url": "assets/RadioButton/radiobutton_select_down.png",
+			"url": "eui_main/imgs/jifen-bg.png",
 			"type": "image",
-			"name": "radiobutton_select_down2_png"
+			"name": "jifen-bg_png"
 		},
 		{
-			"url": "assets/RadioButton/radiobutton_select_up.png",
+			"url": "eui_main/imgs/money-i.png",
 			"type": "image",
-			"name": "radiobutton_select_up2_png"
+			"name": "money-i_png"
 		},
 		{
-			"url": "assets/RadioButton/radiobutton_unselect.png",
+			"url": "eui_main/imgs/my-b-down.png",
 			"type": "image",
-			"name": "radiobutton_unselect2_png"
+			"name": "my-b-down_png"
 		},
 		{
-			"url": "assets/ScrollBar/roundthumb.png",
+			"url": "eui_main/imgs/my-b.png",
 			"type": "image",
-			"name": "roundthumb2_png"
+			"name": "my-b_png"
 		},
 		{
-			"url": "assets/ScrollBar/track_sb.png",
+			"url": "eui_main/imgs/my-i.png",
 			"type": "image",
-			"name": "track_sb2_png"
+			"name": "my-i_png"
 		},
 		{
-			"url": "assets/Slider/thumb.png",
+			"url": "eui_main/imgs/news-i.png",
 			"type": "image",
-			"name": "thumb2_png"
+			"name": "news-i_png"
 		},
 		{
-			"url": "assets/Slider/track.png",
+			"url": "eui_main/imgs/none-i.png",
 			"type": "image",
-			"name": "track2_png"
+			"name": "none-i_png"
 		},
 		{
-			"url": "assets/Slider/tracklight.png",
+			"url": "eui_main/imgs/play-i.png",
 			"type": "image",
-			"name": "tracklight2_png"
+			"name": "play-i_png"
 		},
 		{
-			"url": "assets/ToggleSwitch/handle.png",
+			"url": "eui_main/imgs/room-card-bg.png",
 			"type": "image",
-			"name": "handle2_png"
+			"name": "room-card-bg_png"
 		},
 		{
-			"url": "assets/ToggleSwitch/off.png",
+			"url": "eui_main/imgs/setting-i.png",
 			"type": "image",
-			"name": "off2_png"
+			"name": "setting-i_png"
 		},
 		{
-			"url": "assets/ToggleSwitch/on.png",
+			"url": "eui_main/imgs/tools-i.png",
 			"type": "image",
-			"name": "on2_png"
+			"name": "tools-i_png"
 		},
 		{
-			"url": "assets/egret_icon.png",
+			"url": "eui_main/imgs/zhanji-i.png",
 			"type": "image",
-			"name": "egret_icon2_png"
+			"name": "zhanji-i_png"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_select_disabled.png",
+			"name": "setting-i-down_png",
 			"type": "image",
-			"name": "checkbox_select_disabled3_png"
+			"url": "eui_main/imgs/setting-i-down.png"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_select_down.png",
+			"name": "tools-i-down_png",
 			"type": "image",
-			"name": "checkbox_select_down3_png"
+			"url": "eui_main/imgs/tools-i-down.png"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_select_up.png",
+			"name": "play-i-down_png",
 			"type": "image",
-			"name": "checkbox_select_up3_png"
+			"url": "eui_main/imgs/play-i-down.png"
 		},
 		{
-			"url": "assets/CheckBox/checkbox_unselect.png",
+			"name": "my-i-down_png",
 			"type": "image",
-			"name": "checkbox_unselect3_png"
+			"url": "eui_main/imgs/my-i-down.png"
 		},
 		{
-			"url": "assets/ItemRenderer/selected.png",
+			"name": "news-i-down_png",
 			"type": "image",
-			"name": "selected3_png"
+			"url": "eui_main/imgs/news-i-down.png"
 		},
 		{
-			"url": "assets/Panel/border.png",
+			"name": "zhanji-i-down_png",
 			"type": "image",
-			"name": "border3_png"
+			"url": "eui_main/imgs/zhanji-i-down.png"
 		},
 		{
-			"url": "assets/Panel/header.png",
+			"name": "plus-b-down_png",
 			"type": "image",
-			"name": "header3_png"
+			"url": "eui_main/imgs/plus-b-down.png"
 		},
 		{
-			"url": "assets/ProgressBar/thumb_pb.png",
+			"name": "plus-b_png",
 			"type": "image",
-			"name": "thumb_pb3_png"
-		},
-		{
-			"url": "assets/ProgressBar/track_pb.png",
-			"type": "image",
-			"name": "track_pb3_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_disabled.png",
-			"type": "image",
-			"name": "radiobutton_select_disabled3_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_down.png",
-			"type": "image",
-			"name": "radiobutton_select_down3_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_up.png",
-			"type": "image",
-			"name": "radiobutton_select_up3_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_unselect.png",
-			"type": "image",
-			"name": "radiobutton_unselect3_png"
-		},
-		{
-			"url": "assets/ScrollBar/roundthumb.png",
-			"type": "image",
-			"name": "roundthumb3_png"
-		},
-		{
-			"url": "assets/ScrollBar/track_sb.png",
-			"type": "image",
-			"name": "track_sb3_png"
-		},
-		{
-			"url": "assets/Slider/thumb.png",
-			"type": "image",
-			"name": "thumb3_png"
-		},
-		{
-			"url": "assets/Slider/track.png",
-			"type": "image",
-			"name": "track3_png"
-		},
-		{
-			"url": "assets/Slider/tracklight.png",
-			"type": "image",
-			"name": "tracklight3_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/handle.png",
-			"type": "image",
-			"name": "handle3_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/off.png",
-			"type": "image",
-			"name": "off3_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/on.png",
-			"type": "image",
-			"name": "on3_png"
-		},
-		{
-			"url": "assets/egret_icon.png",
-			"type": "image",
-			"name": "egret_icon3_png"
-		},
-		{
-			"url": "assets/Button/button_down.png",
-			"type": "image",
-			"name": "button_down4_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_select_disabled.png",
-			"type": "image",
-			"name": "checkbox_select_disabled4_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_select_down.png",
-			"type": "image",
-			"name": "checkbox_select_down4_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_select_up.png",
-			"type": "image",
-			"name": "checkbox_select_up4_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_unselect.png",
-			"type": "image",
-			"name": "checkbox_unselect4_png"
-		},
-		{
-			"url": "assets/ItemRenderer/selected.png",
-			"type": "image",
-			"name": "selected4_png"
-		},
-		{
-			"url": "assets/Panel/border.png",
-			"type": "image",
-			"name": "border4_png"
-		},
-		{
-			"url": "assets/Panel/header.png",
-			"type": "image",
-			"name": "header4_png"
-		},
-		{
-			"url": "assets/ProgressBar/thumb_pb.png",
-			"type": "image",
-			"name": "thumb_pb4_png"
-		},
-		{
-			"url": "assets/ProgressBar/track_pb.png",
-			"type": "image",
-			"name": "track_pb4_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_disabled.png",
-			"type": "image",
-			"name": "radiobutton_select_disabled4_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_down.png",
-			"type": "image",
-			"name": "radiobutton_select_down4_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_up.png",
-			"type": "image",
-			"name": "radiobutton_select_up4_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_unselect.png",
-			"type": "image",
-			"name": "radiobutton_unselect4_png"
-		},
-		{
-			"url": "assets/ScrollBar/roundthumb.png",
-			"type": "image",
-			"name": "roundthumb4_png"
-		},
-		{
-			"url": "assets/ScrollBar/track_sb.png",
-			"type": "image",
-			"name": "track_sb4_png"
-		},
-		{
-			"url": "assets/Slider/thumb.png",
-			"type": "image",
-			"name": "thumb4_png"
-		},
-		{
-			"url": "assets/Slider/track.png",
-			"type": "image",
-			"name": "track4_png"
-		},
-		{
-			"url": "assets/Slider/tracklight.png",
-			"type": "image",
-			"name": "tracklight4_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/handle.png",
-			"type": "image",
-			"name": "handle4_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/off.png",
-			"type": "image",
-			"name": "off4_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/on.png",
-			"type": "image",
-			"name": "on4_png"
-		},
-		{
-			"url": "assets/egret_icon.png",
-			"type": "image",
-			"name": "egret_icon4_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_select_disabled.png",
-			"type": "image",
-			"name": "checkbox_select_disabled5_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_select_down.png",
-			"type": "image",
-			"name": "checkbox_select_down5_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_select_up.png",
-			"type": "image",
-			"name": "checkbox_select_up5_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_unselect.png",
-			"type": "image",
-			"name": "checkbox_unselect5_png"
-		},
-		{
-			"url": "assets/ItemRenderer/selected.png",
-			"type": "image",
-			"name": "selected5_png"
-		},
-		{
-			"url": "assets/Panel/border.png",
-			"type": "image",
-			"name": "border5_png"
-		},
-		{
-			"url": "assets/Panel/header.png",
-			"type": "image",
-			"name": "header5_png"
-		},
-		{
-			"url": "assets/ProgressBar/thumb_pb.png",
-			"type": "image",
-			"name": "thumb_pb5_png"
-		},
-		{
-			"url": "assets/ProgressBar/track_pb.png",
-			"type": "image",
-			"name": "track_pb5_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_disabled.png",
-			"type": "image",
-			"name": "radiobutton_select_disabled5_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_down.png",
-			"type": "image",
-			"name": "radiobutton_select_down5_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_up.png",
-			"type": "image",
-			"name": "radiobutton_select_up5_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_unselect.png",
-			"type": "image",
-			"name": "radiobutton_unselect5_png"
-		},
-		{
-			"url": "assets/ScrollBar/roundthumb.png",
-			"type": "image",
-			"name": "roundthumb5_png"
-		},
-		{
-			"url": "assets/ScrollBar/track_sb.png",
-			"type": "image",
-			"name": "track_sb5_png"
-		},
-		{
-			"url": "assets/Slider/thumb.png",
-			"type": "image",
-			"name": "thumb5_png"
-		},
-		{
-			"url": "assets/Slider/track.png",
-			"type": "image",
-			"name": "track5_png"
-		},
-		{
-			"url": "assets/Slider/tracklight.png",
-			"type": "image",
-			"name": "tracklight5_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/handle.png",
-			"type": "image",
-			"name": "handle5_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/off.png",
-			"type": "image",
-			"name": "off5_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/on.png",
-			"type": "image",
-			"name": "on5_png"
-		},
-		{
-			"url": "assets/egret_icon.png",
-			"type": "image",
-			"name": "egret_icon5_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_select_disabled.png",
-			"type": "image",
-			"name": "checkbox_select_disabled6_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_select_down.png",
-			"type": "image",
-			"name": "checkbox_select_down6_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_select_up.png",
-			"type": "image",
-			"name": "checkbox_select_up6_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_unselect.png",
-			"type": "image",
-			"name": "checkbox_unselect6_png"
-		},
-		{
-			"url": "assets/ItemRenderer/selected.png",
-			"type": "image",
-			"name": "selected6_png"
-		},
-		{
-			"url": "assets/Panel/border.png",
-			"type": "image",
-			"name": "border6_png"
-		},
-		{
-			"url": "assets/Panel/header.png",
-			"type": "image",
-			"name": "header6_png"
-		},
-		{
-			"url": "assets/ProgressBar/thumb_pb.png",
-			"type": "image",
-			"name": "thumb_pb6_png"
-		},
-		{
-			"url": "assets/ProgressBar/track_pb.png",
-			"type": "image",
-			"name": "track_pb6_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_disabled.png",
-			"type": "image",
-			"name": "radiobutton_select_disabled6_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_down.png",
-			"type": "image",
-			"name": "radiobutton_select_down6_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_up.png",
-			"type": "image",
-			"name": "radiobutton_select_up6_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_unselect.png",
-			"type": "image",
-			"name": "radiobutton_unselect6_png"
-		},
-		{
-			"url": "assets/ScrollBar/roundthumb.png",
-			"type": "image",
-			"name": "roundthumb6_png"
-		},
-		{
-			"url": "assets/ScrollBar/track_sb.png",
-			"type": "image",
-			"name": "track_sb6_png"
-		},
-		{
-			"url": "assets/Slider/thumb.png",
-			"type": "image",
-			"name": "thumb6_png"
-		},
-		{
-			"url": "assets/Slider/track.png",
-			"type": "image",
-			"name": "track6_png"
-		},
-		{
-			"url": "assets/Slider/tracklight.png",
-			"type": "image",
-			"name": "tracklight6_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/handle.png",
-			"type": "image",
-			"name": "handle6_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/off.png",
-			"type": "image",
-			"name": "off6_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/on.png",
-			"type": "image",
-			"name": "on6_png"
-		},
-		{
-			"url": "assets/bg.jpg",
-			"type": "image",
-			"name": "bg6_jpg"
-		},
-		{
-			"url": "assets/egret_icon.png",
-			"type": "image",
-			"name": "egret_icon6_png"
-		},
-		{
-			"name": "b-current_png",
-			"type": "image",
-			"url": "eui_main/img/b-current.png"
-		},
-		{
-			"name": "bg_jpg",
-			"type": "image",
-			"url": "eui_main/img/bg.jpg"
-		},
-		{
-			"name": "create-room-i-down_png",
-			"type": "image",
-			"url": "eui_main/img/create-room-i-down.png"
-		},
-		{
-			"name": "create-room-i_png",
-			"type": "image",
-			"url": "eui_main/img/create-room-i.png"
-		},
-		{
-			"name": "enter-room-b-down_png",
-			"type": "image",
-			"url": "eui_main/img/enter-room-b-down.png"
-		},
-		{
-			"name": "enter-room-b_png",
-			"type": "image",
-			"url": "eui_main/img/enter-room-b.png"
-		},
-		{
-			"name": "guajian-i_png",
-			"type": "image",
-			"url": "eui_main/img/guajian-i.png"
-		},
-		{
-			"name": "mail-b_png",
-			"type": "image",
-			"url": "eui_main/img/mail-b.png"
-		},
-		{
-			"name": "military-b_png",
-			"type": "image",
-			"url": "eui_main/img/military-b.png"
-		},
-		{
-			"name": "more-b-down_png",
-			"type": "image",
-			"url": "eui_main/img/more-b-down.png"
-		},
-		{
-			"name": "more-b_png",
-			"type": "image",
-			"url": "eui_main/img/more-b.png"
-		},
-		{
-			"name": "my-b_png",
-			"type": "image",
-			"url": "eui_main/img/my-b.png"
-		},
-		{
-			"name": "room-b_png",
-			"type": "image",
-			"url": "eui_main/img/room-b.png"
-		},
-		{
-			"name": "room-card-b-down_png",
-			"type": "image",
-			"url": "eui_main/img/room-card-b-down.png"
-		},
-		{
-			"name": "room-card-b_png",
-			"type": "image",
-			"url": "eui_main/img/room-card-b.png"
-		},
-		{
-			"name": "room1-b-down_png",
-			"type": "image",
-			"url": "eui_main/img/room1-b-down.png"
-		},
-		{
-			"name": "room1-i_png",
-			"type": "image",
-			"url": "eui_main/img/room1-i.png"
-		},
-		{
-			"name": "roomcard-i_png",
-			"type": "image",
-			"url": "eui_main/img/roomcard-i.png"
-		},
-		{
-			"name": "setting-b_png",
-			"type": "image",
-			"url": "eui_main/img/setting-b.png"
-		},
-		{
-			"name": "share-b_png",
-			"type": "image",
-			"url": "eui_main/img/share-b.png"
-		},
-		{
-			"name": "bgtest_jpg",
-			"type": "image",
-			"url": "eui_main/img/bgtest.jpg"
+			"url": "eui_main/imgs/plus-b.png"
 		}
 	]
 }

@@ -1,7 +1,10 @@
 {
-    "1606a8267c0": {
-        "path": "../resource/eui_main/component/MainSence.ts",
-        "class": "MainSence",
-        "parentPath": ""
-    }
+  "global": {
+    "globalRulerEnable": false,
+    "globalBindingDataTestObj": [],
+    "globalAutoLayerMarkEnable": true
+  },
+  "160ccadf2a7": {
+    "bindingDataTestObj": []
+  }
 }

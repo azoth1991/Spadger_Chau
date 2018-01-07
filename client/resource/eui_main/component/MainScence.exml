@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="Main" width="1136" height="640" xmlns:e="http://ns.egret.com/eui">
-	<e:Image source="bg_jpg" x="0" anchorOffsetX="0" width="1136" anchorOffsetY="0" height="640" y="0"/>
-	<e:Image source="guajian-i_png" x="44" y="10" anchorOffsetX="0" width="117.01" anchorOffsetY="0" height="569.74"/>
-</e:Skin>

@@ -1,13 +1,9 @@
 {
-  "native": {
-    "path_ignore": []
+  "engineVersion": "5.1.2",
+  "compilerVersion": "5.1.2",
+  "target": {
+    "current": "web"
   },
-  "publish": {
-    "web": 0,
-    "native": 1,
-    "path": "bin-release"
-  },
-  "egret_version": "5.0.14",
   "template": {},
   "eui": {
     "exmlRoot": [
@@ -16,7 +12,7 @@
     "themes": [
       "resource/default.thm.json"
     ],
-    "exmlPublishPolicy": "content"
+    "exmlPublishPolicy": "commonjs"
   },
   "modules": [
     {
@@ -26,20 +22,19 @@
       "name": "eui"
     },
     {
-      "name": "res"
+      "name": "assetsmanager"
     },
     {
       "name": "tween"
     },
     {
-      "name": "socket"
-    },
-    {
       "name": "game"
     },
     {
-      "name": "promise",
-      "path": "./promise"
+      "name": "socket"
+    },
+    {
+      "name": "promise"
     }
   ]
 }
