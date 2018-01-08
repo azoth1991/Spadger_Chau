@@ -3,6 +3,10 @@
 		{
 			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,egret_icon_png,description_json,setting-i-down_png,tools-i-down_png,play-i-down_png,my-i-down_png,news-i-down_png,zhanji-i-down_png,plus-b-down_png,plus-b_png",
 			"name": "preload"
+		},
+		{
+			"keys": "loading-tag-progress_png,loading-tag-bg_png,loading-bg_jpg",
+			"name": "loading"
 		}
 	],
 	"resources": [
@@ -242,44 +246,59 @@
 			"name": "zhanji-i_png"
 		},
 		{
-			"name": "setting-i-down_png",
+			"url": "eui_main/imgs/setting-i-down.png",
 			"type": "image",
-			"url": "eui_main/imgs/setting-i-down.png"
+			"name": "setting-i-down_png"
 		},
 		{
-			"name": "tools-i-down_png",
+			"url": "eui_main/imgs/tools-i-down.png",
 			"type": "image",
-			"url": "eui_main/imgs/tools-i-down.png"
+			"name": "tools-i-down_png"
 		},
 		{
-			"name": "play-i-down_png",
+			"url": "eui_main/imgs/play-i-down.png",
 			"type": "image",
-			"url": "eui_main/imgs/play-i-down.png"
+			"name": "play-i-down_png"
 		},
 		{
-			"name": "my-i-down_png",
+			"url": "eui_main/imgs/my-i-down.png",
 			"type": "image",
-			"url": "eui_main/imgs/my-i-down.png"
+			"name": "my-i-down_png"
 		},
 		{
-			"name": "news-i-down_png",
+			"url": "eui_main/imgs/news-i-down.png",
 			"type": "image",
-			"url": "eui_main/imgs/news-i-down.png"
+			"name": "news-i-down_png"
 		},
 		{
-			"name": "zhanji-i-down_png",
+			"url": "eui_main/imgs/zhanji-i-down.png",
 			"type": "image",
-			"url": "eui_main/imgs/zhanji-i-down.png"
+			"name": "zhanji-i-down_png"
 		},
 		{
-			"name": "plus-b-down_png",
+			"url": "eui_main/imgs/plus-b-down.png",
 			"type": "image",
-			"url": "eui_main/imgs/plus-b-down.png"
+			"name": "plus-b-down_png"
 		},
 		{
-			"name": "plus-b_png",
+			"url": "eui_main/imgs/plus-b.png",
 			"type": "image",
-			"url": "eui_main/imgs/plus-b.png"
+			"name": "plus-b_png"
+		},
+		{
+			"url": "eui_main/imgs/loading-bg.jpg",
+			"type": "image",
+			"name": "loading-bg_jpg"
+		},
+		{
+			"url": "eui_main/imgs/loading-tag-bg.png",
+			"type": "image",
+			"name": "loading-tag-bg_png"
+		},
+		{
+			"url": "eui_main/imgs/loading-tag-progress.png",
+			"type": "image",
+			"name": "loading-tag-progress_png"
 		}
 	]
 }

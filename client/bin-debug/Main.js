@@ -122,29 +122,39 @@ var Main = (function (_super) {
     };
     Main.prototype.loadResource = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var loadingView, e_1;
+            var loadingView, trueLoadingUI, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 4, , 5]);
+                        _a.trys.push([0, 7, , 8]);
                         loadingView = new LoadingUI();
                         this.stage.addChild(loadingView);
+                        trueLoadingUI = new TrueLoadingUI();
                         return [4 /*yield*/, RES.loadConfig("resource/default.res.json", "resource/")];
                     case 1:
                         _a.sent();
                         return [4 /*yield*/, this.loadTheme()];
                     case 2:
                         _a.sent();
-                        return [4 /*yield*/, RES.loadGroup("preload", 0, loadingView)];
+                        return [4 /*yield*/, RES.loadGroup("loading", 0, loadingView)];
                     case 3:
                         _a.sent();
-                        this.stage.removeChild(loadingView);
-                        return [3 /*break*/, 5];
+                        return [4 /*yield*/, this.stage.removeChild(loadingView)];
                     case 4:
+                        _a.sent();
+                        return [4 /*yield*/, this.stage.addChild(trueLoadingUI)];
+                    case 5:
+                        _a.sent();
+                        return [4 /*yield*/, RES.loadGroup("preload", 0, trueLoadingUI)];
+                    case 6:
+                        _a.sent();
+                        this.stage.removeChild(trueLoadingUI);
+                        return [3 /*break*/, 8];
+                    case 7:
                         e_1 = _a.sent();
                         console.error(e_1);
-                        return [3 /*break*/, 5];
-                    case 5: return [2 /*return*/];
+                        return [3 /*break*/, 8];
+                    case 8: return [2 /*return*/];
                 }
             });
         });
@@ -167,16 +177,6 @@ var Main = (function (_super) {
     Main.prototype.createGameScene = function () {
         var mainUI = new MainUI();
         this.addChild(mainUI);
-    };
-    /**
-     * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
-     * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
-     */
-    Main.prototype.createBitmapByName = function (name) {
-        var result = new egret.Bitmap();
-        var texture = RES.getRes(name);
-        result.texture = texture;
-        return result;
     };
     return Main;
 }(eui.UILayer));

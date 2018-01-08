@@ -71,10 +71,14 @@ class Main extends eui.UILayer {
         try {
             const loadingView = new LoadingUI();
             this.stage.addChild(loadingView);
+            const trueLoadingUI = new TrueLoadingUI();
             await RES.loadConfig("resource/default.res.json", "resource/");
             await this.loadTheme();
-            await RES.loadGroup("preload", 0, loadingView);
-            this.stage.removeChild(loadingView);
+            await RES.loadGroup("loading", 0, loadingView);            
+            await this.stage.removeChild(loadingView);
+            await this.stage.addChild(trueLoadingUI);
+            await RES.loadGroup("preload", 0, trueLoadingUI);
+            this.stage.removeChild(trueLoadingUI);
         }
         catch (e) {
             console.error(e);
@@ -106,11 +110,6 @@ class Main extends eui.UILayer {
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
      * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
      */
-    private createBitmapByName(name: string): egret.Bitmap {
-        let result = new egret.Bitmap();
-        let texture: egret.Texture = RES.getRes(name);
-        result.texture = texture;
-        return result;
-    }
+    
 
 }

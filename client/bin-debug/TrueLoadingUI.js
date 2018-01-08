@@ -26,33 +26,55 @@
 //  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 //////////////////////////////////////////////////////////////////////////////////////
-
-class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
-
-    public constructor() {
-        super();
-        this.createView();
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
+var __extends = this && this.__extends || function __extends(t, e) { 
+ function r() { 
+ this.constructor = t;
+}
+for (var i in e) e.hasOwnProperty(i) && (t[i] = e[i]);
+r.prototype = e.prototype, t.prototype = new r();
+};
+var TrueLoadingUI = (function (_super) {
+    __extends(TrueLoadingUI, _super);
+    function TrueLoadingUI() {
+        var _this = _super.call(this) || this;
+        _this.createView();
+        return _this;
     }
-
-    private textField: egret.TextField;
-
-    private createView(): void {
+    TrueLoadingUI.prototype.createView = function () {
+        this.loadingBg = new eui.Image();
+        this.loadingBg.source = "loading-bg_jpg";
+        this.addChild(this.loadingBg);
+        this.loadingTagBg = new eui.Image();
+        this.loadingTagBg.source = "loading-tag-bg_png";
+        this.loadingTagBg.x = 224;
+        this.loadingTagBg.y = 628;
+        this.addChild(this.loadingTagBg);
+        this.loadingProgressBg = new eui.Image();
+        this.loadingProgressBg.source = "loading-tag-progress_png";
+        this.loadingProgressBg.x = 224;
+        this.loadingProgressBg.y = 628;
+        this.loadingProgressBg.width = 0;
+        this.addChild(this.loadingProgressBg);
         this.textField = new egret.TextField();
         this.addChild(this.textField);
-        this.textField.y = 300;
+        this.textField.y = 665;
         this.textField.width = 480;
         this.textField.height = 100;
-        this.textField.textAlign = "center";
-    }
-
-    public onProgress(current: number, total: number): void {
-        this.textField.text = `Loading...${current}/${total}`;
-    }
-
-    private createBitmapByName(name: string): egret.Bitmap {
-        let result = new egret.Bitmap();
-        let texture: egret.Texture = RES.getRes(name);
+        this.textField.x = 574;
+    };
+    TrueLoadingUI.prototype.onProgress = function (current, total) {
+        this.loadingProgressBg.width = current * 884 / total;
+        this.textField.text = "\u6B63\u5728\u52A0\u8F7D\u4E2D......";
+    };
+    TrueLoadingUI.prototype.createBitmapByName = function (name) {
+        var result = new egret.Bitmap();
+        var texture = RES.getRes(name);
         result.texture = texture;
         return result;
-    }
-}
+    };
+    return TrueLoadingUI;
+}(egret.Sprite));
+__reflect(TrueLoadingUI.prototype, "TrueLoadingUI", ["RES.PromiseTaskReporter"]);

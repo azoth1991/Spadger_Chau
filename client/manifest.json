@@ -15,6 +15,7 @@
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
 		"bin-debug/ThemeAdapter.js",
+		"bin-debug/TrueLoadingUI.js",
 		"bin-debug/UI/Main/DialogUI.js",
 		"bin-debug/UI/Main/HeadUI.js",
 		"bin-debug/UI/Main/MainUI.js"

@@ -27,26 +27,47 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
-class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
+class TrueLoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
 
     public constructor() {
         super();
         this.createView();
     }
 
+    private loadingBg: eui.Image;
+    private loadingTagBg: eui.Image;
+    private loadingProgressBg: eui.Image;
     private textField: egret.TextField;
-
     private createView(): void {
+        this.loadingBg = new eui.Image();
+        this.loadingBg.source = "loading-bg_jpg";
+        this.addChild(this.loadingBg);
+
+        this.loadingTagBg = new eui.Image();
+        this.loadingTagBg.source = "loading-tag-bg_png";
+        this.loadingTagBg.x = 224;
+        this.loadingTagBg.y = 628;
+        this.addChild(this.loadingTagBg);
+
+        this.loadingProgressBg = new eui.Image();
+        this.loadingProgressBg.source = "loading-tag-progress_png";
+        this.loadingProgressBg.x = 224;
+        this.loadingProgressBg.y = 628;
+        this.loadingProgressBg.width = 0;
+        this.addChild(this.loadingProgressBg);
+
         this.textField = new egret.TextField();
         this.addChild(this.textField);
-        this.textField.y = 300;
+        this.textField.y = 665;
         this.textField.width = 480;
         this.textField.height = 100;
-        this.textField.textAlign = "center";
+        this.textField.x = 574;
     }
 
+
     public onProgress(current: number, total: number): void {
-        this.textField.text = `Loading...${current}/${total}`;
+        this.loadingProgressBg.width = current*884/total;
+        this.textField.text = `正在加载中......`;
     }
 
     private createBitmapByName(name: string): egret.Bitmap {
