@@ -7,7 +7,6 @@ class MainUI extends eui.Component {
 
     uiCompHandler() {
         // header
-        this.imgBg.source = "bg_jpg";
         this._headui = new HeadUI();
 
         // _friendListIR
@@ -26,8 +25,28 @@ class MainUI extends eui.Component {
         this.listFriend.itemRenderer = FriendIRUI;
         //需要在scroller添加到舞台上面之后再访问verticalScrollBar
         this.addChildAt( this._headui, this.getChildIndex( this.imgBg ) + 1 );
-    }
 
+        // 绑定按钮
+        this.createRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this );
+        this.myRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this );
+        this.enterRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this );
+
+    }
+    private mbtnHandler( evt:egret.TouchEvent ):void{
+
+        switch ( evt.currentTarget ){
+            case this.createRoom:
+                this._pageFocused = GamePages.CREATE_ROOM;
+                break;
+            case this.enterRoom:
+                this._pageFocused = GamePages.ENTER_ROOM ;
+                break;
+            case this.myRoom:
+                this._pageFocused = GamePages.MY_ROOM ;
+                break;
+        }
+        this.dispatchEventWith( GameEvents.EVT_LOAD_PAGE, false, this._pageFocused );
+    }
     protected createChildren():void {
         super.createChildren();
     }
@@ -35,7 +54,10 @@ class MainUI extends eui.Component {
     private _headui:HeadUI;
     private listFriend:eui.List;
     private scrListFriend:eui.Scroller;
-
+    private createRoom:eui.Button;
+    private enterRoom:eui.Button;
+    private myRoom:eui.Button;
+    private _pageFocused:string;
 }
 class FriendIRUI extends eui.ItemRenderer {
 

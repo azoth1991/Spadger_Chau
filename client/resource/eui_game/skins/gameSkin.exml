@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="gameSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui">
+	<e:Image source="jishi_img_png" x="613" y="244"/>
+	<e:Image source="zhuangshi_img_png" x="0" y="0"/>
+	<e:Image source="zhuangshi_img_png" x="1334" y="0" scaleX="-1"/>
+	<e:Image source="wenzi_bg_png" x="396.5" y="420" />
+    <e:Label text="局数:0/4 底分:10" y="427" size="20" x="600"/>                    
+    <e:Button id="chongzhi" y="7" x="1118">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="chongzhi_btn_png"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+    <e:Button id="shezhi" y="7" x="1205">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="setting_btn_png"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+    <e:Button id="invent" y="499" x="545.5">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="yellow_btn_png" source.down="yellow_btn_down_png"/>
+	            <e:Label text="邀请微信好友游戏" y="40" size="20" x="50"/>                
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+</e:Skin>

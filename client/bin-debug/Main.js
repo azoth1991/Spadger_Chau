@@ -170,13 +170,9 @@ var Main = (function (_super) {
             }, _this);
         });
     };
-    /**
-     * 创建场景界面
-     * Create scene interface
-     */
     Main.prototype.createGameScene = function () {
-        var mainUI = new MainUI();
-        this.addChild(mainUI);
+        this.homeUI = new HomeUI();
+        this.addChild(this.homeUI);
     };
     return Main;
 }(eui.UILayer));

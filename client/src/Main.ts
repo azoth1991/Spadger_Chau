@@ -64,7 +64,6 @@ class Main extends eui.UILayer {
         await platform.login();
         const userInfo = await platform.getUserInfo();
         console.log(userInfo);
-
     }
 
     private async loadResource() {
@@ -93,7 +92,6 @@ class Main extends eui.UILayer {
             theme.addEventListener(eui.UIEvent.COMPLETE, () => {
                 resolve();
             }, this);
-
         })
     }
 
@@ -102,14 +100,10 @@ class Main extends eui.UILayer {
      * 创建场景界面
      * Create scene interface
      */
+    private homeUI:HomeUI;
     protected createGameScene(): void {
-        let mainUI:MainUI = new MainUI();
-        this.addChild(mainUI);
+        this.homeUI = new HomeUI();
+        this.addChild(this.homeUI);
     }
-    /**
-     * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
-     * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
-     */
-    
 
 }

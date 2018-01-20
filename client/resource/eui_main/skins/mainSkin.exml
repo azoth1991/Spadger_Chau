@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="mainSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<w:Config id="160ccadf2a9"/>
-	<e:Image id="imgBg" height="100%" width="100%" x="0" y="0" />
     <e:Button id="enterRoom" y="174" x="879">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
