@@ -53,7 +53,6 @@ class MainUI extends eui.Component {
     private imgBg;
     private _headui:HeadUI;
     private listFriend:eui.List;
-    private scrListFriend:eui.Scroller;
     private createRoom:eui.Button;
     private enterRoom:eui.Button;
     private myRoom:eui.Button;

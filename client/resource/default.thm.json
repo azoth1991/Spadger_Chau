@@ -16,6 +16,7 @@
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
+		"resource/eui_main/homeSkin.exml",
 		"resource/eui_skins/ButtonSkin.exml",
 		"resource/eui_skins/CheckBoxSkin.exml",
 		"resource/eui_skins/HScrollBarSkin.exml",
@@ -29,6 +30,9 @@
 		"resource/eui_skins/ToggleSwitchSkin.exml",
 		"resource/eui_skins/VScrollBarSkin.exml",
 		"resource/eui_skins/VSliderSkin.exml",
+		"resource/eui_game/skins/gameSkin.exml",
+		"resource/eui_game/skins/headIcon1.exml",
+		"resource/eui_game/skins/headIcon2.exml",
 		"resource/eui_main/skins/dialogSkin.exml",
 		"resource/eui_main/skins/friendIRSkin.exml",
 		"resource/eui_main/skins/headSkin.exml",

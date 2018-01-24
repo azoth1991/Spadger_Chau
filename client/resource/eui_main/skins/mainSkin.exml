@@ -69,15 +69,11 @@
     <!--列表-->
     <e:Scroller id="scrListFriend" height="415" width="317" x="120" y="150">
 		<e:viewport>
-			<e:List id="listFriend" height="92">
+			<e:List id="listFriend" height="92" width="315">
 				<e:layout> 
 					<e:VerticalLayout/>
 				</e:layout>
 			</e:List>
 		</e:viewport>
-        <e:Skin>
-			<e:VScrollBar id="verticalScrollBar" width="8" minHeight="100%" height="100%" right="0">
-			</e:VScrollBar>
-		</e:Skin>
 	</e:Scroller>
 </e:Skin>
