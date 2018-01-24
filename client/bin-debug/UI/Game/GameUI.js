@@ -61,6 +61,7 @@ var GameUI = (function (_super) {
         this._icon3.changeSkin(position[3]);
     };
     GameUI.prototype.handleInvent = function (e) {
+        this.removeChild(this._invent);
         this.dispatchEventWith(GameEvents.EVT_LOAD_PAGE, false);
     };
     GameUI.prototype.createChildren = function () {

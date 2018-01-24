@@ -53,7 +53,7 @@ class GameUI extends eui.Component {
     }
 
     private handleInvent(e:egret.TouchEvent):void {
-
+        this.removeChild(this._invent);
         this.dispatchEventWith( GameEvents.EVT_LOAD_PAGE, false );
     }
 
