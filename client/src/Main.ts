@@ -101,9 +101,10 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     private homeUI:HomeUI;
+    private _mainLogic:MainLogic;
     protected createGameScene(): void {
-        this.homeUI = new HomeUI();
-        this.addChild(this.homeUI);
+        this._mainLogic = new MainLogic();
+        this._mainLogic.start(this);
     }
 
 }

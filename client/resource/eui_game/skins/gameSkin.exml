@@ -41,4 +41,11 @@
 			</e:Skin>
 		</e:skinName>
 	</e:Button>
+    <e:Button id="_back" y="0" x="0">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="close_png" source.down="cloase_down_png"/>               
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
 </e:Skin>

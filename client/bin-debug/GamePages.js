@@ -7,6 +7,7 @@ var GamePages = (function () {
     GamePages.CREATE_ROOM = "CREATE_ROOM";
     GamePages.ENTER_ROOM = "ENTER_ROOM";
     GamePages.MY_ROOM = "MY_ROOM";
+    GamePages.BACK_HOME = "BACK_HOME";
     return GamePages;
 }());
 __reflect(GamePages.prototype, "GamePages");

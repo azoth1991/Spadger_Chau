@@ -10,14 +10,16 @@
 		"libs/modules/promise/promise.js"
 	],
 	"game": [
-		"bin-debug/TrueLoadingUI.js",
+		"bin-debug/Logic/MainLogic.js",
 		"bin-debug/AssetAdapter.js",
 		"bin-debug/GamePages.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
 		"bin-debug/ThemeAdapter.js",
+		"bin-debug/TrueLoadingUI.js",
 		"bin-debug/GameEvent.js",
+		"bin-debug/MC/MessageCenter.js",
 		"bin-debug/UI/HomeUI.js",
 		"bin-debug/UI/Game/FriendIcon.js",
 		"bin-debug/UI/Game/GameUI.js",

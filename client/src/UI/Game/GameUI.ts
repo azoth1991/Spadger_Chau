@@ -34,9 +34,13 @@ class GameUI extends eui.Component {
         this.addChild(this._icon2);
         this.addChild(this._icon3);
         this._invent.addEventListener( egret.TouchEvent.TOUCH_TAP, this.handleInvent, this );
-
+        this._back.addEventListener( egret.TouchEvent.TOUCH_TAP, this.backHome, this );
         // 开始游戏  分享
         this.addEventListener(GameEvents.EVT_LOAD_PAGE, this.startGame, this);
+    }
+
+    private backHome(e:egret.TouchEvent):void {
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, GamePages.BACK_HOME);
     }
 
     private startGame(e:egret.TouchEvent):void {
@@ -65,5 +69,6 @@ class GameUI extends eui.Component {
     private _icon2:FriendIcon;
     private _icon3:FriendIcon;
     private _invent:eui.Button;
+    private _back:eui.Button;
 }
 

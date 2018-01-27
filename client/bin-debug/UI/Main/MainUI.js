@@ -51,7 +51,7 @@ var MainUI = (function (_super) {
                 this._pageFocused = GamePages.MY_ROOM;
                 break;
         }
-        this.dispatchEventWith(GameEvents.EVT_LOAD_PAGE, false, this._pageFocused);
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, this._pageFocused);
     };
     MainUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

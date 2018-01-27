@@ -45,7 +45,7 @@ class MainUI extends eui.Component {
                 this._pageFocused = GamePages.MY_ROOM ;
                 break;
         }
-        this.dispatchEventWith( GameEvents.EVT_LOAD_PAGE, false, this._pageFocused );
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, this._pageFocused);
     }
     protected createChildren():void {
         super.createChildren();

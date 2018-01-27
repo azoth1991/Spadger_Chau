@@ -171,8 +171,8 @@ var Main = (function (_super) {
         });
     };
     Main.prototype.createGameScene = function () {
-        this.homeUI = new HomeUI();
-        this.addChild(this.homeUI);
+        this._mainLogic = new MainLogic();
+        this._mainLogic.start(this);
     };
     return Main;
 }(eui.UILayer));

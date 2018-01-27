@@ -45,8 +45,12 @@ var GameUI = (function (_super) {
         this.addChild(this._icon2);
         this.addChild(this._icon3);
         this._invent.addEventListener(egret.TouchEvent.TOUCH_TAP, this.handleInvent, this);
+        this._back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.backHome, this);
         // 开始游戏  分享
         this.addEventListener(GameEvents.EVT_LOAD_PAGE, this.startGame, this);
+    };
+    GameUI.prototype.backHome = function (e) {
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, GamePages.BACK_HOME);
     };
     GameUI.prototype.startGame = function (e) {
         var position = [
