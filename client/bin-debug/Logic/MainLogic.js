@@ -19,7 +19,7 @@ var MainLogic = (function () {
     //监听消息中心
     MainLogic.prototype.createMessageListener = function () {
         MessageCenter.getInstance().addEventListener(MessageCenter.EVT_LOAD_PAGE, this._homeUI.handleRouter, this._homeUI);
-        // MessageCenter.getInstance().addEventListener( MessageCenter.EVT_BACK_HOME, this._homeUI.handleRouter, this._homeUI );
+        MessageCenter.getInstance().addEventListener(MessageCenter.EVT_SHOW_DIALOG, this._homeUI.handleDialog, this._homeUI);
     };
     return MainLogic;
 }());

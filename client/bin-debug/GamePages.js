@@ -8,6 +8,7 @@ var GamePages = (function () {
     GamePages.ENTER_ROOM = "ENTER_ROOM";
     GamePages.MY_ROOM = "MY_ROOM";
     GamePages.BACK_HOME = "BACK_HOME";
+    GamePages.DIALOG = "DIALOG";
     return GamePages;
 }());
 __reflect(GamePages.prototype, "GamePages");

@@ -3,6 +3,7 @@ class MessageCenter extends egret.EventDispatcher
 
     public static EVT_LOAD_PAGE:string = "EVT_LOAD_PAGE";
     public static EVT_BACK_HOME:string = "EVT_BACK_HOME";
+    public static EVT_SHOW_DIALOG:string ="EVT_SHOW_DIALOG";
     private static _this   : MessageCenter = null ; //私有对象，为单例模式提供支持
     private static _isInit : boolean       = true ; //私有对象，为单例模式提供支持
 

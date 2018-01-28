@@ -60,22 +60,23 @@ var HomeUI = (function (_super) {
     };
     HomeUI.prototype.handleRouter = function (evt) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, trueLoadingUI, e_1;
+            var trueLoadingUI, _a, e_1;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
+                        console.log('hanldeRouter=>', evt.data);
                         this._pageName = evt.data;
+                        trueLoadingUI = new TrueLoadingUI();
                         _b.label = 1;
                     case 1:
-                        _b.trys.push([1, 8, , 9]);
+                        _b.trys.push([1, 12, , 13]);
                         _a = this._pageName;
                         switch (_a) {
                             case GamePages.CREATE_ROOM: return [3 /*break*/, 2];
+                            case GamePages.DIALOG: return [3 /*break*/, 6];
                         }
-                        return [3 /*break*/, 6];
-                    case 2:
-                        trueLoadingUI = new TrueLoadingUI();
-                        return [4 /*yield*/, this.addChild(trueLoadingUI)];
+                        return [3 /*break*/, 10];
+                    case 2: return [4 /*yield*/, this.addChild(trueLoadingUI)];
                     case 3:
                         _b.sent();
                         return [4 /*yield*/, RES.loadGroup("game", 0, trueLoadingUI)];
@@ -84,22 +85,65 @@ var HomeUI = (function (_super) {
                         return [4 /*yield*/, this.removeChild(trueLoadingUI)];
                     case 5:
                         _b.sent();
-                        return [3 /*break*/, 6];
-                    case 6: return [4 /*yield*/, this.pageReadyHandler(this._pageName)];
+                        return [3 /*break*/, 10];
+                    case 6: return [4 /*yield*/, this.addChild(trueLoadingUI)];
                     case 7:
                         _b.sent();
-                        return [3 /*break*/, 9];
+                        return [4 /*yield*/, RES.loadGroup("dialog", 0, trueLoadingUI)];
                     case 8:
+                        _b.sent();
+                        return [4 /*yield*/, this.removeChild(trueLoadingUI)];
+                    case 9:
+                        _b.sent();
+                        return [3 /*break*/, 10];
+                    case 10: return [4 /*yield*/, this.pageReadyHandler(this._pageName, '')];
+                    case 11:
+                        _b.sent();
+                        return [3 /*break*/, 13];
+                    case 12:
                         e_1 = _b.sent();
                         console.error(e_1);
-                        return [3 /*break*/, 9];
-                    case 9: return [2 /*return*/];
+                        return [3 /*break*/, 13];
+                    case 13: return [2 /*return*/];
                 }
             });
         });
     };
-    HomeUI.prototype.pageReadyHandler = function (pageName) {
-        console.log('router ===>', pageName);
+    HomeUI.prototype.handleDialog = function (evt) {
+        return __awaiter(this, void 0, void 0, function () {
+            var trueLoadingUI, e_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this._dialogName = evt.data;
+                        trueLoadingUI = new TrueLoadingUI();
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 6, , 7]);
+                        return [4 /*yield*/, this.addChild(trueLoadingUI)];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, RES.loadGroup("dialog", 0, trueLoadingUI)];
+                    case 3:
+                        _a.sent();
+                        return [4 /*yield*/, this.removeChild(trueLoadingUI)];
+                    case 4:
+                        _a.sent();
+                        return [4 /*yield*/, this.pageReadyHandler(GamePages.DIALOG, this._dialogName)];
+                    case 5:
+                        _a.sent();
+                        return [3 /*break*/, 7];
+                    case 6:
+                        e_2 = _a.sent();
+                        console.error(e_2);
+                        return [3 /*break*/, 7];
+                    case 7: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    HomeUI.prototype.pageReadyHandler = function (pageName, data) {
+        console.log('router ===>', pageName, data);
         this.removeChild(this._uiFocused);
         switch (pageName) {
             case GamePages.CREATE_ROOM:
@@ -108,6 +152,11 @@ var HomeUI = (function (_super) {
                 this._uiFocused = this._gameUI;
                 break;
             case GamePages.MY_ROOM:
+                break;
+            case GamePages.DIALOG:
+                this._dialogUI = new DialogUI(data);
+                this.imgBg.source = 'dialog-bg_jpg';
+                this._uiFocused = this._dialogUI;
                 break;
             case GamePages.BACK_HOME:
                 this.imgBg.source = 'bg_jpg';

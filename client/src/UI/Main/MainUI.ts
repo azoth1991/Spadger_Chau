@@ -31,9 +31,16 @@ class MainUI extends eui.Component {
         this.myRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this );
         this.enterRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this );
 
+        // dialog点击
+        this._myI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
+        this._toolsI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
+        this._zhanjiI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
+        this._newsI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
+        this._playI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
+        this._setI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
+
     }
     private mbtnHandler( evt:egret.TouchEvent ):void{
-
         switch ( evt.currentTarget ){
             case this.createRoom:
                 this._pageFocused = GamePages.CREATE_ROOM;
@@ -47,6 +54,31 @@ class MainUI extends eui.Component {
         }
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, this._pageFocused);
     }
+
+    private dialogHandler( evt:egret.TouchEvent ):void{
+        switch ( evt.currentTarget ){
+            case this._myI:
+                this._dialogType = DialogTypes.MY;
+                break;
+            case this._toolsI:
+                this._dialogType = DialogTypes.TOOLS ;
+                break;
+            case this._zhanjiI:
+                this._dialogType = DialogTypes.ZHANJI ;
+                break;
+            case this._newsI:
+                this._dialogType = DialogTypes.NEWS;
+                break;
+            case this._playI:
+                this._dialogType = DialogTypes.PLAY ;
+                break;
+            case this._setI:
+                this._dialogType = DialogTypes.SET ;
+                break;
+        }
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, this._dialogType);
+    }
+
     protected createChildren():void {
         super.createChildren();
     }
@@ -57,6 +89,14 @@ class MainUI extends eui.Component {
     private enterRoom:eui.Button;
     private myRoom:eui.Button;
     private _pageFocused:string;
+
+    private _myI:eui.Button;
+    private _toolsI:eui.Button;
+    private _zhanjiI:eui.Button;
+    private _newsI:eui.Button;
+    private _playI:eui.Button;
+    private _setI:eui.Button;
+    private _dialogType:string;
 }
 class FriendIRUI extends eui.ItemRenderer {
 

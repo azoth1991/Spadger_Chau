@@ -1,7 +1,5 @@
 
 class GameEvents{
-    public static EVT_RETURN:string = "EVT_RETURN";
+    public static EVT_SHOW_DIALOG:string = "EVT_SHOW_DIALOG";
     public static EVT_LOAD_PAGE:string = "EVT_LOAD_PAGE";
-    public static EVT_CLOSE_ABOUT:string = "EVT_CLOSE_ABOUT";
-    public static EVT_START_GAME:string = "EVT_START_GAME";
 }

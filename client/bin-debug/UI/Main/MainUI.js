@@ -38,6 +38,13 @@ var MainUI = (function (_super) {
         this.createRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this);
         this.myRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this);
         this.enterRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this);
+        // dialog点击
+        this._myI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
+        this._toolsI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
+        this._zhanjiI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
+        this._newsI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
+        this._playI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
+        this._setI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
     };
     MainUI.prototype.mbtnHandler = function (evt) {
         switch (evt.currentTarget) {
@@ -52,6 +59,29 @@ var MainUI = (function (_super) {
                 break;
         }
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, this._pageFocused);
+    };
+    MainUI.prototype.dialogHandler = function (evt) {
+        switch (evt.currentTarget) {
+            case this._myI:
+                this._dialogType = DialogTypes.MY;
+                break;
+            case this._toolsI:
+                this._dialogType = DialogTypes.TOOLS;
+                break;
+            case this._zhanjiI:
+                this._dialogType = DialogTypes.ZHANJI;
+                break;
+            case this._newsI:
+                this._dialogType = DialogTypes.NEWS;
+                break;
+            case this._playI:
+                this._dialogType = DialogTypes.PLAY;
+                break;
+            case this._setI:
+                this._dialogType = DialogTypes.SET;
+                break;
+        }
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, this._dialogType);
     };
     MainUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

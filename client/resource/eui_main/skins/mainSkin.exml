@@ -24,42 +24,42 @@
 	</e:Button>
 
     <!--下面-->
-    <e:Button id="myI" y="583" x="197">
+    <e:Button id="_myI" y="583" x="197">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
 				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="my-i_png" source.down="my-i-down_png"/>
 			</e:Skin>
 		</e:skinName>
 	</e:Button>
-    <e:Button id="toolsI" y="583" x="371">
+    <e:Button id="_toolsI" y="583" x="371">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
 				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="tools-i_png" source.down="tools-i-down_png"/>
 			</e:Skin>
 		</e:skinName>
 	</e:Button>
-    <e:Button id="zhanjiI" y="583" x="552">
+    <e:Button id="_zhanjiI" y="583" x="552">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
 				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="zhanji-i_png" source.down="zhanji-i-down_png"/>
 			</e:Skin>
 		</e:skinName>
 	</e:Button>
-    <e:Button id="newsI" y="583" x="715">
+    <e:Button id="_newsI" y="583" x="715">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
 				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="news-i_png" source.down="news-i-down_png"/>
 			</e:Skin>
 		</e:skinName>
 	</e:Button>
-    <e:Button id="playI" y="583" x="879">
+    <e:Button id="_playI" y="583" x="879">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
 				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="play-i_png" source.down="play-i-down_png"/>
 			</e:Skin>
 		</e:skinName>
 	</e:Button>
-    <e:Button id="setI" y="583" x="1036">
+    <e:Button id="_setI" y="583" x="1036">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
 				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="setting-i_png" source.down="setting-i-down_png"/>

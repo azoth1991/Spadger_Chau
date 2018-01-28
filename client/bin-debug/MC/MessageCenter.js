@@ -35,6 +35,7 @@ var MessageCenter = (function (_super) {
     };
     MessageCenter.EVT_LOAD_PAGE = "EVT_LOAD_PAGE";
     MessageCenter.EVT_BACK_HOME = "EVT_BACK_HOME";
+    MessageCenter.EVT_SHOW_DIALOG = "EVT_SHOW_DIALOG";
     MessageCenter._this = null; //私有对象，为单例模式提供支持
     MessageCenter._isInit = true; //私有对象，为单例模式提供支持
     return MessageCenter;

@@ -3,4 +3,5 @@ class GamePages{
     public static ENTER_ROOM:string = "ENTER_ROOM";
     public static MY_ROOM:string = "MY_ROOM";
     public static BACK_HOME:string = "BACK_HOME";
+    public static DIALOG:string = "DIALOG";
 }
