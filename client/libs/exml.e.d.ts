@@ -52,13 +52,17 @@ declare module skins{
 	class VSliderSkin extends eui.Skin{
 	}
 }
+declare class chatSkin extends eui.Skin{
+}
 declare class gameSkin extends eui.Skin{
 }
 declare class headIcon1 extends eui.Skin{
 }
 declare class headIcon2 extends eui.Skin{
 }
-declare class DialogSkin extends eui.Skin{
+declare class dialogSkin extends eui.Skin{
+}
+declare class enterRoomSkin extends eui.Skin{
 }
 declare class friendIRSkin extends eui.Skin{
 }

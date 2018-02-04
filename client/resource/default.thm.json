@@ -30,10 +30,12 @@
 		"resource/eui_skins/ToggleSwitchSkin.exml",
 		"resource/eui_skins/VScrollBarSkin.exml",
 		"resource/eui_skins/VSliderSkin.exml",
+		"resource/eui_game/skins/chatSkin.exml",
 		"resource/eui_game/skins/gameSkin.exml",
 		"resource/eui_game/skins/headIcon1.exml",
 		"resource/eui_game/skins/headIcon2.exml",
 		"resource/eui_main/skins/dialogSkin.exml",
+		"resource/eui_main/skins/enterRoomSkin.exml",
 		"resource/eui_main/skins/friendIRSkin.exml",
 		"resource/eui_main/skins/headSkin.exml",
 		"resource/eui_main/skins/mainSkin.exml"

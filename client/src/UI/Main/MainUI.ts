@@ -29,7 +29,7 @@ class MainUI extends eui.Component {
         // 绑定按钮
         this.createRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this );
         this.myRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this );
-        this.enterRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this );
+        this.enterRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
 
         // dialog点击
         this._myI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
@@ -52,7 +52,7 @@ class MainUI extends eui.Component {
                 this._pageFocused = GamePages.MY_ROOM ;
                 break;
         }
-        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, this._pageFocused);
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:this._pageFocused});
     }
 
     private dialogHandler( evt:egret.TouchEvent ):void{
@@ -74,9 +74,11 @@ class MainUI extends eui.Component {
                 break;
             case this._setI:
                 this._dialogType = DialogTypes.SET ;
+            case this.enterRoom:
+                this._dialogType = DialogTypes.ENTERROOM;
                 break;
         }
-        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, this._dialogType);
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, {type:this._dialogType,data:{}});
     }
 
     protected createChildren():void {

@@ -10,7 +10,7 @@ r.prototype = e.prototype, t.prototype = new r();
 };
 var GameUI = (function (_super) {
     __extends(GameUI, _super);
-    function GameUI() {
+    function GameUI(id) {
         var _this = _super.call(this) || this;
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_game/skins/gameSkin.exml";
@@ -19,6 +19,13 @@ var GameUI = (function (_super) {
     GameUI.prototype.uiCompHandler = function () {
         // headIconList
         /// 填充数据
+        this.initGameUI();
+    };
+    GameUI.prototype.chatBox = function () {
+        this._chatUI = new ChatUI();
+        this.addChild(this._chatUI);
+    };
+    GameUI.prototype.initGameUI = function () {
         var startPosition = [
             { x: 158, y: 576 },
             { x: 158, y: 330 },
@@ -44,13 +51,16 @@ var GameUI = (function (_super) {
         this.addChild(this._icon1);
         this.addChild(this._icon2);
         this.addChild(this._icon3);
+        //聊天框
+        this.chatBox();
         this._invent.addEventListener(egret.TouchEvent.TOUCH_TAP, this.handleInvent, this);
         this._back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.backHome, this);
+        this._chat.addEventListener(egret.TouchEvent.TOUCH_TAP, this._chatUI.toggleVisible, this._chatUI);
         // 开始游戏  分享
         this.addEventListener(GameEvents.EVT_LOAD_PAGE, this.startGame, this);
     };
     GameUI.prototype.backHome = function (e) {
-        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, GamePages.BACK_HOME);
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.BACK_HOME });
     };
     GameUI.prototype.startGame = function (e) {
         var position = [

@@ -13,14 +13,33 @@ var DialogUI = (function (_super) {
     function DialogUI(data) {
         var _this = _super.call(this) || this;
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
-        _this.skinName = "resource/eui_main/skins/dialogSkin.exml";
+        console.log('dialogName==>', data);
+        switch (data.type) {
+            case DialogTypes.ENTERROOM:
+                _this.skinName = "resource/eui_main/skins/enterRoomSkin.exml";
+                break;
+            case DialogTypes.PLAY:
+                _this.skinName = "resource/eui_main/skins/dialogSkin.exml";
+                break;
+            default:
+                _this.skinName = "resource/eui_main/skins/dialogSkin.exml";
+        }
         return _this;
     }
     DialogUI.prototype.uiCompHandler = function () {
-        this._back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.backHome, this);
+        if (this._back) {
+            this._back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.backHome, this);
+        }
+        if (this._enterRoom) {
+            this._enterRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.enterRoom, this);
+        }
     };
     DialogUI.prototype.backHome = function (e) {
-        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, GamePages.BACK_HOME);
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.BACK_HOME });
+    };
+    DialogUI.prototype.enterRoom = function (e) {
+        // MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, {type:DialogTypes.ENTERROOM,data:{id: this._input.text}});
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.CREATE_ROOM, id: this._input.text });
     };
     DialogUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

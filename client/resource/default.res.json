@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,egret_icon_png,description_json,setting-i-down_png,tools-i-down_png,play-i-down_png,my-i-down_png,news-i-down_png,zhanji-i-down_png,plus-b-down_png,plus-b_png,green_btn_down_png,green_btn_png,yellow_btn_down_png,yellow_btn_png,cloase_down_png,close_png",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,egret_icon_png,description_json,setting-i-down_png,tools-i-down_png,play-i-down_png,my-i-down_png,news-i-down_png,zhanji-i-down_png,plus-b-down_png,plus-b_png,green_btn_down_png,green_btn_png,yellow_btn_down_png,yellow_btn_png,cloase_down_png,close_png,dialog-button-select_png,dialog-button_png",
 			"name": "preload"
 		},
 		{
@@ -9,11 +9,11 @@
 			"name": "loading"
 		},
 		{
-			"keys": "babing_png,batiao_png,bawan_png,beifeng_png,dipai1_png,dipai2_png,dipai3_png,dipai4_png,dipai5_png,dongfeng_png,erbing_png,ertiao_png,erwan_png,fachai_png,guangban_png,hongzhong_png,jiubing_png,jiutiao_png,jiuwan_png,liubing_png,liutiao_png,liuwan_png,nanfeng_png,qibing_png,qitiao_png,qiwan_png,sanbing_png,santiao_png,sanwan_png,sibing_png,sitiao_png,siwan_png,wubing_png,wutiao_png,wuwan_png,xifeng_png,yibing_png,yitiao_png,yiwan_png,8_png,9_png,4_png,5_png,7_png,6_png,2_png,3_png,1_png,0_png,bei_img_png,bei_zhongjian_png,chi_fbtn_down_png,chi_fbtn_png,chongzhi_btn_down_png,chongzhi_btn_png,dangqianweizhi_img_png,daoju_btn_down_png,daoju_btn_png,dong_zhongjian_png,fenshu_bg_png,game_bg_jpg,gang_fbtn_down_png,gang_fbtn_png,hu_fbtn_down_png,hu_fbtn_png,jishi_img_png,liaotian_btn_down_png,liaotian_btn_png,nan_zhongjian_png,peng_fbtn_down_png,peng_fbtn_png,setting_btn_png,touxiang_bg_png,wenzi_bg_png,xi_zhongjian_png,zhuang_png,zhuangshi_img_png",
+			"keys": "babing_png,batiao_png,bawan_png,beifeng_png,dipai1_png,dipai2_png,dipai3_png,dipai4_png,dipai5_png,dongfeng_png,erbing_png,ertiao_png,erwan_png,fachai_png,guangban_png,hongzhong_png,jiubing_png,jiutiao_png,jiuwan_png,liubing_png,liutiao_png,liuwan_png,nanfeng_png,qibing_png,qitiao_png,qiwan_png,sanbing_png,santiao_png,sanwan_png,sibing_png,sitiao_png,siwan_png,wubing_png,wutiao_png,wuwan_png,xifeng_png,yibing_png,yitiao_png,yiwan_png,8_png,9_png,4_png,5_png,7_png,6_png,2_png,3_png,1_png,0_png,bei_img_png,bei_zhongjian_png,chi_fbtn_down_png,chi_fbtn_png,chongzhi_btn_down_png,chongzhi_btn_png,dangqianweizhi_img_png,daoju_btn_down_png,daoju_btn_png,dong_zhongjian_png,fenshu_bg_png,game_bg_jpg,gang_fbtn_down_png,gang_fbtn_png,hu_fbtn_down_png,hu_fbtn_png,jishi_img_png,liaotian_btn_down_png,liaotian_btn_png,nan_zhongjian_png,peng_fbtn_down_png,peng_fbtn_png,setting_btn_png,touxiang_bg_png,wenzi_bg_png,xi_zhongjian_png,zhuang_png,zhuangshi_img_png,chat-bg2_png,chat-btn-down_png,chat-btn_png,chat-left-bg_png,chat-line_png,chat-right-bg_png,expression-i1_png,expression-i2_png,expression-i3_png,e1_png,e10_png,e11_png,e12_png,e13_png,e14_png,e2_png,e3_png,e4_png,e5_png,e6_png,e7_png,e8_png,e9_png",
 			"name": "game"
 		},
 		{
-			"keys": "back-btn-down_png,back-btn_png,dialog-bg-bottom_png,dialog-bg_jpg,dialog-bg2_png,dialog-button-select_png,dialog-button_png,dialog-left-bg_png,dialog-left_png,dialog-middle_png,dialog-right-bg_png,dialog-right_png,paper_jpg,papper-bg_jpg,rule-bg_png",
+			"keys": "back-btn-down_png,back-btn_png,dialog-bg-bottom_png,dialog-bg_jpg,dialog-bg2_png,dialog-left-bg_png,dialog-left_png,dialog-middle_png,dialog-right-bg_png,dialog-right_png,paper_jpg,papper-bg_jpg,rule-bg_png,enterroom-btn-down_png,input-bg_png,enterroom-btn_png,enterroom-bg_png",
 			"name": "dialog"
 		}
 	],
@@ -749,16 +749,6 @@
 			"name": "dialog-bg2_png"
 		},
 		{
-			"url": "eui_main/imgs/dialog/dialog-button-select.png",
-			"type": "image",
-			"name": "dialog-button-select_png"
-		},
-		{
-			"url": "eui_main/imgs/dialog/dialog-button.png",
-			"type": "image",
-			"name": "dialog-button_png"
-		},
-		{
 			"url": "eui_main/imgs/dialog/dialog-left-bg.png",
 			"type": "image",
 			"name": "dialog-left-bg_png"
@@ -797,6 +787,151 @@
 			"url": "eui_main/imgs/dialog/rule-bg.png",
 			"type": "image",
 			"name": "rule-bg_png"
+		},
+		{
+			"url": "eui_main/imgs/dialog/enterroom-btn-down.png",
+			"type": "image",
+			"name": "enterroom-btn-down_png"
+		},
+		{
+			"url": "eui_main/imgs/dialog/input-bg.png",
+			"type": "image",
+			"name": "input-bg_png"
+		},
+		{
+			"url": "eui_main/imgs/dialog/enterroom-btn.png",
+			"type": "image",
+			"name": "enterroom-btn_png"
+		},
+		{
+			"url": "eui_main/imgs/dialog/enterroom-bg.png",
+			"type": "image",
+			"name": "enterroom-bg_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/chat-bg.png",
+			"type": "image",
+			"name": "chat-bg2_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/chat-btn-down.png",
+			"type": "image",
+			"name": "chat-btn-down_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/chat-btn.png",
+			"type": "image",
+			"name": "chat-btn_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/chat-left-bg.png",
+			"type": "image",
+			"name": "chat-left-bg_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/chat-line.png",
+			"type": "image",
+			"name": "chat-line_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/chat-right-bg.png",
+			"type": "image",
+			"name": "chat-right-bg_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expression-i1.png",
+			"type": "image",
+			"name": "expression-i1_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expression-i2.png",
+			"type": "image",
+			"name": "expression-i2_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expression-i3.png",
+			"type": "image",
+			"name": "expression-i3_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e1.png",
+			"type": "image",
+			"name": "e1_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e10.png",
+			"type": "image",
+			"name": "e10_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e11.png",
+			"type": "image",
+			"name": "e11_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e12.png",
+			"type": "image",
+			"name": "e12_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e13.png",
+			"type": "image",
+			"name": "e13_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e14.png",
+			"type": "image",
+			"name": "e14_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e2.png",
+			"type": "image",
+			"name": "e2_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e3.png",
+			"type": "image",
+			"name": "e3_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e4.png",
+			"type": "image",
+			"name": "e4_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e5.png",
+			"type": "image",
+			"name": "e5_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e6.png",
+			"type": "image",
+			"name": "e6_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e7.png",
+			"type": "image",
+			"name": "e7_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e8.png",
+			"type": "image",
+			"name": "e8_png"
+		},
+		{
+			"url": "eui_game/imgs/chat/expressions/e9.png",
+			"type": "image",
+			"name": "e9_png"
+		},
+		{
+			"name": "dialog-button-select_png",
+			"type": "image",
+			"url": "eui_main/imgs/dialog-button-select.png"
+		},
+		{
+			"name": "dialog-button_png",
+			"type": "image",
+			"url": "eui_main/imgs/dialog-button.png"
 		}
 	]
 }

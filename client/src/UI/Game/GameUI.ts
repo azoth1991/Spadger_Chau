@@ -1,13 +1,24 @@
 class GameUI extends eui.Component {
-    constructor() {
+    constructor(id) {
         super();
         this.addEventListener( eui.UIEvent.COMPLETE, this.uiCompHandler, this );
         this.skinName = "resource/eui_game/skins/gameSkin.exml";
+        
     }
 
     uiCompHandler() {
         // headIconList
         /// 填充数据
+        this.initGameUI();
+        
+    }
+
+    private chatBox() {
+        this._chatUI = new ChatUI();
+        this.addChild(this._chatUI);
+    }
+
+    private initGameUI() {
         var startPosition:Array<Object> = [
             { x: 158, y: 576 },
             { x: 158, y: 330 },
@@ -33,14 +44,18 @@ class GameUI extends eui.Component {
         this.addChild(this._icon1);
         this.addChild(this._icon2);
         this.addChild(this._icon3);
+        //聊天框
+        this.chatBox();
         this._invent.addEventListener( egret.TouchEvent.TOUCH_TAP, this.handleInvent, this );
         this._back.addEventListener( egret.TouchEvent.TOUCH_TAP, this.backHome, this );
+        this._chat.addEventListener( egret.TouchEvent.TOUCH_TAP, this._chatUI.toggleVisible, this._chatUI );
+
         // 开始游戏  分享
         this.addEventListener(GameEvents.EVT_LOAD_PAGE, this.startGame, this);
     }
 
     private backHome(e:egret.TouchEvent):void {
-        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, GamePages.BACK_HOME);
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.BACK_HOME});
     }
 
     private startGame(e:egret.TouchEvent):void {
@@ -70,5 +85,7 @@ class GameUI extends eui.Component {
     private _icon3:FriendIcon;
     private _invent:eui.Button;
     private _back:eui.Button;
+    private _chatUI:ChatUI;
+    private _chat:eui.Button;
 }
 

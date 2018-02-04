@@ -37,7 +37,7 @@ var MainUI = (function (_super) {
         // 绑定按钮
         this.createRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this);
         this.myRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this);
-        this.enterRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this);
+        this.enterRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
         // dialog点击
         this._myI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
         this._toolsI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
@@ -58,7 +58,7 @@ var MainUI = (function (_super) {
                 this._pageFocused = GamePages.MY_ROOM;
                 break;
         }
-        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, this._pageFocused);
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: this._pageFocused });
     };
     MainUI.prototype.dialogHandler = function (evt) {
         switch (evt.currentTarget) {
@@ -79,9 +79,11 @@ var MainUI = (function (_super) {
                 break;
             case this._setI:
                 this._dialogType = DialogTypes.SET;
+            case this.enterRoom:
+                this._dialogType = DialogTypes.ENTERROOM;
                 break;
         }
-        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, this._dialogType);
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, { type: this._dialogType, data: {} });
     };
     MainUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

@@ -65,7 +65,7 @@ var HomeUI = (function (_super) {
                 switch (_b.label) {
                     case 0:
                         console.log('hanldeRouter=>', evt.data);
-                        this._pageName = evt.data;
+                        this._pageName = evt.data.type;
                         trueLoadingUI = new TrueLoadingUI();
                         _b.label = 1;
                     case 1:
@@ -96,7 +96,7 @@ var HomeUI = (function (_super) {
                     case 9:
                         _b.sent();
                         return [3 /*break*/, 10];
-                    case 10: return [4 /*yield*/, this.pageReadyHandler(this._pageName, '')];
+                    case 10: return [4 /*yield*/, this.pageReadyHandler(this._pageName, evt.data)];
                     case 11:
                         _b.sent();
                         return [3 /*break*/, 13];
@@ -115,7 +115,7 @@ var HomeUI = (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        this._dialogName = evt.data;
+                        this._dialogName = evt.data.type;
                         trueLoadingUI = new TrueLoadingUI();
                         _a.label = 1;
                     case 1:
@@ -129,7 +129,7 @@ var HomeUI = (function (_super) {
                         return [4 /*yield*/, this.removeChild(trueLoadingUI)];
                     case 4:
                         _a.sent();
-                        return [4 /*yield*/, this.pageReadyHandler(GamePages.DIALOG, this._dialogName)];
+                        return [4 /*yield*/, this.pageReadyHandler(GamePages.DIALOG, evt.data)];
                     case 5:
                         _a.sent();
                         return [3 /*break*/, 7];
@@ -143,11 +143,11 @@ var HomeUI = (function (_super) {
         });
     };
     HomeUI.prototype.pageReadyHandler = function (pageName, data) {
-        console.log('router ===>', pageName, data);
+        console.log('router ===>', pageName);
         this.removeChild(this._uiFocused);
         switch (pageName) {
             case GamePages.CREATE_ROOM:
-                this._gameUI = new GameUI();
+                this._gameUI = new GameUI(data.id);
                 this.imgBg.source = 'game_bg_jpg';
                 this._uiFocused = this._gameUI;
                 break;

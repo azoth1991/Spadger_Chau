@@ -15,7 +15,7 @@ class HomeUI extends eui.Component {
     }
      public async handleRouter(evt:egret.Event) {
          console.log('hanldeRouter=>',evt.data)
-        this._pageName = evt.data;
+        this._pageName = evt.data.type;
         const trueLoadingUI = new TrueLoadingUI();                
         try {
             switch (this._pageName){
@@ -30,7 +30,7 @@ class HomeUI extends eui.Component {
                     await this.removeChild(trueLoadingUI);
                     break;
             }
-            await this.pageReadyHandler( this._pageName, '' );            
+            await this.pageReadyHandler( this._pageName, evt.data );            
         }
         catch (e) {
             console.error(e);
@@ -38,13 +38,13 @@ class HomeUI extends eui.Component {
     }
 
     public async handleDialog(evt:egret.Event) {
-        this._dialogName = evt.data;
-        const trueLoadingUI = new TrueLoadingUI();                
+        this._dialogName = evt.data.type;
+        const trueLoadingUI = new TrueLoadingUI();           
         try {
             await this.addChild(trueLoadingUI);
             await RES.loadGroup("dialog", 0, trueLoadingUI);
             await this.removeChild(trueLoadingUI);
-            await this.pageReadyHandler( GamePages.DIALOG, this._dialogName );            
+            await this.pageReadyHandler( GamePages.DIALOG, evt.data );            
         }
         catch (e) {
             console.error(e);
@@ -53,11 +53,11 @@ class HomeUI extends eui.Component {
     
 
     public pageReadyHandler( pageName:string,data:any ):void{
-        console.log('router ===>', pageName,data);
+        console.log('router ===>', pageName);
         this.removeChild(this._uiFocused);
         switch ( pageName ){
             case GamePages.CREATE_ROOM:
-                this._gameUI = new GameUI();
+                this._gameUI = new GameUI(data.id);
                 this.imgBg.source = 'game_bg_jpg';
                 this._uiFocused = this._gameUI;
                 break;

@@ -10,6 +10,7 @@ var DialogTypes = (function () {
     DialogTypes.NEWS = "NEWS";
     DialogTypes.PLAY = "PLAY";
     DialogTypes.SET = "SET";
+    DialogTypes.ENTERROOM = "ENTERROOM";
     return DialogTypes;
 }());
 __reflect(DialogTypes.prototype, "DialogTypes");
