@@ -12,6 +12,7 @@ var GameUI = (function (_super) {
     __extends(GameUI, _super);
     function GameUI(id) {
         var _this = _super.call(this) || this;
+        _this.roomId = id;
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_game/skins/gameSkin.exml";
         return _this;
@@ -53,7 +54,8 @@ var GameUI = (function (_super) {
         this.addChild(this._icon3);
         //聊天框
         this.chatBox();
-        this._invent.addEventListener(egret.TouchEvent.TOUCH_TAP, this.handleInvent, this);
+        this._start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.handleStart, this);
+        this._ready.addEventListener(egret.TouchEvent.TOUCH_TAP, this.handleReady, this);
         this._back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.backHome, this);
         this._chat.addEventListener(egret.TouchEvent.TOUCH_TAP, this._chatUI.toggleVisible, this._chatUI);
         // 开始游戏  分享
@@ -62,7 +64,8 @@ var GameUI = (function (_super) {
     GameUI.prototype.backHome = function (e) {
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.BACK_HOME });
     };
-    GameUI.prototype.startGame = function (e) {
+    GameUI.prototype.startGameUI = function (data) {
+        console.log('startGameUI', data);
         var position = [
             { x: 60, y: 597 },
             { x: 60, y: 293 },
@@ -73,10 +76,36 @@ var GameUI = (function (_super) {
         this._icon1.changeSkin(position[1]);
         this._icon2.changeSkin(position[2]);
         this._icon3.changeSkin(position[3]);
+        var models = [
+            1, 2, 0, 1, 3, 2, 0, 0, 0,
+            1, 0, 0, 0, 0, 0, 0, 0, 0,
+            1, 0, 0, 0, 0, 0, 0, 0, 0,
+            1, 0, 0, 0, 0, 0,
+        ];
+        var cards = this.getCards(models);
+        console.log(cards);
     };
-    GameUI.prototype.handleInvent = function (e) {
-        this.removeChild(this._invent);
-        this.dispatchEventWith(GameEvents.EVT_LOAD_PAGE, false);
+    GameUI.prototype.getCards = function (arr) {
+        var res = [];
+        arr.forEach(function (val, key) {
+            while (val > 0) {
+                res.push(key);
+                val--;
+            }
+        });
+        return res;
+    };
+    GameUI.prototype.changeReady = function () {
+        this._ready.enabled = false;
+        this._ready.$children[1].text = "已准备";
+        console.log(this._ready);
+        // this._readyText.text = '已准备';
+    };
+    GameUI.prototype.handleStart = function (e) {
+        MessageCenter.getInstance().sendMessage(GameEvents.WS_START, { id: this.roomId });
+    };
+    GameUI.prototype.handleReady = function (e) {
+        MessageCenter.getInstance().sendMessage(GameEvents.WS_READY, { id: this.roomId });
     };
     GameUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

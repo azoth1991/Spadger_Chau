@@ -1,8 +1,10 @@
 class GameUI extends eui.Component {
     constructor(id) {
         super();
+        this.roomId = id;
         this.addEventListener( eui.UIEvent.COMPLETE, this.uiCompHandler, this );
         this.skinName = "resource/eui_game/skins/gameSkin.exml";
+
         
     }
 
@@ -46,7 +48,8 @@ class GameUI extends eui.Component {
         this.addChild(this._icon3);
         //聊天框
         this.chatBox();
-        this._invent.addEventListener( egret.TouchEvent.TOUCH_TAP, this.handleInvent, this );
+        this._start.addEventListener( egret.TouchEvent.TOUCH_TAP, this.handleStart, this );
+        this._ready.addEventListener( egret.TouchEvent.TOUCH_TAP, this.handleReady, this );
         this._back.addEventListener( egret.TouchEvent.TOUCH_TAP, this.backHome, this );
         this._chat.addEventListener( egret.TouchEvent.TOUCH_TAP, this._chatUI.toggleVisible, this._chatUI );
 
@@ -58,7 +61,8 @@ class GameUI extends eui.Component {
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.BACK_HOME});
     }
 
-    private startGame(e:egret.TouchEvent):void {
+    public startGameUI(data):void {
+        console.log('startGameUI',data)
         var position:Array<any> = [
             { x: 60, y: 597 },
             { x: 60, y: 293 },
@@ -69,11 +73,38 @@ class GameUI extends eui.Component {
         this._icon1.changeSkin(position[1]);
         this._icon2.changeSkin(position[2]);
         this._icon3.changeSkin(position[3]);
+        var models = [
+            1,2,0,1,3,2,0,0,0,
+            1,0,0,0,0,0,0,0,0,
+            1,0,0,0,0,0,0,0,0,
+            1,0,0,0,0,0,
+        ];
+        var cards = this.getCards(models);
+        console.log(cards);
+    }
+    public getCards(arr:Array<any>){
+        var res = [];
+        arr.forEach((val,key)=>{
+            while(val>0){
+                res.push(key);
+                val--;
+            }
+        });
+        return res;
     }
 
-    private handleInvent(e:egret.TouchEvent):void {
-        this.removeChild(this._invent);
-        this.dispatchEventWith( GameEvents.EVT_LOAD_PAGE, false );
+    public changeReady(){
+        this._ready.enabled = false;
+        this._ready.$children[1].text = "已准备";
+        console.log(this._ready);
+        // this._readyText.text = '已准备';
+    }
+
+    private handleStart(e:egret.TouchEvent):void {
+        MessageCenter.getInstance().sendMessage( GameEvents.WS_START, {id:this.roomId});        
+    }
+    private handleReady(e:egret.TouchEvent):void {
+        MessageCenter.getInstance().sendMessage( GameEvents.WS_READY, {id:this.roomId});
     }
 
     protected createChildren():void {
@@ -83,9 +114,12 @@ class GameUI extends eui.Component {
     private _icon1:FriendIcon;
     private _icon2:FriendIcon;
     private _icon3:FriendIcon;
-    private _invent:eui.Button;
+    private _start:eui.Button;
+    private _ready:eui.Button;
     private _back:eui.Button;
     private _chatUI:ChatUI;
     private _chat:eui.Button;
+    private roomId:any;
+    private _readyText:eui.Label;
 }
 

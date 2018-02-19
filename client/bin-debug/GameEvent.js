@@ -6,6 +6,10 @@ var GameEvents = (function () {
     }
     GameEvents.EVT_SHOW_DIALOG = "EVT_SHOW_DIALOG";
     GameEvents.EVT_LOAD_PAGE = "EVT_LOAD_PAGE";
+    GameEvents.WS_ENTER_ROOM = "WS_ENTER_ROOM";
+    GameEvents.WS_READY = "WS_READY";
+    GameEvents.WS_START = "WS_START";
+    GameEvents.pageReadyHandler = "pageReadyHandler";
     return GameEvents;
 }());
 __reflect(GameEvents.prototype, "GameEvents");

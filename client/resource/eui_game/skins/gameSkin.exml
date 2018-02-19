@@ -33,18 +33,26 @@
 			</e:Skin>
 		</e:skinName>
 	</e:Button>
-    <e:Button id="_invent" y="499" x="545.5">
+    <e:Button id="_start" y="499" x="545.5">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
 				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="yellow_btn_png" source.down="yellow_btn_down_png"/>
-	            <e:Label text="邀请微信好友游戏" y="40" size="20" x="50"/>                
+	            <e:Label text="开始游戏" y="40" size="20" x="90"/>                
 			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="_ready" y="604" x="546">
+		<e:skinName>
+		<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+			<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="yellow_btn_png" source.down="yellow_btn_down_png"/>
+			<e:Label id="_readyText" text="准备" y="38.5" size="20" x="109.5" textAlign="center"/>
+		</e:Skin>
 		</e:skinName>
 	</e:Button>
     <e:Button id="_back" y="0" x="0">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
-				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="close_png" source.down="cloase_down_png"/>               
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="close_png" source.down="cloase_down_png" source.disabled="cloase_down_png"/>               
 			</e:Skin>
 		</e:skinName>
 	</e:Button>

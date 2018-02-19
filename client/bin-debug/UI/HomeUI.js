@@ -54,9 +54,9 @@ var HomeUI = (function (_super) {
     HomeUI.prototype.uiCompHandler = function () {
         // header
         this.imgBg.source = "bg_jpg";
-        this._mainUI = new MainUI();
-        this._uiFocused = this._mainUI;
-        this.addChild(this._uiFocused);
+        // this._mainUI = new MainUI();
+        // this._uiFocused = this._mainUI;
+        // this.addChild(this._uiFocused);
     };
     HomeUI.prototype.handleRouter = function (evt) {
         return __awaiter(this, void 0, void 0, function () {
@@ -96,8 +96,11 @@ var HomeUI = (function (_super) {
                     case 9:
                         _b.sent();
                         return [3 /*break*/, 10];
-                    case 10: return [4 /*yield*/, this.pageReadyHandler(this._pageName, evt.data)];
+                    case 10: 
+                    // await this.pageReadyHandler( this._pageName, evt.data );  
+                    return [4 /*yield*/, MessageCenter.getInstance().sendMessage(GameEvents.pageReadyHandler, { type: this._pageName, data: evt.data })];
                     case 11:
+                        // await this.pageReadyHandler( this._pageName, evt.data );  
                         _b.sent();
                         return [3 /*break*/, 13];
                     case 12:
@@ -119,7 +122,7 @@ var HomeUI = (function (_super) {
                         trueLoadingUI = new TrueLoadingUI();
                         _a.label = 1;
                     case 1:
-                        _a.trys.push([1, 6, , 7]);
+                        _a.trys.push([1, 5, , 6]);
                         return [4 /*yield*/, this.addChild(trueLoadingUI)];
                     case 2:
                         _a.sent();
@@ -129,42 +132,41 @@ var HomeUI = (function (_super) {
                         return [4 /*yield*/, this.removeChild(trueLoadingUI)];
                     case 4:
                         _a.sent();
-                        return [4 /*yield*/, this.pageReadyHandler(GamePages.DIALOG, evt.data)];
+                        // await this.pageReadyHandler( GamePages.DIALOG, evt.data );   
+                        MessageCenter.getInstance().sendMessage(GameEvents.pageReadyHandler, { type: GamePages.DIALOG, data: evt.data });
+                        return [3 /*break*/, 6];
                     case 5:
-                        _a.sent();
-                        return [3 /*break*/, 7];
-                    case 6:
                         e_2 = _a.sent();
                         console.error(e_2);
-                        return [3 /*break*/, 7];
-                    case 7: return [2 /*return*/];
+                        return [3 /*break*/, 6];
+                    case 6: return [2 /*return*/];
                 }
             });
         });
     };
-    HomeUI.prototype.pageReadyHandler = function (pageName, data) {
-        console.log('router ===>', pageName);
-        this.removeChild(this._uiFocused);
-        switch (pageName) {
-            case GamePages.CREATE_ROOM:
-                this._gameUI = new GameUI(data.id);
-                this.imgBg.source = 'game_bg_jpg';
-                this._uiFocused = this._gameUI;
-                break;
-            case GamePages.MY_ROOM:
-                break;
-            case GamePages.DIALOG:
-                this._dialogUI = new DialogUI(data);
-                this.imgBg.source = 'dialog-bg_jpg';
-                this._uiFocused = this._dialogUI;
-                break;
-            case GamePages.BACK_HOME:
-                this.imgBg.source = 'bg_jpg';
-                this._uiFocused = this._mainUI;
-                break;
-        }
-        this.addChild(this._uiFocused);
-    };
+    // public pageReadyHandler( pageName:string,data:any ):void{
+    //     console.log('router ===>', pageName);
+    //     this.removeChild(this._uiFocused);
+    //     switch ( pageName ){
+    //         case GamePages.CREATE_ROOM:
+    //             this._gameUI = new GameUI(data.id);
+    //             this.imgBg.source = 'game_bg_jpg';
+    //             this._uiFocused = this._gameUI;
+    //             break;
+    //         case GamePages.MY_ROOM:
+    //             break;
+    //         case GamePages.DIALOG:
+    //             this._dialogUI = new DialogUI(data);
+    //             this.imgBg.source = 'dialog-bg_jpg';
+    //             this._uiFocused = this._dialogUI;
+    //             break;
+    //         case GamePages.BACK_HOME:
+    //             this.imgBg.source = 'bg_jpg';            
+    //             this._uiFocused = this._mainUI;
+    //             break;
+    //     }
+    //     this.addChild(this._uiFocused);
+    // }
     HomeUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);
     };

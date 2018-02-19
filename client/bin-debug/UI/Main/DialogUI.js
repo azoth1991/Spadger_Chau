@@ -38,8 +38,9 @@ var DialogUI = (function (_super) {
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.BACK_HOME });
     };
     DialogUI.prototype.enterRoom = function (e) {
-        // MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, {type:DialogTypes.ENTERROOM,data:{id: this._input.text}});
-        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.CREATE_ROOM, id: this._input.text });
+        console.log('enterRoom');
+        // MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.CREATE_ROOM,id:this._input.text});
+        MessageCenter.getInstance().sendMessage(GameEvents.WS_ENTER_ROOM, { type: GamePages.CREATE_ROOM, id: this._input.text });
     };
     DialogUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

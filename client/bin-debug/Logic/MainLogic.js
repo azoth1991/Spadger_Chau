@@ -9,17 +9,67 @@ var MainLogic = (function () {
     MainLogic.prototype.start = function (root) {
         this.createScene(root);
         this.createMessageListener();
+        this._websocket = new ESocket();
     };
     //创建场景
     MainLogic.prototype.createScene = function (root) {
         this._root = root;
         this._homeUI = new HomeUI();
         this._root.addChild(this._homeUI);
+        this._mainUI = new MainUI();
+        this._uiFocused = this._mainUI;
+        this._homeUI.addChild(this._uiFocused);
     };
     //监听消息中心
     MainLogic.prototype.createMessageListener = function () {
+        MessageCenter.getInstance().addEventListener(GameEvents.pageReadyHandler, this.pageReadyHandler, this);
         MessageCenter.getInstance().addEventListener(MessageCenter.EVT_LOAD_PAGE, this._homeUI.handleRouter, this._homeUI);
         MessageCenter.getInstance().addEventListener(MessageCenter.EVT_SHOW_DIALOG, this._homeUI.handleDialog, this._homeUI);
+        MessageCenter.getInstance().addEventListener(GameEvents.WS_ENTER_ROOM, this.enterRoom, this);
+        MessageCenter.getInstance().addEventListener(MessageCenter.GAME_READY, this.changeReadyUI, this);
+        MessageCenter.getInstance().addEventListener(MessageCenter.GAME_START, this.startGameUI, this);
+        MessageCenter.getInstance().addEventListener(GameEvents.WS_READY, this.ready, this);
+        MessageCenter.getInstance().addEventListener(GameEvents.WS_START, this.startGame, this);
+    };
+    MainLogic.prototype.enterRoom = function (data) {
+        this._websocket.enterRoom(data);
+    };
+    MainLogic.prototype.ready = function (data) {
+        this._websocket.getReady(data);
+    };
+    MainLogic.prototype.startGame = function (data) {
+        this._websocket.startGame(data);
+    };
+    MainLogic.prototype.changeReadyUI = function () {
+        this._gameUI.changeReady();
+    };
+    MainLogic.prototype.startGameUI = function () {
+        this._gameUI.startGameUI();
+    };
+    MainLogic.prototype.pageReadyHandler = function (evt) {
+        console.log('router ===>', evt);
+        this._homeUI.removeChild(this._uiFocused);
+        var data = evt.data.data;
+        var type = evt.data.type;
+        switch (type) {
+            case GamePages.CREATE_ROOM:
+                this._gameUI = new GameUI(data.id);
+                this._homeUI.imgBg.source = 'game_bg_jpg';
+                this._uiFocused = this._gameUI;
+                break;
+            case GamePages.MY_ROOM:
+                break;
+            case GamePages.DIALOG:
+                this._dialogUI = new DialogUI(data);
+                this._homeUI.imgBg.source = 'dialog-bg_jpg';
+                this._uiFocused = this._dialogUI;
+                break;
+            case GamePages.BACK_HOME:
+                this._homeUI.imgBg.source = 'bg_jpg';
+                this._uiFocused = this._mainUI;
+                break;
+        }
+        this._homeUI.addChild(this._uiFocused);
     };
     return MainLogic;
 }());
