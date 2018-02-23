@@ -3,7 +3,8 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 };
 var ESocket = (function () {
     function ESocket() {
-        this.totalNum = 2;
+        this.totalNum = 3;
+        this._inRoom = false;
         this._websocket = new WebSocket("ws://101.37.151.85:8080//socket/maj/room");
         this.watchSocket();
     }
@@ -17,16 +18,23 @@ var ESocket = (function () {
         else {
             switch (info.type) {
                 case 1:
-                    console.log("sendMessage=>\u8FDB\u5165\u623F\u95F4");
-                    MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.CREATE_ROOM, id: this._roomId });
+                    // 进入房价
+                    if (this._inRoom == false) {
+                        console.log("sendMessage=>\u8FDB\u5165\u623F\u95F4" + GameMode.roomId);
+                        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.CREATE_ROOM });
+                        this._inRoom = true;
+                    }
+                    else {
+                        console.log("sendMessage=>\u623F\u4EF7\u5360\u4F4D");
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_JOIN, { info: info.model.cur });
+                    }
                     break;
                 case 3:
-                    if (info.model && info.model.readyNum == this.totalNum)
-                        MessageCenter.getInstance().sendMessage(MessageCenter.GAME_READY, null);
+                    MessageCenter.getInstance().sendMessage(MessageCenter.GAME_READY, { info: info.model });
                     break;
                 case 7:
                     console.log("sendMessage=>\u5F00\u59CB\u6E38\u620F");
-                    MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, null);
+                    MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, info.model);
                     break;
             }
         }
@@ -38,16 +46,13 @@ var ESocket = (function () {
         this._websocket.onopen = this.onSocketOpen.bind(this);
         this._websocket.onmessage = this.onReceiveMessage.bind(this);
     };
-    ESocket.prototype.enterRoom = function (_a) {
-        var data = _a.data;
-        console.log(data, this.getUrlParam("wechatId"));
-        var roomId = data.id;
-        this._roomId = roomId;
+    ESocket.prototype.enterRoom = function () {
+        var roomId = GameMode.roomId;
         if (roomId !== "") {
             var info = {
                 roomId: roomId,
                 action: 61,
-                wechatId: this.getUrlParam("wechatId"),
+                wechatId: GameMode.wechatId,
             };
             this._websocket.send(JSON.stringify(info));
         }
@@ -57,33 +62,23 @@ var ESocket = (function () {
     };
     ESocket.prototype.getReady = function (_a) {
         var data = _a.data;
-        console.log(data, this.getUrlParam("wechatId"));
         var roomId = data.id;
         var info = {
             roomId: roomId,
             action: 3,
-            wechatId: this.getUrlParam("wechatId"),
+            wechatId: GameMode.wechatId,
         };
         this._websocket.send(JSON.stringify(info));
     };
     ESocket.prototype.startGame = function (_a) {
         var data = _a.data;
-        console.log(data, this.getUrlParam("wechatId"));
         var roomId = data.id;
         var info = {
             roomId: roomId,
             action: 52,
-            wechatId: this.getUrlParam("wechatId"),
+            wechatId: GameMode.wechatId,
         };
         this._websocket.send(JSON.stringify(info));
-    };
-    ESocket.prototype.getUrlParam = function (name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        // if (r!=null) return unescape(r[2]);
-        if (r != null)
-            return r[2];
-        return null;
     };
     return ESocket;
 }());

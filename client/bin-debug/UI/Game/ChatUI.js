@@ -19,20 +19,27 @@ var ChatUI = (function (_super) {
     }
     ChatUI.prototype.uiCompHandler = function () {
         var _this = this;
+        console.log('chatui');
         this._buttons = [this._biaoqing, this._quickchat, this._chatlist];
         this._chatlist.selected = true;
         this.initItem();
         this._buttons.forEach(function (btn) {
             btn.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.handleTag, _this);
         });
+        this._send.addEventListener(egret.TouchEvent.TOUCH_TAP, this.sendMsg, this);
+    };
+    ChatUI.prototype.sendMsg = function () {
+        console.log('发送信息');
+        this._chatListUI.pushChat({ icon: "head-i-2_png", count: "欢迎来到麻将" });
     };
     ChatUI.prototype.initItem = function () {
+        // 表情
         this._chatExListUI = new eui.Component();
         this._chatExListUI.skinName = "resource/eui_game/skins/chatExListSkin.exml";
-        this.currentBox = this._chatExListUI;
+        // 聊天列表
+        this._chatListUI = new ChatListUI();
+        this.currentBox = this._chatListUI;
         this.addChild(this.currentBox);
-        this._chatListUI = new eui.Component();
-        this._chatListUI.skinName = "resource/eui_game/skins/chatListSkin.exml";
     };
     ChatUI.prototype.handleTag = function (evt) {
         console.log('chatBtn', evt);
@@ -55,6 +62,7 @@ var ChatUI = (function (_super) {
         this.addChild(this.currentBox);
     };
     ChatUI.prototype.toggleVisible = function () {
+        console.log('toggle');
         this.visible = !this.visible;
     };
     ChatUI.prototype.createChildren = function () {

@@ -35,7 +35,7 @@ var MainUI = (function (_super) {
         //需要在scroller添加到舞台上面之后再访问verticalScrollBar
         this.addChildAt(this._headui, this.getChildIndex(this.imgBg) + 1);
         // 绑定按钮
-        this.createRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this);
+        this.createRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.sendCreateRoom, this);
         this.myRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this);
         this.enterRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
         // dialog点击
@@ -45,6 +45,24 @@ var MainUI = (function (_super) {
         this._newsI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
         this._playI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
         this._setI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
+    };
+    MainUI.prototype.sendCreateRoom = function (evt) {
+        var params = JSON.stringify({ billingMode: GameMode.billingMode, type: GameMode.type, winPoints: GameMode.winPoints, limitPoints: GameMode.limitPoints });
+        var request = new egret.HttpRequest();
+        request.responseType = egret.HttpResponseType.TEXT;
+        request.open(encodeURI("http://101.37.151.85:8080/socket/create?param=" + params), egret.HttpMethod.GET);
+        request.send();
+        request.addEventListener(egret.Event.COMPLETE, function (evt) {
+            var response = evt.currentTarget;
+            var res = JSON.parse(response.response);
+            if (res.code == 1) {
+                GameMode.roomId = res.result.roomId;
+                MessageCenter.getInstance().sendMessage(GameEvents.WS_ENTER_ROOM, { type: GamePages.CREATE_ROOM });
+            }
+            else {
+                alert('创建房间失败');
+            }
+        }, this);
     };
     MainUI.prototype.mbtnHandler = function (evt) {
         switch (evt.currentTarget) {

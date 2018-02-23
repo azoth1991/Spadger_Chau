@@ -58,12 +58,21 @@ class Main extends eui.UILayer {
     }
 
     private async runGame() {
+        GameMode.wechatId = this.getUrlParam('wechatId');
+        
         await this.loadResource()
         this.createGameScene();
         const result = await RES.getResAsync("description_json")
         await platform.login();
         const userInfo = await platform.getUserInfo();
         console.log(userInfo);
+    }
+    private getUrlParam(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        // if (r!=null) return unescape(r[2]);
+        if (r!=null) return r[2];
+        return null;
     }
 
     private async loadResource() {

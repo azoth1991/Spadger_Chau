@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="chatListSkin" width="746" height="617" xmlns:e="http://ns.egret.com/eui">
-<e:Scroller id="scrListChat" y="90" width="746" height="532">
+<e:Skin class="chatDeListSkin" width="400" height="300" xmlns:e="http://ns.egret.com/eui">
+<e:Scroller id="scrDeListChat" y="90" width="746" height="532">
     <e:viewport>
         <e:List id="listChat" >
             <e:layout> 

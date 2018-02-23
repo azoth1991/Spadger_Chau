@@ -52,11 +52,15 @@ declare module skins{
 	class VSliderSkin extends eui.Skin{
 	}
 }
+declare class cardIRSkin extends eui.Skin{
+}
 declare class chatExListSkin extends eui.Skin{
 }
 declare class chatListSkin extends eui.Skin{
 }
 declare class chatSkin extends eui.Skin{
+}
+declare class chatlistIRSkin extends eui.Skin{
 }
 declare class gameSkin extends eui.Skin{
 }

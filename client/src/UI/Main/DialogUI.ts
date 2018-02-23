@@ -31,7 +31,7 @@ class DialogUI extends eui.Component {
     private enterRoom(e:egret.TouchEvent):void {
         console.log('enterRoom');
         // MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.CREATE_ROOM,id:this._input.text});
-        MessageCenter.getInstance().sendMessage( GameEvents.WS_ENTER_ROOM, {type:GamePages.CREATE_ROOM,id:this._input.text});
+        MessageCenter.getInstance().sendMessage( GameEvents.WS_ENTER_ROOM, {type:GamePages.CREATE_ROOM});
     }
 
     protected createChildren():void {

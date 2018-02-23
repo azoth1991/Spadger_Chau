@@ -30,9 +30,13 @@ var MainLogic = (function () {
         MessageCenter.getInstance().addEventListener(MessageCenter.GAME_START, this.startGameUI, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_READY, this.ready, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_START, this.startGame, this);
+        MessageCenter.getInstance().addEventListener(GameEvents.WS_JOIN, this.joinGame, this);
     };
-    MainLogic.prototype.enterRoom = function (data) {
-        this._websocket.enterRoom(data);
+    MainLogic.prototype.enterRoom = function () {
+        this._websocket.enterRoom();
+    };
+    MainLogic.prototype.joinGame = function (data) {
+        this._gameUI.joinGame(data);
     };
     MainLogic.prototype.ready = function (data) {
         this._websocket.getReady(data);
@@ -40,20 +44,21 @@ var MainLogic = (function () {
     MainLogic.prototype.startGame = function (data) {
         this._websocket.startGame(data);
     };
-    MainLogic.prototype.changeReadyUI = function () {
-        this._gameUI.changeReady();
+    MainLogic.prototype.changeReadyUI = function (evt) {
+        console.log('ready', evt);
+        this._gameUI.changeReady(evt.data.info);
     };
-    MainLogic.prototype.startGameUI = function () {
-        this._gameUI.startGameUI();
+    MainLogic.prototype.startGameUI = function (data) {
+        this._gameUI.startGameUI(data);
     };
     MainLogic.prototype.pageReadyHandler = function (evt) {
-        console.log('router ===>', evt);
+        console.log('router ===>', evt.data);
         this._homeUI.removeChild(this._uiFocused);
         var data = evt.data.data;
         var type = evt.data.type;
         switch (type) {
             case GamePages.CREATE_ROOM:
-                this._gameUI = new GameUI(data.id);
+                this._gameUI = new GameUI();
                 this._homeUI.imgBg.source = 'game_bg_jpg';
                 this._uiFocused = this._gameUI;
                 break;

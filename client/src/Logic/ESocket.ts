@@ -1,7 +1,8 @@
 class ESocket {
     private _websocket:any;
     private _roomId:any;
-    private totalNum = 2;
+    private totalNum = 3;
+    private _inRoom=false;
     constructor() {
         this._websocket = new WebSocket("ws://101.37.151.85:8080//socket/maj/room");
         this.watchSocket();
@@ -15,16 +16,22 @@ class ESocket {
         } else {
             switch (info.type) {
                 case 1:
-                console.log(`sendMessage=>进入房间`)
-                    MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.CREATE_ROOM,id:this._roomId});
+                    // 进入房价
+                    if (this._inRoom == false){
+                        console.log(`sendMessage=>进入房间${GameMode.roomId}`)                        
+                        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.CREATE_ROOM});
+                        this._inRoom = true;                
+                    } else {
+                        console.log(`sendMessage=>房价占位`) 
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_JOIN, {info:info.model.cur});
+                    }
                     break;
                 case 3:
-                    if (info.model && info.model.readyNum == this.totalNum)
-                    MessageCenter.getInstance().sendMessage(MessageCenter.GAME_READY, null);
+                    MessageCenter.getInstance().sendMessage(MessageCenter.GAME_READY, {info:info.model});
                     break;
                 case 7:
                     console.log(`sendMessage=>开始游戏`)
-                    MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, null);
+                    MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, info.model);
                     break;
             }
         }
@@ -38,15 +45,13 @@ class ESocket {
         this._websocket.onopen = this.onSocketOpen.bind(this);
         this._websocket.onmessage = this.onReceiveMessage.bind(this);
     }
-    public enterRoom({data}) {
-        console.log(data,this.getUrlParam("wechatId"))
-        var roomId = data.id;
-        this._roomId = roomId;
+    public enterRoom() {
+        var roomId = GameMode.roomId;
         if(roomId !== "") {
             var info = {
                 roomId,
                 action: 61,
-                wechatId: this.getUrlParam("wechatId"),
+                wechatId: GameMode.wechatId,
             };
             this._websocket.send(JSON.stringify(info));
         } else {
@@ -55,33 +60,24 @@ class ESocket {
     }
 
     public getReady({data}){
-        console.log(data,this.getUrlParam("wechatId"))
         var roomId = data.id;
         var info = {
             roomId,
             action: 3,
-            wechatId: this.getUrlParam("wechatId"),
+            wechatId: GameMode.wechatId,
         };
         this._websocket.send(JSON.stringify(info));
     }
 
     public startGame({data}){
-        console.log(data,this.getUrlParam("wechatId"))
         var roomId = data.id;
         var info = {
             roomId,
             action: 52,
-            wechatId: this.getUrlParam("wechatId"),
+            wechatId: GameMode.wechatId,
         };
         this._websocket.send(JSON.stringify(info));
     }
 
-    private getUrlParam(name){
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        // if (r!=null) return unescape(r[2]);
-        if (r!=null) return r[2];
-        return null;
-    }
     
 }

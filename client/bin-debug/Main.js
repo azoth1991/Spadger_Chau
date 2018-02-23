@@ -101,7 +101,9 @@ var Main = (function (_super) {
             var result, userInfo;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.loadResource()];
+                    case 0:
+                        GameMode.wechatId = this.getUrlParam('wechatId');
+                        return [4 /*yield*/, this.loadResource()];
                     case 1:
                         _a.sent();
                         this.createGameScene();
@@ -119,6 +121,14 @@ var Main = (function (_super) {
                 }
             });
         });
+    };
+    Main.prototype.getUrlParam = function (name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        // if (r!=null) return unescape(r[2]);
+        if (r != null)
+            return r[2];
+        return null;
     };
     Main.prototype.loadResource = function () {
         return __awaiter(this, void 0, void 0, function () {

@@ -9,6 +9,7 @@ var GameEvents = (function () {
     GameEvents.WS_ENTER_ROOM = "WS_ENTER_ROOM";
     GameEvents.WS_READY = "WS_READY";
     GameEvents.WS_START = "WS_START";
+    GameEvents.WS_JOIN = "WS_JOIN";
     GameEvents.pageReadyHandler = "pageReadyHandler";
     return GameEvents;
 }());
