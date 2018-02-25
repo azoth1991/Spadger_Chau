@@ -38,7 +38,8 @@ var DialogUI = (function (_super) {
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.BACK_HOME });
     };
     DialogUI.prototype.enterRoom = function (e) {
-        console.log('enterRoom');
+        GameMode.roomId = this._input.text;
+        console.log("enterRoom" + GameMode.roomId);
         // MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.CREATE_ROOM,id:this._input.text});
         MessageCenter.getInstance().sendMessage(GameEvents.WS_ENTER_ROOM, { type: GamePages.CREATE_ROOM });
     };

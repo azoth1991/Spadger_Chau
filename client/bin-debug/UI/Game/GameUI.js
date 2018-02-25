@@ -27,9 +27,7 @@ var GameUI = (function (_super) {
             { x: 892, y: 305 },
         ];
         _this.dsListIcon = [];
-        _this.dsListIcon = [
-            { icon: "head-i-2_png", name: GameMode.wechatId, id: "123" },
-        ];
+        _this.dsListIcon = GameMode.playerList;
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_game/skins/gameSkin.exml";
         return _this;
@@ -38,38 +36,48 @@ var GameUI = (function (_super) {
         // headIconList
         /// 填充数据
         this.initGameUI();
+        this.createListener();
+    };
+    GameUI.prototype.createListener = function () {
+        this._setting.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            MessageCenter.getInstance().sendMessage(GameEvents.TOGGLE_SETTING, null);
+        }, this);
     };
     GameUI.prototype.joinGame = function (evt) {
-        this.dsListIcon.push({
-            icon: "head-i-2_png",
-            name: evt.data.info,
-            id: "123",
-        });
-        this["_icon" + (this.dsListIcon.length - 1)] = new FriendIcon(1, __assign({}, this.dsListIcon[this.dsListIcon.length - 1], this.startPosition[this.dsListIcon.length - 1]));
-        this._gameBox.addChild(this["_icon" + (this.dsListIcon.length - 1)]);
+        console.log('joinGame', this.dsListIcon);
+        for (var k = 0; k < 4; k++) {
+            if (!this.dsListIcon[k]) {
+                this.dsListIcon[k] = {
+                    icon: "head-i-2_png",
+                    name: evt.data.info,
+                    id: "123",
+                };
+                this["_icon" + k] = new FriendIcon(1, __assign({}, this.dsListIcon[k], this.startPosition[k]));
+                this._gameBox.addChild(this["_icon" + k]);
+                break;
+            }
+        }
     };
     GameUI.prototype.chatBox = function () {
         this._chatUI = new ChatUI();
         this.addChild(this._chatUI);
+    };
+    GameUI.prototype.sendMsg = function (info, name) {
+        this._chatUI.sendMsg(info);
     };
     GameUI.prototype.initGameUI = function () {
         var _this = this;
         this._gameBox = new eui.Component();
         this.addChild(this._gameBox);
         var that = this;
+        console.log('dslist', this.dsListIcon);
         this.dsListIcon.map(function (v, k) {
-            _this["_icon" + k] = new FriendIcon(1, __assign({}, _this.dsListIcon[k], _this.startPosition[k]));
-            that._gameBox.addChild(_this["_icon" + k]);
+            if (v) {
+                _this["_icon" + k] = new FriendIcon(1, __assign({}, _this.dsListIcon[k], _this.startPosition[k]));
+                that._gameBox.addChild(_this["_icon" + k]);
+            }
         });
         this._start.enabled = false;
-        // this._icon0 = new FriendIcon(1, this.dsListIcon[0]);
-        // this._icon1 = new FriendIcon(1, this.dsListIcon[1]);
-        // this._icon2 = new FriendIcon(1, this.dsListIcon[2]);
-        // this._icon3 = new FriendIcon(1, this.dsListIcon[3]);
-        // this.addChild(this._icon0);
-        // this.addChild(this._icon1);
-        // this.addChild(this._icon2);
-        // this.addChild(this._icon3);
         //聊天框
         this.chatBox();
         this._start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.handleStart, this);
@@ -120,18 +128,15 @@ var GameUI = (function (_super) {
         return res;
     };
     GameUI.prototype.changeReady = function (info) {
-        console.log();
-        if (info.readyNum >= 4) {
-            // this._start.$children[0].source = 'yellow_btn_png';
+        if (info.readyNum >= GameMode.totalNum) {
+            this._start.$children[0].source = 'yellow_btn_png';
             this._start.enabled = true;
         }
         if (this.dsListIcon[0].name == info.player) {
-            console.log(this._ready);
             this._ready.$children[0].source = 'yellow_btn_down_png';
             this._ready.$children[1].text = "已准备";
             this._ready.enabled = false;
         }
-        console.log(this._ready);
     };
     GameUI.prototype.handleStart = function (e) {
         MessageCenter.getInstance().sendMessage(GameEvents.WS_START, { id: GameMode.roomId });

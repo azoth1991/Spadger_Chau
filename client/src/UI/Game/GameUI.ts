@@ -1,9 +1,7 @@
 class GameUI extends eui.Component {
     constructor() {
         super();
-        this.dsListIcon = [
-            { icon: "head-i-2_png", name: GameMode.wechatId, id: "123" },
-        ];
+        this.dsListIcon = GameMode.playerList;
         this.addEventListener( eui.UIEvent.COMPLETE, this.uiCompHandler, this );
         this.skinName = "resource/eui_game/skins/gameSkin.exml";
     }
@@ -12,42 +10,51 @@ class GameUI extends eui.Component {
         // headIconList
         /// 填充数据
         this.initGameUI();
-        
+        this.createListener();
+    }
+    private createListener() {
+        this._setting.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{
+            MessageCenter.getInstance().sendMessage( GameEvents.TOGGLE_SETTING,null);
+        }, this );
     }
     public joinGame(evt) {
-        this.dsListIcon.push({
-            icon: "head-i-2_png",
-            name: evt.data.info, 
-            id: "123",
-        });
-        this[`_icon${this.dsListIcon.length-1}`] = new FriendIcon(1, {...this.dsListIcon[this.dsListIcon.length-1],...this.startPosition[this.dsListIcon.length-1]});
-        this._gameBox.addChild(this[`_icon${this.dsListIcon.length-1}`]);
+        console.log('joinGame',this.dsListIcon)
+        for (var k = 0;k<4;k++){
+            if (!this.dsListIcon[k]) {
+                this.dsListIcon[k] = {
+                    icon: "head-i-2_png",
+                    name: evt.data.info, 
+                    id: "123",
+                };
+                this[`_icon${k}`] = new FriendIcon(1, {...this.dsListIcon[k],...this.startPosition[k]});
+                this._gameBox.addChild(this[`_icon${k}`]);
+                break;
+            }
+        }
+        
     }
 
     private chatBox() {
         this._chatUI = new ChatUI();
         this.addChild(this._chatUI);
     }
+    public sendMsg(info,name) {
+        this._chatUI.sendMsg(info);
+    }
 
     private initGameUI() {
         this._gameBox = new eui.Component();
         this.addChild(this._gameBox);
         let that = this;
+        console.log('dslist',this.dsListIcon)
         this.dsListIcon.map( (v,k) => {
-            this[`_icon${k}`] = new FriendIcon(1, {...this.dsListIcon[k],...this.startPosition[k]});
-            that._gameBox.addChild(this[`_icon${k}`]);
+            if (v) {
+                this[`_icon${k}`] = new FriendIcon(1, {...this.dsListIcon[k],...this.startPosition[k]});
+                that._gameBox.addChild(this[`_icon${k}`]);
+            }
         })
         this._start.enabled = false;
         
-        
-        // this._icon0 = new FriendIcon(1, this.dsListIcon[0]);
-        // this._icon1 = new FriendIcon(1, this.dsListIcon[1]);
-        // this._icon2 = new FriendIcon(1, this.dsListIcon[2]);
-        // this._icon3 = new FriendIcon(1, this.dsListIcon[3]);
-        // this.addChild(this._icon0);
-        // this.addChild(this._icon1);
-        // this.addChild(this._icon2);
-        // this.addChild(this._icon3);
         //聊天框
         this.chatBox();
         this._start.addEventListener( egret.TouchEvent.TOUCH_TAP, this.handleStart, this );
@@ -102,18 +109,15 @@ class GameUI extends eui.Component {
     }
 
     public changeReady(info){
-        console.log()
-        if (info.readyNum >= 4) {
+        if (info.readyNum >= GameMode.totalNum) {
             this._start.$children[0].source = 'yellow_btn_png';
             this._start.enabled = true;
         }
         if(this.dsListIcon[0].name == info.player) {
-            console.log(this._ready)
             this._ready.$children[0].source = 'yellow_btn_down_png';
             this._ready.$children[1].text = "已准备";
             this._ready.enabled = false;
         }
-        console.log(this._ready);
     }
 
     private handleStart(e:egret.TouchEvent):void {
@@ -174,6 +178,7 @@ class GameUI extends eui.Component {
     private _gameBox:eui.Component;
     private card;
     private _info;
+    private _setting:eui.Button;
     private startPosition:Array<Object> = [
             { x: 158, y: 576 },
             { x: 158, y: 330 },

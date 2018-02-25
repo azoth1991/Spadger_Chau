@@ -10,7 +10,10 @@ var GameEvents = (function () {
     GameEvents.WS_READY = "WS_READY";
     GameEvents.WS_START = "WS_START";
     GameEvents.WS_JOIN = "WS_JOIN";
+    GameEvents.WS_GET_CHAT = "WS_GET_CHAT";
+    GameEvents.WS_SEND_CHAT = "WS_SEND_CHAT";
     GameEvents.pageReadyHandler = "pageReadyHandler";
+    GameEvents.TOGGLE_SETTING = "TOGGLE_SETTING";
     return GameEvents;
 }());
 __reflect(GameEvents.prototype, "GameEvents");

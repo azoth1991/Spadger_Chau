@@ -2,7 +2,6 @@ class ESocket {
     private _websocket:any;
     private _roomId:any;
     private totalNum = 3;
-    private _inRoom=false;
     constructor() {
         this._websocket = new WebSocket("ws://101.37.151.85:8080//socket/maj/room");
         this.watchSocket();
@@ -17,15 +16,28 @@ class ESocket {
             switch (info.type) {
                 case 1:
                     // 进入房价
-                    if (this._inRoom == false){
-                        console.log(`sendMessage=>进入房间${GameMode.roomId}`)                        
+                    if (GameMode.inRoom == false){
+                        console.log(`sendMessage=>进入房间${GameMode.roomId}`)  
+                        var list = info.model.entered;
+                        var index = list.indexOf(GameMode.wechatId);
+
+                        GameMode.playerList[0] = { icon: "head-i-2_png", name: GameMode.wechatId, id: "123" };                                     
+                        while (index > 0){
+                            index--;
+                            GameMode.playerList[3-index] = { icon: "head-i-2_png", name: list[index], id: "123" };
+                        }
+                        GameMode.playerList;
                         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.CREATE_ROOM});
-                        this._inRoom = true;                
+                        GameMode.inRoom = true;
                     } else {
                         console.log(`sendMessage=>房价占位`) 
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_JOIN, {info:info.model.cur});
                     }
                     break;
+                case 2:
+                    // 聊天
+                    console.log(`getMessage=>聊天信息`) 
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CHAT, {info:info.model,name:info.prevailing});
                 case 3:
                     MessageCenter.getInstance().sendMessage(MessageCenter.GAME_READY, {info:info.model});
                     break;
@@ -50,7 +62,7 @@ class ESocket {
         if(roomId !== "") {
             var info = {
                 roomId,
-                action: 61,
+                action: 1,
                 wechatId: GameMode.wechatId,
             };
             this._websocket.send(JSON.stringify(info));
@@ -73,8 +85,18 @@ class ESocket {
         var roomId = data.id;
         var info = {
             roomId,
-            action: 52,
+            action: 7,
             wechatId: GameMode.wechatId,
+        };
+        this._websocket.send(JSON.stringify(info));
+    }
+    public sendChat(evt){
+        console.log('sendMSG',evt.data)
+        var info = {
+            roomId: GameMode.roomId,
+            action: 2,
+            wechatId: GameMode.wechatId,
+            textMsg: evt.data.info
         };
         this._websocket.send(JSON.stringify(info));
     }

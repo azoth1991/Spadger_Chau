@@ -37,7 +37,9 @@ class MainUI extends eui.Component {
         this._zhanjiI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
         this._newsI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
         this._playI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
-        this._setI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
+        this._setI.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{
+            MessageCenter.getInstance().sendMessage( GameEvents.TOGGLE_SETTING,null);
+        }, this );
 
     }
 

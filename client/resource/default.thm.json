@@ -31,6 +31,8 @@
 		"resource/eui_skins/VScrollBarSkin.exml",
 		"resource/eui_skins/VSliderSkin.exml",
 		"resource/eui_game/skins/cardIRSkin.exml",
+		"resource/eui_game/skins/chatDeListIRSkin.exml",
+		"resource/eui_game/skins/chatDeListSkin.exml",
 		"resource/eui_game/skins/chatExListSkin.exml",
 		"resource/eui_game/skins/chatListSkin.exml",
 		"resource/eui_game/skins/chatSkin.exml",

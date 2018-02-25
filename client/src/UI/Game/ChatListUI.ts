@@ -10,11 +10,6 @@ class ChatListUI extends eui.Component {
     uiCompHandler() {
         /// 填充数据
         var dsListFriend:Array<Object> = [
-            { icon: "head-i-2_png", count: "评价：樱桃小丸子"},
-            { icon: "head-i-2_png", count: "评价：樱桃小丸子评价：樱桃小丸子评价：樱桃小丸子评价：樱桃小丸子评价：樱桃小丸子评价：樱桃小丸子"},
-            { icon: "head-i-2_png", count: "评价：樱桃小丸子"},
-            { icon: "head-i-2_png", count: "评价：樱桃小丸子"},
-            { icon: "head-i-2_png", count: "评价：樱桃小丸子"},
         ];
         this.listChat.dataProvider = new eui.ArrayCollection(dsListFriend);
         this.listChat.itemRenderer = ChatlistIRUI;        
@@ -52,7 +47,7 @@ class ChatlistIRUI extends eui.ItemRenderer {
 
             this.chatLabel.height = height*(l+1);
             this.chatBg.height = height*(l+1);
-        },0)
+        },20);
         
         
     }

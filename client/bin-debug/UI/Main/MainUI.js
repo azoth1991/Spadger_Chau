@@ -44,7 +44,9 @@ var MainUI = (function (_super) {
         this._zhanjiI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
         this._newsI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
         this._playI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
-        this._setI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
+        this._setI.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            MessageCenter.getInstance().sendMessage(GameEvents.TOGGLE_SETTING, null);
+        }, this);
     };
     MainUI.prototype.sendCreateRoom = function (evt) {
         var params = JSON.stringify({ billingMode: GameMode.billingMode, type: GameMode.type, winPoints: GameMode.winPoints, limitPoints: GameMode.limitPoints });

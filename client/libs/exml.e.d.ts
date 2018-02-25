@@ -54,6 +54,8 @@ declare module skins{
 }
 declare class cardIRSkin extends eui.Skin{
 }
+declare class chatDeListSkin extends eui.Skin{
+}
 declare class chatExListSkin extends eui.Skin{
 }
 declare class chatListSkin extends eui.Skin{

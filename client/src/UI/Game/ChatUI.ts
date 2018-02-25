@@ -16,12 +16,17 @@ class ChatUI extends eui.Component {
         this._buttons.forEach((btn)=>{
             btn.addEventListener( egret.TouchEvent.TOUCH_TAP, this.handleTag, this );
         })
-        this._send.addEventListener( egret.TouchEvent.TOUCH_TAP, this.sendMsg, this );
+        this._send.addEventListener( egret.TouchEvent.TOUCH_TAP, this.handleChat, this );
     }
 
-    private sendMsg() {
-        console.log('发送信息');
-        this._chatListUI.pushChat({ icon: "head-i-2_png", count: "欢迎来到麻将"});
+    public sendMsg(info) {
+        this._chatListUI.pushChat({ icon: "head-i-2_png", count: info});
+    }
+    private handleChat(evt) {
+        if (this._textInupt.text) {
+            MessageCenter.getInstance().sendMessage( GameEvents.WS_SEND_CHAT, {info: this._textInupt.text} );
+            this._textInupt.text = '';                  
+        }
     }
 
     private initItem(){
@@ -76,4 +81,5 @@ class ChatUI extends eui.Component {
     private _chatListUI:ChatListUI;
     private currentBox:eui.Component;
     private _send:eui.Button;
+    private _textInupt:eui.TextInput;
 }

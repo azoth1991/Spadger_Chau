@@ -8,6 +8,9 @@ var GameMode = (function () {
     GameMode.type = 1; // 1:红中发财 2:前痞后赖
     GameMode.winPoints = 1; //1 16 32 64
     GameMode.limitPoints = 300; //300 500
+    GameMode.totalNum = 4;
+    GameMode.inRoom = false;
+    GameMode.playerList = [];
     return GameMode;
 }());
 __reflect(GameMode.prototype, "GameMode");

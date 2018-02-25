@@ -10,13 +10,14 @@ class MainLogic
     private _websocket:ESocket;
     private _dialogUI:DialogUI;
     private _mainUI:MainUI;
+    private _settingUI:SettingUI;
     //启动逻辑模块
     //root参数为显示列表根，当前Demo所有显示内容全部放置于root中
     public start( root:egret.DisplayObjectContainer )
     {
         this.createScene( root );
-        this.createMessageListener();
         this._websocket = new ESocket();
+        this.createMessageListener();        
     }
 
     //创建场景
@@ -28,6 +29,15 @@ class MainLogic
         this._mainUI = new MainUI();
         this._uiFocused = this._mainUI;
         this._homeUI.addChild(this._uiFocused);
+        this._settingUI = new SettingUI();
+    }
+
+    private toggleSettingUI(){
+        if (this._homeUI.contains(this._settingUI)){
+            this._homeUI.removeChild(this._settingUI)
+        } else {
+            this._homeUI.addChild(this._settingUI);
+        }
     }
     //监听消息中心
     private createMessageListener()
@@ -41,11 +51,18 @@ class MainLogic
         MessageCenter.getInstance().addEventListener( GameEvents.WS_READY, this.ready, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_START, this.startGame, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_JOIN, this.joinGame, this );
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_CHAT, this.chat, this );
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CHAT, this._websocket.sendChat, this._websocket );
+        MessageCenter.getInstance().addEventListener( GameEvents.TOGGLE_SETTING, this.toggleSettingUI, this );
 
     }
 
     private enterRoom(){
         this._websocket.enterRoom();
+    }
+    private chat(evt){
+        console.log('chat',evt.data)
+        this._gameUI.sendMsg(evt.data.info,evt.data.name);
     }
     private joinGame(data){
         this._gameUI.joinGame(data);
@@ -57,7 +74,6 @@ class MainLogic
         this._websocket.startGame(data);
     }
     private changeReadyUI(evt) {
-        console.log('ready',evt)
         this._gameUI.changeReady(evt.data.info);
     }
     private startGameUI(data) {
@@ -83,6 +99,7 @@ class MainLogic
                 this._uiFocused = this._dialogUI;
                 break;
             case GamePages.BACK_HOME:
+                GameMode.inRoom = false;
                 this._homeUI.imgBg.source = 'bg_jpg';            
                 this._uiFocused = this._mainUI;
                 break;

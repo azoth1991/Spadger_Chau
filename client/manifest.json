@@ -31,6 +31,7 @@
 		"bin-debug/UI/Game/GameUI.js",
 		"bin-debug/UI/Main/DialogUI.js",
 		"bin-debug/UI/Main/HeadUI.js",
-		"bin-debug/UI/Main/MainUI.js"
+		"bin-debug/UI/Main/MainUI.js",
+		"bin-debug/UI/Main/SettingUI.js"
 	]
 }

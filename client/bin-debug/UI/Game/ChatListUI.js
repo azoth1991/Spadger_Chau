@@ -18,13 +18,7 @@ var ChatListUI = (function (_super) {
     }
     ChatListUI.prototype.uiCompHandler = function () {
         /// 填充数据
-        var dsListFriend = [
-            { icon: "head-i-2_png", count: "评价：樱桃小丸子" },
-            { icon: "head-i-2_png", count: "评价：樱桃小丸子评价：樱桃小丸子评价：樱桃小丸子评价：樱桃小丸子评价：樱桃小丸子评价：樱桃小丸子" },
-            { icon: "head-i-2_png", count: "评价：樱桃小丸子" },
-            { icon: "head-i-2_png", count: "评价：樱桃小丸子" },
-            { icon: "head-i-2_png", count: "评价：樱桃小丸子" },
-        ];
+        var dsListFriend = [];
         this.listChat.dataProvider = new eui.ArrayCollection(dsListFriend);
         this.listChat.itemRenderer = ChatlistIRUI;
     };
@@ -63,7 +57,7 @@ var ChatlistIRUI = (function (_super) {
             }
             _this.chatLabel.height = height * (l + 1);
             _this.chatBg.height = height * (l + 1);
-        }, 0);
+        }, 20);
     };
     ChatlistIRUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

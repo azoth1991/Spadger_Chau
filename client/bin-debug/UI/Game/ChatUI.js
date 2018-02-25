@@ -26,11 +26,16 @@ var ChatUI = (function (_super) {
         this._buttons.forEach(function (btn) {
             btn.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.handleTag, _this);
         });
-        this._send.addEventListener(egret.TouchEvent.TOUCH_TAP, this.sendMsg, this);
+        this._send.addEventListener(egret.TouchEvent.TOUCH_TAP, this.handleChat, this);
     };
-    ChatUI.prototype.sendMsg = function () {
-        console.log('发送信息');
-        this._chatListUI.pushChat({ icon: "head-i-2_png", count: "欢迎来到麻将" });
+    ChatUI.prototype.sendMsg = function (info) {
+        this._chatListUI.pushChat({ icon: "head-i-2_png", count: info });
+    };
+    ChatUI.prototype.handleChat = function (evt) {
+        if (this._textInupt.text) {
+            MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CHAT, { info: this._textInupt.text });
+            this._textInupt.text = '';
+        }
     };
     ChatUI.prototype.initItem = function () {
         // 表情

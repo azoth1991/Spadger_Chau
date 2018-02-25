@@ -25,6 +25,7 @@
 			</e:Skin>
 		</e:skinName>
 	</e:ToggleButton>
+	<e:TextInput id='_textInupt' x="27" y="657.5" anchorOffsetX="0" width="479" alpha="0"></e:TextInput>
     <e:Button id="_send" y="687" x="554.5" anchorOffsetX="22" anchorOffsetY="44">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
