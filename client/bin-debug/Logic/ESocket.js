@@ -101,6 +101,16 @@ var ESocket = (function () {
         };
         this._websocket.send(JSON.stringify(info));
     };
+    ESocket.prototype.sendCard = function (evt) {
+        console.log('sendCard', evt.data);
+        var info = {
+            roomId: GameMode.roomId,
+            action: 41,
+            wechatId: GameMode.wechatId,
+            discardNum: evt.data.discardNum
+        };
+        this._websocket.send(JSON.stringify(info));
+    };
     return ESocket;
 }());
 __reflect(ESocket.prototype, "ESocket");

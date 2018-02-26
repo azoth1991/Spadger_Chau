@@ -21,6 +21,8 @@ class CardUI extends eui.Component {
         } else {
             this.downCard();
             // 如果能够发票则发票
+            MessageCenter.getInstance().sendMessage( GameEvents.WS_SEND_CARD, {discardNum:this._num} );
+
         }
     }
 
@@ -34,7 +36,7 @@ class CardUI extends eui.Component {
     }
 
     uiCompHandler() {
-        console.log('drewCard');
+        console.log(`drewCard${this._num}`);
         if (this._type) {
             this._bg.source = `dipai${this._type}_png`;
         }

@@ -44,7 +44,8 @@
 		"resource/eui_main/skins/enterRoomSkin.exml",
 		"resource/eui_main/skins/friendIRSkin.exml",
 		"resource/eui_main/skins/headSkin.exml",
-		"resource/eui_main/skins/mainSkin.exml"
+		"resource/eui_main/skins/mainSkin.exml",
+		"resource/eui_main/skins/settingSkin.exml"
 	],
 	"path": "resource/default.thm.json"
 }

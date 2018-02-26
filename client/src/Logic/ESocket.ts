@@ -100,6 +100,15 @@ class ESocket {
         };
         this._websocket.send(JSON.stringify(info));
     }
-
+    public sendCard(evt){
+        console.log('sendCard',evt.data)
+        var info = {
+            roomId: GameMode.roomId,
+            action: 41,
+            wechatId: GameMode.wechatId,
+            discardNum: evt.data.discardNum
+        };
+        this._websocket.send(JSON.stringify(info));
+    }
     
 }

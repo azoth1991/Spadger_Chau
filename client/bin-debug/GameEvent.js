@@ -14,6 +14,7 @@ var GameEvents = (function () {
     GameEvents.WS_SEND_CHAT = "WS_SEND_CHAT";
     GameEvents.pageReadyHandler = "pageReadyHandler";
     GameEvents.TOGGLE_SETTING = "TOGGLE_SETTING";
+    GameEvents.WS_SEND_CARD = "WS_SEND_CARD";
     return GameEvents;
 }());
 __reflect(GameEvents.prototype, "GameEvents");

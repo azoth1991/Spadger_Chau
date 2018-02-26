@@ -52,6 +52,7 @@ class MainLogic
         MessageCenter.getInstance().addEventListener( GameEvents.WS_START, this.startGame, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_JOIN, this.joinGame, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_CHAT, this.chat, this );
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CARD, this._websocket.sendCard, this._websocket );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CHAT, this._websocket.sendChat, this._websocket );
         MessageCenter.getInstance().addEventListener( GameEvents.TOGGLE_SETTING, this.toggleSettingUI, this );
 

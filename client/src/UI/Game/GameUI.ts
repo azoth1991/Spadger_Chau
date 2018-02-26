@@ -70,8 +70,8 @@ class GameUI extends eui.Component {
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.BACK_HOME});
     }
 
-    public startGameUI(data):void {
-        console.log('startGameUI',data)
+    public startGameUI(evt):void {
+        console.log('startGameUI',evt.data)
         var position:Array<any> = [
             { x: 60, y: 597 },
             { x: 60, y: 293 },
@@ -82,18 +82,15 @@ class GameUI extends eui.Component {
         this._icon1.changeSkin(position[1]);
         this._icon2.changeSkin(position[2]);
         this._icon3.changeSkin(position[3]);
-        var models = [
-            1,2,0,1,3,2,0,0,0,
-            1,0,0,0,0,0,0,0,0,
-            1,0,0,0,0,0,0,0,0,
-            1,0,0,0,0,0,
-        ];
+        var models = evt.data.cards;
         var cards = this.getCards(models);
         // 移除按钮
         this.removeChild(this._ready);
         this.removeChild(this._start);
         // 画牌
+        this.cardsBox = new eui.Component();        
         this.drawCard(cards);
+        this._gameBox.addChild(this.cardsBox);
         // 画其他三家
         this.drawOtherCard();
     }
@@ -129,15 +126,13 @@ class GameUI extends eui.Component {
 
     private drawCard(cards:Array<any>){
         var des = 80;
-        
         cards.forEach((value, key) => {
             var card = new CardUI(2,value);
             card.x = 1100 - key*des;
             card.y = 591;
-            this._gameBox.addChild(card);
+            this.cardsBox.addChild(card);
         })
-
-
+        
     }
     private drawOtherCard(){
         var desX = 29;
@@ -177,6 +172,7 @@ class GameUI extends eui.Component {
     private _readyText:eui.Label;
     private _gameBox:eui.Component;
     private card;
+    private cardsBox;
     private _info;
     private _setting:eui.Button;
     private startPosition:Array<Object> = [

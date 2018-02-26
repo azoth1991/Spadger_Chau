@@ -10,4 +10,5 @@ class GameEvents{
     public static WS_SEND_CHAT:string = "WS_SEND_CHAT";
     public static pageReadyHandler:string = "pageReadyHandler";
     public static TOGGLE_SETTING:string = "TOGGLE_SETTING";
+    public static WS_SEND_CARD:string = "WS_SEND_CARD";
 }

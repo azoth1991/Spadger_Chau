@@ -2,6 +2,7 @@ const Koa = require('koa')
 const app = new Koa()
 var url = require("url");
 var crypto = require("crypto");
+var 
 
 function sha1(str){
   var md5sum = crypto.createHash("sha1");

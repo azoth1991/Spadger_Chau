@@ -33,6 +33,7 @@ var CardUI = (function (_super) {
         else {
             this.downCard();
             // 如果能够发票则发票
+            MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CARD, { discardNum: this._num });
         }
     };
     CardUI.prototype.downCard = function () {
@@ -43,7 +44,7 @@ var CardUI = (function (_super) {
         console.log('clickCard');
     };
     CardUI.prototype.uiCompHandler = function () {
-        console.log('drewCard');
+        console.log("drewCard" + this._num);
         if (this._type) {
             this._bg.source = "dipai" + this._type + "_png";
         }

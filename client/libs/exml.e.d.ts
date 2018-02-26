@@ -80,3 +80,5 @@ declare class headSkin extends eui.Skin{
 }
 declare class mainSkin extends eui.Skin{
 }
+declare class settingSkin extends eui.Skin{
+}

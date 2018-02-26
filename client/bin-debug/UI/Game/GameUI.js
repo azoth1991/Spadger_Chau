@@ -90,8 +90,8 @@ var GameUI = (function (_super) {
     GameUI.prototype.backHome = function (e) {
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.BACK_HOME });
     };
-    GameUI.prototype.startGameUI = function (data) {
-        console.log('startGameUI', data);
+    GameUI.prototype.startGameUI = function (evt) {
+        console.log('startGameUI', evt.data);
         var position = [
             { x: 60, y: 597 },
             { x: 60, y: 293 },
@@ -102,18 +102,15 @@ var GameUI = (function (_super) {
         this._icon1.changeSkin(position[1]);
         this._icon2.changeSkin(position[2]);
         this._icon3.changeSkin(position[3]);
-        var models = [
-            1, 2, 0, 1, 3, 2, 0, 0, 0,
-            1, 0, 0, 0, 0, 0, 0, 0, 0,
-            1, 0, 0, 0, 0, 0, 0, 0, 0,
-            1, 0, 0, 0, 0, 0,
-        ];
+        var models = evt.data.cards;
         var cards = this.getCards(models);
         // 移除按钮
         this.removeChild(this._ready);
         this.removeChild(this._start);
         // 画牌
+        this.cardsBox = new eui.Component();
         this.drawCard(cards);
+        this._gameBox.addChild(this.cardsBox);
         // 画其他三家
         this.drawOtherCard();
     };
@@ -151,7 +148,7 @@ var GameUI = (function (_super) {
             var card = new CardUI(2, value);
             card.x = 1100 - key * des;
             card.y = 591;
-            _this._gameBox.addChild(card);
+            _this.cardsBox.addChild(card);
         });
     };
     GameUI.prototype.drawOtherCard = function () {

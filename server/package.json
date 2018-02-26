@@ -9,7 +9,8 @@
   "author": "azoth",
   "license": "ISC",
   "dependencies": {
-    "koa": "^2.5.0"
+    "koa": "^2.5.0",
+    "wechat-auth": "^1.1.2"
   },
   "devDependencies": {
     "crypto": "^1.0.1",
