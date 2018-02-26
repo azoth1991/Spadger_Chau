@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "微信api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "azoth",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.5.0"
+  },
+  "devDependencies": {
+    "crypto": "^1.0.1",
+    "url": "^0.11.0"
+  }
+}
