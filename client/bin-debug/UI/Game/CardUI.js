@@ -10,13 +10,15 @@ r.prototype = e.prototype, t.prototype = new r();
 };
 var CardUI = (function (_super) {
     __extends(CardUI, _super);
-    function CardUI(type, num) {
+    function CardUI(type, num, deraction) {
+        if (deraction === void 0) { deraction = 0; }
         var _this = _super.call(this) || this;
         _this._type = type;
         _this._num = num;
+        _this._deraction = deraction;
         _this.status = 'down';
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
-        if (num) {
+        if (num || num == 0) {
             _this.addEventListener('touchTap', _this.handleClick, _this);
         }
         _this.skinName = "resource/eui_game/skins/cardIRSkin.exml";
@@ -27,13 +29,17 @@ var CardUI = (function (_super) {
         this.status = 'up';
     };
     CardUI.prototype.handleClick = function () {
+        console.log('handleclick', GameMode.isDiscard, this.status);
         if (this.status == 'down') {
             this.upCard();
         }
         else {
             this.downCard();
-            // 如果能够发票则发票
-            MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CARD, { discardNum: this._num });
+            // 如果能够发票则发牌
+            if (GameMode.isDiscard) {
+                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CARD, { discardNum: this._num });
+                GameMode.isDiscard = false;
+            }
         }
     };
     CardUI.prototype.downCard = function () {
@@ -44,12 +50,28 @@ var CardUI = (function (_super) {
         console.log('clickCard');
     };
     CardUI.prototype.uiCompHandler = function () {
-        console.log("drewCard" + this._num);
-        if (this._type) {
-            this._bg.source = "dipai" + this._type + "_png";
-        }
-        if (this._num) {
+        this._bg.source = "dipai" + this._type + "_png";
+        if (this._num || this._num == 0) {
             this._cardBg.source = "p" + this._num + "_png";
+        }
+        switch (this._deraction) {
+            case 1:
+                this._cardBg.rotation = 90;
+                console.log(1111, this._cardBg);
+                this._cardBg.anchorOffsetY = 110;
+                break;
+            case 2:
+                this._cardBg.rotation = 180;
+                this._cardBg.anchorOffsetX = 78;
+                this._cardBg.anchorOffsetY = 110;
+                break;
+            case 3:
+                this._cardBg.rotation = 270;
+                this._cardBg.anchorOffsetX = 78;
+                break;
+            case 0:
+                this._cardBg.rotation = 0;
+                break;
         }
     };
     CardUI.prototype.createChildren = function () {

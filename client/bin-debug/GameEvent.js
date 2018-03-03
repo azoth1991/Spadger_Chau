@@ -12,9 +12,12 @@ var GameEvents = (function () {
     GameEvents.WS_JOIN = "WS_JOIN";
     GameEvents.WS_GET_CHAT = "WS_GET_CHAT";
     GameEvents.WS_SEND_CHAT = "WS_SEND_CHAT";
+    GameEvents.WS_SEND_CARD = "WS_SEND_CARD";
     GameEvents.pageReadyHandler = "pageReadyHandler";
     GameEvents.TOGGLE_SETTING = "TOGGLE_SETTING";
-    GameEvents.WS_SEND_CARD = "WS_SEND_CARD";
+    GameEvents.WS_GET_CARD = "WS_GET_CARD";
+    GameEvents.WS_SEND_CARDSTATUS = "WS_SEND_CARDSTATUS";
+    GameEvents.WS_GET_DISCARDPOS = "WS_GET_DISCARDPOS";
     return GameEvents;
 }());
 __reflect(GameEvents.prototype, "GameEvents");

@@ -20,6 +20,7 @@ var GameUI = (function (_super) {
     __extends(GameUI, _super);
     function GameUI() {
         var _this = _super.call(this) || this;
+        _this._cardStatuslist = [];
         _this.startPosition = [
             { x: 158, y: 576 },
             { x: 158, y: 330 },
@@ -27,6 +28,11 @@ var GameUI = (function (_super) {
             { x: 892, y: 305 },
         ];
         _this.dsListIcon = [];
+        _this._discardList0 = [];
+        _this._discardList1 = [];
+        _this._discardList2 = [];
+        _this._discardList3 = [];
+        _this.canDiscard = false;
         _this.dsListIcon = GameMode.playerList;
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_game/skins/gameSkin.exml";
@@ -58,6 +64,30 @@ var GameUI = (function (_super) {
             }
         }
     };
+    GameUI.prototype.getCard = function (evt) {
+        console.log('getCard', evt);
+        // 画牌  
+        var cards = this.getCards(evt.data.cards);
+        this._gameBox.removeChild(this.cardsBox);
+        this.cardsBox = new eui.Component();
+        this.drawCard(cards);
+        this._gameBox.addChild(this.cardsBox);
+        // 弃牌
+        var discard = evt.data.discard;
+        this._gameBox.removeChild(this.discardBox);
+        var posName = evt.data.prevailing;
+        var pos = 0;
+        this.dsListIcon.forEach(function (v, k) {
+            if (v.name == posName) {
+                pos = k;
+            }
+        });
+        this["_discardList" + pos].push(discard);
+        this.drawDiscard(this["_discardList" + pos], pos);
+        this._gameBox.addChild(this.discardBox);
+    };
+    GameUI.prototype.dropCard = function (pos, num) {
+    };
     GameUI.prototype.chatBox = function () {
         this._chatUI = new ChatUI();
         this.addChild(this._chatUI);
@@ -82,6 +112,7 @@ var GameUI = (function (_super) {
         this.chatBox();
         this._start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.handleStart, this);
         this._ready.addEventListener(egret.TouchEvent.TOUCH_TAP, this.handleReady, this);
+        this._invest.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { alert("\u623F\u95F4\u53F7\u4E3A" + GameMode.roomId); }, this);
         this._back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.backHome, this);
         this._chat.addEventListener(egret.TouchEvent.TOUCH_TAP, this._chatUI.toggleVisible, this._chatUI);
         // 开始游戏  分享
@@ -90,8 +121,22 @@ var GameUI = (function (_super) {
     GameUI.prototype.backHome = function (e) {
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.BACK_HOME });
     };
+    GameUI.prototype.showZj = function (num) {
+        this["_zj1"].visible = false;
+        this["_zj2"].visible = false;
+        this["_zj3"].visible = false;
+        this["_zj4"].visible = false;
+        this["_zj" + num].visible = true;
+    };
+    GameUI.prototype.sendCardStatus = function (evt) {
+        console.log('cardStatus');
+    };
     GameUI.prototype.startGameUI = function (evt) {
         console.log('startGameUI', evt.data);
+        this.showZj(evt.data.pos);
+        if (evt.data.pos == 1) {
+            GameMode.isDiscard = true;
+        }
         var position = [
             { x: 60, y: 597 },
             { x: 60, y: 293 },
@@ -107,13 +152,43 @@ var GameUI = (function (_super) {
         // 移除按钮
         this.removeChild(this._ready);
         this.removeChild(this._start);
+        this.removeChild(this._invest);
         // 画牌
         this.cardsBox = new eui.Component();
+        console.log(cards);
         this.drawCard(cards);
         this._gameBox.addChild(this.cardsBox);
         // 画其他三家
         this.drawOtherCard();
+        // 弃牌
+        this.discardBox = new eui.Component();
+        this._gameBox.addChild(this.discardBox);
     };
+    //获取当前出牌人位置
+    GameUI.prototype.getdiscardPos = function (evt) {
+        console.log('getdiscardPos', evt);
+        var pos = 0;
+        this.dsListIcon.forEach(function (v, k) {
+            if (v.name == evt.data.pos) {
+                switch (k) {
+                    case 0:
+                        pos = 1;
+                        GameMode.isDiscard = true;
+                        break;
+                    case 1:
+                        pos = 4;
+                        break;
+                    case 2:
+                        pos = 3;
+                        break;
+                    case 3:
+                        pos = 2;
+                }
+            }
+        });
+        this.showZj(pos);
+    };
+    // 获取
     GameUI.prototype.getCards = function (arr) {
         var res = [];
         arr.forEach(function (val, key) {
@@ -122,6 +197,7 @@ var GameUI = (function (_super) {
                 val--;
             }
         });
+        console.log(res);
         return res;
     };
     GameUI.prototype.changeReady = function (info) {
@@ -145,10 +221,69 @@ var GameUI = (function (_super) {
         var _this = this;
         var des = 80;
         cards.forEach(function (value, key) {
+            console.log(value);
             var card = new CardUI(2, value);
-            card.x = 1100 - key * des;
+            var scale = 0.8;
+            card.scaleX = scale;
+            card.scaleY = scale;
+            card.x = 1100 - key * des * scale;
             card.y = 591;
             _this.cardsBox.addChild(card);
+        });
+    };
+    GameUI.prototype.drawDiscard = function (discards, pos) {
+        var _this = this;
+        console.log('pos=>', pos);
+        var desx, desy, startx, starty, type, drection, anchorOffsetX, anchorOffsetY;
+        desx = 35;
+        desy = 55;
+        switch (pos) {
+            case 0:
+                startx = 365;
+                starty = 395;
+                type = 1;
+                break;
+            case 1:
+                startx = 489;
+                starty = 173;
+                type = 3;
+                break;
+            case 2:
+                startx = 1067;
+                starty = 328;
+                type = 1;
+                break;
+            case 3:
+                startx = 806;
+                starty = 498;
+                type = 3;
+                break;
+        }
+        discards.forEach(function (value, key) {
+            var card = new CardUI(type, value, pos);
+            var scale = 0.45;
+            card.scaleX = scale;
+            card.scaleY = scale;
+            console.log(parseInt("" + key / 4));
+            switch (pos) {
+                case 0:
+                    card.x = startx + (key % 4) * desx;
+                    card.y = starty + parseInt("" + key / 4) * desy;
+                    break;
+                case 1:
+                    card.x = startx - parseInt("" + key / 5) * desy;
+                    card.y = starty + (key % 5) * desx;
+                    break;
+                case 2:
+                    card.x = startx - (key % 4) * desx;
+                    card.y = starty - parseInt("" + key / 4) * desy;
+                    break;
+                case 3:
+                    card.x = startx + parseInt("" + key / 5) * desy;
+                    card.y = starty - (key % 5) * desx;
+                    break;
+            }
+            _this.discardBox.addChild(card);
         });
     };
     GameUI.prototype.drawOtherCard = function () {
