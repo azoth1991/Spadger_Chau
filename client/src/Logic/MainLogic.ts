@@ -45,34 +45,35 @@ class MainLogic
         MessageCenter.getInstance().addEventListener( GameEvents.pageReadyHandler, this.pageReadyHandler, this );
         MessageCenter.getInstance().addEventListener( MessageCenter.EVT_LOAD_PAGE, this._homeUI.handleRouter, this._homeUI );
         MessageCenter.getInstance().addEventListener( MessageCenter.EVT_SHOW_DIALOG, this._homeUI.handleDialog, this._homeUI );
-        MessageCenter.getInstance().addEventListener( GameEvents.WS_ENTER_ROOM, this.enterRoom, this );
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_ENTER_ROOM, this._websocket.enterRoom, this._websocket );
         MessageCenter.getInstance().addEventListener( MessageCenter.GAME_READY, this.changeReadyUI, this );
         MessageCenter.getInstance().addEventListener( MessageCenter.GAME_START, this.startGameUI, this );
-        MessageCenter.getInstance().addEventListener( GameEvents.WS_READY, this.ready, this );
-        MessageCenter.getInstance().addEventListener( GameEvents.WS_START, this.startGame, this );
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_READY, this._websocket.getReady, this._websocket );
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_START, this._websocket.startGame, this._websocket );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_JOIN, this.joinGame, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_CHAT, this.chat, this );
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CARDSTATUS, this.sendCardStatus, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CARD, this._websocket.sendCard, this._websocket );
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_CARD, this.getCard, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CHAT, this._websocket.sendChat, this._websocket );
         MessageCenter.getInstance().addEventListener( GameEvents.TOGGLE_SETTING, this.toggleSettingUI, this );
-
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_DISCARDPOS, this.getdiscardPos, this );
     }
 
-    private enterRoom(){
-        this._websocket.enterRoom();
+    private getdiscardPos(evt){
+        this._gameUI.getdiscardPos(evt);
     }
     private chat(evt){
-        console.log('chat',evt.data)
         this._gameUI.sendMsg(evt.data.info,evt.data.name);
     }
     private joinGame(data){
         this._gameUI.joinGame(data);
     }
-    private ready(data){
-        this._websocket.getReady(data);
+    private sendCardStatus(data){
+        this._gameUI.sendCardStatus(data);
     }
-    private startGame(data){
-        this._websocket.startGame(data);
+    private getCard(data){
+        this._gameUI.getCard(data);
     }
     private changeReadyUI(evt) {
         this._gameUI.changeReady(evt.data.info);

@@ -44,7 +44,7 @@ class MainUI extends eui.Component {
     }
 
     private sendCreateRoom(evt) {
-        var params = JSON.stringify({billingMode:GameMode.billingMode,type:GameMode.type,winPoints:GameMode.winPoints,limitPoints:GameMode.limitPoints});
+        var params = JSON.stringify({host:GameMode.wechatId,billingMode:GameMode.billingMode,type:GameMode.type,winPoints:GameMode.winPoints,limitPoints:GameMode.limitPoints,pointType:GameMode.pointType});
         var request = new egret.HttpRequest();
         request.responseType = egret.HttpResponseType.TEXT;
         request.open(encodeURI(`http://101.37.151.85:8080/socket/create?param=${params}`),egret.HttpMethod.GET);

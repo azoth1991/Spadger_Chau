@@ -8,7 +8,10 @@ class GameEvents{
     public static WS_JOIN:string = "WS_JOIN";
     public static WS_GET_CHAT:string = "WS_GET_CHAT";
     public static WS_SEND_CHAT:string = "WS_SEND_CHAT";
+    public static WS_SEND_CARD:string = "WS_SEND_CARD";
     public static pageReadyHandler:string = "pageReadyHandler";
     public static TOGGLE_SETTING:string = "TOGGLE_SETTING";
-    public static WS_SEND_CARD:string = "WS_SEND_CARD";
+    public static WS_GET_CARD:string = "WS_GET_CARD";
+    public static WS_SEND_CARDSTATUS:string = "WS_SEND_CARDSTATUS";
+    public static WS_GET_DISCARDPOS:string = "WS_GET_DISCARDPOS";
 }
