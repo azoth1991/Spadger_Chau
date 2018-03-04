@@ -13,7 +13,7 @@
 			"name": "game"
 		},
 		{
-			"keys": "back-btn-down_png,back-btn_png,dialog-bg-bottom_png,dialog-bg_jpg,dialog-bg2_png,dialog-left-bg_png,dialog-left_png,dialog-middle_png,dialog-right-bg_png,dialog-right_png,paper_jpg,papper-bg_jpg,rule-bg_png,enterroom-btn-down_png,input-bg_png,enterroom-btn_png,enterroom-bg_png",
+			"keys": "back-btn-down_png,back-btn_png,dialog-bg-bottom_png,dialog-bg_jpg,dialog-bg2_png,dialog-left-bg_png,dialog-left_png,dialog-middle_png,dialog-right-bg_png,dialog-right_png,paper_jpg,papper-bg_jpg,rule-bg_png,enterroom-btn-down_png,input-bg_png,enterroom-btn_png,enterroom-bg_png,shop-bg_png,shopContent-bg_png,shopContent-icon_png",
 			"name": "dialog"
 		}
 	],
@@ -934,14 +934,29 @@
 			"name": "p33_png"
 		},
 		{
-			"name": "dialog-s-bg_png",
+			"url": "eui_main/imgs/dialog-s-bg.png",
 			"type": "image",
-			"url": "eui_main/imgs/dialog-s-bg.png"
+			"name": "dialog-s-bg_png"
 		},
 		{
-			"name": "dialog-s-top_png",
+			"url": "eui_main/imgs/dialog-s-top.png",
 			"type": "image",
-			"url": "eui_main/imgs/dialog-s-top.png"
+			"name": "dialog-s-top_png"
+		},
+		{
+			"url": "eui_main/imgs/dialog/shop-bg.png",
+			"type": "image",
+			"name": "shop-bg_png"
+		},
+		{
+			"url": "eui_main/imgs/dialog/shopContent-bg.png",
+			"type": "image",
+			"name": "shopContent-bg_png"
+		},
+		{
+			"url": "eui_main/imgs/dialog/shopContent-icon.png",
+			"type": "image",
+			"name": "shopContent-icon_png"
 		}
 	]
 }

@@ -17,6 +17,23 @@ var HeadUI = (function (_super) {
         return _this;
     }
     HeadUI.prototype.uiCompHandler = function () {
+        this._addTool.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
+        this._addMoney.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
+        this._addCard.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
+    };
+    HeadUI.prototype.dialogHandler = function (evt) {
+        switch (evt.currentTarget) {
+            case this._addTool:
+                this._shopType = ShopTypes.ADDSJ;
+                break;
+            case this._addMoney:
+                this._shopType = ShopTypes.ADDMONEY;
+                break;
+            case this._addCard:
+                this._shopType = ShopTypes.ADDCARD;
+                break;
+        }
+        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, { type: DialogTypes.SHOP, data: { shopType: this._shopType } });
     };
     HeadUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

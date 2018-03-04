@@ -6,4 +6,5 @@ class DialogTypes{
     public static PLAY:string = "PLAY";
     public static SET:string = "SET";
     public static ENTERROOM:string = "ENTERROOM";
+    public static SHOP:string = "SHOP";
 }

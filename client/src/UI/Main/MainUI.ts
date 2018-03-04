@@ -121,9 +121,6 @@ class MainUI extends eui.Component {
     private _dialogType:string;
 }
 class FriendIRUI extends eui.ItemRenderer {
-
-    private cb:eui.CheckBox;
-
     constructor() {
         super();
         this.skinName = "friendIRSkin";
