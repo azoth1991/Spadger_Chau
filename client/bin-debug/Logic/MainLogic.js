@@ -41,12 +41,21 @@ var MainLogic = (function () {
         MessageCenter.getInstance().addEventListener(GameEvents.WS_START, this._websocket.startGame, this._websocket);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_JOIN, this.joinGame, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_CHAT, this.chat, this);
+        MessageCenter.getInstance().addEventListener(GameEvents.WS_GAMEOVER, this.gameOver, this);
+        MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_DISCARDSTATUS, this.getDiscardStatus, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_CARDSTATUS, this.sendCardStatus, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_CARD, this._websocket.sendCard, this._websocket);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_CARD, this.getCard, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_CHAT, this._websocket.sendChat, this._websocket);
         MessageCenter.getInstance().addEventListener(GameEvents.TOGGLE_SETTING, this.toggleSettingUI, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_DISCARDPOS, this.getdiscardPos, this);
+        MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_DISCARDSTATUS, this._websocket.sendDiscardStatus, this._websocket);
+    };
+    MainLogic.prototype.getDiscardStatus = function (evt) {
+        this._gameUI.showDiscardStatus(evt);
+    };
+    MainLogic.prototype.gameOver = function (evt) {
+        this._gameUI.gameOver(evt);
     };
     MainLogic.prototype.getdiscardPos = function (evt) {
         this._gameUI.getdiscardPos(evt);
@@ -58,7 +67,7 @@ var MainLogic = (function () {
         this._gameUI.joinGame(data);
     };
     MainLogic.prototype.sendCardStatus = function (data) {
-        this._gameUI.sendCardStatus(data);
+        this._gameUI.showDiscardStatus(data);
     };
     MainLogic.prototype.getCard = function (data) {
         this._gameUI.getCard(data);

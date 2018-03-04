@@ -99,6 +99,7 @@ var MainUI = (function (_super) {
                 break;
             case this._setI:
                 this._dialogType = DialogTypes.SET;
+                break;
             case this.enterRoom:
                 this._dialogType = DialogTypes.ENTERROOM;
                 break;

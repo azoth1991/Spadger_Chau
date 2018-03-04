@@ -52,12 +52,21 @@ class MainLogic
         MessageCenter.getInstance().addEventListener( GameEvents.WS_START, this._websocket.startGame, this._websocket );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_JOIN, this.joinGame, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_CHAT, this.chat, this );
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_GAMEOVER, this.gameOver, this );
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_DISCARDSTATUS, this.getDiscardStatus, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CARDSTATUS, this.sendCardStatus, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CARD, this._websocket.sendCard, this._websocket );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_CARD, this.getCard, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CHAT, this._websocket.sendChat, this._websocket );
         MessageCenter.getInstance().addEventListener( GameEvents.TOGGLE_SETTING, this.toggleSettingUI, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_DISCARDPOS, this.getdiscardPos, this );
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_DISCARDSTATUS, this._websocket.sendDiscardStatus, this._websocket );
+    }
+    private getDiscardStatus(evt){
+        this._gameUI.showDiscardStatus(evt);
+    }
+    private gameOver(evt){
+        this._gameUI.gameOver(evt);
     }
 
     private getdiscardPos(evt){
@@ -70,7 +79,7 @@ class MainLogic
         this._gameUI.joinGame(data);
     }
     private sendCardStatus(data){
-        this._gameUI.sendCardStatus(data);
+        this._gameUI.showDiscardStatus(data);
     }
     private getCard(data){
         this._gameUI.getCard(data);

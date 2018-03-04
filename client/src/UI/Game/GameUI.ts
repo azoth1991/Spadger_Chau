@@ -42,22 +42,34 @@ class GameUI extends eui.Component {
         this.drawCard(cards);
         this._gameBox.addChild(this.cardsBox);
         // 弃牌
-        var discard = evt.data.discard;
-        this._gameBox.removeChild(this.discardBox);
-        var posName = evt.data.prevailing;
-        var pos = 0;
-        this.dsListIcon.forEach((v,k)=>{
-            if (v.name == posName){
-                pos = k;
-            }
-        });
-        this[`_discardList${pos}`].push(discard);
-        this.drawDiscard(this[`_discardList${pos}`],pos);
-        this._gameBox.addChild(this.discardBox);
+        if (evt.data.discard && evt.data.discard>0){
+            var discard = evt.data.discard;
+            this._gameBox.removeChild(this.discardBox);
+            var posName = evt.data.prevailing;
+            var pos = 0;
+            this.dsListIcon.forEach((v,k)=>{
+                if (v.name == posName){
+                    pos = k;
+                }
+            });
+            this[`_discardList${pos}`].push(discard);
+            this.drawDiscard(this[`_discardList${pos}`],pos);
+            this._gameBox.addChild(this.discardBox);
+        }
+        // 吃碰的牌
+        
+        
 
     }
     private dropCard(pos,num) {
 
+    }
+    // 显示吃胡碰杠
+    public showDiscardStatus(evt){
+        console.log('showDiscardStatus',evt);
+        var option = evt.data.option;
+        this._discardStatusUI = new DiscardStatusUI(option);
+        this.addChild(this._discardStatusUI);
     }
 
     private chatBox() {
@@ -105,7 +117,8 @@ class GameUI extends eui.Component {
     }
 
     public sendCardStatus(evt){
-        console.log('cardStatus');
+        console.log('cardStatus',evt);
+        this.showDiscardStatus(evt.data.option);
     }
 
     public startGameUI(evt):void {
@@ -180,7 +193,7 @@ class GameUI extends eui.Component {
         console.log(res)
         return res;
     }
-
+    // 准备
     public changeReady(info){
         if (info.readyNum >= GameMode.totalNum) {
             this._start.$children[0].source = 'yellow_btn_png';
@@ -191,6 +204,39 @@ class GameUI extends eui.Component {
             this._ready.$children[1].text = "已准备";
             this._ready.enabled = false;
         }
+    }
+    // 游戏结束
+    public gameOver(evt){
+        console.log('gameOver',evt);
+        var gameoverInfo = evt.data.info;
+        gameoverInfo = {
+            status: 0,
+            type: 121,
+            result:[
+                {
+                    fan:1,
+                    points: -16,
+                    name: 'a1',
+                },
+                {
+                    fan:2,
+                    points: -16,
+                    name: 'a2',
+                },
+                {
+                    fan:1,
+                    points: -16,
+                    name: 'a3',
+                },
+                {
+                    fan:4,
+                    points: -16,
+                    name: 'a4',
+                }
+            ]
+        }
+        this._gameOverUI = new GameOverUI(gameoverInfo);
+        this.addChild(this._gameOverUI);
     }
 
     private handleStart(e:egret.TouchEvent):void {
@@ -203,7 +249,6 @@ class GameUI extends eui.Component {
     private drawCard(cards:Array<any>){
         var des = 80;
         cards.forEach((value, key) => {
-            console.log(value)
             var card = new CardUI(2,value);
             var scale = 0.8;
             card.scaleX = scale;
@@ -333,5 +378,7 @@ class GameUI extends eui.Component {
     private _discardList2 = [];
     private _discardList3 = [];
     private canDiscard = false;
+    private _discardStatusUI:DiscardStatusUI;
+    private _gameOverUI:GameOverUI;
 }
 

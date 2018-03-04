@@ -73,20 +73,30 @@ var GameUI = (function (_super) {
         this.drawCard(cards);
         this._gameBox.addChild(this.cardsBox);
         // 弃牌
-        var discard = evt.data.discard;
-        this._gameBox.removeChild(this.discardBox);
-        var posName = evt.data.prevailing;
-        var pos = 0;
-        this.dsListIcon.forEach(function (v, k) {
-            if (v.name == posName) {
-                pos = k;
-            }
-        });
-        this["_discardList" + pos].push(discard);
-        this.drawDiscard(this["_discardList" + pos], pos);
-        this._gameBox.addChild(this.discardBox);
+        if (evt.data.discard && evt.data.discard > 0) {
+            var discard = evt.data.discard;
+            this._gameBox.removeChild(this.discardBox);
+            var posName = evt.data.prevailing;
+            var pos = 0;
+            this.dsListIcon.forEach(function (v, k) {
+                if (v.name == posName) {
+                    pos = k;
+                }
+            });
+            this["_discardList" + pos].push(discard);
+            this.drawDiscard(this["_discardList" + pos], pos);
+            this._gameBox.addChild(this.discardBox);
+        }
+        // 吃碰的牌
     };
     GameUI.prototype.dropCard = function (pos, num) {
+    };
+    // 显示吃胡碰杠
+    GameUI.prototype.showDiscardStatus = function (evt) {
+        console.log('showDiscardStatus', evt);
+        var option = evt.data.option;
+        this._discardStatusUI = new DiscardStatusUI(option);
+        this.addChild(this._discardStatusUI);
     };
     GameUI.prototype.chatBox = function () {
         this._chatUI = new ChatUI();
@@ -129,7 +139,8 @@ var GameUI = (function (_super) {
         this["_zj" + num].visible = true;
     };
     GameUI.prototype.sendCardStatus = function (evt) {
-        console.log('cardStatus');
+        console.log('cardStatus', evt);
+        this.showDiscardStatus(evt.data.option);
     };
     GameUI.prototype.startGameUI = function (evt) {
         console.log('startGameUI', evt.data);
@@ -200,6 +211,7 @@ var GameUI = (function (_super) {
         console.log(res);
         return res;
     };
+    // 准备
     GameUI.prototype.changeReady = function (info) {
         if (info.readyNum >= GameMode.totalNum) {
             this._start.$children[0].source = 'yellow_btn_png';
@@ -211,6 +223,39 @@ var GameUI = (function (_super) {
             this._ready.enabled = false;
         }
     };
+    // 游戏结束
+    GameUI.prototype.gameOver = function (evt) {
+        console.log('gameOver', evt);
+        var gameoverInfo = evt.data.info;
+        gameoverInfo = {
+            status: 0,
+            type: 121,
+            result: [
+                {
+                    fan: 1,
+                    points: -16,
+                    name: 'a1',
+                },
+                {
+                    fan: 2,
+                    points: -16,
+                    name: 'a2',
+                },
+                {
+                    fan: 1,
+                    points: -16,
+                    name: 'a3',
+                },
+                {
+                    fan: 4,
+                    points: -16,
+                    name: 'a4',
+                }
+            ]
+        };
+        this._gameOverUI = new GameOverUI(gameoverInfo);
+        this.addChild(this._gameOverUI);
+    };
     GameUI.prototype.handleStart = function (e) {
         MessageCenter.getInstance().sendMessage(GameEvents.WS_START, { id: GameMode.roomId });
     };
@@ -221,7 +266,6 @@ var GameUI = (function (_super) {
         var _this = this;
         var des = 80;
         cards.forEach(function (value, key) {
-            console.log(value);
             var card = new CardUI(2, value);
             var scale = 0.8;
             card.scaleX = scale;

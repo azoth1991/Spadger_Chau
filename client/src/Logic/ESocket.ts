@@ -82,31 +82,66 @@ class ESocket {
                     }
                     // 谁出牌
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, {pos:info.currentPlayer});
+                    // MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:[42,43,44,45]});
+                    
                     if(info.model.option.length > 0){
                         // 显示碰杠吃
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CARDSTATUS, {option:info.model.option});
-                        // // 碰
-                        // if(info.model.option.indexOf(42) >= 0){
-                        //     $('button.pong').removeAttr('disabled');
-                        //     $('button.discard').attr('disabled', '')
-                        // }
-                        // // 杠
-                        // if(info.model.option.indexOf(44) >= 0){
-                        //     $('button.kong').removeAttr('disabled');
-                        //     $('button.discard').attr('disabled', '')
-                        // }
-                        // // 吃
-                        // if(info.model.option.indexOf(43) >= 0){
-                        //     $('button.chow').removeAttr('disabled');
-                        //     $('button.discard').attr('disabled', '')
-                        // }
-                        // // 胡
-                        // if(info.model.option.indexOf(45) >= 0){
-                        //     $('button.hu').removeAttr('disabled');
-                        //     $('button.discard').attr('disabled', '')
-                        // }
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:info.model.option});
                     }
                     break;
+                case 44:
+                    // 杠 流程
+                    // 显示牌组
+                    if(info.model.cards){
+                        var cards = info.model.cards;
+                        var discard = info.discard;
+                        var prevailing = info.prevailing;
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, {cards,prevailing});
+                    }
+                    if (info.model.status ==23) {
+                        GameMode.isDiscard = true;
+                    } else {
+                        GameMode.isDiscard = false;
+                    }
+                    // 谁出牌
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, {pos:info.currentPlayer});
+                    break;
+                case 43:
+                    // 吃 流程
+                    // 显示牌组
+                    if(info.model.cards){
+                        var cards = info.model.cards;
+                        var prevailing = info.prevailing;
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, {cards,prevailing});
+                    }
+                    if (info.model.status ==23) {
+                        GameMode.isDiscard = true;
+                    } else {
+                        GameMode.isDiscard = false;
+                    }
+                    // 谁出牌
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, {pos:info.currentPlayer});
+                    break;
+                case 42:
+                    // 碰 流程
+                    // 显示牌组
+                    if(info.model.cards){
+                        var cards = info.model.cards;
+                        var prevailing = info.prevailing;
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, {cards,prevailing});
+                    }
+                    if (info.model.status ==23) {
+                        GameMode.isDiscard = true;
+                    } else {
+                        GameMode.isDiscard = false;
+                    }
+                    // 谁出牌
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, {pos:info.currentPlayer});
+                    break;
+
+                case 45:
+                    // 胡牌 游戏结束
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GAMEOVER, {info:info.model});
             }
         }
     }
@@ -169,6 +204,31 @@ class ESocket {
             action: 41,
             wechatId: GameMode.wechatId,
             discardNum: evt.data.discardNum
+        };
+        this._websocket.send(JSON.stringify(info));
+    }
+    public sendDiscardStatus(evt){
+        console.log('sendDsicardstatus',evt);
+        switch (evt.data.type) {
+            case GameEvents.WS_HU:
+                this.action(45);
+                break;
+            case GameEvents.WS_GANG:
+                this.action(44);
+                break;
+            case GameEvents.WS_CHI:
+                this.action(43);
+                break;
+            case GameEvents.WS_PENG:
+                this.action(42);
+                break;
+        }
+    }
+    private action(actionid) {
+        var info = {
+            roomId: GameMode.roomId,
+            action: actionid,
+            wechatId: GameMode.wechatId,
         };
         this._websocket.send(JSON.stringify(info));
     }

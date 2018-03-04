@@ -66,6 +66,10 @@ declare class chatSkin extends eui.Skin{
 }
 declare class discardStatusSkin extends eui.Skin{
 }
+declare class discardStatusSkin extends eui.Skin{
+}
+declare class discardStatusSkin extends eui.Skin{
+}
 declare class gameSkin extends eui.Skin{
 }
 declare class headIcon1 extends eui.Skin{
