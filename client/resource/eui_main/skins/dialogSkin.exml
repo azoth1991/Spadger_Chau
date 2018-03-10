@@ -15,4 +15,13 @@
 			</e:Skin>
 		</e:skinName>
 	</e:Button>
+	<e:Scroller id="" height="473" width="560" x="506" y="152">
+		<e:viewport>
+			<e:List id="_mailContents" height="131">
+				<e:layout> 
+					<e:VerticalLayout/>
+				</e:layout>
+			</e:List>
+		</e:viewport>
+	</e:Scroller>
 </e:Skin>
