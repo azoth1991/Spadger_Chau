@@ -21,6 +21,9 @@ class DialogUI extends eui.Component {
             case DialogTypes.MYROOM:
                 this.skinName = "resource/eui_main/skins/myRoomSkin.exml";
                 break;
+            case DialogTypes.ZHANJI:
+                this.skinName = "resource/eui_main/skins/gameHistorySkin.exml";
+                break;
             default:
                 this.skinName = "resource/eui_main/skins/dialogSkin.exml";
         }
@@ -35,6 +38,9 @@ class DialogUI extends eui.Component {
         }
         if(this._mailScroller) {
             this.generateMailState();
+        }
+        if (this._gameHistoryScroller) {
+            this.generateHistoryState();
         }
         if(this._shopScroller) {
             this._labelContainer = [this._firstBuy, this._addCard, this._addMoney, this._addTool]
@@ -79,26 +85,44 @@ class DialogUI extends eui.Component {
                 break;
         }
         var dsShopContents:Array<Object> = [
-            { icon: "head-i-2_png", purpose: "伊文捷琳", desc: "评价：樱桃小丸子", amount: "10元"}
-            , { icon: "head-i-2_png", purpose: "史帝文", desc: "评价：咖啡不加糖", amount: "20元" }
-            , { icon: "head-i-2_png", purpose: "哈瑞斯", desc: "评价：猪一样的队友", amount: "30元" }
-            , { icon: "head-i-2_png", purpose: "史帝文", desc: "评价：咖啡不加糖", amount: "20元" }
-            , { icon: "head-i-2_png", purpose: "哈瑞斯", desc: "评价：猪一样的队友", amount: "30元" }, { icon: "head-i-2_png", purpose: "史帝文", desc: "评价：咖啡不加糖", amount: "20元" }
-            , { icon: "head-i-2_png", purpose: "哈瑞斯", desc: "评价：猪一样的队友", amount: "30元" }
+            { icon: "head-i-2_png", purpose: "伊文捷琳", desc: "评价：樱桃小丸子", price: "10元"}
+            , { icon: "head-i-2_png", purpose: "史帝文", desc: "评价：咖啡不加糖", price: "20元" }
+            , { icon: "head-i-2_png", purpose: "哈瑞斯", desc: "评价：猪一样的队友", price: "30元" }
+            , { icon: "head-i-2_png", purpose: "史帝文", desc: "评价：咖啡不加糖", price: "20元" }
+            , { icon: "head-i-2_png", purpose: "哈瑞斯", desc: "评价：猪一样的队友", price: "30元" },
+            { icon: "head-i-2_png", purpose: "史帝文", desc: "评价：咖啡不加糖", price: "20元" }
+            , { icon: "head-i-2_png", purpose: "哈瑞斯", desc: "评价：猪一样的队友", price: "30元" }
         ];
         this._shopContents.dataProvider = new eui.ArrayCollection( dsShopContents );
         this._shopContents.itemRenderer = ShopContentIRUI;
     }
 
+    private generateHistoryState() {
+        var history:Array<Object> = [
+            {roomId: 1000, roomOwner: '陈志伟', gameCount: 1, gameDuration: '10分钟', overTime: '2017-02-12 10:23:23', record: 20},
+            {roomId: 1230, roomOwner: '周菲特', gameCount: 4, gameDuration: '30分钟', overTime: '2017-02-12 10:23:23', record: -20},
+            {roomId: 1430, roomOwner: '阳神', gameCount: 5, gameDuration: '2分钟', overTime: '2017-02-12 10:23:23', record: 3},
+            {roomId: 1023, roomOwner: '一点兄', gameCount: 12, gameDuration: '23分钟', overTime: '2017-02-12 10:23:23', record: 210},
+            {roomId: 1120, roomOwner: '解老', gameCount: 14, gameDuration: '43分钟', overTime: '2017-02-12 10:23:23', record: -121},
+            {roomId: 1002, roomOwner: '春节', gameCount: 111, gameDuration: '23分钟', overTime: '2017-02-12 10:23:23', record: 302},            
+        ]
+        this._gameHistory.dataProvider = new eui.ArrayCollection( history );
+        this._gameHistory.itemRenderer = GameHistoryIRUI;
+    }
+
     private generateMailState() {
-        var mailContents:Array<Object> = [
-            { mailIcon: "mail_closed_png", mailInfo: '梦一样的遐想', remainTime: '10 days', date: '20180305' },
-            { mailIcon: "mail_opened_png", mailInfo: '从前的你和我', remainTime: '10 days', date: '20180305' },
-            { mailIcon: "mail_opened_png", mailInfo: '手一挥就再见', remainTime: '10 days', date: '20180305' },
-            { mailIcon: "mail_opened_png", mailInfo: '嘴一翘就笑', remainTime: '10 days', date: '20180305' },
-            { mailIcon: "mail_closed_png", mailInfo: '啊漫天的回想', remainTime: '10 days', date: '20180305' },
-            { mailIcon: "mail_closed_png", mailInfo: '云上去云上看云上走一趟', remainTime: '10 days', date: '20180305' },
+        var mailContents:Array<MailContentType> = [
+            { mailIcon: "mail_closed_png", mailInfo: '梦一样的遐想', opened:true,  remainTime: '已启', date: '20180305'},
+            { mailIcon: "mail_opened_png", mailInfo: '从前的你和我', opened:false, remainTime: '10 days', date: '20180305' },
+            { mailIcon: "mail_opened_png", mailInfo: '手一挥就再见', opened:true, remainTime: '已启', date: '20180305' },
+            { mailIcon: "mail_opened_png", mailInfo: '嘴一翘就笑', opened:false, remainTime: '10 days', date: '20180305' },
+            { mailIcon: "mail_closed_png", mailInfo: '啊漫天的回想', opened:false, remainTime: '10 days', date: '20180305' },
+            { mailIcon: "mail_closed_png", mailInfo: '云上去云上看云上走一趟', opened:false, remainTime: '10 days', date: '20180305' },
         ];
+        mailContents = mailContents.map(item => {
+            const textColor = item.opened ? '0x6BAE2D' : '0xD1AB98';
+            return {...item, textColor};
+        });
         this._mailContents.dataProvider = new eui.ArrayCollection(mailContents);
         this._mailContents.itemRenderer = MailContentIRUI;
     }
@@ -142,17 +166,28 @@ class DialogUI extends eui.Component {
     private _shopContents:eui.List;
     private _mailContents:eui.List;
     private _myRooms: eui.List;
+    private _gameHistory: eui.List;
     private _mailScroller:eui.Scroller;
     private _shopScroller:eui.Scroller;
     private _roomScroller:eui.Scroller;
+    private _gameHistoryScroller:eui.Scroller;
 }
 
 class ShopContentIRUI extends eui.ItemRenderer {
     constructor() {
         super();
+        this.addEventListener( eui.UIEvent.COMPLETE, this.uiCompHandler, this );
         this.skinName = "resource/eui_main/skins/shopContentIRSkin.exml";
     }
 
+
+    private uiCompHandler() {
+        setTimeout(() => {
+            this._buyTool.$children[1].text = this._price.text;
+        }, 0);
+    }
+    private _buyTool:eui.Button;
+    private _price:eui.Label;
     protected createChildren():void {
         super.createChildren();
     }
@@ -178,4 +213,23 @@ class MyRoomIRUI  extends eui.ItemRenderer {
     protected createChildren():void {
         super.createChildren();
     }
+}
+
+class GameHistoryIRUI  extends eui.ItemRenderer {
+    constructor() {
+        super();
+        this.skinName = "resource/eui_main/skins/gameHistoryIRSkin.exml";
+    }
+
+    protected createChildren():void {
+        super.createChildren();
+    }
+}
+
+interface MailContentType {
+    mailIcon: string,
+    mailInfo: string,
+    opened: boolean,
+    remainTime: string,
+    date: string
 }

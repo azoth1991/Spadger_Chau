@@ -13,7 +13,7 @@
 			"name": "game"
 		},
 		{
-			"keys": "back-btn-down_png,back-btn_png,dialog-bg-bottom_png,dialog-bg_jpg,dialog-bg2_png,dialog-left-bg_png,dialog-left_png,dialog-middle_png,dialog-right-bg_png,dialog-right_png,paper_jpg,papper-bg_jpg,rule-bg_png,enterroom-btn-down_png,input-bg_png,enterroom-btn_png,enterroom-bg_png,shop-bg_png,shopContent-bg_png,shopContent-icon_png,mail-bg_png,mailItem-bg_png,mail_opened_png,mail_closed_png,myRoom-bg_png",
+			"keys": "back-btn-down_png,back-btn_png,dialog-bg-bottom_png,dialog-bg_jpg,dialog-bg2_png,dialog-left-bg_png,dialog-left_png,dialog-middle_png,dialog-right-bg_png,dialog-right_png,paper_jpg,papper-bg_jpg,rule-bg_png,enterroom-btn-down_png,input-bg_png,enterroom-btn_png,enterroom-bg_png,shop-bg_png,shopContent-bg_png,shopContent-icon_png,mail-bg_png,mailItem-bg_png,mail_opened_png,mail_closed_png,myRoom-bg_png,gameHistory-bg_png",
 			"name": "dialog"
 		}
 	],
@@ -1002,6 +1002,11 @@
 			"url": "eui_main/imgs/dialog/myRoom-bg.png",
 			"type": "image",
 			"name": "myRoom-bg_png"
+		},
+		{
+			"url": "eui_main/imgs/dialog/gameHistory-bg.png",
+			"type": "image",
+			"name": "gameHistory-bg_png"
 		}
 	]
 }

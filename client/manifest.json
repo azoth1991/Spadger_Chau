@@ -10,8 +10,8 @@
 		"libs/modules/promise/promise.js"
 	],
 	"game": [
+		"bin-debug/DialogTypes.js",
 		"bin-debug/MC/MessageCenter.js",
-		"bin-debug/AssetAdapter.js",
 		"bin-debug/GameEvent.js",
 		"bin-debug/GameMode.js",
 		"bin-debug/GamePages.js",
@@ -23,7 +23,7 @@
 		"bin-debug/TrueLoadingUI.js",
 		"bin-debug/Logic/ESocket.js",
 		"bin-debug/Logic/MainLogic.js",
-		"bin-debug/DialogTypes.js",
+		"bin-debug/AssetAdapter.js",
 		"bin-debug/UI/HomeUI.js",
 		"bin-debug/UI/Game/CardUI.js",
 		"bin-debug/UI/Game/ChatListUI.js",
