@@ -32,6 +32,10 @@ var GameUI = (function (_super) {
         _this._discardList1 = [];
         _this._discardList2 = [];
         _this._discardList3 = [];
+        _this._discardSPList0 = [];
+        _this._discardSPList1 = [];
+        _this._discardSPList2 = [];
+        _this._discardSPList3 = [];
         _this.canDiscard = false;
         _this.dsListIcon = GameMode.playerList;
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
@@ -49,6 +53,7 @@ var GameUI = (function (_super) {
             MessageCenter.getInstance().sendMessage(GameEvents.TOGGLE_SETTING, null);
         }, this);
     };
+    // 加入游戏
     GameUI.prototype.joinGame = function (evt) {
         console.log('joinGame', this.dsListIcon);
         for (var k = 0; k < 4; k++) {
@@ -63,6 +68,73 @@ var GameUI = (function (_super) {
                 break;
             }
         }
+    };
+    GameUI.prototype.getdiscardSPs = function (evt) {
+        console.log('getdiscardSPs', evt);
+        var pos = 0;
+        this.dsListIcon.forEach(function (v, k) {
+            if (v.name == evt.data.pos) {
+                pos = k;
+            }
+        });
+        var actionResult = evt.data.actionResult;
+        this["_discardSPList" + pos].push(actionResult);
+        this.drawDiscardSPs();
+    };
+    // 画丢弃的牌
+    GameUI.prototype.drawDiscardSPs = function () {
+        var _this = this;
+        this.removeChild(this._discardSPsBox);
+        this._discardSPsBox = new eui.Component();
+        this.addChild(this._discardSPsBox);
+        var sum0 = 0;
+        var sum1 = 0;
+        var sum2 = 0;
+        var sum3 = 0;
+        this._discardSPList0.forEach(function (value, key) {
+            value.forEach(function (v, k) {
+                var discardSP = new CardUI(1, v, 0);
+                discardSP.x = 1194 - (k + key * 0.1 + sum0) * 79 * 0.6;
+                discardSP.y = 600;
+                discardSP.scaleX = 0.6;
+                discardSP.scaleY = 0.6;
+                _this._discardSPsBox.addChild(discardSP);
+            });
+            sum0 += value.length;
+        });
+        this._discardSPList1.forEach(function (value, key) {
+            value.forEach(function (v, k) {
+                var discardSP = new CardUI(1, v, 1);
+                discardSP.x = 195;
+                discardSP.y = 572 - (k + key * 0.1 + sum1) * 79 * 0.6;
+                discardSP.scaleX = 0.6;
+                discardSP.scaleY = 0.6;
+                _this._discardSPsBox.addChild(discardSP);
+            });
+            sum1 += value.length;
+        });
+        this._discardSPList2.forEach(function (value, key) {
+            value.forEach(function (v, k) {
+                var discardSP = new CardUI(1, v, 2);
+                discardSP.x = 1194 - (k + key * 0.1 + sum2) * 79 * 0.6;
+                discardSP.y = 128;
+                discardSP.scaleX = 0.6;
+                discardSP.scaleY = 0.6;
+                _this._discardSPsBox.addChild(discardSP);
+            });
+            sum2 += value.length;
+        });
+        this._discardSPList3.forEach(function (value, key) {
+            value.forEach(function (v, k) {
+                var discardSP = new CardUI(1, v, 3);
+                discardSP.x = 195;
+                discardSP.y = 1140 - (k + key * 0.1 + sum3) * 79 * 0.6;
+                discardSP.scaleX = 0.6;
+                discardSP.scaleY = 0.6;
+                _this._discardSPsBox.addChild(discardSP);
+            });
+            sum3 += value.length;
+        });
     };
     GameUI.prototype.getCard = function (evt) {
         console.log('getCard', evt);
@@ -87,7 +159,6 @@ var GameUI = (function (_super) {
             this.drawDiscard(this["_discardList" + pos], pos);
             this._gameBox.addChild(this.discardBox);
         }
-        // 吃碰的牌
     };
     GameUI.prototype.dropCard = function (pos, num) {
     };
@@ -108,7 +179,9 @@ var GameUI = (function (_super) {
     GameUI.prototype.initGameUI = function () {
         var _this = this;
         this._gameBox = new eui.Component();
+        this._discardSPsBox = new eui.Component();
         this.addChild(this._gameBox);
+        this.addChild(this._discardSPsBox);
         var that = this;
         console.log('dslist', this.dsListIcon);
         this.dsListIcon.map(function (v, k) {
@@ -131,6 +204,7 @@ var GameUI = (function (_super) {
     GameUI.prototype.backHome = function (e) {
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.BACK_HOME });
     };
+    // 显示中间的方向
     GameUI.prototype.showZj = function (num) {
         this["_zj1"].visible = false;
         this["_zj2"].visible = false;
@@ -270,11 +344,12 @@ var GameUI = (function (_super) {
             var scale = 0.8;
             card.scaleX = scale;
             card.scaleY = scale;
-            card.x = 1100 - key * des * scale;
+            card.x = 159 + key * des * scale;
             card.y = 591;
             _this.cardsBox.addChild(card);
         });
     };
+    // 画弃牌
     GameUI.prototype.drawDiscard = function (discards, pos) {
         var _this = this;
         console.log('pos=>', pos);
@@ -283,23 +358,23 @@ var GameUI = (function (_super) {
         desy = 55;
         switch (pos) {
             case 0:
-                startx = 365;
-                starty = 395;
+                startx = 554;
+                starty = 424;
                 type = 1;
                 break;
             case 1:
-                startx = 489;
-                starty = 173;
+                startx = 520;
+                starty = 256;
                 type = 3;
                 break;
             case 2:
-                startx = 1067;
-                starty = 328;
+                startx = 770;
+                starty = 260;
                 type = 1;
                 break;
             case 3:
-                startx = 806;
-                starty = 498;
+                startx = 776;
+                starty = 385;
                 type = 3;
                 break;
         }
@@ -311,16 +386,16 @@ var GameUI = (function (_super) {
             console.log(parseInt("" + key / 4));
             switch (pos) {
                 case 0:
-                    card.x = startx + (key % 4) * desx;
-                    card.y = starty + parseInt("" + key / 4) * desy;
+                    card.x = startx + (key % 5) * desx;
+                    card.y = starty + parseInt("" + key / 5) * desy;
                     break;
                 case 1:
                     card.x = startx - parseInt("" + key / 5) * desy;
                     card.y = starty + (key % 5) * desx;
                     break;
                 case 2:
-                    card.x = startx - (key % 4) * desx;
-                    card.y = starty - parseInt("" + key / 4) * desy;
+                    card.x = startx - (key % 5) * desx;
+                    card.y = starty - parseInt("" + key / 5) * desy;
                     break;
                 case 3:
                     card.x = startx + parseInt("" + key / 5) * desy;

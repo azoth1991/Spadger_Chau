@@ -21,4 +21,5 @@ class GameEvents{
     public static WS_SEND_CARDSTATUS:string = "WS_SEND_CARDSTATUS";
     public static WS_GET_DISCARDPOS:string = "WS_GET_DISCARDPOS";
     public static WS_GET_DISCARDSTATUS:string = "WS_GET_DISCARDSTATUS";
+    public static WS_GET_DISCARDSPS:string = "WS_GET_DISCARDSPS";
 }

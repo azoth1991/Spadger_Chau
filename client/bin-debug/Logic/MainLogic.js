@@ -49,10 +49,14 @@ var MainLogic = (function () {
         MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_CHAT, this._websocket.sendChat, this._websocket);
         MessageCenter.getInstance().addEventListener(GameEvents.TOGGLE_SETTING, this.toggleSettingUI, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_DISCARDPOS, this.getdiscardPos, this);
+        MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_DISCARDSPS, this.getdiscardSPs, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_DISCARDSTATUS, this._websocket.sendDiscardStatus, this._websocket);
     };
     MainLogic.prototype.getDiscardStatus = function (evt) {
         this._gameUI.showDiscardStatus(evt);
+    };
+    MainLogic.prototype.getdiscardSPs = function (evt) {
+        this._gameUI.getdiscardSPs(evt);
     };
     MainLogic.prototype.gameOver = function (evt) {
         this._gameUI.gameOver(evt);

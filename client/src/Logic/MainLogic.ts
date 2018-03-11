@@ -60,10 +60,14 @@ class MainLogic
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CHAT, this._websocket.sendChat, this._websocket );
         MessageCenter.getInstance().addEventListener( GameEvents.TOGGLE_SETTING, this.toggleSettingUI, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_DISCARDPOS, this.getdiscardPos, this );
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_DISCARDSPS, this.getdiscardSPs, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_DISCARDSTATUS, this._websocket.sendDiscardStatus, this._websocket );
     }
     private getDiscardStatus(evt){
         this._gameUI.showDiscardStatus(evt);
+    }
+    private getdiscardSPs(evt){
+        this._gameUI.getdiscardSPs(evt);
     }
     private gameOver(evt){
         this._gameUI.gameOver(evt);

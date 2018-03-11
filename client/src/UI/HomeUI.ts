@@ -11,7 +11,6 @@ class HomeUI extends eui.Component {
         // this._mainUI = new MainUI();
         // this._uiFocused = this._mainUI;
         // this.addChild(this._uiFocused);
-
     }
      public async handleRouter(evt:egret.Event) {
          console.log('hanldeRouter=>',evt.data)

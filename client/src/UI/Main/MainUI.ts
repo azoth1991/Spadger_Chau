@@ -103,7 +103,7 @@ class MainUI extends eui.Component {
                 break;
         }
         if (this._dialogType === DialogTypes.SHOP) {
-            MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, {type:this._dialogType,data:{ shopType: ShopTypes.ADDSJ }});
+            MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, {type:this._dialogType,data:{ shopType: ShopTypes.ADDTOOL }});
         } else {
             MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, {type:this._dialogType,data:{}});
         }
@@ -128,15 +128,4 @@ class MainUI extends eui.Component {
     private _playI:eui.Button;
     private _setI:eui.Button;
     private _dialogType:string;
-}
-class FriendIRUI extends eui.ItemRenderer {
-    constructor() {
-        super();
-        this.skinName = "friendIRSkin";
-    }
-
-    protected createChildren():void {
-        super.createChildren();
-    }
-
 }

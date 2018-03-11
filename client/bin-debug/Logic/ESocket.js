@@ -107,6 +107,8 @@ var ESocket = (function () {
                     }
                     // 谁出牌
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
+                    // 显示吃
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { pos: info.prevailing, actionResult: info.actionResult });
                     break;
                 case 43:
                     // 吃 流程
@@ -124,6 +126,8 @@ var ESocket = (function () {
                     }
                     // 谁出牌
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
+                    // 显示吃
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { pos: info.prevailing, actionResult: info.actionResult });
                     break;
                 case 42:
                     // 碰 流程
@@ -141,6 +145,8 @@ var ESocket = (function () {
                     }
                     // 谁出牌
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
+                    // 显示吃
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { pos: info.prevailing, actionResult: info.actionResult });
                     break;
                 case 45:
                     // 胡牌 游戏结束

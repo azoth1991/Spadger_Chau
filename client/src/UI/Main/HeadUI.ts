@@ -17,9 +17,10 @@ class HeadUI extends eui.Component {
     }
 
     private dialogHandler( evt:egret.TouchEvent ):void{
+        console.log('dialogHandler',evt)
         switch ( evt.currentTarget ){
             case this._addTool:
-                this._shopType = ShopTypes.ADDSJ;
+                this._shopType = ShopTypes.ADDTOOL;
                 break;
             case this._addMoney:
                 this._shopType = ShopTypes.ADDMONEY;

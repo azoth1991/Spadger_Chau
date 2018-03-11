@@ -22,9 +22,10 @@ var HeadUI = (function (_super) {
         this._addCard.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
     };
     HeadUI.prototype.dialogHandler = function (evt) {
+        console.log('dialogHandler', evt);
         switch (evt.currentTarget) {
             case this._addTool:
-                this._shopType = ShopTypes.ADDSJ;
+                this._shopType = ShopTypes.ADDTOOL;
                 break;
             case this._addMoney:
                 this._shopType = ShopTypes.ADDMONEY;

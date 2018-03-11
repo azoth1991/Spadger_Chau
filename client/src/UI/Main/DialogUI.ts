@@ -77,7 +77,7 @@ class DialogUI extends eui.Component {
             case ShopTypes.ADDMONEY:
                 this._addMoney.selected = true;
                 break;
-            case ShopTypes.ADDSJ:
+            case ShopTypes.ADDTOOL:
                 this._addTool.selected = true;
                 break;
             default :

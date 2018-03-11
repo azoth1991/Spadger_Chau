@@ -25,6 +25,7 @@ var GameEvents = (function () {
     GameEvents.WS_SEND_CARDSTATUS = "WS_SEND_CARDSTATUS";
     GameEvents.WS_GET_DISCARDPOS = "WS_GET_DISCARDPOS";
     GameEvents.WS_GET_DISCARDSTATUS = "WS_GET_DISCARDSTATUS";
+    GameEvents.WS_GET_DISCARDSPS = "WS_GET_DISCARDSPS";
     return GameEvents;
 }());
 __reflect(GameEvents.prototype, "GameEvents");
