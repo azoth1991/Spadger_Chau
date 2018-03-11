@@ -36,7 +36,7 @@ var MainUI = (function (_super) {
         this.addChildAt(this._headui, this.getChildIndex(this.imgBg) + 1);
         // 绑定按钮
         this.createRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.sendCreateRoom, this);
-        this.myRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.mbtnHandler, this);
+        this.myRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
         this.enterRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
         // dialog点击
         this._myI.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
@@ -86,7 +86,7 @@ var MainUI = (function (_super) {
                 this._dialogType = DialogTypes.MY;
                 break;
             case this._toolsI:
-                this._dialogType = DialogTypes.TOOLS;
+                this._dialogType = DialogTypes.SHOP;
                 break;
             case this._zhanjiI:
                 this._dialogType = DialogTypes.ZHANJI;
@@ -103,8 +103,16 @@ var MainUI = (function (_super) {
             case this.enterRoom:
                 this._dialogType = DialogTypes.ENTERROOM;
                 break;
+            case this.myRoom:
+                this._dialogType = DialogTypes.MYROOM;
+                break;
         }
-        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, { type: this._dialogType, data: {} });
+        if (this._dialogType === DialogTypes.SHOP) {
+            MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, { type: this._dialogType, data: { shopType: ShopTypes.ADDSJ } });
+        }
+        else {
+            MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, { type: this._dialogType, data: {} });
+        }
     };
     MainUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

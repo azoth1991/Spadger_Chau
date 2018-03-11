@@ -47,7 +47,7 @@
 		</e:Skin>
 		</e:skinName>
 	</e:ToggleButton>
-    <e:Scroller id="" height="473" width="560" x="506" y="152">
+    <e:Scroller id="_shopScroller" height="473" width="560" x="506" y="152">
 		<e:viewport>
 			<e:List id="_shopContents" height="131">
 				<e:layout> 

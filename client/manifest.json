@@ -37,7 +37,6 @@
 		"bin-debug/UI/Main/FriendIRUI.js",
 		"bin-debug/UI/Main/HeadUI.js",
 		"bin-debug/UI/Main/MainUI.js",
-		"bin-debug/UI/Main/SettingUI.js",
-		"bin-debug/UI/Main/ShopContentIRUI.js"
+		"bin-debug/UI/Main/SettingUI.js"
 	]
 }

@@ -2,7 +2,10 @@
   "global": {
     "globalRulerEnable": false,
     "globalBindingDataTestObj": [],
-    "globalAutoLayerMarkEnable": false
+    "globalAutoLayerMarkEnable": false,
+    "gridColor": 8421504,
+    "gridEnabled": false,
+    "gridSize": 20
   },
   "160ccadf2a7": {
     "bindingDataTestObj": []
