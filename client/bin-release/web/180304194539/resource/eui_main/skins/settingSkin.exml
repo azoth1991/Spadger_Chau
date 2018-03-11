@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="settingSkin"  width="1334" height="750" xmlns:e="http://ns.egret.com/eui">
+	<e:Image source="dialog-s-top_png" x="359" y="143"/>
+	<e:Image source="dialog-s-bg_png" x="376.5" y="167"/>
+    <e:Button id="_close" y="155" x="302.5">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="close_png" source.down="cloase_down_png"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Group xmlns:e="http://ns.egret.com/eui" y="216" x="454" anchorOffsetX="0" width="456" anchorOffsetY="0" height="52">
+        <e:RadioButton id="radio1" groupName="cn1" label="AA房卡" skinName="skins.RadioButtonSkin" y="12" />
+        <e:RadioButton id="radio2" groupName="cn1" label="房主房卡" skinName="skins.RadioButtonSkin" x="235" y="14"/>
+    </e:Group>
+    <e:Group xmlns:e="http://ns.egret.com/eui" y="272" x="454" anchorOffsetX="0" width="456" anchorOffsetY="0" height="52">
+        <e:RadioButton id="radio3" groupName="cn2" label="红中发财" skinName="skins.RadioButtonSkin" y="12"/>
+        <e:RadioButton id="radio4" groupName="cn2" label="前痞后赖" skinName="skins.RadioButtonSkin" x="235" y="14"/>
+    </e:Group>
+    <e:Group xmlns:e="http://ns.egret.com/eui" y="328" x="454" anchorOffsetX="0" width="456" anchorOffsetY="0" height="112">
+        <e:RadioButton id="radio5" groupName="cn3" label="1倍" skinName="skins.RadioButtonSkin" y="12"/>
+        <e:RadioButton id="radio6" groupName="cn3" label="16倍" skinName="skins.RadioButtonSkin" x="235" y="14"/>
+        <e:RadioButton id="radio7" groupName="cn3" label="32倍" skinName="skins.RadioButtonSkin" x="-1" y="66"/>
+        <e:RadioButton id="radio8" groupName="cn3" label="64倍" skinName="skins.RadioButtonSkin" x="235" y="62"/>
+    </e:Group>
+    <e:Group xmlns:e="http://ns.egret.com/eui" y="444" x="454" anchorOffsetX="0" width="456" anchorOffsetY="0" height="52">
+        <e:RadioButton id="radio9" groupName="cn4" label="300倍封顶" skinName="skins.RadioButtonSkin" y="12"/>
+        <e:RadioButton id="radio10" groupName="cn4" label="500倍封顶" skinName="skins.RadioButtonSkin" x="235" y="14"/>
+    </e:Group>
+	
+</e:Skin>

@@ -1,0 +1,12 @@
+{
+    "useClip": false,
+    "maxImageWidth": 2048,
+    "maxImageHeight": 2048,
+    "defaultResPath": "/Users/azoth/Sites/Spadger_Chau/client/resource/default.res.json",
+    "packGroups": {
+        "preload": true,
+        "loading": true,
+        "game": true,
+        "dialog": true
+    }
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="chatSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*">
+	<e:Image source="chat-bg2_png" x="0" y="10"/>
+	<e:ToggleButton id="_biaoqing" x="0" y="10" >
+		<e:skinName>
+			<e:Skin states="up,down,disabled,disabledAndSelected" minHeight="50" minWidth="100">
+				<e:Image source.disabledAndSelected="mbtn_BgFc_png" source="chat-btn_png" source.down="chat-btn-down_png"/>
+				<e:Image source="expression-i1_png" y="16" x="68"/>
+			</e:Skin>
+		</e:skinName>
+	</e:ToggleButton>
+	<e:ToggleButton id="_quickchat" x="250" y="10" >
+		<e:skinName>
+			<e:Skin states="up,down,disabled,disabledAndSelected" minHeight="50" minWidth="100">
+				<e:Image source.disabledAndSelected="chat-btn_png" source="chat-btn_png" source.down="chat-btn-down_png"/>
+				<e:Image source="expression-i2_png" y="18" x="38"/>
+			</e:Skin>
+		</e:skinName>
+	</e:ToggleButton>
+    <e:ToggleButton id="_chatlist" x="500" y="10" >
+		<e:skinName>
+			<e:Skin states="up,down,disabled,disabledAndSelected" minHeight="50" minWidth="100">
+				<e:Image source.disabledAndSelected="chat-btn_png" source="chat-btn_png" source.down="chat-btn-down_png"/>
+				<e:Image source="expression-i3_png" y="14" x="34"/>
+			</e:Skin>
+		</e:skinName>
+	</e:ToggleButton>
+	<e:TextInput id='_textInupt' x="27" y="657.5" anchorOffsetX="0" width="479" alpha="0"></e:TextInput>
+    <e:Button id="_send" y="687" x="554.5" anchorOffsetX="22" anchorOffsetY="44">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="dialog-button_png" source.down="dialog-button-select_png"/>
+                <e:Label text="发送" y="20" x="72"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+</e:Skin>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="chatExListSkin" width="746" height="617" xmlns:e="http://ns.egret.com/eui">
+	<e:Image source="e1_png" x="54" y="137.5"/>
+	<e:Image source="e2_png" x="188" y="137.5"/>
+	<e:Image source="e3_png" x="321" y="137.5"/>
+	<e:Image source="e4_png" x="455" y="137.5"/>
+	<e:Image source="e5_png" x="588" y="137.5"/>
+	<e:Image source="e6_png" x="54" y="235.5"/>
+	<e:Image source="e7_png" x="188" y="235.5"/>
+	<e:Image source="e8_png" x="321" y="235.5"/>
+	<e:Image source="e9_png" x="455" y="235.5"/>
+	<e:Image source="e10_png" x="588" y="235.5"/>
+	<e:Image source="e11_png" x="54" y="333.5"/>
+	<e:Image source="e12_png" x="188" y="333.5"/>
+	<e:Image source="e13_png" x="321" y="333.5"/>
+	<e:Image source="e14_png" x="455" y="333.5"/>
+
+</e:Skin>
