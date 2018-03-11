@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="friendIRSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Image source="mailItem-bg_png" x="0" y="0" width="547" height="127" scale9Grid="70,40,10,40" />
+	<e:Image source="free-seat_jpg" x="172.5" y="29"/>
+<e:Label fontFamily="微软雅黑" text="房间号" x="80" y="24" size="20" width="191" textAlign="left" verticalAlign="middle" anchorOffsetX="0" anchorOffsetY="0" height="23"/>
+<e:Label fontFamily="微软雅黑" text="{data.roomId}" x="80" y="63" size="20" width="191" textAlign="left"
+verticalAlign="middle" anchorOffsetX="0" anchorOffsetY="0" height="23" />
+<e:Image source="free-seat_jpg" x="252" y="28.5" />
+	<e:Image source="free-seat_jpg" x="332" y="29"/>
+	<e:Image source="free-seat_jpg" x="412" y="29"/>
+</e:Skin>

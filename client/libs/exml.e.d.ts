@@ -52,18 +52,6 @@ declare module skins{
 	class VSliderSkin extends eui.Skin{
 	}
 }
-declare class dialogSkin extends eui.Skin{
-}
-declare class enterRoomSkin extends eui.Skin{
-}
-declare class friendIRSkin extends eui.Skin{
-}
-declare class headSkin extends eui.Skin{
-}
-declare class mainSkin extends eui.Skin{
-}
-declare class settingSkin extends eui.Skin{
-}
 declare class cardIRSkin extends eui.Skin{
 }
 declare class chatDeListSkin extends eui.Skin{
@@ -87,4 +75,16 @@ declare class gameSkin extends eui.Skin{
 declare class headIcon1 extends eui.Skin{
 }
 declare class headIcon2 extends eui.Skin{
+}
+declare class dialogSkin extends eui.Skin{
+}
+declare class enterRoomSkin extends eui.Skin{
+}
+declare class friendIRSkin extends eui.Skin{
+}
+declare class headSkin extends eui.Skin{
+}
+declare class mainSkin extends eui.Skin{
+}
+declare class settingSkin extends eui.Skin{
 }

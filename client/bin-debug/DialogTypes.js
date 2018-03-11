@@ -12,6 +12,7 @@ var DialogTypes = (function () {
     DialogTypes.SET = "SET";
     DialogTypes.ENTERROOM = "ENTERROOM";
     DialogTypes.SHOP = "SHOP";
+    DialogTypes.MYROOM = "MYROOM";
     return DialogTypes;
 }());
 __reflect(DialogTypes.prototype, "DialogTypes");

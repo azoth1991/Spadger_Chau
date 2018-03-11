@@ -4,6 +4,7 @@ class DialogUI extends eui.Component {
         this._headerMessage = data.data || {shopType: ShopTypes.ADDMONEY};
         this.addEventListener( eui.UIEvent.COMPLETE, this.uiCompHandler, this );
         console.log('dialogName==>',data);
+        this._dialogType = data.type;
         switch (data.type) {
             case DialogTypes.ENTERROOM:
                 this.skinName = "resource/eui_main/skins/enterRoomSkin.exml";
@@ -17,6 +18,9 @@ class DialogUI extends eui.Component {
             case DialogTypes.NEWS:
                 this.skinName = "resource/eui_main/skins/dialogMailSkin.exml";
                 break;
+            case DialogTypes.MYROOM:
+                this.skinName = "resource/eui_main/skins/myRoomSkin.exml";
+                break;
             default:
                 this.skinName = "resource/eui_main/skins/dialogSkin.exml";
         }
@@ -29,11 +33,21 @@ class DialogUI extends eui.Component {
         if(this._enterRoom){
             this._enterRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.enterRoom, this );
         }
-        if(this._firstBuy) {
-            this.generateShopState()
-        }
         if(this._mailScroller) {
             this.generateMailState();
+        }
+        if(this._shopScroller) {
+            this._labelContainer = [this._firstBuy, this._addCard, this._addMoney, this._addTool]
+            this.generateShopState();
+        }
+        if (this._roomScroller) {
+            this._labelContainer = [this._freeRoom, this._busyRoom];
+            this.generateMyRoomState();
+        }
+        if(this._labelContainer.length > 0) {
+            this._labelContainer.forEach(label=> {
+                label.addEventListener(egret.TouchEvent.TOUCH_TAP, this.switchLabel, this);
+            })
         }
     }
 
@@ -49,10 +63,6 @@ class DialogUI extends eui.Component {
     }
 
     private generateShopState() {
-        this._shopLabels = [this._firstBuy, this._addCard, this._addMoney, this._addTool]
-        this._shopLabels.forEach(label=> {
-            label.addEventListener(egret.TouchEvent.TOUCH_TAP, this.changeShopLabel, this);
-        })
         const shopType = this._headerMessage.shopType;
         switch (shopType) {
             case ShopTypes.ADDCARD: 
@@ -93,18 +103,31 @@ class DialogUI extends eui.Component {
         this._mailContents.itemRenderer = MailContentIRUI;
     }
 
-    private changeShopLabel(e:egret.TouchEvent):void {
+    private generateMyRoomState() {
+        var rooms:Array<Object> = [
+            {roomId: 1000},
+            {roomId: 1032},
+            {roomId: 1234},
+            {roomId: 1546},
+            {roomId: 1023},
+            {roomId: 1103},            
+        ]
+        this._myRooms.dataProvider = new eui.ArrayCollection(rooms);
+        this._myRooms.itemRenderer = MyRoomIRUI;
+    }
+
+    private switchLabel(e:egret.TouchEvent):void {
         const target = e.currentTarget;
-        this._shopLabels = this._shopLabels.map(label => {
+        this._labelContainer = this._labelContainer.map(label => {
             label.selected = label === target;
             return label;
         })
-        // 后台请求商品数据
     }
 
     protected createChildren():void {
         super.createChildren();
     }
+    private _dialogType:string;
     private _back:eui.Button;
     private _enterRoom:eui.Button;
     private _input:eui.TextInput;
@@ -112,11 +135,16 @@ class DialogUI extends eui.Component {
     private _addMoney:eui.ToggleButton;
     private _addCard:eui.ToggleButton;
     private _addTool:eui.ToggleButton;
-    private _shopLabels:Array<eui.ToggleButton> = [];
+    private _freeRoom:eui.ToggleButton;
+    private _busyRoom:eui.ToggleButton;
+    private _labelContainer:Array<eui.ToggleButton> = [];
     private _headerMessage:{ shopType: string };
     private _shopContents:eui.List;
     private _mailContents:eui.List;
+    private _myRooms: eui.List;
     private _mailScroller:eui.Scroller;
+    private _shopScroller:eui.Scroller;
+    private _roomScroller:eui.Scroller;
 }
 
 class ShopContentIRUI extends eui.ItemRenderer {
@@ -134,6 +162,17 @@ class MailContentIRUI extends eui.ItemRenderer {
     constructor() {
         super();
         this.skinName = "resource/eui_main/skins/mailContentIRSkin.exml";
+    }
+
+    protected createChildren():void {
+        super.createChildren();
+    }
+}
+
+class MyRoomIRUI  extends eui.ItemRenderer {
+    constructor() {
+        super();
+        this.skinName = "resource/eui_main/skins/myRoomIRSkin.exml";
     }
 
     protected createChildren():void {

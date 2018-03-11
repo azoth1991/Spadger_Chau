@@ -12,10 +12,11 @@ var DialogUI = (function (_super) {
     __extends(DialogUI, _super);
     function DialogUI(data) {
         var _this = _super.call(this) || this;
-        _this._shopLabels = [];
+        _this._labelContainer = [];
         _this._headerMessage = data.data || { shopType: ShopTypes.ADDMONEY };
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         console.log('dialogName==>', data);
+        _this._dialogType = data.type;
         switch (data.type) {
             case DialogTypes.ENTERROOM:
                 _this.skinName = "resource/eui_main/skins/enterRoomSkin.exml";
@@ -29,23 +30,37 @@ var DialogUI = (function (_super) {
             case DialogTypes.NEWS:
                 _this.skinName = "resource/eui_main/skins/dialogMailSkin.exml";
                 break;
+            case DialogTypes.MYROOM:
+                _this.skinName = "resource/eui_main/skins/myRoomSkin.exml";
+                break;
             default:
                 _this.skinName = "resource/eui_main/skins/dialogSkin.exml";
         }
         return _this;
     }
     DialogUI.prototype.uiCompHandler = function () {
+        var _this = this;
         if (this._back) {
             this._back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.backHome, this);
         }
         if (this._enterRoom) {
             this._enterRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.enterRoom, this);
         }
-        if (this._firstBuy) {
-            this.generateShopState();
-        }
         if (this._mailScroller) {
             this.generateMailState();
+        }
+        if (this._shopScroller) {
+            this._labelContainer = [this._firstBuy, this._addCard, this._addMoney, this._addTool];
+            this.generateShopState();
+        }
+        if (this._roomScroller) {
+            this._labelContainer = [this._freeRoom, this._busyRoom];
+            this.generateMyRoomState();
+        }
+        if (this._labelContainer.length > 0) {
+            this._labelContainer.forEach(function (label) {
+                label.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.switchLabel, _this);
+            });
         }
     };
     DialogUI.prototype.backHome = function (e) {
@@ -58,11 +73,6 @@ var DialogUI = (function (_super) {
         MessageCenter.getInstance().sendMessage(GameEvents.WS_ENTER_ROOM, { type: GamePages.CREATE_ROOM });
     };
     DialogUI.prototype.generateShopState = function () {
-        var _this = this;
-        this._shopLabels = [this._firstBuy, this._addCard, this._addMoney, this._addTool];
-        this._shopLabels.forEach(function (label) {
-            label.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.changeShopLabel, _this);
-        });
         var shopType = this._headerMessage.shopType;
         switch (shopType) {
             case ShopTypes.ADDCARD:
@@ -101,13 +111,24 @@ var DialogUI = (function (_super) {
         this._mailContents.dataProvider = new eui.ArrayCollection(mailContents);
         this._mailContents.itemRenderer = MailContentIRUI;
     };
-    DialogUI.prototype.changeShopLabel = function (e) {
+    DialogUI.prototype.generateMyRoomState = function () {
+        var rooms = [
+            { roomId: 1000 },
+            { roomId: 1032 },
+            { roomId: 1234 },
+            { roomId: 1546 },
+            { roomId: 1023 },
+            { roomId: 1103 },
+        ];
+        this._myRooms.dataProvider = new eui.ArrayCollection(rooms);
+        this._myRooms.itemRenderer = MyRoomIRUI;
+    };
+    DialogUI.prototype.switchLabel = function (e) {
         var target = e.currentTarget;
-        this._shopLabels = this._shopLabels.map(function (label) {
+        this._labelContainer = this._labelContainer.map(function (label) {
             label.selected = label === target;
             return label;
         });
-        // 后台请求商品数据
     };
     DialogUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);
@@ -141,3 +162,16 @@ var MailContentIRUI = (function (_super) {
     return MailContentIRUI;
 }(eui.ItemRenderer));
 __reflect(MailContentIRUI.prototype, "MailContentIRUI");
+var MyRoomIRUI = (function (_super) {
+    __extends(MyRoomIRUI, _super);
+    function MyRoomIRUI() {
+        var _this = _super.call(this) || this;
+        _this.skinName = "resource/eui_main/skins/myRoomIRSkin.exml";
+        return _this;
+    }
+    MyRoomIRUI.prototype.createChildren = function () {
+        _super.prototype.createChildren.call(this);
+    };
+    return MyRoomIRUI;
+}(eui.ItemRenderer));
+__reflect(MyRoomIRUI.prototype, "MyRoomIRUI");
