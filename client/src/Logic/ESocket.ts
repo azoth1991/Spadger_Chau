@@ -18,7 +18,7 @@ class ESocket {
                     // 进入房价
                     if (GameMode.inRoom == false){
                         console.log(`sendMessage=>进入房间${GameMode.roomId}`)  
-                        var list = info.model.entered;
+                        var list = info.entered;
                         var index = list.indexOf(GameMode.wechatId);
                         list.unshift(list[list.length-1]);
                         list.pop();
@@ -39,7 +39,7 @@ class ESocket {
                         GameMode.inRoom = true;
                     } else {
                         console.log(`sendMessage=>房价占位`) 
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_JOIN, {info:info.model.cur});
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_JOIN, {info:info.cur});
                     }
                     break;
                 case 2:
@@ -47,6 +47,7 @@ class ESocket {
                     console.log(`getMessage=>聊天信息`) 
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CHAT, {info:info.model,name:info.prevailing});
                 case 3:
+                // 准备
                     MessageCenter.getInstance().sendMessage(MessageCenter.GAME_READY, {info:info.model});
                     break;
                 case 7:
@@ -55,7 +56,7 @@ class ESocket {
                     break;
                 case 10:
                     console.log(`重连`);
-                    var list = info.model.entered;
+                    var list = info.entered;
                     var index = list.indexOf(GameMode.wechatId);
 
                     GameMode.playerList[0] = {icon: "head-i-2_png", name: GameMode.wechatId, id: "123" };                                     
@@ -63,8 +64,12 @@ class ESocket {
                         index--;
                         GameMode.playerList[3-index] = { icon: "head-i-2_png", name: list[index], id: "123" };
                     }
-                    GameMode.playerList;
-                    MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.CREATE_ROOM});
+                    GameMode.playerList = list.map((v)=>{
+                        return {
+                            icon: "head-i-2_png", name: v, id: "123"
+                        };
+                    });
+                    MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.RELOAD,cards:info.model});
                     GameMode.inRoom = true;
                     break;
                 case 41:

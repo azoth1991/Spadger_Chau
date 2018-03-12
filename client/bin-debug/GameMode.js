@@ -13,6 +13,8 @@ var GameMode = (function () {
     GameMode.inRoom = false;
     GameMode.playerList = [];
     GameMode.isDiscard = false;
+    GameMode.joker = []; //赖子
+    GameMode.jokerPi = []; //皮
     return GameMode;
 }());
 __reflect(GameMode.prototype, "GameMode");

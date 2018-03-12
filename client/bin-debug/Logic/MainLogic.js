@@ -93,7 +93,10 @@ var MainLogic = (function () {
                 this._homeUI.imgBg.source = 'game_bg_jpg';
                 this._uiFocused = this._gameUI;
                 break;
-            case GamePages.MY_ROOM:
+            case GamePages.RELOAD:
+                this._gameUI = new GameUI();
+                this._homeUI.imgBg.source = 'game_bg_jpg';
+                this._uiFocused = this._gameUI;
                 break;
             case GamePages.DIALOG:
                 this._dialogUI = new DialogUI(data);

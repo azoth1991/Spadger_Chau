@@ -69,13 +69,14 @@ var HomeUI = (function (_super) {
                         trueLoadingUI = new TrueLoadingUI();
                         _b.label = 1;
                     case 1:
-                        _b.trys.push([1, 12, , 13]);
+                        _b.trys.push([1, 16, , 17]);
                         _a = this._pageName;
                         switch (_a) {
                             case GamePages.CREATE_ROOM: return [3 /*break*/, 2];
                             case GamePages.DIALOG: return [3 /*break*/, 6];
+                            case GamePages.RELOAD: return [3 /*break*/, 10];
                         }
-                        return [3 /*break*/, 10];
+                        return [3 /*break*/, 14];
                     case 2: return [4 /*yield*/, this.addChild(trueLoadingUI)];
                     case 3:
                         _b.sent();
@@ -85,7 +86,7 @@ var HomeUI = (function (_super) {
                         return [4 /*yield*/, this.removeChild(trueLoadingUI)];
                     case 5:
                         _b.sent();
-                        return [3 /*break*/, 10];
+                        return [3 /*break*/, 14];
                     case 6: return [4 /*yield*/, this.addChild(trueLoadingUI)];
                     case 7:
                         _b.sent();
@@ -95,19 +96,32 @@ var HomeUI = (function (_super) {
                         return [4 /*yield*/, this.removeChild(trueLoadingUI)];
                     case 9:
                         _b.sent();
-                        return [3 /*break*/, 10];
-                    case 10: 
+                        return [3 /*break*/, 14];
+                    case 10: return [4 /*yield*/, this.addChild(trueLoadingUI)];
+                    case 11:
+                        _b.sent();
+                        return [4 /*yield*/, RES.loadGroup("game", 0, trueLoadingUI)];
+                    case 12:
+                        _b.sent();
+                        return [4 /*yield*/, this.removeChild(trueLoadingUI)];
+                    case 13:
+                        _b.sent();
+                        _b.label = 14;
+                    case 14: 
                     // await this.pageReadyHandler( this._pageName, evt.data );  
                     return [4 /*yield*/, MessageCenter.getInstance().sendMessage(GameEvents.pageReadyHandler, { type: this._pageName, data: evt.data })];
-                    case 11:
+                    case 15:
                         // await this.pageReadyHandler( this._pageName, evt.data );  
                         _b.sent();
-                        return [3 /*break*/, 13];
-                    case 12:
+                        if (this._pageName == GamePages.RELOAD) {
+                            MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, evt.data.cards);
+                        }
+                        return [3 /*break*/, 17];
+                    case 16:
                         e_1 = _b.sent();
                         console.error(e_1);
-                        return [3 /*break*/, 13];
-                    case 13: return [2 /*return*/];
+                        return [3 /*break*/, 17];
+                    case 17: return [2 /*return*/];
                 }
             });
         });

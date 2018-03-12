@@ -28,9 +28,16 @@ class HomeUI extends eui.Component {
                     await RES.loadGroup("dialog", 0, trueLoadingUI);
                     await this.removeChild(trueLoadingUI);
                     break;
+                case GamePages.RELOAD:
+                    await this.addChild(trueLoadingUI);
+                    await RES.loadGroup("game", 0, trueLoadingUI);
+                    await this.removeChild(trueLoadingUI);
             }
             // await this.pageReadyHandler( this._pageName, evt.data );  
-            await MessageCenter.getInstance().sendMessage( GameEvents.pageReadyHandler, {type:this._pageName,data:evt.data});            
+            await MessageCenter.getInstance().sendMessage( GameEvents.pageReadyHandler, {type:this._pageName,data:evt.data});    
+            if (this._pageName == GamePages.RELOAD) {
+                await MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, evt.data.cards);
+            }  
         }
         catch (e) {
             console.error(e);
