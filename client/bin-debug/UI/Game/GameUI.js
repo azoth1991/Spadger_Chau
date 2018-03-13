@@ -37,6 +37,8 @@ var GameUI = (function (_super) {
         _this._discardSPList2 = [];
         _this._discardSPList3 = [];
         _this.canDiscard = false;
+        _this._joker = [];
+        _this._jokerPi = [];
         _this.dsListIcon = GameMode.playerList;
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_game/skins/gameSkin.exml";
@@ -339,12 +341,43 @@ var GameUI = (function (_super) {
     GameUI.prototype.drawCard = function (cards) {
         var _this = this;
         var des = 80;
-        cards.forEach(function (value, key) {
+        // joker
+        cards.filter(function (value, key) {
+            if (GameMode.joker.length > 0 && GameMode.joker.indexOf(value) >= 0) {
+                _this._joker.push(value);
+            }
+            else if (GameMode.jokerPi.length > 0 && GameMode.jokerPi.indexOf(value) >= 0) {
+                _this._jokerPi.push(value);
+            }
+            return GameMode.joker.length > 0 && GameMode.joker.indexOf(value) >= 0;
+        }).forEach(function (value, key) {
             var card = new CardUI(2, value);
             var scale = 0.8;
             card.scaleX = scale;
             card.scaleY = scale;
             card.x = 159 + key * des * scale;
+            card.y = 591;
+            _this.cardsBox.addChild(card);
+        });
+        // jokerpi
+        this._jokerPi.forEach(function (value, key) {
+            var card = new CardUI(2, value);
+            var scale = 0.8;
+            card.scaleX = scale;
+            card.scaleY = scale;
+            card.x = 159 + (key + _this._joker.length) * des * scale;
+            card.y = 591;
+            _this.cardsBox.addChild(card);
+        });
+        console.log('joker', this._joker, this._jokerPi, cards);
+        cards.filter(function (value) {
+            return (GameMode.jokerPi.indexOf(value) < 0 && GameMode.joker.indexOf(value) < 0);
+        }).forEach(function (value, key) {
+            var card = new CardUI(2, value);
+            var scale = 0.8;
+            card.scaleX = scale;
+            card.scaleY = scale;
+            card.x = 159 + (key + _this._jokerPi.length + _this._joker.length) * des * scale;
             card.y = 591;
             _this.cardsBox.addChild(card);
         });

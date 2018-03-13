@@ -69,7 +69,7 @@ var HomeUI = (function (_super) {
                         trueLoadingUI = new TrueLoadingUI();
                         _b.label = 1;
                     case 1:
-                        _b.trys.push([1, 16, , 17]);
+                        _b.trys.push([1, 18, , 19]);
                         _a = this._pageName;
                         switch (_a) {
                             case GamePages.CREATE_ROOM: return [3 /*break*/, 2];
@@ -113,15 +113,17 @@ var HomeUI = (function (_super) {
                     case 15:
                         // await this.pageReadyHandler( this._pageName, evt.data );  
                         _b.sent();
-                        if (this._pageName == GamePages.RELOAD) {
-                            MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, evt.data.cards);
-                        }
-                        return [3 /*break*/, 17];
+                        if (!(this._pageName == GamePages.RELOAD)) return [3 /*break*/, 17];
+                        return [4 /*yield*/, MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, evt.data.cards)];
                     case 16:
+                        _b.sent();
+                        _b.label = 17;
+                    case 17: return [3 /*break*/, 19];
+                    case 18:
                         e_1 = _b.sent();
                         console.error(e_1);
-                        return [3 /*break*/, 17];
-                    case 17: return [2 /*return*/];
+                        return [3 /*break*/, 19];
+                    case 19: return [2 /*return*/];
                 }
             });
         });

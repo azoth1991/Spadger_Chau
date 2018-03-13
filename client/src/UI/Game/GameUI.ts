@@ -318,7 +318,15 @@ class GameUI extends eui.Component {
 
     private drawCard(cards:Array<any>){
         var des = 80;
-        cards.forEach((value, key) => {
+        // joker
+        cards.filter((value, key) => {
+            if(GameMode.joker.length > 0 && GameMode.joker.indexOf(value) >= 0){
+                this._joker.push(value);
+            } else if (GameMode.jokerPi.length > 0 && GameMode.jokerPi.indexOf(value) >=0 ){
+                this._jokerPi.push(value);
+            }
+            return GameMode.joker.length>0 && GameMode.joker.indexOf(value) >=0;
+        }).forEach((value,key)=>{
             var card = new CardUI(2,value);
             var scale = 0.8;
             card.scaleX = scale;
@@ -326,7 +334,30 @@ class GameUI extends eui.Component {
             card.x = 159 + key*des*scale;
             card.y = 591;
             this.cardsBox.addChild(card);
-        })
+        });
+        // jokerpi
+        this._jokerPi.forEach((value,key)=>{
+            var card = new CardUI(2,value);
+            var scale = 0.8;
+            card.scaleX = scale;
+            card.scaleY = scale;
+            card.x = 159 + (key+this._joker.length)*des*scale;
+            card.y = 591;
+            this.cardsBox.addChild(card);
+        });
+        console.log('joker',this._joker,this._jokerPi,cards)
+
+        cards.filter((value)=>{
+            return ( GameMode.jokerPi.indexOf(value) < 0 && GameMode.joker.indexOf(value) < 0)
+        }).forEach((value, key)=>{
+            var card = new CardUI(2,value);
+            var scale = 0.8;
+            card.scaleX = scale;
+            card.scaleY = scale;
+            card.x = 159 + (key+this._jokerPi.length+this._joker.length)*des*scale;
+            card.y = 591;
+            this.cardsBox.addChild(card);
+        });
     }
 
     // 画弃牌
@@ -456,6 +487,8 @@ class GameUI extends eui.Component {
     private _discardStatusUI:DiscardStatusUI;
     private _gameOverUI:GameOverUI;
     private _discardSPsBox;
+    private _joker = [];
+    private _jokerPi = [];
 
 }
 

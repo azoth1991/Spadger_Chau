@@ -58,20 +58,23 @@ var ESocket = (function () {
                     break;
                 case 10:
                     console.log("\u91CD\u8FDE");
-                    var list = info.entered;
-                    var index = list.indexOf(GameMode.wechatId);
-                    GameMode.playerList[0] = { icon: "head-i-2_png", name: GameMode.wechatId, id: "123" };
-                    while (index > 0) {
-                        index--;
-                        GameMode.playerList[3 - index] = { icon: "head-i-2_png", name: list[index], id: "123" };
+                    if (GameMode.inRoom == false) {
+                        var list = info.entered;
+                        var index = list.indexOf(GameMode.wechatId);
+                        GameMode.playerList[0] = { icon: "head-i-2_png", name: GameMode.wechatId, id: "123" };
+                        while (index > 0) {
+                            index--;
+                            GameMode.playerList[3 - index] = { icon: "head-i-2_png", name: list[index], id: "123" };
+                        }
+                        GameMode.playerList = list.map(function (v) {
+                            return {
+                                icon: "head-i-2_png", name: v, id: "123"
+                            };
+                        });
+                        this.setJoker(info.model);
+                        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.RELOAD, cards: info.model });
+                        GameMode.inRoom = true;
                     }
-                    GameMode.playerList = list.map(function (v) {
-                        return {
-                            icon: "head-i-2_png", name: v, id: "123"
-                        };
-                    });
-                    MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.RELOAD, cards: info.model });
-                    GameMode.inRoom = true;
                     break;
                 case 41:
                     console.log('出牌');
@@ -157,6 +160,14 @@ var ESocket = (function () {
                     // 胡牌 游戏结束
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GAMEOVER, { info: info.model });
             }
+        }
+    };
+    ESocket.prototype.setJoker = function (info) {
+        if (info.joker[0] > 0) {
+            GameMode.joker = info.joker;
+        }
+        if (info.jokerPi[0] > 0) {
+            GameMode.jokerPi = info.jokerPi;
         }
     };
     ESocket.prototype.onSocketOpen = function () {
