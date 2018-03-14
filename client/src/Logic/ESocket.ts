@@ -52,6 +52,7 @@ class ESocket {
                     break;
                 case 7:
                     console.log(`sendMessage=>开始游戏`)
+                    this.setJoker(info.model);
                     MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, info.model);
                     break;
                 case 10:

@@ -11,6 +11,7 @@ class MainLogic
     private _dialogUI:DialogUI;
     private _mainUI:MainUI;
     private _settingUI:SettingUI;
+    private _createRoomSettingUI:CreateRoomSettingUI;
     //启动逻辑模块
     //root参数为显示列表根，当前Demo所有显示内容全部放置于root中
     public start( root:egret.DisplayObjectContainer )
@@ -30,6 +31,7 @@ class MainLogic
         this._uiFocused = this._mainUI;
         this._homeUI.addChild(this._uiFocused);
         this._settingUI = new SettingUI();
+        this._createRoomSettingUI = new CreateRoomSettingUI();
     }
 
     private toggleSettingUI(){
@@ -37,6 +39,13 @@ class MainLogic
             this._homeUI.removeChild(this._settingUI)
         } else {
             this._homeUI.addChild(this._settingUI);
+        }
+    }
+    private toggleCreateRoomDialogUI(){
+        if (this._homeUI.contains(this._createRoomSettingUI)){
+            this._homeUI.removeChild(this._createRoomSettingUI)
+        } else {
+            this._homeUI.addChild(this._createRoomSettingUI);
         }
     }
     //监听消息中心
@@ -59,6 +68,7 @@ class MainLogic
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_CARD, this.getCard, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CHAT, this._websocket.sendChat, this._websocket );
         MessageCenter.getInstance().addEventListener( GameEvents.TOGGLE_SETTING, this.toggleSettingUI, this );
+        MessageCenter.getInstance().addEventListener( GameEvents.TOGGLE_CREATEROOM, this.toggleCreateRoomDialogUI, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_DISCARDPOS, this.getdiscardPos, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_DISCARDSPS, this.getdiscardSPs, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_DISCARDSTATUS, this._websocket.sendDiscardStatus, this._websocket );

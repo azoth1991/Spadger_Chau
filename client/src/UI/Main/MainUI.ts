@@ -27,7 +27,9 @@ class MainUI extends eui.Component {
         this.addChildAt( this._headui, this.getChildIndex( this.imgBg ) + 1 );
 
         // 绑定按钮
-        this.createRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.sendCreateRoom, this );
+        this.createRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{
+            MessageCenter.getInstance().sendMessage( GameEvents.TOGGLE_CREATEROOM,null);
+        }, this );
         this.myRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
         this.enterRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
 
@@ -43,23 +45,6 @@ class MainUI extends eui.Component {
 
     }
 
-    private sendCreateRoom(evt) {
-        var params = JSON.stringify({host:GameMode.wechatId,billingMode:GameMode.billingMode,type:GameMode.type,winPoints:GameMode.winPoints,limitPoints:GameMode.limitPoints,pointType:GameMode.pointType});
-        var request = new egret.HttpRequest();
-        request.responseType = egret.HttpResponseType.TEXT;
-        request.open(encodeURI(`http://101.37.151.85:8080/socket/create?param=${params}`),egret.HttpMethod.GET);
-        request.send();
-        request.addEventListener(egret.Event.COMPLETE,(evt)=>{
-            var response = <egret.HttpRequest>evt.currentTarget;
-            var res = JSON.parse(response.response);
-            if (res.code == 1) {
-                GameMode.roomId = res.result.roomId;
-                MessageCenter.getInstance().sendMessage( GameEvents.WS_ENTER_ROOM, {type:GamePages.CREATE_ROOM});
-            } else {
-                alert('创建房间失败')
-            }
-        },this);
-    }
     private mbtnHandler( evt ):void{
         switch ( evt.currentTarget ){
             case this.createRoom:

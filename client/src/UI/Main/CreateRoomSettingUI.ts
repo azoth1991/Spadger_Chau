@@ -1,5 +1,6 @@
 class CreateRoomSettingUI extends eui.Component {
     private _close:eui.Button;
+    private _enterRoom:eui.Button;
     constructor() {
         super();
         this.addEventListener( eui.UIEvent.COMPLETE, this.uiCompHandler, this );
@@ -8,8 +9,12 @@ class CreateRoomSettingUI extends eui.Component {
 
     uiCompHandler() {
         this.initData();
+        this._enterRoom.addEventListener( egret.TouchEvent.TOUCH_TAP,()=>{
+            MessageCenter.getInstance().sendMessage( GameEvents.TOGGLE_CREATEROOM,null);
+            this.sendCreateRoom();
+        }, this);
         this._close.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{
-            MessageCenter.getInstance().sendMessage( GameEvents.TOGGLE_SETTING,null);
+            MessageCenter.getInstance().sendMessage( GameEvents.TOGGLE_CREATEROOM,null);
         }, this );
         var rdlist = [this.radio1,this.radio2,this.radio3,this.radio4,this.radio5,this.radio6,this.radio7,this.radio8,this.radio9,this.radio10];
         rdlist.forEach(rd=>{
@@ -49,6 +54,25 @@ class CreateRoomSettingUI extends eui.Component {
             }, this );
         })
     }
+
+    private sendCreateRoom() {
+        var params = JSON.stringify({host:GameMode.wechatId,billingMode:GameMode.billingMode,type:GameMode.type,winPoints:GameMode.winPoints,limitPoints:GameMode.limitPoints,pointType:GameMode.pointType});
+        var request = new egret.HttpRequest();
+        request.responseType = egret.HttpResponseType.TEXT;
+        request.open(encodeURI(`http://101.37.151.85:8080/socket/create?param=${params}`),egret.HttpMethod.GET);
+        request.send();
+        request.addEventListener(egret.Event.COMPLETE,(evt)=>{
+            var response = <egret.HttpRequest>evt.currentTarget;
+            var res = JSON.parse(response.response);
+            if (res.code == 1) {
+                GameMode.roomId = res.result.roomId;
+                MessageCenter.getInstance().sendMessage( GameEvents.WS_ENTER_ROOM, {type:GamePages.CREATE_ROOM});
+            } else {
+                alert('创建房间失败')
+            }
+        },this);
+    }
+
     private initData() {
         if (GameMode.billingMode == 1){
             this.radio1.selected = true;

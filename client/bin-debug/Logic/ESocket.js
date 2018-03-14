@@ -54,6 +54,7 @@ var ESocket = (function () {
                     break;
                 case 7:
                     console.log("sendMessage=>\u5F00\u59CB\u6E38\u620F");
+                    this.setJoker(info.model);
                     MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, info.model);
                     break;
                 case 10:
