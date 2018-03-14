@@ -16,38 +16,41 @@ class CreateRoomSettingUI extends eui.Component {
         this._close.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{
             MessageCenter.getInstance().sendMessage( GameEvents.TOGGLE_CREATEROOM,null);
         }, this );
-        var rdlist = [this.radio1,this.radio2,this.radio3,this.radio4,this.radio5,this.radio6,this.radio7,this.radio8,this.radio9,this.radio10];
+        var rdlist = [this.radio1_1,this.radio1_2,this.radio2_1,this.radio2_2,this.radio2_3,this.radio3_1,this.radio3_2,this.radio3_3,this.radio3_4,this.radio4_1,this.radio4_2];
         rdlist.forEach(rd=>{
             rd.addEventListener( egret.TouchEvent.TOUCH_TAP, (evt)=>{
                 switch(evt.currentTarget) {
-                    case  this.radio1:
+                    case  this.radio1_1:
                         GameMode.billingMode = 1;
                         break;
-                    case  this.radio2:
+                    case  this.radio1_2:
                         GameMode.billingMode = 2;
                         break;
-                    case  this.radio3:
-                        GameMode.type = 1;
+                    case  this.radio2_1:
+                        GameMode.type = 121;
                         break;
-                    case  this.radio4:
-                        GameMode.type = 2;
+                    case  this.radio2_2:
+                        GameMode.type = 122;
                         break;
-                    case  this.radio5:
+                    case  this.radio2_3:
+                        GameMode.type = 123;
+                        break;
+                    case  this.radio3_1:
                         GameMode.winPoints = 1;
                         break;
-                    case  this.radio6:
+                    case  this.radio3_2:
                         GameMode.winPoints = 16;
                         break;
-                    case  this.radio7:
+                    case  this.radio3_3:
                         GameMode.winPoints = 32;
                         break;
-                    case  this.radio8:
+                    case  this.radio3_4:
                         GameMode.winPoints = 64;
                         break;
-                    case  this.radio9:
+                    case  this.radio4_1:
                         GameMode.limitPoints = 300;
                         break;
-                    case  this.radio10:
+                    case  this.radio4_2:
                         GameMode.limitPoints = 500;
                         break;
                 }
@@ -59,6 +62,7 @@ class CreateRoomSettingUI extends eui.Component {
         var params = JSON.stringify({host:GameMode.wechatId,billingMode:GameMode.billingMode,type:GameMode.type,winPoints:GameMode.winPoints,limitPoints:GameMode.limitPoints,pointType:GameMode.pointType});
         var request = new egret.HttpRequest();
         request.responseType = egret.HttpResponseType.TEXT;
+        console.log('gameparams',params)
         request.open(encodeURI(`http://101.37.151.85:8080/socket/create?param=${params}`),egret.HttpMethod.GET);
         request.send();
         request.addEventListener(egret.Event.COMPLETE,(evt)=>{
@@ -74,49 +78,24 @@ class CreateRoomSettingUI extends eui.Component {
     }
 
     private initData() {
-        if (GameMode.billingMode == 1){
-            this.radio1.selected = true;
-        }
-        if (GameMode.billingMode == 2){
-            this.radio2.selected = true;
-        }
-        if (GameMode.type == 1){
-            this.radio3.selected = true;
-        }
-        if (GameMode.type == 2){
-            this.radio4.selected = true;
-        }
-        if (GameMode.winPoints == 1){
-            this.radio5.selected = true;
-        }
-        if (GameMode.winPoints == 16){
-            this.radio6.selected = true;
-        }
-        if (GameMode.winPoints == 32){
-            this.radio7.selected = true;
-        }
-        if (GameMode.winPoints == 64){
-            this.radio8.selected = true;
-        }
-        if (GameMode.limitPoints == 300){
-            this.radio9.selected = true;
-        }
-        if (GameMode.limitPoints == 500){
-            this.radio10.selected = true;
-        }
+        this.radio1_1.selected = true;
+        this.radio2_1.selected = true;
+        this.radio3_1.selected = true;
+        this.radio4_1.selected = true;
     }
 
     protected createChildren():void {
         super.createChildren();
     }
-    private radio1:eui.RadioButton;
-    private radio2:eui.RadioButton;
-    private radio3:eui.RadioButton;
-    private radio4:eui.RadioButton;
-    private radio5:eui.RadioButton;
-    private radio6:eui.RadioButton;
-    private radio7:eui.RadioButton;
-    private radio8:eui.RadioButton;
-    private radio9:eui.RadioButton;
-    private radio10:eui.RadioButton;
+    private radio1_1:eui.RadioButton;
+    private radio1_2:eui.RadioButton;
+    private radio2_1:eui.RadioButton;
+    private radio2_2:eui.RadioButton;
+    private radio2_3:eui.RadioButton;
+    private radio3_1:eui.RadioButton;
+    private radio3_2:eui.RadioButton;
+    private radio3_3:eui.RadioButton;
+    private radio3_4:eui.RadioButton;
+    private radio4_1:eui.RadioButton;
+    private radio4_2:eui.RadioButton;
 }
