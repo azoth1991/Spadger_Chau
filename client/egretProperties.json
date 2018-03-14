@@ -1,40 +1,40 @@
 {
-  "engineVersion": "5.1.2",
-  "compilerVersion": "5.1.2",
-  "target": {
-    "current": "web"
-  },
-  "template": {},
-  "eui": {
-    "exmlRoot": [
-      "resource/eui_skins"
-    ],
-    "themes": [
-      "resource/default.thm.json"
-    ],
-    "exmlPublishPolicy": "commonjs"
-  },
-  "modules": [
-    {
-      "name": "egret"
-    },
-    {
-      "name": "eui"
-    },
-    {
-      "name": "assetsmanager"
-    },
-    {
-      "name": "tween"
-    },
-    {
-      "name": "game"
-    },
-    {
-      "name": "socket"
-    },
-    {
-      "name": "promise"
-    }
-  ]
+	"engineVersion": "5.1.2",
+	"compilerVersion": "5.1.2",
+	"target": {
+		"current": "web"
+	},
+	"template": {},
+	"eui": {
+		"exmlRoot": [
+			"resource/eui_skins"
+		],
+		"themes": [
+			"resource/default.thm.json"
+		],
+		"exmlPublishPolicy": "commonjs"
+	},
+	"modules": [
+		{
+			"name": "egret"
+		},
+		{
+			"name": "eui"
+		},
+		{
+			"name": "assetsmanager"
+		},
+		{
+			"name": "tween"
+		},
+		{
+			"name": "game"
+		},
+		{
+			"name": "socket"
+		},
+		{
+			"name": "promise"
+		}
+	]
 }

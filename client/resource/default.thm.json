@@ -43,6 +43,7 @@
 		"resource/eui_game/skins/gameSkin.exml",
 		"resource/eui_game/skins/headIcon1.exml",
 		"resource/eui_game/skins/headIcon2.exml",
+		"resource/eui_main/skins/createRoomSettingSkin.exml",
 		"resource/eui_main/skins/dialogMailSkin.exml",
 		"resource/eui_main/skins/dialogShopSkin.exml",
 		"resource/eui_main/skins/dialogSkin.exml",

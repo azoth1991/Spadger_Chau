@@ -62,16 +62,28 @@ var CardUI = (function (_super) {
         }
         switch (this._deraction) {
             case 1:
-                this.rotation = 90;
+                -this._cardBg.rotation;
+                90;
+                -this._cardBg.anchorOffsetY;
+                110;
                 break;
             case 2:
-                this.rotation = 180;
+                -this._cardBg.rotation;
+                180;
+                -this._cardBg.anchorOffsetX;
+                78;
+                -this._cardBg.anchorOffsetY;
+                110;
                 break;
             case 3:
-                this.rotation = 270;
+                -this._cardBg.rotation;
+                270;
+                -this._cardBg.anchorOffsetX;
+                78;
                 break;
             case 0:
-                this.rotation = 0;
+                -this._cardBg.rotation;
+                0;
                 break;
         }
     };

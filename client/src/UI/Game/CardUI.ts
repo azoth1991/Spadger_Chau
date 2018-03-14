@@ -50,20 +50,28 @@ class CardUI extends eui.Component {
         if (GameMode.jokerPi.indexOf(this._num)>=0){
             this._joker.source = 'joker1_png';
         }
+
         switch (this._deraction) {
-            case 1:
-                this.rotation = 90;             
-                break;
-            case 2:
-                this.rotation = 180;
-                break;
-            case 3:
-                this.rotation = 270;
-                break;
-            case 0:
-                this.rotation = 0;
-                break;
-        }
+             case 1:
+-                this._cardBg.rotation = 90;
+-                this._cardBg.anchorOffsetY = 110;
+                 break;
+             case 2:
+-                this._cardBg.rotation = 180;
+-                this._cardBg.anchorOffsetX = 78;
+-                this._cardBg.anchorOffsetY = 110;
+                 break;
+             case 3:
+-                this._cardBg.rotation = 270;
+-                this._cardBg.anchorOffsetX = 78;
+                 break;
+             case 0:
+-                this._cardBg.rotation = 0;
+                 break;
+         }
+
+        
+        
 
         
     }
@@ -78,4 +86,5 @@ class CardUI extends eui.Component {
     private _deraction;
     public status;
     private _joker:eui.Image;
+
 }

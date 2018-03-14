@@ -76,6 +76,8 @@ declare class headIcon1 extends eui.Skin{
 }
 declare class headIcon2 extends eui.Skin{
 }
+declare class settingSkin extends eui.Skin{
+}
 declare class dialogSkin extends eui.Skin{
 }
 declare class enterRoomSkin extends eui.Skin{
@@ -85,6 +87,4 @@ declare class friendIRSkin extends eui.Skin{
 declare class headSkin extends eui.Skin{
 }
 declare class mainSkin extends eui.Skin{
-}
-declare class settingSkin extends eui.Skin{
 }

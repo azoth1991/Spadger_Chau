@@ -319,6 +319,8 @@ class GameUI extends eui.Component {
     private drawCard(cards:Array<any>){
         var des = 80;
         // joker
+        this._joker = [];
+        this._jokerPi = [];
         cards.filter((value, key) => {
             if(GameMode.joker.length > 0 && GameMode.joker.indexOf(value) >= 0){
                 this._joker.push(value);
@@ -402,15 +404,15 @@ class GameUI extends eui.Component {
                     break;
                 case 1:
                     card.x = startx - parseInt(`${key/5}`)*desy;
-                    card.y = starty + (key%5)*desx;   
+                    card.y = starty + (key%5)*desx;                 
                     break;                                 
                 case 2:
                     card.x = startx - (key%5)*desx;
-                    card.y = starty - parseInt(`${key/5}`)*desy;
+                    card.y = starty - parseInt(`${key/5}`)*desy;                
                     break;
                 case 3:
                     card.x = startx + parseInt(`${key/5}`)*desy;
-                    card.y = starty - (key%5)*desx;  
+                    card.y = starty - (key%5)*desx;                  
                     break;                                  
             }
             this.discardBox.addChild(card);

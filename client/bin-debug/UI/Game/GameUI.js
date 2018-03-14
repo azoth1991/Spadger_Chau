@@ -342,6 +342,8 @@ var GameUI = (function (_super) {
         var _this = this;
         var des = 80;
         // joker
+        this._joker = [];
+        this._jokerPi = [];
         cards.filter(function (value, key) {
             if (GameMode.joker.length > 0 && GameMode.joker.indexOf(value) >= 0) {
                 _this._joker.push(value);
