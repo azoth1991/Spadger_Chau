@@ -37,12 +37,12 @@ class SettingUI extends eui.Component {
         GameMode.bgmSwitch = this.settingCache.bgmSwitch;
         GameMode.soundEffectSwitch = this.settingCache.soundEffectSwitch;
         if (!GameMode.bgmSwitch) {
-            GameSound.stopBGM()
-        } else if (!GameSound._bgmSoundChannel) {
+            GameSound.stopBGM();
+        } else if (GameMode.bgmSwitch && !GameSound._bgmSoundChannel) {
             GameSound.playBGM();
         }
     }
-    
+
     private initData() {
         if (GameMode.bgmSwitch == true){
             this._bgmOpen.selected = true;
@@ -64,8 +64,8 @@ class SettingUI extends eui.Component {
     private _bgmOpen:eui.RadioButton;
     private _bgmClose:eui.RadioButton;
     private _confirmSetting:eui.Button;
-    private settingCache ={
-            soundEffectSwitch: true,
-            bgmSwitch: true,
+    private settingCache = {
+            soundEffectSwitch: false,
+            bgmSwitch: false,
     };
 }

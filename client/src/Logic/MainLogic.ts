@@ -12,6 +12,7 @@ class MainLogic
     private _mainUI:MainUI;
     private _settingUI:SettingUI;
     private _createRoomSettingUI:CreateRoomSettingUI;
+    private _useToolUI:UseToolUI;
     //启动逻辑模块
     //root参数为显示列表根，当前Demo所有显示内容全部放置于root中
     public start( root:egret.DisplayObjectContainer )
@@ -41,6 +42,15 @@ class MainLogic
             this._homeUI.addChild(this._settingUI);
         }
     }
+
+    private toggleUseToolUI() {
+        if (this._gameUI.contains(this._useToolUI)){
+            this._gameUI.removeChild(this._useToolUI)
+        } else {
+            this._gameUI.addChild(this._useToolUI);
+        }
+    }
+
     private toggleCreateRoomDialogUI(){
         if (this._homeUI.contains(this._createRoomSettingUI)){
             this._homeUI.removeChild(this._createRoomSettingUI)
@@ -72,6 +82,7 @@ class MainLogic
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_DISCARDPOS, this.getdiscardPos, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_DISCARDSPS, this.getdiscardSPs, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_DISCARDSTATUS, this._websocket.sendDiscardStatus, this._websocket );
+        MessageCenter.getInstance().addEventListener( GameEvents.TOGGLE_USETOOL, this.toggleUseToolUI, this );
     }
     private getDiscardStatus(evt){
         this._gameUI.showDiscardStatus(evt);
@@ -115,11 +126,13 @@ class MainLogic
                 this._gameUI = new GameUI();
                 this._homeUI.imgBg.source = 'game_bg_jpg';
                 this._uiFocused = this._gameUI;
+                this._useToolUI = new UseToolUI();
                 break;
             case GamePages.RELOAD:
                 this._gameUI = new GameUI();
                 this._homeUI.imgBg.source = 'game_bg_jpg';
                 this._uiFocused = this._gameUI;
+                this._useToolUI = new UseToolUI();
                 break;
             case GamePages.DIALOG:
                 this._dialogUI = new DialogUI(data);

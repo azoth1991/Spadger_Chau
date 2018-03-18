@@ -13,8 +13,8 @@ var SettingUI = (function (_super) {
     function SettingUI() {
         var _this = _super.call(this) || this;
         _this.settingCache = {
-            soundEffectSwitch: true,
-            bgmSwitch: true,
+            soundEffectSwitch: false,
+            bgmSwitch: false,
         };
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_main/skins/settingSkin.exml";
@@ -53,7 +53,7 @@ var SettingUI = (function (_super) {
         if (!GameMode.bgmSwitch) {
             GameSound.stopBGM();
         }
-        else if (!GameSound._bgmSoundChannel) {
+        else if (GameMode.bgmSwitch && !GameSound._bgmSoundChannel) {
             GameSound.playBGM();
         }
     };

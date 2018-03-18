@@ -12,6 +12,6 @@ class GameMode{
     public static isDiscard = false;
     public static joker = []; //赖子
     public static jokerPi = []; //皮
-    public static bgmSwitch = true;
+    public static bgmSwitch = false;
     public static soundEffectSwitch = true; 
 }

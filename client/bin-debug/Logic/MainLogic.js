@@ -30,6 +30,14 @@ var MainLogic = (function () {
             this._homeUI.addChild(this._settingUI);
         }
     };
+    MainLogic.prototype.toggleUseToolUI = function () {
+        if (this._gameUI.contains(this._useToolUI)) {
+            this._gameUI.removeChild(this._useToolUI);
+        }
+        else {
+            this._gameUI.addChild(this._useToolUI);
+        }
+    };
     MainLogic.prototype.toggleCreateRoomDialogUI = function () {
         if (this._homeUI.contains(this._createRoomSettingUI)) {
             this._homeUI.removeChild(this._createRoomSettingUI);
@@ -61,6 +69,7 @@ var MainLogic = (function () {
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_DISCARDPOS, this.getdiscardPos, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_DISCARDSPS, this.getdiscardSPs, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_DISCARDSTATUS, this._websocket.sendDiscardStatus, this._websocket);
+        MessageCenter.getInstance().addEventListener(GameEvents.TOGGLE_USETOOL, this.toggleUseToolUI, this);
     };
     MainLogic.prototype.getDiscardStatus = function (evt) {
         this._gameUI.showDiscardStatus(evt);
@@ -102,11 +111,13 @@ var MainLogic = (function () {
                 this._gameUI = new GameUI();
                 this._homeUI.imgBg.source = 'game_bg_jpg';
                 this._uiFocused = this._gameUI;
+                this._useToolUI = new UseToolUI();
                 break;
             case GamePages.RELOAD:
                 this._gameUI = new GameUI();
                 this._homeUI.imgBg.source = 'game_bg_jpg';
                 this._uiFocused = this._gameUI;
+                this._useToolUI = new UseToolUI();
                 break;
             case GamePages.DIALOG:
                 this._dialogUI = new DialogUI(data);

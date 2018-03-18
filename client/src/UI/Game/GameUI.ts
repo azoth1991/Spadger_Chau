@@ -142,6 +142,7 @@ class GameUI extends eui.Component {
         this._chatUI = new ChatUI();
         this.addChild(this._chatUI);
     }
+
     public sendMsg(info,name) {
         this._chatUI.sendMsg(info);
     }
@@ -168,6 +169,10 @@ class GameUI extends eui.Component {
         this._invest.addEventListener( egret.TouchEvent.TOUCH_TAP,()=>{alert(`房间号为${GameMode.roomId}`)}, this );
         this._back.addEventListener( egret.TouchEvent.TOUCH_TAP, this.backHome, this );
         this._chat.addEventListener( egret.TouchEvent.TOUCH_TAP, this._chatUI.toggleVisible, this._chatUI );
+        this._useTool.addEventListener( egret.TouchEvent.TOUCH_TAP, () => {
+            MessageCenter.getInstance().sendMessage( GameEvents.TOGGLE_USETOOL,null);
+            console.log('start')
+        },  this );
 
         // 开始游戏  分享
         this.addEventListener(GameEvents.EVT_LOAD_PAGE, this.startGameUI, this);
@@ -454,6 +459,7 @@ class GameUI extends eui.Component {
     private _back:eui.Button;
     private _chatUI:ChatUI;
     private _chat:eui.Button;
+    private _useTool:eui.Button;
     private _readyText:eui.Label;
     private _gameBox:eui.Component;
     private _invest;

@@ -26,12 +26,20 @@
 		</e:skinName>
 	</e:ToggleButton>
 	<e:TextInput id='_textInupt' x="27" y="657.5" anchorOffsetX="0" width="479" alpha="0"></e:TextInput>
-    <e:Button id="_send" y="687" x="554.5" anchorOffsetX="22" anchorOffsetY="44">
+    <e:Button id="_send" y="684" x="672.8" anchorOffsetX="29" anchorOffsetY="44" scaleX="0.45" >
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
 				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="dialog-button_png" source.down="dialog-button-select_png"/>
                 <e:Label text="发送" y="20" x="72"/>
 			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="_record" y="678" x="631.45" anchorOffsetX="171.7" anchorOffsetY="38" scaleX="0.62">
+		<e:skinName>
+		<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+			<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="dialog-button_png" source.down="dialog-button-select_png"/>
+			<e:Label text="录音" y="20" x="72"/>
+		</e:Skin>
 		</e:skinName>
 	</e:Button>
 </e:Skin>

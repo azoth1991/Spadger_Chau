@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,egret_icon_png,description_json,setting-i-down_png,tools-i-down_png,play-i-down_png,my-i-down_png,news-i-down_png,zhanji-i-down_png,plus-b-down_png,plus-b_png,green_btn_down_png,green_btn_png,yellow_btn_down_png,yellow_btn_png,cloase_down_png,close_png,dialog-button-select_png,dialog-button_png,dialog-s-bg_png,dialog-s-top_png,free-seat_jpg,click_mp3,hall_bg_mp3",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,egret_icon_png,description_json,setting-i-down_png,tools-i-down_png,play-i-down_png,my-i-down_png,news-i-down_png,zhanji-i-down_png,plus-b-down_png,plus-b_png,green_btn_down_png,green_btn_png,yellow_btn_down_png,yellow_btn_png,cloase_down_png,close_png,dialog-button-select_png,dialog-button_png,dialog-s-bg_png,dialog-s-top_png,free-seat_jpg,click_mp3,hall_bg_mp3,guo_fbtn2_png,guo_fbtn_down2_png,joker12_png,joker22_png",
 			"name": "preload"
 		},
 		{
@@ -9,7 +9,7 @@
 			"name": "loading"
 		},
 		{
-			"keys": "dipai1_png,dipai2_png,dipai3_png,dipai4_png,dipai5_png,8_png,9_png,4_png,5_png,7_png,6_png,2_png,3_png,1_png,0_png,bei_img_png,bei_zhongjian_png,chi_fbtn_down_png,chi_fbtn_png,chongzhi_btn_down_png,chongzhi_btn_png,dangqianweizhi_img_png,daoju_btn_down_png,daoju_btn_png,dong_zhongjian_png,fenshu_bg_png,game_bg_jpg,gang_fbtn_down_png,gang_fbtn_png,hu_fbtn_down_png,hu_fbtn_png,jishi_img_png,liaotian_btn_down_png,liaotian_btn_png,nan_zhongjian_png,peng_fbtn_down_png,peng_fbtn_png,setting_btn_png,touxiang_bg_png,wenzi_bg_png,xi_zhongjian_png,zhuang_png,zhuangshi_img_png,chat-bg2_png,chat-btn-down_png,chat-btn_png,chat-left-bg_png,chat-line_png,chat-right-bg_png,expression-i1_png,expression-i2_png,expression-i3_png,e1_png,e10_png,e11_png,e12_png,e13_png,e14_png,e2_png,e3_png,e4_png,e5_png,e6_png,e7_png,e8_png,e9_png,p4_png,p3_png,p5_png,p1_png,p7_png,p6_png,p2_png,p0_png,p8_png,p14_png,p17_png,p10_png,p16_png,p11_png,p13_png,p9_png,p15_png,p12_png,p25_png,p23_png,p24_png,p20_png,p21_png,p22_png,p19_png,p26_png,p27_png,p18_png,p28_png,p29_png,p30_png,p31_png,p32_png,p33_png,bai_gameover_bg_jpg,ping_gameover_bg_jpg,ying_gameover_bg_jpg,guo_fbtn_png,guo_fbtn_down_png,joker1_png,joker2_png",
+			"keys": "dipai1_png,dipai2_png,dipai3_png,dipai4_png,dipai5_png,8_png,9_png,4_png,5_png,7_png,6_png,2_png,3_png,1_png,0_png,bei_img_png,bei_zhongjian_png,chi_fbtn_down_png,chi_fbtn_png,chongzhi_btn_down_png,chongzhi_btn_png,dangqianweizhi_img_png,daoju_btn_down_png,daoju_btn_png,dong_zhongjian_png,fenshu_bg_png,game_bg_jpg,gang_fbtn_down_png,gang_fbtn_png,hu_fbtn_down_png,hu_fbtn_png,jishi_img_png,liaotian_btn_down_png,liaotian_btn_png,nan_zhongjian_png,peng_fbtn_down_png,peng_fbtn_png,setting_btn_png,touxiang_bg_png,wenzi_bg_png,xi_zhongjian_png,zhuang_png,zhuangshi_img_png,chat-bg2_png,chat-btn-down_png,chat-btn_png,chat-left-bg_png,chat-line_png,chat-right-bg_png,expression-i1_png,expression-i2_png,expression-i3_png,e1_png,e10_png,e11_png,e12_png,e13_png,e14_png,e2_png,e3_png,e4_png,e5_png,e6_png,e7_png,e8_png,e9_png,p4_png,p3_png,p5_png,p1_png,p7_png,p6_png,p2_png,p0_png,p8_png,p14_png,p17_png,p10_png,p16_png,p11_png,p13_png,p9_png,p15_png,p12_png,p25_png,p23_png,p24_png,p20_png,p21_png,p22_png,p19_png,p26_png,p27_png,p18_png,p28_png,p29_png,p30_png,p31_png,p32_png,p33_png,bai_gameover_bg_jpg,ping_gameover_bg_jpg,ying_gameover_bg_jpg,guo_fbtn_png,guo_fbtn_down_png,joker1_png,joker2_png,usetool-bg_png,toolItem-bg_png,rose_png,egg_png,shit_png,card_png,boom_png,cannon_png,crystal_png,clap_png,kiss_png",
 			"name": "game"
 		},
 		{
@@ -1029,14 +1029,89 @@
 			"name": "joker2_png"
 		},
 		{
-			"name": "click_mp3",
+			"url": "sound/click.mp3",
 			"type": "sound",
-			"url": "sound/click.mp3"
+			"name": "click_mp3"
 		},
 		{
-			"name": "hall_bg_mp3",
+			"url": "sound/hall_bg.mp3",
 			"type": "sound",
-			"url": "sound/hall_bg.mp3"
+			"name": "hall_bg_mp3"
+		},
+		{
+			"url": "eui_game/imgs/guo_fbtn.png",
+			"type": "image",
+			"name": "guo_fbtn2_png"
+		},
+		{
+			"url": "eui_game/imgs/guo_fbtn_down.png",
+			"type": "image",
+			"name": "guo_fbtn_down2_png"
+		},
+		{
+			"url": "eui_game/imgs/pai/joker1.png",
+			"type": "image",
+			"name": "joker12_png"
+		},
+		{
+			"url": "eui_game/imgs/pai/joker2.png",
+			"type": "image",
+			"name": "joker22_png"
+		},
+		{
+			"url": "eui_game/imgs/usetool/usetool-bg.png",
+			"type": "image",
+			"name": "usetool-bg_png"
+		},
+		{
+			"url": "eui_game/imgs/usetool/toolItem-bg.png",
+			"type": "image",
+			"name": "toolItem-bg_png"
+		},
+		{
+			"url": "eui_game/imgs/usetool/rose.png",
+			"type": "image",
+			"name": "rose_png"
+		},
+		{
+			"url": "eui_game/imgs/usetool/egg.png",
+			"type": "image",
+			"name": "egg_png"
+		},
+		{
+			"url": "eui_game/imgs/usetool/shit.png",
+			"type": "image",
+			"name": "shit_png"
+		},
+		{
+			"url": "eui_game/imgs/usetool/card.png",
+			"type": "image",
+			"name": "card_png"
+		},
+		{
+			"url": "eui_game/imgs/usetool/boom.png",
+			"type": "image",
+			"name": "boom_png"
+		},
+		{
+			"url": "eui_game/imgs/usetool/cannon.png",
+			"type": "image",
+			"name": "cannon_png"
+		},
+		{
+			"url": "eui_game/imgs/usetool/crystal.png",
+			"type": "image",
+			"name": "crystal_png"
+		},
+		{
+			"url": "eui_game/imgs/usetool/clap.png",
+			"type": "image",
+			"name": "clap_png"
+		},
+		{
+			"url": "eui_game/imgs/usetool/kiss.png",
+			"type": "image",
+			"name": "kiss_png"
 		}
 	]
 }

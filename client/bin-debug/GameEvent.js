@@ -27,6 +27,7 @@ var GameEvents = (function () {
     GameEvents.WS_GET_DISCARDSTATUS = "WS_GET_DISCARDSTATUS";
     GameEvents.WS_GET_DISCARDSPS = "WS_GET_DISCARDSPS";
     GameEvents.TOGGLE_CREATEROOM = "TOGGLE_CREATEROOM";
+    GameEvents.TOGGLE_USETOOL = "TOGGLE_USETOOL";
     return GameEvents;
 }());
 __reflect(GameEvents.prototype, "GameEvents");

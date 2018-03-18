@@ -200,6 +200,10 @@ var GameUI = (function (_super) {
         this._invest.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { alert("\u623F\u95F4\u53F7\u4E3A" + GameMode.roomId); }, this);
         this._back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.backHome, this);
         this._chat.addEventListener(egret.TouchEvent.TOUCH_TAP, this._chatUI.toggleVisible, this._chatUI);
+        this._useTool.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+            MessageCenter.getInstance().sendMessage(GameEvents.TOGGLE_USETOOL, null);
+            console.log('start');
+        }, this);
         // 开始游戏  分享
         this.addEventListener(GameEvents.EVT_LOAD_PAGE, this.startGameUI, this);
     };

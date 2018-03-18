@@ -31,7 +31,7 @@
 			</e:Skin>
 		</e:skinName>
 	</e:Button>
-    <e:Button id="_tool" y="533" x="1222">
+    <e:Button id="_useTool" y="533" x="1222">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
 				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="daoju_btn_png"/>
