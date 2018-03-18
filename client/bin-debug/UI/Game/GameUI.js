@@ -82,6 +82,7 @@ var GameUI = (function (_super) {
         var actionResult = evt.data.actionResult;
         this["_discardSPList" + pos].push(actionResult);
         this.drawDiscardSPs();
+        this.drawOtherCard();
     };
     // 画丢弃的牌
     GameUI.prototype.drawDiscardSPs = function () {
@@ -93,46 +94,39 @@ var GameUI = (function (_super) {
         var sum1 = 0;
         var sum2 = 0;
         var sum3 = 0;
+        var scale = 0.4;
         this._discardSPList0.forEach(function (value, key) {
             value.forEach(function (v, k) {
-                var discardSP = new CardUI(1, v, 0);
-                discardSP.x = 1194 - (k + key * 0.1 + sum0) * 79 * 0.6;
-                discardSP.y = 600;
-                discardSP.scaleX = 0.6;
-                discardSP.scaleY = 0.6;
+                var discardSP = new CardUI(1, v, 0, scale);
+                discardSP.x = 1194 - (k + key * 0.1 + sum0) * 79 * scale;
+                discardSP.y = 620;
                 _this._discardSPsBox.addChild(discardSP);
             });
             sum0 += value.length;
         });
         this._discardSPList1.forEach(function (value, key) {
             value.forEach(function (v, k) {
-                var discardSP = new CardUI(1, v, 1);
+                var discardSP = new CardUI(1, v, 1, scale);
                 discardSP.x = 195;
-                discardSP.y = 572 - (k + key * 0.1 + sum1) * 79 * 0.6;
-                discardSP.scaleX = 0.6;
-                discardSP.scaleY = 0.6;
+                discardSP.y = 572 - (k + key * 0.1 + sum1) * 79 * scale;
                 _this._discardSPsBox.addChild(discardSP);
             });
             sum1 += value.length;
         });
         this._discardSPList2.forEach(function (value, key) {
             value.forEach(function (v, k) {
-                var discardSP = new CardUI(1, v, 2);
-                discardSP.x = 1194 - (k + key * 0.1 + sum2) * 79 * 0.6;
+                var discardSP = new CardUI(1, v, 2, scale);
+                discardSP.x = 1194 - (k + key * 0.1 + sum2) * 79 * scale;
                 discardSP.y = 128;
-                discardSP.scaleX = 0.6;
-                discardSP.scaleY = 0.6;
                 _this._discardSPsBox.addChild(discardSP);
             });
             sum2 += value.length;
         });
         this._discardSPList3.forEach(function (value, key) {
             value.forEach(function (v, k) {
-                var discardSP = new CardUI(1, v, 3);
+                var discardSP = new CardUI(1, v, 3, scale);
                 discardSP.x = 195;
-                discardSP.y = 1140 - (k + key * 0.1 + sum3) * 79 * 0.6;
-                discardSP.scaleX = 0.6;
-                discardSP.scaleY = 0.6;
+                discardSP.y = 1140 - (k + key * 0.1 + sum3) * 79 * scale;
                 _this._discardSPsBox.addChild(discardSP);
             });
             sum3 += value.length;
@@ -161,6 +155,7 @@ var GameUI = (function (_super) {
             this.drawDiscard(this["_discardList" + pos], pos);
             this._gameBox.addChild(this.discardBox);
         }
+        this.drawOtherCard();
     };
     GameUI.prototype.dropCard = function (pos, num) {
     };
@@ -182,6 +177,8 @@ var GameUI = (function (_super) {
         var _this = this;
         this._gameBox = new eui.Component();
         this._discardSPsBox = new eui.Component();
+        this._otherCardBox = new eui.Component();
+        this.addChild(this._otherCardBox);
         this.addChild(this._gameBox);
         this.addChild(this._discardSPsBox);
         var that = this;
@@ -328,7 +325,7 @@ var GameUI = (function (_super) {
                 },
                 {
                     fan: 4,
-                    points: -16,
+                    points: +48,
                     name: 'a4',
                 }
             ]
@@ -395,33 +392,28 @@ var GameUI = (function (_super) {
         var desx, desy, startx, starty, type, drection, anchorOffsetX, anchorOffsetY;
         desx = 35;
         desy = 55;
+        type = 2;
         switch (pos) {
             case 0:
                 startx = 554;
                 starty = 424;
-                type = 1;
                 break;
             case 1:
                 startx = 520;
                 starty = 256;
-                type = 3;
                 break;
             case 2:
                 startx = 770;
                 starty = 260;
-                type = 1;
                 break;
             case 3:
                 startx = 776;
                 starty = 385;
-                type = 3;
                 break;
         }
         discards.forEach(function (value, key) {
-            var card = new CardUI(type, value, pos);
             var scale = 0.45;
-            card.scaleX = scale;
-            card.scaleY = scale;
+            var card = new CardUI(type, value, pos, scale);
             console.log(parseInt("" + key / 4));
             switch (pos) {
                 case 0:
@@ -445,24 +437,34 @@ var GameUI = (function (_super) {
         });
     };
     GameUI.prototype.drawOtherCard = function () {
+        console.log('drawOtherCard');
+        this.removeChild(this._otherCardBox);
+        this._otherCardBox = new eui.Component();
         var desX = 29;
         var desY = 52;
         for (var cardLength = 0; cardLength < 13; cardLength++) {
             // 左边
-            var letfCard = new CardUI(5, null);
-            letfCard.x = 145;
-            letfCard.y = 128 + cardLength * desX;
-            this._gameBox.addChild(letfCard);
+            if (cardLength < 13 - this._discardSPList1.length) {
+                var letfCard = new CardUI(5, null);
+                letfCard.x = 145;
+                letfCard.y = 128 + cardLength * desX;
+                this._otherCardBox.addChild(letfCard);
+            }
             // 右边
-            var rightCard = new CardUI(5, null);
-            rightCard.x = 1168;
-            rightCard.y = 128 + cardLength * desX;
-            this._gameBox.addChild(rightCard);
+            if (cardLength < 13 - this._discardSPList3.length) {
+                var rightCard = new CardUI(5, null);
+                rightCard.x = 1168;
+                rightCard.y = 128 + cardLength * desX;
+                this._otherCardBox.addChild(rightCard);
+            }
             // 上面
-            var letfCard = new CardUI(4, null);
-            letfCard.x = 322 + cardLength * desY;
-            letfCard.y = 53;
-            this._gameBox.addChild(letfCard);
+            if (cardLength < 13 - this._discardSPList2.length) {
+                var letfCard = new CardUI(4, null);
+                letfCard.x = 322 + cardLength * desY;
+                letfCard.y = 53;
+                this._otherCardBox.addChild(letfCard);
+            }
+            this.addChild(this._otherCardBox);
         }
     };
     GameUI.prototype.createChildren = function () {

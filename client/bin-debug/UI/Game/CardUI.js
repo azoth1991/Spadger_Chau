@@ -10,13 +10,16 @@ r.prototype = e.prototype, t.prototype = new r();
 };
 var CardUI = (function (_super) {
     __extends(CardUI, _super);
-    function CardUI(type, num, deraction) {
+    function CardUI(type, num, deraction, scale) {
         if (deraction === void 0) { deraction = 0; }
+        if (scale === void 0) { scale = 1; }
         var _this = _super.call(this) || this;
         _this._type = type;
         _this._num = num;
         _this._deraction = deraction;
         _this.status = 'down';
+        _this.scaleX = scale;
+        _this.scaleY = scale;
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         if (num || num == 0) {
             _this.addEventListener('touchTap', _this.handleClick, _this);
@@ -50,6 +53,7 @@ var CardUI = (function (_super) {
         console.log('clickCard');
     };
     CardUI.prototype.uiCompHandler = function () {
+        var _this = this;
         this._bg.source = "dipai" + this._type + "_png";
         if (this._num || this._num == 0) {
             this._cardBg.source = "p" + this._num + "_png";
@@ -60,32 +64,27 @@ var CardUI = (function (_super) {
         if (GameMode.jokerPi.indexOf(this._num) >= 0) {
             this._joker.source = 'joker1_png';
         }
-        switch (this._deraction) {
-            case 1:
-                -this._cardBg.rotation;
-                90;
-                -this._cardBg.anchorOffsetY;
-                110;
-                break;
-            case 2:
-                -this._cardBg.rotation;
-                180;
-                -this._cardBg.anchorOffsetX;
-                78;
-                -this._cardBg.anchorOffsetY;
-                110;
-                break;
-            case 3:
-                -this._cardBg.rotation;
-                270;
-                -this._cardBg.anchorOffsetX;
-                78;
-                break;
-            case 0:
-                -this._cardBg.rotation;
-                0;
-                break;
-        }
+        setTimeout(function () {
+            _this.rotation = parseInt(_this._deraction) * 90;
+        }, 10);
+        // switch (this._deraction) {
+        //     case 1:
+        //         this._cardBg.rotation = 90;
+        //         this._cardBg.anchorOffsetY = 110;                
+        //         break;
+        //     case 2:
+        //         this._cardBg.rotation = 180;
+        //         this._cardBg.anchorOffsetX = 78;
+        //         this._cardBg.anchorOffsetY = 110;
+        //         break;
+        //     case 3:
+        //         this._cardBg.rotation = 270;
+        //         this._cardBg.anchorOffsetX = 78;
+        //         break;
+        //     case 0:
+        //         this._cardBg.rotation = 0;
+        //         break;
+        // }    
     };
     CardUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

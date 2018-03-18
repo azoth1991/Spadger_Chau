@@ -117,7 +117,13 @@ var ESocket = (function () {
                     // 谁出牌
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
                     // 显示吃
-                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { pos: info.prevailing, actionResult: info.actionResult });
+                    console.log(info.actionCard);
+                    if (info.actionResult && info.actionResult.length) {
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { pos: info.prevailing, actionResult: info.actionResult });
+                    }
+                    if (info.actionCard) {
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, discard: info.actionCard, prevailing: prevailing });
+                    }
                     break;
                 case 43:
                     // 吃 流程

@@ -103,6 +103,15 @@ var Main = (function (_super) {
                 switch (_a.label) {
                     case 0:
                         GameMode.wechatId = this.getUrlParam('wechatId');
+                        // wx
+                        wx.config({
+                            debug: true,
+                            appId: '{{appId}}',
+                            timestamp: '{{timeStamp}}',
+                            nonceStr: '{{nonceStr}}',
+                            signature: '{{signType}}',
+                            jsApiList: ['chooseWXPay', 'startRecord', 'stopRecord', 'playVoice', 'uploadVoice'] // 必填，需要使用的JS接口列表
+                        });
                         return [4 /*yield*/, this.loadResource()];
                     case 1:
                         _a.sent();

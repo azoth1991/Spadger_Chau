@@ -30,19 +30,29 @@ var DiscardStatusUI = (function (_super) {
         this._hu.selected = false;
         this._gang.selected = false;
         this._chi.selected = false;
+        this._peng.touchEnabled = false;
+        this._hu.touchEnabled = false;
+        this._gang.touchEnabled = false;
+        this._chi.touchEnabled = false;
+        this._guo.selected = true;
+        this._guo.touchEnabled = true;
         this._option.forEach(function (v) {
             switch (v) {
                 case 42:
                     _this._peng.selected = true;
+                    _this._peng.touchEnabled = true;
                     break;
                 case 43:
                     _this._chi.selected = true;
+                    _this._chi.touchEnabled = true;
                     break;
                 case 44:
-                    _this._gang.selected = true;
+                    _this._chi.selected = true;
+                    _this._chi.touchEnabled = true;
                     break;
                 case 45:
                     _this._hu.selected = true;
+                    _this._hu.touchEnabled = true;
                     break;
             }
         });
@@ -52,26 +62,25 @@ var DiscardStatusUI = (function (_super) {
         this._gang.addEventListener('touchTap', this.handleStatus, this);
         this._chi.addEventListener('touchTap', this.handleStatus, this);
         this._peng.addEventListener('touchTap', this.handleStatus, this);
+        this._guo.addEventListener('touchTap', this.handleStatus, this);
     };
     DiscardStatusUI.prototype.handleStatus = function (evt) {
-        if (evt.currentTarget.selected == true) {
-            switch (evt.currentTarget) {
-                case this._hu:
-                    MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, { type: GameEvents.WS_HU });
-                    break;
-                case this._gang:
-                    MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, { type: GameEvents.WS_GANG });
-                    break;
-                case this._chi:
-                    MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, { type: GameEvents.WS_CHI });
-                    break;
-                case this._peng:
-                    MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, { type: GameEvents.WS_PENG });
-                    break;
-            }
-            // todo销毁
-            this.visible = false;
+        switch (evt.currentTarget) {
+            case this._hu:
+                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, { type: GameEvents.WS_HU });
+                break;
+            case this._gang:
+                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, { type: GameEvents.WS_GANG });
+                break;
+            case this._chi:
+                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, { type: GameEvents.WS_CHI });
+                break;
+            case this._peng:
+                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, { type: GameEvents.WS_PENG });
+                break;
         }
+        // todo销毁
+        this.visible = false;
     };
     DiscardStatusUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

@@ -1,10 +1,12 @@
 class CardUI extends eui.Component {
-    constructor(type,num,deraction = 0) {
+    constructor(type,num,deraction = 0,scale = 1) {
         super();
         this._type = type;
         this._num = num;
         this._deraction = deraction;
         this.status = 'down';
+        this.scaleX = scale;
+        this.scaleY = scale;
         this.addEventListener( eui.UIEvent.COMPLETE, this.uiCompHandler, this );
         if (num||num==0) {
             this.addEventListener('touchTap', this.handleClick, this);
@@ -50,30 +52,28 @@ class CardUI extends eui.Component {
         if (GameMode.jokerPi.indexOf(this._num)>=0){
             this._joker.source = 'joker1_png';
         }
+        setTimeout(()=>{
+            this.rotation = parseInt(this._deraction)*90;
+        },10);
 
-        switch (this._deraction) {
-             case 1:
--                this._cardBg.rotation = 90;
--                this._cardBg.anchorOffsetY = 110;
-                 break;
-             case 2:
--                this._cardBg.rotation = 180;
--                this._cardBg.anchorOffsetX = 78;
--                this._cardBg.anchorOffsetY = 110;
-                 break;
-             case 3:
--                this._cardBg.rotation = 270;
--                this._cardBg.anchorOffsetX = 78;
-                 break;
-             case 0:
--                this._cardBg.rotation = 0;
-                 break;
-         }
-
-        
-        
-
-        
+        // switch (this._deraction) {
+        //     case 1:
+        //         this._cardBg.rotation = 90;
+        //         this._cardBg.anchorOffsetY = 110;                
+        //         break;
+        //     case 2:
+        //         this._cardBg.rotation = 180;
+        //         this._cardBg.anchorOffsetX = 78;
+        //         this._cardBg.anchorOffsetY = 110;
+        //         break;
+        //     case 3:
+        //         this._cardBg.rotation = 270;
+        //         this._cardBg.anchorOffsetX = 78;
+        //         break;
+        //     case 0:
+        //         this._cardBg.rotation = 0;
+        //         break;
+        // }    
     }
 
     protected createChildren():void {

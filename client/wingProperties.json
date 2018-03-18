@@ -8,6 +8,10 @@
             {
                 "configPath": "resource/default.res.json",
                 "relativePath": "resource/"
+            },
+            {
+                "configPath": "resource/default.res.json",
+                "relativePath": "resource/"
             }
         ]
     },

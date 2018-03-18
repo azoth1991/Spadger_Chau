@@ -16,19 +16,30 @@ class DiscardStatusUI extends eui.Component {
         this._hu.selected = false;
         this._gang.selected = false;
         this._chi.selected = false;
+        this._peng.touchEnabled = false;
+        this._hu.touchEnabled = false;
+        this._gang.touchEnabled = false;
+        this._chi.touchEnabled = false;
+
+        this._guo.selected = true;
+        this._guo.touchEnabled = true;
         this._option.forEach((v)=>{
             switch(v){
                 case 42:
                     this._peng.selected = true;
+                    this._peng.touchEnabled = true;
                     break;
                 case 43:
                     this._chi.selected = true;
+                    this._chi.touchEnabled = true;
                     break;
                 case 44:
-                    this._gang.selected = true;
+                    this._chi.selected = true;
+                    this._chi.touchEnabled = true;
                     break;
                 case 45:
                     this._hu.selected = true;
+                    this._hu.touchEnabled = true;
                     break;
             }
         });
@@ -38,27 +49,25 @@ class DiscardStatusUI extends eui.Component {
         this._gang.addEventListener('touchTap',this.handleStatus,this);
         this._chi.addEventListener('touchTap',this.handleStatus,this);
         this._peng.addEventListener('touchTap',this.handleStatus,this);
+        this._guo.addEventListener('touchTap',this.handleStatus,this);
     }
     private handleStatus(evt){
-        if (evt.currentTarget.selected == true){
-            switch (evt.currentTarget) {
-                case this._hu:
-                    MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_HU});
-                    break;
-                case this._gang:
-                    MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_GANG});
-                    break;
-                case this._chi:
-                    MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_CHI});
-                    break;
-                case this._peng:
-                    MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_PENG});
-                    break;
-
-            }
-            // todo销毁
-            this.visible = false;
+        switch (evt.currentTarget) {
+            case this._hu:
+                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_HU});
+                break;
+            case this._gang:
+                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_GANG});
+                break;
+            case this._chi:
+                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_CHI});
+                break;
+            case this._peng:
+                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_PENG});
+                break;
         }
+        // todo销毁
+        this.visible = false;
         
     }
 
@@ -70,5 +79,7 @@ class DiscardStatusUI extends eui.Component {
     private _gang:eui.ToggleButton;
     private _chi:eui.ToggleButton;
     private _hu:eui.ToggleButton;
+    private _guo:eui.ToggleButton;
     private _option = [];
+
 }
