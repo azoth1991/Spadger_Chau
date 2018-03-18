@@ -15,6 +15,8 @@ var GameMode = (function () {
     GameMode.isDiscard = false;
     GameMode.joker = []; //赖子
     GameMode.jokerPi = []; //皮
+    GameMode.bgmSwitch = true;
+    GameMode.soundEffectSwitch = true;
     return GameMode;
 }());
 __reflect(GameMode.prototype, "GameMode");

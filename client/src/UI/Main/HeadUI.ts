@@ -17,7 +17,7 @@ class HeadUI extends eui.Component {
     }
 
     private dialogHandler( evt:egret.TouchEvent ):void{
-        console.log('dialogHandler',evt)
+        GameSound.playClickSound();
         switch ( evt.currentTarget ){
             case this._addTool:
                 this._shopType = ShopTypes.ADDTOOL;

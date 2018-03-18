@@ -58,11 +58,11 @@ declare class chatDeListSkin extends eui.Skin{
 }
 declare class chatExListSkin extends eui.Skin{
 }
+declare class chatlistIRSkin extends eui.Skin{
+}
 declare class chatListSkin extends eui.Skin{
 }
 declare class chatSkin extends eui.Skin{
-}
-declare class chatlistIRSkin extends eui.Skin{
 }
 declare class discardStatusSkin extends eui.Skin{
 }

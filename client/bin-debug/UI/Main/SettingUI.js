@@ -12,6 +12,10 @@ var SettingUI = (function (_super) {
     __extends(SettingUI, _super);
     function SettingUI() {
         var _this = _super.call(this) || this;
+        _this.settingCache = {
+            soundEffectSwitch: true,
+            bgmSwitch: true,
+        };
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_main/skins/settingSkin.exml";
         return _this;
@@ -22,74 +26,49 @@ var SettingUI = (function (_super) {
         this._close.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             MessageCenter.getInstance().sendMessage(GameEvents.TOGGLE_SETTING, null);
         }, this);
-        var rdlist = [this.radio1, this.radio2, this.radio3, this.radio4, this.radio5, this.radio6, this.radio7, this.radio8, this.radio9, this.radio10];
+        this._confirmSetting.addEventListener(egret.TouchEvent.TOUCH_TAP, this.changeGameSound, this);
+        var rdlist = [this._effectOpen, this._effectClose, this._bgmOpen, this._bgmClose];
         rdlist.forEach(function (rd) {
             rd.addEventListener(egret.TouchEvent.TOUCH_TAP, function (evt) {
                 switch (evt.currentTarget) {
-                    case _this.radio1:
-                        GameMode.billingMode = 1;
+                    case _this._effectOpen:
+                        _this.settingCache.soundEffectSwitch = true;
                         break;
-                    case _this.radio2:
-                        GameMode.billingMode = 2;
+                    case _this._effectClose:
+                        _this.settingCache.soundEffectSwitch = false;
                         break;
-                    case _this.radio3:
-                        GameMode.type = 1;
+                    case _this._bgmOpen:
+                        _this.settingCache.bgmSwitch = true;
                         break;
-                    case _this.radio4:
-                        GameMode.type = 2;
-                        break;
-                    case _this.radio5:
-                        GameMode.winPoints = 1;
-                        break;
-                    case _this.radio6:
-                        GameMode.winPoints = 16;
-                        break;
-                    case _this.radio7:
-                        GameMode.winPoints = 32;
-                        break;
-                    case _this.radio8:
-                        GameMode.winPoints = 64;
-                        break;
-                    case _this.radio9:
-                        GameMode.limitPoints = 300;
-                        break;
-                    case _this.radio10:
-                        GameMode.limitPoints = 500;
+                    case _this._bgmClose:
+                        _this.settingCache.bgmSwitch = false;
                         break;
                 }
             }, _this);
         });
     };
+    SettingUI.prototype.changeGameSound = function () {
+        GameMode.bgmSwitch = this.settingCache.bgmSwitch;
+        GameMode.soundEffectSwitch = this.settingCache.soundEffectSwitch;
+        if (!GameMode.bgmSwitch) {
+            GameSound.stopBGM();
+        }
+        else if (!GameSound._bgmSoundChannel) {
+            GameSound.playBGM();
+        }
+    };
     SettingUI.prototype.initData = function () {
-        if (GameMode.billingMode == 1) {
-            this.radio1.selected = true;
+        if (GameMode.bgmSwitch == true) {
+            this._bgmOpen.selected = true;
         }
-        if (GameMode.billingMode == 2) {
-            this.radio2.selected = true;
+        else {
+            this._bgmClose.selected = true;
         }
-        if (GameMode.type == 1) {
-            this.radio3.selected = true;
+        if (GameMode.soundEffectSwitch == true) {
+            this._effectOpen.selected = true;
         }
-        if (GameMode.type == 2) {
-            this.radio4.selected = true;
-        }
-        if (GameMode.winPoints == 1) {
-            this.radio5.selected = true;
-        }
-        if (GameMode.winPoints == 16) {
-            this.radio6.selected = true;
-        }
-        if (GameMode.winPoints == 32) {
-            this.radio7.selected = true;
-        }
-        if (GameMode.winPoints == 64) {
-            this.radio8.selected = true;
-        }
-        if (GameMode.limitPoints == 300) {
-            this.radio9.selected = true;
-        }
-        if (GameMode.limitPoints == 500) {
-            this.radio10.selected = true;
+        else {
+            this._effectClose.selected = true;
         }
     };
     SettingUI.prototype.createChildren = function () {

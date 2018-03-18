@@ -9,7 +9,12 @@ class MainUI extends eui.Component {
         // header
         this._headui = new HeadUI();
 
-        // _friendListIR
+        // 加载声音资源
+        GameSound._clickSound = RES.getRes('click_mp3');
+        GameSound._bgm = RES.getRes("hall_bg_mp3");
+        if (GameMode.bgmSwitch) {
+            GameSound.playBGM();
+        }
         /// 填充数据
         var dsListFriend:Array<Object> = [
             { icon: "head-i-2_png", name: "伊文捷琳", count: "评价：樱桃小丸子"}
@@ -46,6 +51,7 @@ class MainUI extends eui.Component {
     }
 
     private mbtnHandler( evt ):void{
+        GameSound.playClickSound();
         switch ( evt.currentTarget ){
             case this.createRoom:
                 this._pageFocused = GamePages.CREATE_ROOM;
@@ -61,6 +67,7 @@ class MainUI extends eui.Component {
     }
 
     private dialogHandler( evt:egret.TouchEvent ):void{
+        GameSound.playClickSound();
         switch ( evt.currentTarget ){
             case this._myI:
                 this._dialogType = DialogTypes.MY;

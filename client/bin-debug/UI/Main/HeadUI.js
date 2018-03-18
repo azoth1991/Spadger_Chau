@@ -22,7 +22,7 @@ var HeadUI = (function (_super) {
         this._addCard.addEventListener(egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this);
     };
     HeadUI.prototype.dialogHandler = function (evt) {
-        console.log('dialogHandler', evt);
+        GameSound.playClickSound();
         switch (evt.currentTarget) {
             case this._addTool:
                 this._shopType = ShopTypes.ADDTOOL;
