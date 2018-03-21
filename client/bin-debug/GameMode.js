@@ -17,6 +17,8 @@ var GameMode = (function () {
     GameMode.jokerPi = []; //皮
     GameMode.bgmSwitch = false;
     GameMode.soundEffectSwitch = true;
+    GameMode.pos = '';
+    GameMode.draw = -1;
     return GameMode;
 }());
 __reflect(GameMode.prototype, "GameMode");

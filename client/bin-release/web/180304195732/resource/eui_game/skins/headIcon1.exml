@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="headIcon1" height="70" xmlns:e="http://ns.egret.com/eui">
-    <e:Image source="touxiang_bg_png"/>
-    <e:Image id="_icon" source="head-i-2_png" height="70" width="70"/>
-    <e:Label id="_name" x="82" y="3"/>
-    <e:Label id="_id" x="81" y="37"/>
-</e:Skin>

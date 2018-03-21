@@ -78,6 +78,9 @@ var DiscardStatusUI = (function (_super) {
             case this._peng:
                 MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, { type: GameEvents.WS_PENG });
                 break;
+            case this._guo:
+                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, { type: GameEvents.WS_GUO });
+                break;
         }
         // todo销毁
         this.visible = false;

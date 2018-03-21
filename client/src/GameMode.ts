@@ -14,4 +14,6 @@ class GameMode{
     public static jokerPi = []; //皮
     public static bgmSwitch = false;
     public static soundEffectSwitch = true; 
+    public static pos = '';
+    public static draw = -1;出的牌
 }

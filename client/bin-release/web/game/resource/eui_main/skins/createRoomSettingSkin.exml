@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="settingSkin"  width="1334" height="750" xmlns:e="http://ns.egret.com/eui">
+	<e:Image source="dialog-s-top_png" x="359" y="143"/>
+	<e:Image source="dialog-s-bg_png" x="376.5" y="167"/>
+    <e:Label text="房卡模式" x="422" y="218" size="20"/>
+    <e:Label text="麻将类型" y="273" x="422" size="20"/>
+    <e:Label text="倍数" x="462" y="364" size="20"/>
+    <e:Label text="封顶" x="462" y="462" size="20"/>
+    <e:Button id="_close" y="155" x="302.5">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="close_png" source.down="cloase_down_png"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Group xmlns:e="http://ns.egret.com/eui" y="206" x="524" anchorOffsetX="0" width="456" anchorOffsetY="0" height="52">
+        <e:RadioButton id="radio1_1" groupName="cn1" label="AA房卡" skinName="skins.RadioButtonSkin" y="12" />
+        <e:RadioButton id="radio1_2" groupName="cn1" label="房主房卡" skinName="skins.RadioButtonSkin" x="235" y="14"/>
+    </e:Group>
+    <e:Group xmlns:e="http://ns.egret.com/eui" y="260" x="524" anchorOffsetX="0" width="456" anchorOffsetY="0" height="92">
+        <e:RadioButton id="radio2_1" groupName="cn2" label="红中发财" skinName="skins.RadioButtonSkin" y="12"/>
+        <e:RadioButton id="radio2_2" groupName="cn2" label="前痞后赖" skinName="skins.RadioButtonSkin" x="235" y="14"/>
+        <e:RadioButton id="radio2_3" groupName="cn2" label="武汉晃晃" skinName="skins.RadioButtonSkin" x="-1" y="54"/>
+    </e:Group>
+    <e:Group xmlns:e="http://ns.egret.com/eui" y="352" x="524" anchorOffsetX="0" width="456" anchorOffsetY="0" height="98">
+        <e:RadioButton id="radio3_1" groupName="cn3" label="1倍" skinName="skins.RadioButtonSkin" y="12"/>
+        <e:RadioButton id="radio3_2" groupName="cn3" label="16倍" skinName="skins.RadioButtonSkin" x="235" y="14"/>
+        <e:RadioButton id="radio3_3" groupName="cn3" label="32倍" skinName="skins.RadioButtonSkin" x="-1" y="66"/>
+        <e:RadioButton id="radio3_4" groupName="cn3" label="64倍" skinName="skins.RadioButtonSkin" x="235" y="62"/>
+    </e:Group>
+    <e:Group xmlns:e="http://ns.egret.com/eui" y="450" x="524" anchorOffsetX="0" width="456" anchorOffsetY="0" height="52">
+        <e:RadioButton id="radio4_1" groupName="cn4" label="300倍封顶" skinName="skins.RadioButtonSkin" y="12"/>
+        <e:RadioButton id="radio4_2" groupName="cn4" label="500倍封顶" skinName="skins.RadioButtonSkin" x="235" y="14"/>
+    </e:Group>
+
+    <e:Button id="_enterRoom" y="538" x="697.5" anchorOffsetX="166" anchorOffsetY="48" scaleX="0.7" scaleY="0.7">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="enterroom-btn_png" />
+				<e:Label text="确定" y="34" x="120"/>				
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	
+</e:Skin>

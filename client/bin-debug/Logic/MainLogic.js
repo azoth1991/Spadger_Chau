@@ -86,8 +86,8 @@ var MainLogic = (function () {
     MainLogic.prototype.chat = function (evt) {
         this._gameUI.sendMsg(evt.data.info, evt.data.name);
     };
-    MainLogic.prototype.joinGame = function (data) {
-        this._gameUI.joinGame(data);
+    MainLogic.prototype.joinGame = function (evt) {
+        this._gameUI.joinGame(evt);
     };
     MainLogic.prototype.sendCardStatus = function (data) {
         this._gameUI.showDiscardStatus(data);

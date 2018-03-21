@@ -16,6 +16,7 @@ class GameEvents{
     public static WS_GANG:string = "WS_GANG";
     public static WS_CHI:string = "WS_CHI";
     public static WS_PENG:string = "WS_PENG";
+    public static WS_GUO:string = "WS_GUO";
     public static WS_GAMEOVER:string = "WS_GAMEOVER";
     public static WS_SEND_DISCARDSTATUS:string = "WS_SEND_DISCARDSTATUS";
     public static WS_SEND_CARDSTATUS:string = "WS_SEND_CARDSTATUS";
@@ -24,4 +25,5 @@ class GameEvents{
     public static WS_GET_DISCARDSPS:string = "WS_GET_DISCARDSPS";
     public static TOGGLE_CREATEROOM:string = "TOGGLE_CREATEROOM";
     public static TOGGLE_USETOOL:string = "TOGGLE_USETOOL";
+    public static WS_SHOW_DRAW:string = "WS_SHOW_DRAW";
 }
