@@ -205,7 +205,7 @@ class ESocket {
     }
     private setJoker(info){
         if (info.joker[0]>0){
-            GameMode.joker = info.joker;
+            GameMode.joker = [info.joker];
         }
         if (info.jokerPi[0]>0){
             GameMode.jokerPi = info.jokerPi;

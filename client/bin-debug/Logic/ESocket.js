@@ -203,7 +203,7 @@ var ESocket = (function () {
     };
     ESocket.prototype.setJoker = function (info) {
         if (info.joker[0] > 0) {
-            GameMode.joker = info.joker;
+            GameMode.joker = [info.joker];
         }
         if (info.jokerPi[0] > 0) {
             GameMode.jokerPi = info.jokerPi;

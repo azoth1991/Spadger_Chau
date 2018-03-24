@@ -14,6 +14,8 @@ var DiscardStatusUI = (function (_super) {
         if (option === void 0) { option = []; }
         var _this = _super.call(this) || this;
         _this._option = [];
+        _this.pos = 702;
+        _this.des = 115;
         _this._option = option;
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_game/skins/discardStatusSkin.exml";
@@ -34,25 +36,37 @@ var DiscardStatusUI = (function (_super) {
         this._hu.touchEnabled = false;
         this._gang.touchEnabled = false;
         this._chi.touchEnabled = false;
+        this._peng.visible = false;
+        this._hu.visible = false;
+        this._gang.visible = false;
+        this._chi.visible = false;
         this._guo.selected = true;
         this._guo.touchEnabled = true;
-        this._option.forEach(function (v) {
+        this._option.forEach(function (v, k) {
             switch (v) {
                 case 42:
                     _this._peng.selected = true;
                     _this._peng.touchEnabled = true;
+                    _this._peng.visible = true;
+                    _this._peng.x = _this.pos + k * _this.des;
                     break;
                 case 43:
                     _this._chi.selected = true;
                     _this._chi.touchEnabled = true;
+                    _this._chi.visible = true;
+                    _this._chi.x = _this.pos + k * _this.des;
                     break;
                 case 44:
-                    _this._chi.selected = true;
-                    _this._chi.touchEnabled = true;
+                    _this._gang.selected = true;
+                    _this._gang.touchEnabled = true;
+                    _this._gang.visible = true;
+                    _this._gang.x = _this.pos + k * _this.des;
                     break;
                 case 45:
                     _this._hu.selected = true;
                     _this._hu.touchEnabled = true;
+                    _this._hu.visible = true;
+                    _this._hu.x = _this.pos + k * _this.des;
                     break;
             }
         });

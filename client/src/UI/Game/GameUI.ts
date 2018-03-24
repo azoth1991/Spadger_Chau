@@ -107,10 +107,10 @@ class GameUI extends eui.Component {
         this.drawCard(cards);
         this._gameBox.addChild(this.cardsBox);
         // 弃牌
+        this.discardBox.removeChildren();        
         if (evt.data.discard && evt.data.discard>0){
             var discard = evt.data.discard;
             // this._gameBox.removeChild(this.discardBox);
-            this.discardBox.removeChildren();
             var posName = evt.data.prevailing;
             var pos = 0;
             this.dsListIcon.forEach((v,k)=>{
