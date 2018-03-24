@@ -10,8 +10,8 @@
 		"libs/modules/promise/promise.js"
 	],
 	"game": [
-		"bin-debug/UI/HomeUI.js",
 		"bin-debug/AssetAdapter.js",
+		"bin-debug/DialogTypes.js",
 		"bin-debug/GameEvent.js",
 		"bin-debug/GameMode.js",
 		"bin-debug/GamePages.js",
@@ -26,7 +26,7 @@
 		"bin-debug/Logic/ESocket.js",
 		"bin-debug/Logic/MainLogic.js",
 		"bin-debug/MC/MessageCenter.js",
-		"bin-debug/DialogTypes.js",
+		"bin-debug/UI/HomeUI.js",
 		"bin-debug/UI/Game/CardUI.js",
 		"bin-debug/UI/Game/ChatListUI.js",
 		"bin-debug/UI/Game/ChatQuickListUI.js",
@@ -35,6 +35,7 @@
 		"bin-debug/UI/Game/FriendIcon.js",
 		"bin-debug/UI/Game/GameOverUI.js",
 		"bin-debug/UI/Game/GameUI.js",
+		"bin-debug/UI/Game/UserPicker.js",
 		"bin-debug/UI/Game/UseToolUI.js",
 		"bin-debug/UI/Main/CreateRoomSettingUI.js",
 		"bin-debug/UI/Main/DialogUI.js",

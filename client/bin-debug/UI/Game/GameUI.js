@@ -205,7 +205,6 @@ var GameUI = (function (_super) {
         this._chat.addEventListener(egret.TouchEvent.TOUCH_TAP, this._chatUI.toggleVisible, this._chatUI);
         this._useTool.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             MessageCenter.getInstance().sendMessage(GameEvents.TOGGLE_USETOOL, null);
-            console.log('start');
         }, this);
         // 开始游戏  分享
         this.addEventListener(GameEvents.EVT_LOAD_PAGE, this.startGameUI, this);
@@ -228,6 +227,8 @@ var GameUI = (function (_super) {
     };
     GameUI.prototype.startGameUI = function (evt) {
         console.log('startGameUI', evt.data);
+        // 显示道具按钮
+        this._useTool.visible = true;
         this.showZj(evt.data.pos);
         if (evt.data.pos == 1) {
             GameMode.isDiscard = true;

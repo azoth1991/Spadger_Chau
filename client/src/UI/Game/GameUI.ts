@@ -173,7 +173,6 @@ class GameUI extends eui.Component {
         this._chat.addEventListener( egret.TouchEvent.TOUCH_TAP, this._chatUI.toggleVisible, this._chatUI );
         this._useTool.addEventListener( egret.TouchEvent.TOUCH_TAP, () => {
             MessageCenter.getInstance().sendMessage( GameEvents.TOGGLE_USETOOL,null);
-            console.log('start')
         },  this );
 
         // 开始游戏  分享
@@ -201,6 +200,8 @@ class GameUI extends eui.Component {
 
     public startGameUI(evt):void {
         console.log('startGameUI',evt.data)
+        // 显示道具按钮
+        this._useTool.visible = true;
         this.showZj(evt.data.pos)
         if (evt.data.pos == 1){
             GameMode.isDiscard = true;

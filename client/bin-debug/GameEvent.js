@@ -30,6 +30,7 @@ var GameEvents = (function () {
     GameEvents.TOGGLE_CREATEROOM = "TOGGLE_CREATEROOM";
     GameEvents.TOGGLE_USETOOL = "TOGGLE_USETOOL";
     GameEvents.WS_SHOW_DRAW = "WS_SHOW_DRAW";
+    GameEvents.PICK_TOOL_TARGET = "PICK_TOOL_TARGET";
     return GameEvents;
 }());
 __reflect(GameEvents.prototype, "GameEvents");

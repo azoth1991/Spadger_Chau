@@ -26,4 +26,5 @@ class GameEvents{
     public static TOGGLE_CREATEROOM:string = "TOGGLE_CREATEROOM";
     public static TOGGLE_USETOOL:string = "TOGGLE_USETOOL";
     public static WS_SHOW_DRAW:string = "WS_SHOW_DRAW";
+    public static PICK_TOOL_TARGET:string = "PICK_TOOL_TARGET";
 }

@@ -31,12 +31,42 @@ var MainLogic = (function () {
         }
     };
     MainLogic.prototype.toggleUseToolUI = function () {
+        // 此时创建userpicker
+        if (!this._userPickerUI) {
+            this._userPickerUI = new UserPickerUI();
+        }
+        // 道具对象列表存在时点击无效
+        if (this._gameUI.contains(this._userPickerUI)) {
+            return;
+        }
         if (this._gameUI.contains(this._useToolUI)) {
             this._gameUI.removeChild(this._useToolUI);
         }
         else {
             this._gameUI.addChild(this._useToolUI);
         }
+    };
+    MainLogic.prototype.pickToolTarget = function (event) {
+        // 获取当前的道具和使用对象
+        if (!this._gameUI.contains(this._userPickerUI)) {
+            this._gameUI.addChild(this._userPickerUI);
+            return;
+        }
+        var message = event.data;
+        switch (message.action) {
+            case 'close_dialog':
+                this._gameUI.removeChild(this._userPickerUI);
+                break;
+            case 'pick_user':
+                this._userPickerUI;
+                console.log(message.name);
+                break;
+        }
+        // if (this._gameUI.contains(this._userPickerUI)){
+        //     console.log(event.data);
+        // } else {
+        //     this._gameUI.addChild(this._userPickerUI);
+        // }
     };
     MainLogic.prototype.toggleCreateRoomDialogUI = function () {
         if (this._homeUI.contains(this._createRoomSettingUI)) {
@@ -70,6 +100,7 @@ var MainLogic = (function () {
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_DISCARDSPS, this.getdiscardSPs, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_DISCARDSTATUS, this._websocket.sendDiscardStatus, this._websocket);
         MessageCenter.getInstance().addEventListener(GameEvents.TOGGLE_USETOOL, this.toggleUseToolUI, this);
+        MessageCenter.getInstance().addEventListener(GameEvents.PICK_TOOL_TARGET, this.pickToolTarget, this);
     };
     MainLogic.prototype.getDiscardStatus = function (evt) {
         this._gameUI.showDiscardStatus(evt);
