@@ -28,26 +28,53 @@ var CardUI = (function (_super) {
         return _this;
     }
     CardUI.prototype.upCard = function () {
-        this.y = this.y - 28;
-        this.status = 'up';
+        if (this.status == 'down') {
+            this.y = this.y - 28;
+            this.status = 'up';
+        }
     };
     CardUI.prototype.handleClick = function () {
+        var _this = this;
         console.log('handleclick', GameMode.isDiscard, this.status);
+        // 皮赖杠，没有按起 可以出牌 出的皮赖 唤起弹框
+        GameMode.gangNum = -1;
+        if (this.status == 'down' && GameMode.isDiscard && (GameMode.joker.indexOf(this._num) > -1 || GameMode.jokerPi.indexOf(this._num) > -1)) {
+            // 唤起弹窗
+            GameMode.gangNum = this._num;
+            setTimeout(function () {
+                _this.upCard();
+            }, 10);
+            MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, { option: [44] });
+        }
+        // MessageCenter.getInstance().sendMessage( GameEvents.WS_GANG_NUM, {discardNum:this._num} );
+        // 如果处于有特殊操作的状态下可以立起多张，但是不能出牌
         if (this.status == 'down') {
-            this.upCard();
+            if (!GameMode.isSP) {
+                // 所有牌倒下
+                MessageCenter.getInstance().sendMessage(GameEvents.DOWN_CARDS, { discardNum: this._num });
+                setTimeout(function () {
+                    _this.upCard();
+                }, 10);
+            }
         }
         else {
             this.downCard();
             // 如果能够发票则发牌
             if (GameMode.isDiscard) {
+                // 关闭discardsp
+                console.log('HIDE_DISCARDSP');
+                MessageCenter.getInstance().sendMessage(GameEvents.HIDE_DISCARDSP, null);
+                // 唤起弹窗
                 MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CARD, { discardNum: this._num });
                 GameMode.isDiscard = false;
             }
         }
     };
     CardUI.prototype.downCard = function () {
-        this.y = this.y + 28;
-        this.status = 'down';
+        if (this.status == 'up') {
+            this.y = this.y + 28;
+            this.status = 'down';
+        }
     };
     CardUI.prototype.clickCard = function (e) {
         console.log('clickCard');

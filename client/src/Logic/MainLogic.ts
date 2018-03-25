@@ -105,7 +105,7 @@ class MainLogic
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_CHAT, this.chat, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GAMEOVER, this.gameOver, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_DISCARDSTATUS, this.getDiscardStatus, this );
-        MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CARDSTATUS, this.sendCardStatus, this );
+        // MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CARDSTATUS, this.sendCardStatus, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CARD, this._websocket.sendCard, this._websocket );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_CARD, this.getCard, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CHAT, this._websocket.sendChat, this._websocket );
@@ -115,7 +115,18 @@ class MainLogic
         MessageCenter.getInstance().addEventListener( GameEvents.WS_GET_DISCARDSPS, this.getdiscardSPs, this );
         MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_DISCARDSTATUS, this._websocket.sendDiscardStatus, this._websocket );
         MessageCenter.getInstance().addEventListener( GameEvents.TOGGLE_USETOOL, this.toggleUseToolUI, this );
+<<<<<<< HEAD
         MessageCenter.getInstance().addEventListener( GameEvents.PICK_TOOL_TARGET, this.pickToolTarget, this );
+=======
+        MessageCenter.getInstance().addEventListener( GameEvents.DOWN_CARDS, this.downCards, this );
+        MessageCenter.getInstance().addEventListener( GameEvents.HIDE_DISCARDSP, this.hideDiscardsp, this );
+    }
+    private hideDiscardsp(evt){
+        this._gameUI.hideDiscardsp(evt);
+    }
+    private downCards(evt){
+        this._gameUI.downCards(evt);
+>>>>>>> master
     }
     private getDiscardStatus(evt){
         this._gameUI.showDiscardStatus(evt);
@@ -135,10 +146,16 @@ class MainLogic
     }
     private joinGame(evt){
         this._gameUI.joinGame(evt);
+<<<<<<< HEAD
     }
     private sendCardStatus(data){
         this._gameUI.showDiscardStatus(data);
+=======
+>>>>>>> master
     }
+    // private sendCardStatus(data){
+    //     this._gameUI.showDiscardStatus(data);
+    // }
     private getCard(data){
         this._gameUI.getCard(data);
     }

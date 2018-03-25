@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin id="card" class="cardIRSkin" xmlns:e="http://ns.egret.com/eui">
+	<e:Image id="_bg" />
+	<e:Image id="_cardBg"/>
+	<e:Image id="_joker"/>
+</e:Skin>

@@ -15,5 +15,11 @@ class GameMode{
     public static bgmSwitch = false;
     public static soundEffectSwitch = true; 
     public static pos = '';
-    public static draw = -1;出的牌
+    public static draw = -1; //出的牌
+    public static isSP = false; // 只有特殊操作的时候才可以选中多张
+    public static gangNum = -1;
+    public static canChowChoice = [[]];
+    public static option = [];
+    public static currentPlayer = '';
+    public static upList = [];
 }

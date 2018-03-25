@@ -31,6 +31,9 @@ var GameEvents = (function () {
     GameEvents.TOGGLE_USETOOL = "TOGGLE_USETOOL";
     GameEvents.WS_SHOW_DRAW = "WS_SHOW_DRAW";
     GameEvents.PICK_TOOL_TARGET = "PICK_TOOL_TARGET";
+    GameEvents.DOWN_CARDS = "DOWN_CARDS";
+    GameEvents.WS_GANG_NUM = "WS_GANG_NUM";
+    GameEvents.HIDE_DISCARDSP = "HIDE_DISCARDSP";
     return GameEvents;
 }());
 __reflect(GameEvents.prototype, "GameEvents");

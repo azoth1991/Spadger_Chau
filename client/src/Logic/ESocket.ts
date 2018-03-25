@@ -91,6 +91,18 @@ class ESocket {
                         this.setJoker(info.model);
                         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.RELOAD,cards:info.model});
                         GameMode.inRoom = true;
+
+                        if(info.model.option.length > 0){
+                            // 显示碰杠吃
+                            GameMode.option = info.model.option;
+                            // MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:info.model.option});
+                        }
+                        if (info.model.canChowChoice&& info.model.canChowChoice.length>0){
+                            GameMode.canChowChoice = info.model.canChowChoice;
+                        }
+                        if (info.currentPlayer) {
+                            GameMode.currentPlayer = info.currentPlayer;
+                        }
                     }
                     
                     break;
@@ -119,6 +131,10 @@ class ESocket {
                         // 显示碰杠吃
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:info.model.option});
                     }
+                    if (info.model.canChowChoice&& info.model.canChowChoice.length>0){
+                        GameMode.canChowChoice = info.model.canChowChoice;
+                    }
+                    
                     break;
                 case 44:
                     // 杠 流程
@@ -294,12 +310,14 @@ class ESocket {
         }
     }
     private action(actionid) {
-        
         var info = {
             roomId: GameMode.roomId,
             action: actionid,
             wechatId: GameMode.wechatId,
         };
+        if (actionid == 44){
+            info.discardNum = GameMode.gangNum;
+        }
         this._websocket.send(JSON.stringify(info));
     }
     

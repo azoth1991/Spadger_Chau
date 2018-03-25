@@ -5,6 +5,7 @@
 	<e:Image id="_zj3" source="dong_zhongjian_png" x="613" y="290"/>
 	<e:Image id="_zj1" source="xi_zhongjian_png" x="613" y="290"/>
 	<e:Image id="_zj4" source="nan_zhongjian_png" x="613" y="290"/>
+	<e:Label id="_count" textAlign="center" text="30" y="333" size="25" x="658"/>
 
 	<e:Image source="zhuangshi_img_png" x="0" y="0"/>
 	<e:Image source="zhuangshi_img_png" x="1334" y="0" scaleX="-1"/>

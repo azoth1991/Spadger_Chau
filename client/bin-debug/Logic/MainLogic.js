@@ -90,7 +90,7 @@ var MainLogic = (function () {
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_CHAT, this.chat, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GAMEOVER, this.gameOver, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_DISCARDSTATUS, this.getDiscardStatus, this);
-        MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_CARDSTATUS, this.sendCardStatus, this);
+        // MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CARDSTATUS, this.sendCardStatus, this );
         MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_CARD, this._websocket.sendCard, this._websocket);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_CARD, this.getCard, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_CHAT, this._websocket.sendChat, this._websocket);
@@ -123,6 +123,9 @@ var MainLogic = (function () {
     MainLogic.prototype.sendCardStatus = function (data) {
         this._gameUI.showDiscardStatus(data);
     };
+    // private sendCardStatus(data){
+    //     this._gameUI.showDiscardStatus(data);
+    // }
     MainLogic.prototype.getCard = function (data) {
         this._gameUI.getCard(data);
     };
