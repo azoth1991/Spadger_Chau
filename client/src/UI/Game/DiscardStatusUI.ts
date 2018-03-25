@@ -96,7 +96,8 @@ class DiscardStatusUI extends eui.Component {
         // todo销毁
         this.visible = false;
         GameMode.isSP = false;
-        
+        // 所有牌倒下
+        MessageCenter.getInstance().sendMessage( GameEvents.DOWN_CARDS, null );
     }
 
     protected createChildren():void {

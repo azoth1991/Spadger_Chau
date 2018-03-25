@@ -51,7 +51,7 @@ var CardUI = (function (_super) {
         if (this.status == 'down') {
             if (!GameMode.isSP) {
                 // 所有牌倒下
-                MessageCenter.getInstance().sendMessage(GameEvents.DOWN_CARDS, { discardNum: this._num });
+                MessageCenter.getInstance().sendMessage(GameEvents.DOWN_CARDS, null);
                 setTimeout(function () {
                     _this.upCard();
                 }, 10);
@@ -61,12 +61,26 @@ var CardUI = (function (_super) {
             this.downCard();
             // 如果能够发票则发牌
             if (GameMode.isDiscard) {
-                // 关闭discardsp
-                console.log('HIDE_DISCARDSP');
-                MessageCenter.getInstance().sendMessage(GameEvents.HIDE_DISCARDSP, null);
-                // 唤起弹窗
-                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CARD, { discardNum: this._num });
-                GameMode.isDiscard = false;
+                // 可以吃的时候点击牌可以直接出牌
+                if (GameMode.isSP) {
+                    var extkey = -1;
+                    for (var i = 0; i < GameMode.canChowChoice.length; i++) {
+                        if (GameMode.canChowChoice[i].indexOf(this._num) > -1) {
+                            GameMode.chiNum = i;
+                            break;
+                        }
+                    }
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, { type: GameEvents.WS_CHI });
+                    MessageCenter.getInstance().sendMessage(GameEvents.HIDE_DISCARDSP, null);
+                }
+                else {
+                    // 关闭discardsp
+                    console.log('HIDE_DISCARDSP');
+                    MessageCenter.getInstance().sendMessage(GameEvents.HIDE_DISCARDSP, null);
+                    // 唤起弹窗
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CARD, { discardNum: this._num });
+                    GameMode.isDiscard = false;
+                }
             }
         }
     };

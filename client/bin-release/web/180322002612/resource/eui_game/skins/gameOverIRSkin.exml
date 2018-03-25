@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="gameOverIRSkin" width="754" xmlns:e="http://ns.egret.com/eui">
-	<e:Image id="_icon" source="head-i-2_png" x="0" y="0"/>
-    <e:Label id="_name" text="阿静"  x="85"/>
-	<e:Image source="bei_img_png" x="86" y="39"/>
-    <e:Label id="_res" text="x1" x="116" y="37"/>
-    <e:Label id="_num" text="+18"  x="669" y="10" size="50" textColor="0xdd6316"/>
-</e:Skin>

@@ -108,6 +108,8 @@ var DiscardStatusUI = (function (_super) {
         // todo销毁
         this.visible = false;
         GameMode.isSP = false;
+        // 所有牌倒下
+        MessageCenter.getInstance().sendMessage(GameEvents.DOWN_CARDS, null);
     };
     DiscardStatusUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

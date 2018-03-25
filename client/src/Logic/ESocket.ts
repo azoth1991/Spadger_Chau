@@ -2,6 +2,7 @@ class ESocket {
     private _websocket:any;
     private _roomId:any;
     private totalNum = 3;
+    private ext;
     constructor() {
         this._websocket = new WebSocket("ws://101.37.151.85:8080//socket/maj/room");
         this.watchSocket();
@@ -72,26 +73,6 @@ class ESocket {
                         var list = info.entered;
                         var index = list.indexOf(GameMode.wechatId);
 
-                        GameMode.playerList[0] = {icon: "head-i-2_png", name: GameMode.wechatId, id: "123" };                                     
-                        while (index > 0){
-                            index--;
-                            GameMode.playerList[3-index] = { icon: "head-i-2_png", name: list[index], id: "123" };
-                        }
-                        GameMode.playerList = list.map((v)=>{
-                            return {
-                                icon: "head-i-2_png", name: v, id: "123"
-                            };
-                        });
-                        // 显示出牌
-                        if (info.draw>0){
-                            GameMode.draw = info.draw;
-                        }
-                        // 谁出牌
-                        // GameMode.pos = info.currentPlayer;
-                        this.setJoker(info.model);
-                        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.RELOAD,cards:info.model});
-                        GameMode.inRoom = true;
-
                         if(info.model.option.length > 0){
                             // 显示碰杠吃
                             GameMode.option = info.model.option;
@@ -103,6 +84,26 @@ class ESocket {
                         if (info.currentPlayer) {
                             GameMode.currentPlayer = info.currentPlayer;
                         }
+                        GameMode.playerList[0] = {icon: "head-i-2_png", name: GameMode.wechatId, id: "123" };                                     
+                        while (index > 0){
+                            index--;
+                            GameMode.playerList[3-index] = { icon: "head-i-2_png", name: list[index], id: "123" };
+                        }
+                        GameMode.playerList = list.map((v)=>{
+                            return {
+                                icon: "head-i-2_png", name: v, id: "123"
+                            };
+                        });
+                        // 显示出牌
+                        if (info.draw>-1){
+                            GameMode.draw = info.draw;
+                        }
+                        // 谁出牌
+                        // GameMode.pos = info.currentPlayer;
+                        this.setJoker(info.model);
+                        MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.RELOAD,cards:info.model});
+                        GameMode.inRoom = true;
+
                     }
                     
                     break;
@@ -110,17 +111,21 @@ class ESocket {
                     console.log('出牌');
                     // 显示出牌
                     GameMode.draw = info.draw;
+                    if (info.model.status ==23) {
+                        GameMode.isDiscard = true;
+                    } else {
+                        GameMode.isDiscard = false;
+                    }
+                    if (info.model.canChowChoice&& info.model.canChowChoice.length>0){
+                        GameMode.canChowChoice = info.model.canChowChoice;
+                    }
                     if(info.model.cards){
                         var cards = info.model.cards;
                         var discard = info.discard;
                         var prevailing = info.prevailing;
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, {cards,discard,prevailing});
                     }
-                    if (info.model.status ==23) {
-                        GameMode.isDiscard = true;
-                    } else {
-                        GameMode.isDiscard = false;
-                    }
+                    
                     // 谁出牌
                     // GameMode.pos = info.currentPlayer;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, {pos:info.currentPlayer});
@@ -131,9 +136,7 @@ class ESocket {
                         // 显示碰杠吃
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:info.model.option});
                     }
-                    if (info.model.canChowChoice&& info.model.canChowChoice.length>0){
-                        GameMode.canChowChoice = info.model.canChowChoice;
-                    }
+                    
                     
                     break;
                 case 44:
@@ -316,9 +319,14 @@ class ESocket {
             action: actionid,
             wechatId: GameMode.wechatId,
         };
+        if (actionid == 43){
+            info.ext = GameMode.chiNum;
+        }
         if (actionid == 44){
             info.discardNum = GameMode.gangNum;
         }
+        GameMode.chiNum = -1;
+        GameMode.gangNum = -1;
         this._websocket.send(JSON.stringify(info));
     }
     

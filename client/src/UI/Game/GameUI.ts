@@ -424,10 +424,15 @@ class GameUI extends eui.Component {
             this.cardsBox.addChild(card);
             // 吃的时候弹起
             console.log('canChowChoice',GameMode.canChowChoice[0],value);
-            if (GameMode.canChowChoice[0].indexOf(value)>-1){
-                console.log('upcard')
-                card.upCard();
-            }
+            // if (GameMode.canChowChoice[0].indexOf(value)>-1){
+            GameMode.canChowChoice.forEach((arr)=>{
+                if (arr.indexOf(value)>-1){
+                    console.log('upcard')
+                    card.upCard();
+                }
+            })
+            
+            // }
         });
         // 出牌
         console.log('draw',GameMode.draw);
@@ -494,29 +499,41 @@ class GameUI extends eui.Component {
         })
     }
     private drawOtherCard(){
-        console.log('drawOtherCard');
+        console.log('drawOtherCard',this._discardSPList1.length,this._discardSPList2.length,this._discardSPList3.length);
         // this.removeChild(this._otherCardBox);
         // this._otherCardBox = new eui.Component();
         this._otherCardBox.removeChildren();
         var desX = 29;
         var desY = 52;
         for (var cardLength = 0; cardLength<13;cardLength++) {
+            var sum1=0;
+            var sum2=0;
+            var sum3=0;
             // 左边
-            if (cardLength<13-this._discardSPList1.length){
+            this._discardSPList1.forEach((v)=>{
+                sum1+=v.length;
+            });
+            this._discardSPList2.forEach((v)=>{
+                sum2+=v.length;
+            });
+            this._discardSPList3.forEach((v)=>{
+                sum3+=v.length;
+            });
+            if (cardLength<13-sum1){
                 var letfCard = new CardUI(5,null);
                 letfCard.x = 145;
                 letfCard.y = 128 +  cardLength * desX;
                 this._otherCardBox.addChild(letfCard);
             }
             // 右边
-            if (cardLength<13-this._discardSPList3.length) {
+            if (cardLength<13-sum3) {
                 var rightCard = new CardUI(5,null);
                 rightCard.x = 1168;
                 rightCard.y = 128 +  cardLength * desX;
                 this._otherCardBox.addChild(rightCard);
             }
             // 上面
-            if (cardLength<13-this._discardSPList2.length) {
+            if (cardLength<13-sum2) {
                 var letfCard = new CardUI(4,null);
                 letfCard.x = 322 + cardLength * desY;
                 letfCard.y = 53;
