@@ -22,41 +22,51 @@ class DiscardStatusUI extends eui.Component {
         this._gang.touchEnabled = false;
         this._chi.touchEnabled = false;
 
-        this._peng.visible = false;
-        this._hu.visible = false;
-        this._gang.visible = false;
-        this._chi.visible = false;
+        // this._peng.visible = false;
+        // this._hu.visible = false;
+        // this._gang.visible = false;
+        // this._chi.visible = false;
 
         this._guo.selected = true;
         this._guo.touchEnabled = true;
+        console.log('option', this._option)
         this._option.forEach((v,k)=>{
             switch(v){
                 case 42:
                     this._peng.selected = true;
                     this._peng.touchEnabled = true;
-                    this._peng.visible = true;
-                    this._peng.x = this.pos + k*this.des;
+                    // this._peng.visible = true;
+                    // this._peng.x = this.pos + k*this.des;
+                    // this._peng.y = 494;
                     break;
                 case 43:
-                    this._chi.selected = true;
-                    this._chi.touchEnabled = true;
-                    this._chi.visible = true;
-                    this._chi.x = this.pos + k*this.des;
+                    this._chi.selected = false;
+                    this._chi.touchEnabled = false;
+                    // this._chi.visible = true;
+                    // this._chi.x = this.pos + k*this.des;
+                    // this._chi.y = 494;
                     break;
                 case 44:
                     this._gang.selected = true;
                     this._gang.touchEnabled = true;
-                    this._gang.visible = true;
-                    this._gang.x = this.pos + k*this.des;
+                    // this._gang.visible = true;
+                    // this._gang.x = this.pos + k*this.des;
+                    // this._gang.y = 494;
                     break;
                 case 45:
                     this._hu.selected = true;
                     this._hu.touchEnabled = true;
-                    this._hu.visible = true;
-                    this._hu.x = this.pos + k*this.des;
+                    // this._hu.visible = true;
+                    // this._hu.x = this.pos + k*this.des;
+                    // this._hu.y = 494;
                     break;
             }
         });
+    }
+
+    public showChi() {
+        this._chi.selected = true;
+        this._chi.touchEnabled = true;        
     }
     private handleEvent(){
         this._hu.addEventListener('touchTap',this.handleStatus,this);
@@ -85,9 +95,9 @@ class DiscardStatusUI extends eui.Component {
         }
         // todo销毁
         this.visible = false;
+        GameMode.isSP = false;
         
     }
-
 
     protected createChildren():void {
         super.createChildren();

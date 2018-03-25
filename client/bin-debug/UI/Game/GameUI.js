@@ -111,7 +111,7 @@ var GameUI = (function (_super) {
             value.forEach(function (v, k) {
                 var discardSP = new CardUI(1, v, 1, scale);
                 discardSP.x = 195;
-                discardSP.y = 572 - (k + key * 0.1 + sum1) * 79 * scale;
+                discardSP.y = 562 - (k + key * 0.1 + sum1) * 79 * scale;
                 _this._discardSPsBox.addChild(discardSP);
             });
             sum1 += value.length;
@@ -144,7 +144,7 @@ var GameUI = (function (_super) {
         this.drawCard(cards);
         this._gameBox.addChild(this.cardsBox);
         // 弃牌
-        // this.discardBox.removeChildren();        
+        // this.discardBox.removeChildren();
         if (evt.data.discard && evt.data.discard > 0) {
             var discard = evt.data.discard;
             // this._gameBox.removeChild(this.discardBox);
@@ -163,9 +163,17 @@ var GameUI = (function (_super) {
     };
     GameUI.prototype.dropCard = function (pos, num) {
     };
+    // 所有牌倒下
+    GameUI.prototype.downCards = function (evt) {
+        this.cardsBox.$children.forEach(function (v) {
+            v.downCard();
+        });
+    };
     // 显示吃胡碰杠
     GameUI.prototype.showDiscardStatus = function (evt) {
         console.log('showDiscardStatus', evt);
+        // 当可以吃多种牌的情况为sp
+        GameMode.isSP = true;
         var option = evt.data.option;
         this._discardStatusUI = new DiscardStatusUI(option);
         this.addChild(this._discardStatusUI);
@@ -176,6 +184,13 @@ var GameUI = (function (_super) {
     };
     GameUI.prototype.sendMsg = function (info, name) {
         this._chatUI.sendMsg(info);
+    };
+    GameUI.prototype.hideDiscardsp = function (evt) {
+        // 关闭状态
+        console.log('hideDiscardsp');
+        if (this.contains(this._discardStatusUI)) {
+            this.removeChild(this._discardStatusUI);
+        }
     };
     GameUI.prototype.initGameUI = function () {
         var _this = this;
@@ -228,10 +243,19 @@ var GameUI = (function (_super) {
     };
     GameUI.prototype.startGameUI = function (evt) {
         console.log('startGameUI', evt.data);
+        if (GameMode.option.length > 0) {
+            // 断线重连
+            MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, { option: GameMode.option });
+        }
+        if (GameMode.currentPlayer) {
+            MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: GameMode.currentPlayer });
+        }
         this.showZj(evt.data.pos);
         if (evt.data.pos == 1) {
             GameMode.isDiscard = true;
         }
+        // 倒数计时
+        this.count();
         var position = [
             { x: 60, y: 597 },
             { x: 60, y: 293 },
@@ -261,6 +285,8 @@ var GameUI = (function (_super) {
     //获取当前出牌人位置
     GameUI.prototype.getdiscardPos = function (evt) {
         console.log('getdiscardPos');
+        // 重新定位后重新计时
+        this.count();
         var pos = 0;
         this.dsListIcon.forEach(function (v, k) {
             if (v.name == evt.data.pos) {
@@ -281,6 +307,21 @@ var GameUI = (function (_super) {
             }
         });
         this.showZj(pos);
+    };
+    // 倒计时 自动出牌
+    GameUI.prototype.count = function () {
+        var _this = this;
+        var num = 30;
+        if (this.countlistener) {
+            clearInterval(this.countlistener);
+        }
+        this.countlistener = setInterval(function () {
+            if (num < 1 && GameMode.isDiscard) {
+                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CARD, { discardNum: GameMode.draw });
+                GameMode.isDiscard = false;
+            }
+            _this._count.text = "" + num--;
+        }, 1000);
     };
     // 获取
     GameUI.prototype.getCards = function (arr) {
@@ -404,6 +445,12 @@ var GameUI = (function (_super) {
             card.x = 159 + (key + _this._jokerPi.length + _this._joker.length) * des * scale;
             card.y = 591;
             _this.cardsBox.addChild(card);
+            // 吃的时候弹起
+            console.log('canChowChoice', GameMode.canChowChoice[0], value);
+            if (GameMode.canChowChoice[0].indexOf(value) > -1) {
+                console.log('upcard');
+                card.upCard();
+            }
         });
         // 出牌
         console.log('draw', GameMode.draw);

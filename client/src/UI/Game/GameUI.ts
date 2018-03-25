@@ -73,7 +73,7 @@ class GameUI extends eui.Component {
             value.forEach((v,k)=>{
                 var discardSP = new CardUI(1,v,1,scale);
                 discardSP.x = 195;
-                discardSP.y = 572-(k+key*0.1+sum1)*79*scale;     
+                discardSP.y = 562-(k+key*0.1+sum1)*79*scale;     
                 this._discardSPsBox.addChild(discardSP);
             });
             sum1 += value.length;
@@ -107,7 +107,7 @@ class GameUI extends eui.Component {
         this.drawCard(cards);
         this._gameBox.addChild(this.cardsBox);
         // 弃牌
-        this.discardBox.removeChildren();        
+        // this.discardBox.removeChildren();
         if (evt.data.discard && evt.data.discard>0){
             var discard = evt.data.discard;
             // this._gameBox.removeChild(this.discardBox);
@@ -128,9 +128,17 @@ class GameUI extends eui.Component {
     private dropCard(pos,num) {
 
     }
+    // 所有牌倒下
+    public downCards(evt){
+        this.cardsBox.$children.forEach((v)=>{
+            v.downCard();
+        })
+    }
     // 显示吃胡碰杠
     public showDiscardStatus(evt){
         console.log('showDiscardStatus',evt);
+        // 当可以吃多种牌的情况为sp
+        GameMode.isSP = true;
         var option = evt.data.option;
         this._discardStatusUI = new DiscardStatusUI(option);
         this.addChild(this._discardStatusUI);
@@ -143,6 +151,13 @@ class GameUI extends eui.Component {
 
     public sendMsg(info,name) {
         this._chatUI.sendMsg(info);
+    }
+    public hideDiscardsp(evt){
+        // 关闭状态
+        console.log('hideDiscardsp');
+        if (this.contains(this._discardStatusUI)){
+            this.removeChild(this._discardStatusUI);
+        }
     }
 
     private initGameUI() {
@@ -201,10 +216,19 @@ class GameUI extends eui.Component {
 
     public startGameUI(evt):void {
         console.log('startGameUI',evt.data)
+        if (GameMode.option.length>0){
+            // 断线重连
+            MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:GameMode.option});
+        }
+        if (GameMode.currentPlayer){
+            MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, {pos:GameMode.currentPlayer});            
+        }
         this.showZj(evt.data.pos)
         if (evt.data.pos == 1){
             GameMode.isDiscard = true;
         }
+        // 倒数计时
+        this.count();
         
         var position:Array<any> = [
             { x: 60, y: 597 },
@@ -235,7 +259,9 @@ class GameUI extends eui.Component {
 
     //获取当前出牌人位置
     public getdiscardPos(evt) {
-        console.log('getdiscardPos')
+        console.log('getdiscardPos');
+        // 重新定位后重新计时
+        this.count();
         var pos = 0;
         this.dsListIcon.forEach((v,k)=>{
             if(v.name == evt.data.pos) {
@@ -256,6 +282,21 @@ class GameUI extends eui.Component {
             }
         })
         this.showZj(pos);
+    }
+
+    // 倒计时 自动出牌
+    private count(){
+        var num = 30;
+        if (this.countlistener){
+            clearInterval(this.countlistener);  
+        }
+        this.countlistener = setInterval(()=>{
+            if (num<1 && GameMode.isDiscard){
+                MessageCenter.getInstance().sendMessage( GameEvents.WS_SEND_CARD, {discardNum: GameMode.draw} );
+                GameMode.isDiscard = false;
+            }
+            this._count.text = `${num--}`;
+        },1000);
     }
 
     // 获取
@@ -381,6 +422,12 @@ class GameUI extends eui.Component {
             card.x = 159 + (key+this._jokerPi.length+this._joker.length)*des*scale;
             card.y = 591;
             this.cardsBox.addChild(card);
+            // 吃的时候弹起
+            console.log('canChowChoice',GameMode.canChowChoice[0],value);
+            if (GameMode.canChowChoice[0].indexOf(value)>-1){
+                console.log('upcard')
+                card.upCard();
+            }
         });
         // 出牌
         console.log('draw',GameMode.draw);
@@ -530,6 +577,8 @@ class GameUI extends eui.Component {
     private _otherCardBox:eui.Component;
     private _joker = [];
     private _jokerPi = [];
+    private _count:eui.Label;
+    private countlistener;
 
 }
 

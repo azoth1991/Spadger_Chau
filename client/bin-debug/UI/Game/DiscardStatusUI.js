@@ -36,40 +36,49 @@ var DiscardStatusUI = (function (_super) {
         this._hu.touchEnabled = false;
         this._gang.touchEnabled = false;
         this._chi.touchEnabled = false;
-        this._peng.visible = false;
-        this._hu.visible = false;
-        this._gang.visible = false;
-        this._chi.visible = false;
+        // this._peng.visible = false;
+        // this._hu.visible = false;
+        // this._gang.visible = false;
+        // this._chi.visible = false;
         this._guo.selected = true;
         this._guo.touchEnabled = true;
+        console.log('option', this._option);
         this._option.forEach(function (v, k) {
             switch (v) {
                 case 42:
                     _this._peng.selected = true;
                     _this._peng.touchEnabled = true;
-                    _this._peng.visible = true;
-                    _this._peng.x = _this.pos + k * _this.des;
+                    // this._peng.visible = true;
+                    // this._peng.x = this.pos + k*this.des;
+                    // this._peng.y = 494;
                     break;
                 case 43:
-                    _this._chi.selected = true;
-                    _this._chi.touchEnabled = true;
-                    _this._chi.visible = true;
-                    _this._chi.x = _this.pos + k * _this.des;
+                    _this._chi.selected = false;
+                    _this._chi.touchEnabled = false;
+                    // this._chi.visible = true;
+                    // this._chi.x = this.pos + k*this.des;
+                    // this._chi.y = 494;
                     break;
                 case 44:
                     _this._gang.selected = true;
                     _this._gang.touchEnabled = true;
-                    _this._gang.visible = true;
-                    _this._gang.x = _this.pos + k * _this.des;
+                    // this._gang.visible = true;
+                    // this._gang.x = this.pos + k*this.des;
+                    // this._gang.y = 494;
                     break;
                 case 45:
                     _this._hu.selected = true;
                     _this._hu.touchEnabled = true;
-                    _this._hu.visible = true;
-                    _this._hu.x = _this.pos + k * _this.des;
+                    // this._hu.visible = true;
+                    // this._hu.x = this.pos + k*this.des;
+                    // this._hu.y = 494;
                     break;
             }
         });
+    };
+    DiscardStatusUI.prototype.showChi = function () {
+        this._chi.selected = true;
+        this._chi.touchEnabled = true;
     };
     DiscardStatusUI.prototype.handleEvent = function () {
         this._hu.addEventListener('touchTap', this.handleStatus, this);
@@ -98,6 +107,7 @@ var DiscardStatusUI = (function (_super) {
         }
         // todo销毁
         this.visible = false;
+        GameMode.isSP = false;
     };
     DiscardStatusUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

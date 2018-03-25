@@ -18,7 +18,13 @@ var GameMode = (function () {
     GameMode.bgmSwitch = false;
     GameMode.soundEffectSwitch = true;
     GameMode.pos = '';
-    GameMode.draw = -1;
+    GameMode.draw = -1; //出的牌
+    GameMode.isSP = false; // 只有特殊操作的时候才可以选中多张
+    GameMode.gangNum = -1;
+    GameMode.canChowChoice = [[]];
+    GameMode.option = [];
+    GameMode.currentPlayer = '';
+    GameMode.upList = [];
     return GameMode;
 }());
 __reflect(GameMode.prototype, "GameMode");

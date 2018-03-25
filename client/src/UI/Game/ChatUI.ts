@@ -117,7 +117,7 @@ class ChatUI extends eui.Component {
     private _buttons:any;
     private _chatExListUI:eui.Component;
     private _chatListUI:ChatListUI;
-    private _chatQuickListUI:ChatQuickListUI;
+    // private _chatQuickListUI:ChatQuickListUI;
     private currentBox:eui.Component;
     private _send:eui.Button;
     private _textInupt:eui.TextInput;

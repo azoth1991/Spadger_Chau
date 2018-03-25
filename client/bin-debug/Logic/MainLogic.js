@@ -60,7 +60,7 @@ var MainLogic = (function () {
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_CHAT, this.chat, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GAMEOVER, this.gameOver, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_DISCARDSTATUS, this.getDiscardStatus, this);
-        MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_CARDSTATUS, this.sendCardStatus, this);
+        // MessageCenter.getInstance().addEventListener( GameEvents.WS_SEND_CARDSTATUS, this.sendCardStatus, this );
         MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_CARD, this._websocket.sendCard, this._websocket);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_CARD, this.getCard, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_CHAT, this._websocket.sendChat, this._websocket);
@@ -70,6 +70,14 @@ var MainLogic = (function () {
         MessageCenter.getInstance().addEventListener(GameEvents.WS_GET_DISCARDSPS, this.getdiscardSPs, this);
         MessageCenter.getInstance().addEventListener(GameEvents.WS_SEND_DISCARDSTATUS, this._websocket.sendDiscardStatus, this._websocket);
         MessageCenter.getInstance().addEventListener(GameEvents.TOGGLE_USETOOL, this.toggleUseToolUI, this);
+        MessageCenter.getInstance().addEventListener(GameEvents.DOWN_CARDS, this.downCards, this);
+        MessageCenter.getInstance().addEventListener(GameEvents.HIDE_DISCARDSP, this.hideDiscardsp, this);
+    };
+    MainLogic.prototype.hideDiscardsp = function (evt) {
+        this._gameUI.hideDiscardsp(evt);
+    };
+    MainLogic.prototype.downCards = function (evt) {
+        this._gameUI.downCards(evt);
     };
     MainLogic.prototype.getDiscardStatus = function (evt) {
         this._gameUI.showDiscardStatus(evt);
@@ -89,9 +97,9 @@ var MainLogic = (function () {
     MainLogic.prototype.joinGame = function (evt) {
         this._gameUI.joinGame(evt);
     };
-    MainLogic.prototype.sendCardStatus = function (data) {
-        this._gameUI.showDiscardStatus(data);
-    };
+    // private sendCardStatus(data){
+    //     this._gameUI.showDiscardStatus(data);
+    // }
     MainLogic.prototype.getCard = function (data) {
         this._gameUI.getCard(data);
     };
