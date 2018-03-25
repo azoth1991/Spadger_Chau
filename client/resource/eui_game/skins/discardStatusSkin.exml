@@ -28,4 +28,11 @@
 			</e:Skin>
 			</e:skinName>
 		</e:ToggleButton>
+		<e:ToggleButton id="_guo" x="1187" y="494">
+			<e:skinName>
+			<e:Skin states="up,down,disabled,disabledAndSelected" minHeight="50" minWidth="100">
+				<e:Image source.disabledAndSelected="guo_fbtn_down_png" source="guo_fbtn_png" source.down="guo_fbtn_down_png"/>
+			</e:Skin>
+			</e:skinName>
+		</e:ToggleButton>
 </e:Skin>

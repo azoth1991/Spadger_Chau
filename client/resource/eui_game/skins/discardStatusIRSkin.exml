@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="discardStatusIRSkin" width="400" height="300" xmlns:e="http://ns.egret.com/eui">
+    <e:ToggleButton id="_status" x="702" y="494">
+        <e:skinName>
+        <e:Skin states="up,down,disabled,disabledAndSelected" minHeight="50" minWidth="100">
+            <e:Image source.disabledAndSelected="peng_fbtn_down_png" source="peng_fbtn_png" source.down="peng_fbtn_down_png"/>
+        </e:Skin>
+        </e:skinName>
+    </e:ToggleButton>
+</e:Skin>

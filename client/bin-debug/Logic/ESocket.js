@@ -11,6 +11,7 @@ var ESocket = (function () {
         var data = _a.data;
         console.log('onReceiveMessage', JSON.parse(data));
         var info = JSON.parse(data);
+        GameMode.draw = -1;
         if (info.code == 0) {
             alert(info.msg);
         }
@@ -41,7 +42,17 @@ var ESocket = (function () {
                     }
                     else {
                         console.log("sendMessage=>\u623F\u4EF7\u5360\u4F4D");
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_JOIN, { info: info.cur });
+                        for (var k = 0; k < 4; k++) {
+                            if (!GameMode.playerList[k]) {
+                                GameMode.playerList[k] = {
+                                    icon: "head-i-2_png",
+                                    name: info.cur,
+                                    id: "123",
+                                };
+                                break;
+                            }
+                        }
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_JOIN, null);
                     }
                     break;
                 case 2:
@@ -72,6 +83,12 @@ var ESocket = (function () {
                                 icon: "head-i-2_png", name: v, id: "123"
                             };
                         });
+                        // 显示出牌
+                        if (info.draw > 0) {
+                            GameMode.draw = info.draw;
+                        }
+                        // 谁出牌
+                        // GameMode.pos = info.currentPlayer;
                         this.setJoker(info.model);
                         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.RELOAD, cards: info.model });
                         GameMode.inRoom = true;
@@ -79,6 +96,8 @@ var ESocket = (function () {
                     break;
                 case 41:
                     console.log('出牌');
+                    // 显示出牌
+                    GameMode.draw = info.draw;
                     if (info.model.cards) {
                         var cards = info.model.cards;
                         var discard = info.discard;
@@ -92,6 +111,7 @@ var ESocket = (function () {
                         GameMode.isDiscard = false;
                     }
                     // 谁出牌
+                    // GameMode.pos = info.currentPlayer;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
                     // MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:[42,43,44,45]});
                     if (info.model.option.length > 0) {
@@ -101,6 +121,8 @@ var ESocket = (function () {
                     break;
                 case 44:
                     // 杠 流程
+                    // 显示出牌
+                    GameMode.draw = info.draw;
                     // 显示牌组
                     if (info.model.cards) {
                         var cards = info.model.cards;
@@ -115,10 +137,12 @@ var ESocket = (function () {
                         GameMode.isDiscard = false;
                     }
                     // 谁出牌
+                    // GameMode.pos = info.currentPlayer;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
                     // 显示吃
                     console.log(info.actionCard);
                     if (info.actionResult && info.actionResult.length) {
+                        // GameMode.pos = info.prevailing;
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { pos: info.prevailing, actionResult: info.actionResult });
                     }
                     if (info.actionCard) {
@@ -140,6 +164,7 @@ var ESocket = (function () {
                         GameMode.isDiscard = false;
                     }
                     // 谁出牌
+                    // GameMode.pos = info.currentPlayer;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
                     // 显示吃
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { pos: info.prevailing, actionResult: info.actionResult });
@@ -159,9 +184,16 @@ var ESocket = (function () {
                         GameMode.isDiscard = false;
                     }
                     // 谁出牌
+                    // GameMode.pos = info.currentPlayer;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
                     // 显示吃
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { pos: info.prevailing, actionResult: info.actionResult });
+                    break;
+                case 46:
+                    // 过 流程
+                    // 谁出牌
+                    // GameMode.pos = info.currentPlayer;
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
                     break;
                 case 45:
                     // 胡牌 游戏结束
@@ -171,7 +203,7 @@ var ESocket = (function () {
     };
     ESocket.prototype.setJoker = function (info) {
         if (info.joker[0] > 0) {
-            GameMode.joker = info.joker;
+            GameMode.joker = [info.joker];
         }
         if (info.jokerPi[0] > 0) {
             GameMode.jokerPi = info.jokerPi;
@@ -252,6 +284,9 @@ var ESocket = (function () {
                 break;
             case GameEvents.WS_PENG:
                 this.action(42);
+                break;
+            case GameEvents.WS_GUO:
+                this.action(46);
                 break;
         }
     };

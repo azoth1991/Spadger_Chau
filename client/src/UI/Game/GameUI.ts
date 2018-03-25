@@ -20,18 +20,19 @@ class GameUI extends eui.Component {
     // 加入游戏
     public joinGame(evt) {
         console.log('joinGame',this.dsListIcon)
-        for (var k = 0;k<4;k++){
-            if (!this.dsListIcon[k]) {
-                this.dsListIcon[k] = {
-                    icon: "head-i-2_png",
-                    name: evt.data.info, 
-                    id: "123",
-                };
+        let that = this;
+        // if (this.contains(this._gameBox)){
+        //     this.removeChild(this._gameBox);
+        // }
+        // this._gameBox = new eui.Component();
+        this._gameBox.removeChildren();
+        this.dsListIcon.map( (v,k) => {
+            if (v) {
                 this[`_icon${k}`] = new FriendIcon(1, {...this.dsListIcon[k],...this.startPosition[k]});
-                this._gameBox.addChild(this[`_icon${k}`]);
-                break;
+                that._gameBox.addChild(this[`_icon${k}`]);
             }
-        }
+        })
+        // this.addChild(this._gameBox);
         
     }
     public getdiscardSPs(evt) {
@@ -49,9 +50,10 @@ class GameUI extends eui.Component {
     }
     // 画丢弃的牌
     private drawDiscardSPs(){
-        this.removeChild(this._discardSPsBox);
-        this._discardSPsBox = new eui.Component();
-        this.addChild(this._discardSPsBox);
+        // this.removeChild(this._discardSPsBox);
+        // this._discardSPsBox = new eui.Component();
+        // this.addChild(this._discardSPsBox);
+        this._discardSPsBox.removeChildren();
         var sum0 = 0;
         var sum1 = 0;
         var sum2 = 0;
@@ -105,9 +107,10 @@ class GameUI extends eui.Component {
         this.drawCard(cards);
         this._gameBox.addChild(this.cardsBox);
         // 弃牌
+        this.discardBox.removeChildren();        
         if (evt.data.discard && evt.data.discard>0){
             var discard = evt.data.discard;
-            this._gameBox.removeChild(this.discardBox);
+            // this._gameBox.removeChild(this.discardBox);
             var posName = evt.data.prevailing;
             var pos = 0;
             this.dsListIcon.forEach((v,k)=>{
@@ -117,7 +120,7 @@ class GameUI extends eui.Component {
             });
             this[`_discardList${pos}`].push(discard);
             this.drawDiscard(this[`_discardList${pos}`],pos);
-            this._gameBox.addChild(this.discardBox);
+            // this._gameBox.addChild(this.discardBox);
         }
         this.drawOtherCard();
 
@@ -146,9 +149,11 @@ class GameUI extends eui.Component {
         this._gameBox = new eui.Component();
         this._discardSPsBox = new eui.Component();
         this._otherCardBox = new eui.Component();
+        this.discardBox = new eui.Component();        
         this.addChild(this._otherCardBox);        
         this.addChild(this._gameBox);
         this.addChild(this._discardSPsBox);
+        this.addChild(this.discardBox);
         let that = this;
         console.log('dslist',this.dsListIcon)
         this.dsListIcon.map( (v,k) => {
@@ -168,7 +173,6 @@ class GameUI extends eui.Component {
         this._chat.addEventListener( egret.TouchEvent.TOUCH_TAP, this._chatUI.toggleVisible, this._chatUI );
         this._useTool.addEventListener( egret.TouchEvent.TOUCH_TAP, () => {
             MessageCenter.getInstance().sendMessage( GameEvents.TOGGLE_USETOOL,null);
-            console.log('start')
         },  this );
 
         // 开始游戏  分享
@@ -181,6 +185,7 @@ class GameUI extends eui.Component {
 
     // 显示中间的方向
     private showZj(num) {
+        console.log('showzj',num)
         this[`_zj1`].visible = false;
         this[`_zj2`].visible = false;
         this[`_zj3`].visible = false;
@@ -195,6 +200,8 @@ class GameUI extends eui.Component {
 
     public startGameUI(evt):void {
         console.log('startGameUI',evt.data)
+        // 显示道具按钮
+        this._useTool.visible = true;
         this.showZj(evt.data.pos)
         if (evt.data.pos == 1){
             GameMode.isDiscard = true;
@@ -224,13 +231,12 @@ class GameUI extends eui.Component {
         // 画其他三家
         this.drawOtherCard();
         // 弃牌
-        this.discardBox = new eui.Component();
-        this._gameBox.addChild(this.discardBox);
+        // this._gameBox.addChild(this.discardBox);
     }
 
     //获取当前出牌人位置
     public getdiscardPos(evt) {
-        console.log('getdiscardPos',evt)
+        console.log('getdiscardPos')
         var pos = 0;
         this.dsListIcon.forEach((v,k)=>{
             if(v.name == evt.data.pos) {
@@ -256,6 +262,14 @@ class GameUI extends eui.Component {
     // 获取
     public getCards(arr:Array<any>){
         var res = [];
+        // 如果是要出的牌剔除
+        arr = arr.map((v,k)=>{
+            if (k == GameMode.draw){
+                return v-1;
+            } else {
+                return v;
+            }
+        });
         arr.forEach((val,key)=>{
             while(val>0){
                 res.push(key);
@@ -323,6 +337,9 @@ class GameUI extends eui.Component {
         // joker
         this._joker = [];
         this._jokerPi = [];
+        var isShowDraw = false;
+
+        //画pi
         cards.filter((value, key) => {
             if(GameMode.joker.length > 0 && GameMode.joker.indexOf(value) >= 0){
                 this._joker.push(value);
@@ -349,8 +366,12 @@ class GameUI extends eui.Component {
             card.y = 591;
             this.cardsBox.addChild(card);
         });
+        if (GameMode.draw > 0) {
+            var card = new CardUI(2,GameMode.draw);
+        }
         console.log('joker',this._joker,this._jokerPi,cards)
 
+        // 普通牌
         cards.filter((value)=>{
             return ( GameMode.jokerPi.indexOf(value) < 0 && GameMode.joker.indexOf(value) < 0)
         }).forEach((value, key)=>{
@@ -362,6 +383,17 @@ class GameUI extends eui.Component {
             card.y = 591;
             this.cardsBox.addChild(card);
         });
+        // 出牌
+        console.log('draw',GameMode.draw);
+        if (GameMode.draw >-1) {
+            var card = new CardUI(2, GameMode.draw);
+            var scale = 0.8;
+            card.scaleX = scale;
+            card.scaleY = scale;
+            card.x = 169 + cards.length*des*scale;
+            card.y = 591;
+            this.cardsBox.addChild(card);
+        }
     }
 
     // 画弃牌
@@ -382,7 +414,7 @@ class GameUI extends eui.Component {
                 break;
             case 2:
                 startx = 770;
-                starty = 260;   
+                starty = 250;   
                 break;
             case 3:
                 startx = 776;
@@ -396,16 +428,16 @@ class GameUI extends eui.Component {
             console.log(parseInt(`${key/4}`))
             switch (pos){
                 case 0:
-                    card.x = startx + (key%5)*desx;
-                    card.y = starty + parseInt(`${key/5}`)*desy;
+                    card.x = startx + (key%8)*desx;
+                    card.y = starty + parseInt(`${key/8}`)*desy;
                     break;
                 case 1:
                     card.x = startx - parseInt(`${key/5}`)*desy;
                     card.y = starty + (key%5)*desx;                 
                     break;                                 
                 case 2:
-                    card.x = startx - (key%5)*desx;
-                    card.y = starty - parseInt(`${key/5}`)*desy;                
+                    card.x = startx - (key%8)*desx;
+                    card.y = starty - parseInt(`${key/8}`)*desy;                
                     break;
                 case 3:
                     card.x = startx + parseInt(`${key/5}`)*desy;
@@ -417,8 +449,9 @@ class GameUI extends eui.Component {
     }
     private drawOtherCard(){
         console.log('drawOtherCard');
-        this.removeChild(this._otherCardBox);
-        this._otherCardBox = new eui.Component();
+        // this.removeChild(this._otherCardBox);
+        // this._otherCardBox = new eui.Component();
+        this._otherCardBox.removeChildren();
         var desX = 29;
         var desY = 52;
         for (var cardLength = 0; cardLength<13;cardLength++) {
@@ -443,10 +476,9 @@ class GameUI extends eui.Component {
                 letfCard.y = 53;
                 this._otherCardBox.addChild(letfCard);
             }
-            this.addChild(this._otherCardBox);
+            // this.addChild(this._otherCardBox);
         }
     }
-
 
     protected createChildren():void {
         super.createChildren();
@@ -465,8 +497,8 @@ class GameUI extends eui.Component {
     private _gameBox:eui.Component;
     private _invest;
     private card;
-    private cardsBox;
-    private discardBox;
+    private cardsBox:eui.Component;
+    private discardBox:eui.Component;
     private _info;
     private _setting:eui.Button;
     private _cardStatuslist = [];
@@ -495,8 +527,8 @@ class GameUI extends eui.Component {
     private canDiscard = false;
     private _discardStatusUI:DiscardStatusUI;
     private _gameOverUI:GameOverUI;
-    private _discardSPsBox;
-    private _otherCardBox;
+    private _discardSPsBox:eui.Component;
+    private _otherCardBox:eui.Component;
     private _joker = [];
     private _jokerPi = [];
 

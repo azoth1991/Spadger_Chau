@@ -20,6 +20,7 @@ var GameEvents = (function () {
     GameEvents.WS_GANG = "WS_GANG";
     GameEvents.WS_CHI = "WS_CHI";
     GameEvents.WS_PENG = "WS_PENG";
+    GameEvents.WS_GUO = "WS_GUO";
     GameEvents.WS_GAMEOVER = "WS_GAMEOVER";
     GameEvents.WS_SEND_DISCARDSTATUS = "WS_SEND_DISCARDSTATUS";
     GameEvents.WS_SEND_CARDSTATUS = "WS_SEND_CARDSTATUS";
@@ -28,6 +29,8 @@ var GameEvents = (function () {
     GameEvents.WS_GET_DISCARDSPS = "WS_GET_DISCARDSPS";
     GameEvents.TOGGLE_CREATEROOM = "TOGGLE_CREATEROOM";
     GameEvents.TOGGLE_USETOOL = "TOGGLE_USETOOL";
+    GameEvents.WS_SHOW_DRAW = "WS_SHOW_DRAW";
+    GameEvents.PICK_TOOL_TARGET = "PICK_TOOL_TARGET";
     return GameEvents;
 }());
 __reflect(GameEvents.prototype, "GameEvents");
