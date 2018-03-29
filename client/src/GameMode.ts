@@ -23,4 +23,5 @@ class GameMode{
     public static option = [];
     public static currentPlayer = '';
     public static upList = [];
+    public static userInfo = {};
 }

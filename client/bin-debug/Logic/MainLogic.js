@@ -95,7 +95,7 @@ var MainLogic = (function () {
         this._gameUI.sendMsg(evt.data.info, evt.data.name);
     };
     MainLogic.prototype.joinGame = function (evt) {
-        this._gameUI.joinGame(evt);
+        this._gameUI.joinGame();
     };
     // private sendCardStatus(data){
     //     this._gameUI.showDiscardStatus(data);

@@ -59,15 +59,43 @@ class Main extends eui.UILayer {
 
     private async runGame() {
         GameMode.wechatId = this.getUrlParam('wechatId');
+        // 获取用户信息
+        var request = new egret.HttpRequest();
+        request.responseType = egret.HttpResponseType.TEXT;
+        request.open(encodeURI(`http://101.37.151.85:8080/socket/getWXInfo?openid=${GameMode.wechatId}`),egret.HttpMethod.GET);
+        request.send();
+        request.addEventListener(egret.Event.COMPLETE,(evt)=>{
+            var response = <egret.HttpRequest>evt.currentTarget;
+            var res = JSON.parse(response.response);
+            if (res.code == 1) {
+                console.log('userinfo',res.result);
+                GameMode.userInfo = res.result;
+            } else {
+                alert('请在微信中打开')
+            }
+        },this);
         // wx
-        wx.config({
-            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: '{{appId}}', // 必填，公众号的唯一标识
-            timestamp: '{{timeStamp}}', // 必填，生成签名的时间戳
-            nonceStr: '{{nonceStr}}', // 必填，生成签名的随机串
-            signature: '{{signType}}',// 必填，签名
-            jsApiList: ['chooseWXPay','startRecord','stopRecord','playVoice','uploadVoice'] // 必填，需要使用的JS接口列表
-        });
+        var request2 = new egret.HttpRequest();
+        request2.responseType = egret.HttpResponseType.TEXT;
+        request2.open(encodeURI(`http://101.37.151.85:8080/socket/getWXSign`),egret.HttpMethod.GET);
+        request2.send();
+        request2.addEventListener(egret.Event.COMPLETE,(evt)=>{
+            var response = <egret.HttpRequest>evt.currentTarget;
+            var res = JSON.parse(response.response);
+            if (res.code == 1) {
+                console.log('wxconfig',res.result);
+                wx.config({
+                    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: res.result.appId, // 必填，公众号的唯一标识
+                    timestamp: res.result.timeStamp, // 必填，生成签名的时间戳
+                    nonceStr: res.result.nonceStr, // 必填，生成签名的随机串
+                    signature: res.result.signature,// 必填，签名
+                    jsApiList: ['chooseWXPay','startRecord','stopRecord','playVoice','uploadVoice'] // 必填，需要使用的JS接口列表
+                });
+            } else {
+                alert('请在微信中打开')
+            }
+        },this);
         await this.loadResource()
         this.createGameScene();
         const result = await RES.getResAsync("description_json")

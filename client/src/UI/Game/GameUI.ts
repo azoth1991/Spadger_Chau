@@ -1,7 +1,6 @@
 class GameUI extends eui.Component {
     constructor() {
         super();
-        this.dsListIcon = GameMode.playerList;
         this.addEventListener( eui.UIEvent.COMPLETE, this.uiCompHandler, this );
         this.skinName = "resource/eui_game/skins/gameSkin.exml";
     }
@@ -18,17 +17,17 @@ class GameUI extends eui.Component {
         }, this );
     }
     // 加入游戏
-    public joinGame(evt) {
-        console.log('joinGame',this.dsListIcon)
+    public joinGame() {
+        console.log('joinGame',GameMode.playerList)
         let that = this;
         // if (this.contains(this._gameBox)){
         //     this.removeChild(this._gameBox);
         // }
         // this._gameBox = new eui.Component();
         this._gameBox.removeChildren();
-        this.dsListIcon.map( (v,k) => {
+        GameMode.playerList.map( (v,k) => {
             if (v) {
-                this[`_icon${k}`] = new FriendIcon(1, {...this.dsListIcon[k],...this.startPosition[k]});
+                this[`_icon${k}`] = new FriendIcon(1, {...GameMode.playerList[k],...this.startPosition[k]});
                 that._gameBox.addChild(this[`_icon${k}`]);
             }
         })
@@ -38,7 +37,7 @@ class GameUI extends eui.Component {
     public getdiscardSPs(evt) {
         console.log('getdiscardSPs',evt);
         var pos = 0;
-        this.dsListIcon.forEach((v,k)=>{
+        GameMode.playerList.forEach((v,k)=>{
             if (v.name == evt.data.pos){
                 pos = k;
             }
@@ -113,7 +112,7 @@ class GameUI extends eui.Component {
             // this._gameBox.removeChild(this.discardBox);
             var posName = evt.data.prevailing;
             var pos = 0;
-            this.dsListIcon.forEach((v,k)=>{
+            GameMode.playerList.forEach((v,k)=>{
                 if (v.name == posName){
                     pos = k;
                 }
@@ -170,10 +169,10 @@ class GameUI extends eui.Component {
         this.addChild(this._discardSPsBox);
         this.addChild(this.discardBox);
         let that = this;
-        console.log('dslist',this.dsListIcon)
-        this.dsListIcon.map( (v,k) => {
+        console.log('dslist',GameMode.playerList)
+        GameMode.playerList.map( (v,k) => {
             if (v) {
-                this[`_icon${k}`] = new FriendIcon(1, {...this.dsListIcon[k],...this.startPosition[k]});
+                this[`_icon${k}`] = new FriendIcon(1, {...GameMode.playerList[k],...this.startPosition[k]});
                 that._gameBox.addChild(this[`_icon${k}`]);
             }
         })
@@ -215,7 +214,8 @@ class GameUI extends eui.Component {
     }
 
     public startGameUI(evt):void {
-        console.log('startGameUI',evt.data)
+        console.log('startGameUI',evt.data);
+        this.joinGame();
         if (GameMode.option.length>0){
             // 断线重连
             MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:GameMode.option});
@@ -259,12 +259,12 @@ class GameUI extends eui.Component {
 
     //获取当前出牌人位置
     public getdiscardPos(evt) {
-        console.log('getdiscardPos');
+        console.log('getdiscardPos',evt);
         // 重新定位后重新计时
         this.count();
         var pos = 0;
-        this.dsListIcon.forEach((v,k)=>{
-            if(v.name == evt.data.pos) {
+        GameMode.playerList.forEach((v,k)=>{
+            if(v.wechatId == evt.data.pos) {
                 switch (k){
                     case 0:
                         pos = 1;
@@ -291,17 +291,26 @@ class GameUI extends eui.Component {
             clearInterval(this.countlistener);  
         }
         this.countlistener = setInterval(()=>{
+            // console.log('num',num)
             if (num<1 && GameMode.isDiscard){
                 MessageCenter.getInstance().sendMessage( GameEvents.WS_SEND_CARD, {discardNum: GameMode.draw} );
                 GameMode.isDiscard = false;
+            } else {
+                this._count.text = `${num--}`;
             }
-            this._count.text = `${num--}`;
         },1000);
     }
 
     // 获取
     public getCards(arr:Array<any>){
         var res = [];
+        if (!GameMode.draw || GameMode.draw==-1) {
+            arr.forEach((v,k)=>{
+                if (v>0){
+                    GameMode.draw = k;
+                }
+            });
+        }
         // 如果是要出的牌剔除
         arr = arr.map((v,k)=>{
             if (k == GameMode.draw){
@@ -325,7 +334,7 @@ class GameUI extends eui.Component {
             this._start.$children[0].source = 'yellow_btn_png';
             this._start.enabled = true;
         }
-        if(this.dsListIcon[0].name == info.player) {
+        if(GameMode.wechatId == info.player) {
             this._ready.$children[0].source = 'yellow_btn_down_png';
             this._ready.$children[1].text = "已准备";
             this._ready.enabled = false;
@@ -576,8 +585,6 @@ class GameUI extends eui.Component {
             { x: 563, y: 106 },
             { x: 892, y: 305 },
         ];
-    private dsListIcon:Array<any> = [
-    ];
     private _discardList0 = [];
     private _discardList1 = [];
     private _discardList2 = [];

@@ -27,7 +27,6 @@ var GameUI = (function (_super) {
             { x: 563, y: 106 },
             { x: 892, y: 305 },
         ];
-        _this.dsListIcon = [];
         _this._discardList0 = [];
         _this._discardList1 = [];
         _this._discardList2 = [];
@@ -39,7 +38,6 @@ var GameUI = (function (_super) {
         _this.canDiscard = false;
         _this._joker = [];
         _this._jokerPi = [];
-        _this.dsListIcon = GameMode.playerList;
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_game/skins/gameSkin.exml";
         return _this;
@@ -56,18 +54,18 @@ var GameUI = (function (_super) {
         }, this);
     };
     // 加入游戏
-    GameUI.prototype.joinGame = function (evt) {
+    GameUI.prototype.joinGame = function () {
         var _this = this;
-        console.log('joinGame', this.dsListIcon);
+        console.log('joinGame', GameMode.playerList);
         var that = this;
         // if (this.contains(this._gameBox)){
         //     this.removeChild(this._gameBox);
         // }
         // this._gameBox = new eui.Component();
         this._gameBox.removeChildren();
-        this.dsListIcon.map(function (v, k) {
+        GameMode.playerList.map(function (v, k) {
             if (v) {
-                _this["_icon" + k] = new FriendIcon(1, __assign({}, _this.dsListIcon[k], _this.startPosition[k]));
+                _this["_icon" + k] = new FriendIcon(1, __assign({}, GameMode.playerList[k], _this.startPosition[k]));
                 that._gameBox.addChild(_this["_icon" + k]);
             }
         });
@@ -76,7 +74,7 @@ var GameUI = (function (_super) {
     GameUI.prototype.getdiscardSPs = function (evt) {
         console.log('getdiscardSPs', evt);
         var pos = 0;
-        this.dsListIcon.forEach(function (v, k) {
+        GameMode.playerList.forEach(function (v, k) {
             if (v.name == evt.data.pos) {
                 pos = k;
             }
@@ -150,7 +148,7 @@ var GameUI = (function (_super) {
             // this._gameBox.removeChild(this.discardBox);
             var posName = evt.data.prevailing;
             var pos = 0;
-            this.dsListIcon.forEach(function (v, k) {
+            GameMode.playerList.forEach(function (v, k) {
                 if (v.name == posName) {
                     pos = k;
                 }
@@ -203,10 +201,10 @@ var GameUI = (function (_super) {
         this.addChild(this._discardSPsBox);
         this.addChild(this.discardBox);
         var that = this;
-        console.log('dslist', this.dsListIcon);
-        this.dsListIcon.map(function (v, k) {
+        console.log('dslist', GameMode.playerList);
+        GameMode.playerList.map(function (v, k) {
             if (v) {
-                _this["_icon" + k] = new FriendIcon(1, __assign({}, _this.dsListIcon[k], _this.startPosition[k]));
+                _this["_icon" + k] = new FriendIcon(1, __assign({}, GameMode.playerList[k], _this.startPosition[k]));
                 that._gameBox.addChild(_this["_icon" + k]);
             }
         });
@@ -243,6 +241,7 @@ var GameUI = (function (_super) {
     };
     GameUI.prototype.startGameUI = function (evt) {
         console.log('startGameUI', evt.data);
+        this.joinGame();
         if (GameMode.option.length > 0) {
             // 断线重连
             MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, { option: GameMode.option });
@@ -284,12 +283,12 @@ var GameUI = (function (_super) {
     };
     //获取当前出牌人位置
     GameUI.prototype.getdiscardPos = function (evt) {
-        console.log('getdiscardPos');
+        console.log('getdiscardPos', evt);
         // 重新定位后重新计时
         this.count();
         var pos = 0;
-        this.dsListIcon.forEach(function (v, k) {
-            if (v.name == evt.data.pos) {
+        GameMode.playerList.forEach(function (v, k) {
+            if (v.wechatId == evt.data.pos) {
                 switch (k) {
                     case 0:
                         pos = 1;
@@ -316,16 +315,26 @@ var GameUI = (function (_super) {
             clearInterval(this.countlistener);
         }
         this.countlistener = setInterval(function () {
+            // console.log('num',num)
             if (num < 1 && GameMode.isDiscard) {
                 MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CARD, { discardNum: GameMode.draw });
                 GameMode.isDiscard = false;
             }
-            _this._count.text = "" + num--;
+            else {
+                _this._count.text = "" + num--;
+            }
         }, 1000);
     };
     // 获取
     GameUI.prototype.getCards = function (arr) {
         var res = [];
+        if (!GameMode.draw || GameMode.draw == -1) {
+            arr.forEach(function (v, k) {
+                if (v > 0) {
+                    GameMode.draw = k;
+                }
+            });
+        }
         // 如果是要出的牌剔除
         arr = arr.map(function (v, k) {
             if (k == GameMode.draw) {
@@ -350,7 +359,7 @@ var GameUI = (function (_super) {
             this._start.$children[0].source = 'yellow_btn_png';
             this._start.enabled = true;
         }
-        if (this.dsListIcon[0].name == info.player) {
+        if (GameMode.wechatId == info.player) {
             this._ready.$children[0].source = 'yellow_btn_down_png';
             this._ready.$children[1].text = "已准备";
             this._ready.enabled = false;

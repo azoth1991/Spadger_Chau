@@ -21,12 +21,17 @@ class ESocket {
                     if (GameMode.inRoom == false){
                         console.log(`sendMessage=>进入房间${GameMode.roomId}`)  
                         var list = info.entered;
-                        var index = list.indexOf(GameMode.wechatId);
-                        list.unshift(list[list.length-1]);
-                        list.pop();
+                        // var index = 0;
+                        // list.forEach((v,k)=>{
+                        //     if (v.wechatId == GameMode.wechatId) {
+                        //         index = k;
+                        //     }
+                        // });
+                        // list.unshift(list[list.length-1]);
+                        // list.pop();
                         GameMode.playerList = list.map((v)=>{
                             return {
-                                icon: "head-i-2_png", name: v, id: "123"
+                                icon: v.headImageUrl, name: v.wechatNick,id:v.id,wechatId:v.wechatId
                             }
                         });
                         var l = 4-GameMode.playerList.length;
@@ -41,16 +46,23 @@ class ESocket {
                         GameMode.inRoom = true;
                     } else {
                         console.log(`sendMessage=>房价占位`) 
-                        for (var k = 0;k<4;k++){
-                            if (!GameMode.playerList[k]) {
-                                GameMode.playerList[k] = {
-                                    icon: "head-i-2_png",
-                                    name: info.cur,
-                                    id: "123",
-                                };
-                                break;
+                        // for (var k = 0;k<4;k++){
+                        //     if (!GameMode.playerList[k]) {
+                        //         GameMode.playerList[k] = {
+                        //             icon: "head-i-2_png",
+                        //             name: info.cur,
+                        //             id: "123",
+                        //         };
+                        //         break;
+                        //     }
+                        // }
+                        var list = info.entered;
+                        GameMode.playerList = list.map((v)=>{
+                            return {
+                                icon: v.headImageUrl, name: v.wechatNick,id:v.id,wechatId:v.wechatId
                             }
-                        }
+                        });
+                        console.log('GameMode',GameMode.playerList)
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_JOIN, null);
                     }
                     break;
@@ -65,6 +77,15 @@ class ESocket {
                 case 7:
                     console.log(`sendMessage=>开始游戏`)
                     this.setJoker(info.model);
+                    var playerList = GameMode.playerList;
+                    var index = info.positionMap[GameMode.wechatId];
+                    playerList.forEach((v,k)=>{
+                        if(parseInt(info.positionMap[v.wechatId])>index) {
+                            GameMode.playerList[parseInt(info.positionMap[v.wechatId])-index] = v;
+                        } else {
+                            GameMode.playerList[parseInt(info.positionMap[v.wechatId])+4-index] = v;
+                        }
+                    });
                     MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, info.model);
                     break;
                 case 10:

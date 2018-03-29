@@ -22,12 +22,17 @@ var ESocket = (function () {
                     if (GameMode.inRoom == false) {
                         console.log("sendMessage=>\u8FDB\u5165\u623F\u95F4" + GameMode.roomId);
                         var list = info.entered;
-                        var index = list.indexOf(GameMode.wechatId);
-                        list.unshift(list[list.length - 1]);
-                        list.pop();
+                        // var index = 0;
+                        // list.forEach((v,k)=>{
+                        //     if (v.wechatId == GameMode.wechatId) {
+                        //         index = k;
+                        //     }
+                        // });
+                        // list.unshift(list[list.length-1]);
+                        // list.pop();
                         GameMode.playerList = list.map(function (v) {
                             return {
-                                icon: "head-i-2_png", name: v, id: "123"
+                                icon: v.headImageUrl, name: v.wechatNick, id: v.id, wechatId: v.wechatId
                             };
                         });
                         var l = 4 - GameMode.playerList.length;
@@ -42,16 +47,23 @@ var ESocket = (function () {
                     }
                     else {
                         console.log("sendMessage=>\u623F\u4EF7\u5360\u4F4D");
-                        for (var k = 0; k < 4; k++) {
-                            if (!GameMode.playerList[k]) {
-                                GameMode.playerList[k] = {
-                                    icon: "head-i-2_png",
-                                    name: info.cur,
-                                    id: "123",
-                                };
-                                break;
-                            }
-                        }
+                        // for (var k = 0;k<4;k++){
+                        //     if (!GameMode.playerList[k]) {
+                        //         GameMode.playerList[k] = {
+                        //             icon: "head-i-2_png",
+                        //             name: info.cur,
+                        //             id: "123",
+                        //         };
+                        //         break;
+                        //     }
+                        // }
+                        var list = info.entered;
+                        GameMode.playerList = list.map(function (v) {
+                            return {
+                                icon: v.headImageUrl, name: v.wechatNick, id: v.id, wechatId: v.wechatId
+                            };
+                        });
+                        console.log('GameMode', GameMode.playerList);
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_JOIN, null);
                     }
                     break;
@@ -66,6 +78,16 @@ var ESocket = (function () {
                 case 7:
                     console.log("sendMessage=>\u5F00\u59CB\u6E38\u620F");
                     this.setJoker(info.model);
+                    var playerList = GameMode.playerList;
+                    var index = info.positionMap[GameMode.wechatId];
+                    playerList.forEach(function (v, k) {
+                        if (parseInt(info.positionMap[v.wechatId]) > index) {
+                            GameMode.playerList[parseInt(info.positionMap[v.wechatId]) - index] = v;
+                        }
+                        else {
+                            GameMode.playerList[parseInt(info.positionMap[v.wechatId]) + 4 - index] = v;
+                        }
+                    });
                     MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, info.model);
                     break;
                 case 10:

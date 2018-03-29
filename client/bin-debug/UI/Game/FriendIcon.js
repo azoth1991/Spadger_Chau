@@ -11,7 +11,7 @@ r.prototype = e.prototype, t.prototype = new r();
 var FriendIcon = (function (_super) {
     __extends(FriendIcon, _super);
     function FriendIcon(type, _a) {
-        var x = _a.x, y = _a.y, name = _a.name, id = _a.id, icon = _a.icon;
+        var x = _a.x, y = _a.y, name = _a.name, id = _a.id, icon = _a.icon, wechatId = _a.wechatId;
         var _this = _super.call(this) || this;
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_game/skins/headIcon1.exml";
@@ -20,6 +20,9 @@ var FriendIcon = (function (_super) {
         _this._name.text = name;
         _this._id.text = "id:" + id;
         _this._icon.source = icon;
+        _this._name1 = name;
+        _this._icon1 = icon;
+        _this._wechatid = wechatId;
         return _this;
     }
     FriendIcon.prototype.uiCompHandler = function () {
@@ -29,7 +32,8 @@ var FriendIcon = (function (_super) {
         this.x = x;
         this.y = y;
         this.skinName = "resource/eui_game/skins/headIcon2.exml";
-        this._count.text = "0";
+        this._icon.source = this._icon1;
+        this._count.text = this._name1;
     };
     FriendIcon.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

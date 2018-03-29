@@ -98,20 +98,48 @@ var Main = (function (_super) {
     };
     Main.prototype.runGame = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var result, userInfo;
+            var request, request2, result, userInfo;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         GameMode.wechatId = this.getUrlParam('wechatId');
-                        // wx
-                        wx.config({
-                            debug: true,
-                            appId: '{{appId}}',
-                            timestamp: '{{timeStamp}}',
-                            nonceStr: '{{nonceStr}}',
-                            signature: '{{signType}}',
-                            jsApiList: ['chooseWXPay', 'startRecord', 'stopRecord', 'playVoice', 'uploadVoice'] // 必填，需要使用的JS接口列表
-                        });
+                        request = new egret.HttpRequest();
+                        request.responseType = egret.HttpResponseType.TEXT;
+                        request.open(encodeURI("http://101.37.151.85:8080/socket/getWXInfo?openid=" + GameMode.wechatId), egret.HttpMethod.GET);
+                        request.send();
+                        request.addEventListener(egret.Event.COMPLETE, function (evt) {
+                            var response = evt.currentTarget;
+                            var res = JSON.parse(response.response);
+                            if (res.code == 1) {
+                                console.log('userinfo', res.result);
+                                GameMode.userInfo = res.result;
+                            }
+                            else {
+                                alert('请在微信中打开');
+                            }
+                        }, this);
+                        request2 = new egret.HttpRequest();
+                        request2.responseType = egret.HttpResponseType.TEXT;
+                        request2.open(encodeURI("http://101.37.151.85:8080/socket/getWXSign"), egret.HttpMethod.GET);
+                        request2.send();
+                        request2.addEventListener(egret.Event.COMPLETE, function (evt) {
+                            var response = evt.currentTarget;
+                            var res = JSON.parse(response.response);
+                            if (res.code == 1) {
+                                console.log('wxconfig', res.result);
+                                wx.config({
+                                    debug: true,
+                                    appId: res.result.appId,
+                                    timestamp: res.result.timeStamp,
+                                    nonceStr: res.result.nonceStr,
+                                    signature: res.result.signature,
+                                    jsApiList: ['chooseWXPay', 'startRecord', 'stopRecord', 'playVoice', 'uploadVoice'] // 必填，需要使用的JS接口列表
+                                });
+                            }
+                            else {
+                                alert('请在微信中打开');
+                            }
+                        }, this);
                         return [4 /*yield*/, this.loadResource()];
                     case 1:
                         _a.sent();

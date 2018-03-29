@@ -109,7 +109,7 @@ class MainLogic
         this._gameUI.sendMsg(evt.data.info,evt.data.name);
     }
     private joinGame(evt){
-        this._gameUI.joinGame(evt);
+        this._gameUI.joinGame();
     }
     // private sendCardStatus(data){
     //     this._gameUI.showDiscardStatus(data);
