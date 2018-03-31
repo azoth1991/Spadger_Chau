@@ -28,6 +28,7 @@ var GameMode = (function () {
     GameMode.upList = [];
     GameMode.userInfo = {};
     GameMode.startGame = false;
+    GameMode.actionCard = -1;
     return GameMode;
 }());
 __reflect(GameMode.prototype, "GameMode");

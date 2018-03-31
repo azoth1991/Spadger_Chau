@@ -13,6 +13,12 @@ var ESocket = (function () {
         var info = JSON.parse(data);
         GameMode.draw = -1;
         GameMode.canChowChoice = [];
+        GameMode.chiNum = -1;
+        GameMode.gangNum = -1;
+        GameMode.actionCard = -1;
+        if (info.actionCard) {
+            GameMode.actionCard = info.actionCard;
+        }
         if (info.code == 0) {
             alert(info.msg);
         }
@@ -175,14 +181,14 @@ var ESocket = (function () {
                     // GameMode.pos = info.currentPlayer;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
                     // 显示吃
-                    console.log(info.actionCard);
+                    // console.log(info.actionCard);
                     if (info.actionResult && info.actionResult.length) {
                         // GameMode.pos = info.prevailing;
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { pos: info.prevailing, actionResult: info.actionResult });
                     }
-                    if (info.actionCard) {
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, discard: info.actionCard, prevailing: prevailing });
-                    }
+                    // if(info.actionCard) {
+                    //     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, {cards,discard:info.actionCard,prevailing});
+                    // }
                     break;
                 case 43:
                     // 吃 流程
@@ -237,7 +243,7 @@ var ESocket = (function () {
         }
     };
     ESocket.prototype.setJoker = function (info) {
-        if (info.joker[0] > 0) {
+        if (info.joker > 0) {
             GameMode.joker = [info.joker];
         }
         if (info.jokerPi[0] > 0) {
@@ -337,8 +343,6 @@ var ESocket = (function () {
         if (actionid == 44) {
             info.discardNum = GameMode.gangNum;
         }
-        GameMode.chiNum = -1;
-        GameMode.gangNum = -1;
         this._websocket.send(JSON.stringify(info));
     };
     return ESocket;

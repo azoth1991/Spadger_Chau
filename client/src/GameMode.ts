@@ -25,4 +25,5 @@ class GameMode{
     public static upList = [];
     public static userInfo = {};
     public static startGame = false;
+    public static actionCard = -1;
 }

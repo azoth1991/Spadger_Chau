@@ -24,6 +24,7 @@ class CardUI extends eui.Component {
         console.log('handleclick',GameMode.isDiscard,this.status);
         // 皮赖杠，没有按起 可以出牌 出的皮赖 唤起弹框
         GameMode.gangNum = -1;
+        GameMode.chiNum = 0;
         if (this.status == 'down'&&GameMode.isDiscard&&(GameMode.joker.indexOf(this._num)>-1||GameMode.jokerPi.indexOf(this._num)>-1)) {
             // 唤起弹窗
             GameMode.gangNum = this._num;
@@ -46,26 +47,30 @@ class CardUI extends eui.Component {
             this.downCard();
             // 如果能够发票则发牌
             if (GameMode.isDiscard) {
-                // 可以吃的时候点击牌可以直接出牌
+                // 可以吃、杠的时候点击牌可以直接出牌
                 if(GameMode.isSP){
-                    var extkey = -1;
-                    for (var i=0;i<GameMode.canChowChoice.length;i++){
-                        if(GameMode.canChowChoice[i].indexOf(this._num)>-1){
-                            GameMode.chiNum = i;
-                            break;
+                    if (GameMode.gangNum>=0){
+                        // 杠直接点是当普通牌出
+                        MessageCenter.getInstance().sendMessage( GameEvents.WS_SEND_CARD, {discardNum:this._num} );
+                    } else {
+                        var extkey = -1;
+                        for (var i=0;i<GameMode.canChowChoice.length;i++){
+                            if(GameMode.canChowChoice[i].indexOf(this._num)>-1){
+                                GameMode.chiNum = i;
+                                break;
+                            }
                         }
+                        
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_CHI});                    
                     }
                     GameMode.isSP = false;
-                    MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_CHI});                    
-                    MessageCenter.getInstance().sendMessage( GameEvents.HIDE_DISCARDSP, null );
-                    
+                    MessageCenter.getInstance().sendMessage( GameEvents.HIDE_DISCARDSP, null ); 
                 } else {
                     // 关闭discardsp
                     console.log('HIDE_DISCARDSP')
                     MessageCenter.getInstance().sendMessage( GameEvents.HIDE_DISCARDSP, null ); 
                     // 唤起弹窗
                     MessageCenter.getInstance().sendMessage( GameEvents.WS_SEND_CARD, {discardNum:this._num} );            
-                    GameMode.isDiscard = false;
                 }
                 
             }

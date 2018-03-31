@@ -98,7 +98,7 @@ var GameUI = (function (_super) {
         var scale = 0.4;
         this._discardSPList0.forEach(function (value, key) {
             value.forEach(function (v, k) {
-                var discardSP = new CardUI(1, v, 2, scale);
+                var discardSP = new CardUI(1, v, 0, scale);
                 discardSP.x = 1194 - (k + key * 0.1 + sum0) * 79 * scale;
                 discardSP.y = 620;
                 _this._discardSPsBox.addChild(discardSP);
@@ -107,7 +107,7 @@ var GameUI = (function (_super) {
         });
         this._discardSPList1.forEach(function (value, key) {
             value.forEach(function (v, k) {
-                var discardSP = new CardUI(1, v, 3, scale);
+                var discardSP = new CardUI(1, v, 1, scale);
                 discardSP.x = 195;
                 discardSP.y = 562 - (k + key * 0.1 + sum1) * 79 * scale;
                 _this._discardSPsBox.addChild(discardSP);
@@ -116,7 +116,7 @@ var GameUI = (function (_super) {
         });
         this._discardSPList2.forEach(function (value, key) {
             value.forEach(function (v, k) {
-                var discardSP = new CardUI(1, v, 0, scale);
+                var discardSP = new CardUI(1, v, 2, scale);
                 discardSP.x = 1194 - (k + key * 0.1 + sum2) * 79 * scale;
                 discardSP.y = 128;
                 _this._discardSPsBox.addChild(discardSP);
@@ -125,7 +125,7 @@ var GameUI = (function (_super) {
         });
         this._discardSPList3.forEach(function (value, key) {
             value.forEach(function (v, k) {
-                var discardSP = new CardUI(1, v, 1, scale);
+                var discardSP = new CardUI(1, v, 3, scale);
                 discardSP.x = 1150;
                 discardSP.y = 554 - (k + key * 0.1 + sum3) * 79 * scale;
                 _this._discardSPsBox.addChild(discardSP);
@@ -288,7 +288,6 @@ var GameUI = (function (_super) {
         // 重新定位后重新计时
         // this.count();
         var pos = 1;
-        GameMode.isDiscard = false;
         GameMode.playerList.forEach(function (v, k) {
             console.log(11111, v, k, evt.data.pos);
             if (v.wechatId == evt.data.pos) {
@@ -322,7 +321,6 @@ var GameUI = (function (_super) {
             // console.log('num',num)
             if (num < 1 && GameMode.isDiscard) {
                 MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CARD, { discardNum: GameMode.draw });
-                GameMode.isDiscard = false;
             }
             else {
                 _this._count.text = "" + num--;
@@ -440,10 +438,9 @@ var GameUI = (function (_super) {
             card.y = 591;
             _this.cardsBox.addChild(card);
             // 吃的时候弹起
-            console.log('canChowChoice', GameMode.canChowChoice[0], value);
             // if (GameMode.canChowChoice[0].indexOf(value)>-1){
             GameMode.canChowChoice.forEach(function (arr) {
-                if (arr.indexOf(value) > -1) {
+                if ((arr.indexOf(value) > -1) && (value != GameMode.actionCard)) {
                     console.log('upcard');
                     card.upCard();
                 }
@@ -491,7 +488,6 @@ var GameUI = (function (_super) {
         discards.forEach(function (value, key) {
             var scale = 0.45;
             var card = new CardUI(type, value, pos, scale);
-            console.log(parseInt("" + key / 4));
             switch (pos) {
                 case 0:
                     card.x = startx + (key % 8) * desx;

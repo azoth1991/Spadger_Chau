@@ -70,6 +70,7 @@ class CreateRoomSettingUI extends eui.Component {
             var res = JSON.parse(response.response);
             if (res.code == 1) {
                 GameMode.roomId = res.result.roomId;
+                console.log('createroom',GameMode.roomId);
                 MessageCenter.getInstance().sendMessage( GameEvents.WS_ENTER_ROOM, {type:GamePages.CREATE_ROOM});
             } else {
                 alert('创建房间失败')

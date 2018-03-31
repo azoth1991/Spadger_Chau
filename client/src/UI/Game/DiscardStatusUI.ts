@@ -40,8 +40,8 @@ class DiscardStatusUI extends eui.Component {
                     // this._peng.y = 494;
                     break;
                 case 43:
-                    this._chi.selected = false;
-                    this._chi.touchEnabled = false;
+                    this._chi.selected = true;
+                    this._chi.touchEnabled = true;
                     // this._chi.visible = true;
                     // this._chi.x = this.pos + k*this.des;
                     // this._chi.y = 494;
@@ -90,7 +90,10 @@ class DiscardStatusUI extends eui.Component {
                 MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_PENG});
                 break;
             case this._guo:
-                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_GUO});
+                // 点杠的时候，过不发ws
+                if (GameMode.gangNum<0){
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_GUO});
+                }
                 break;
         }
         // todo销毁
