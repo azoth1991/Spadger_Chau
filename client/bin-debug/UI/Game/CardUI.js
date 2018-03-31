@@ -70,6 +70,7 @@ var CardUI = (function (_super) {
                             break;
                         }
                     }
+                    GameMode.isSP = false;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, { type: GameEvents.WS_CHI });
                     MessageCenter.getInstance().sendMessage(GameEvents.HIDE_DISCARDSP, null);
                 }

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="toolIRUISkin" height="86" xmlns:e="http://ns.egret.com/eui">
-    <e:Image x="0" y="0" source="{data.bg}"/>
-    <e:Image x="0" y="0" source="{data.icon}"/>
-	<e:Label fontFamily="微软雅黑" text="{data.count}" x="67" y="63" size="15" width="20" textAlign="left" verticalAlign="middle" anchorOffsetX="0" anchorOffsetY="0" height="23"/>
-</e:Skin>

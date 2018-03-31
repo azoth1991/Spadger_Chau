@@ -11,17 +11,17 @@ r.prototype = e.prototype, t.prototype = new r();
 var FriendIcon = (function (_super) {
     __extends(FriendIcon, _super);
     function FriendIcon(type, _a) {
-        var x = _a.x, y = _a.y, name = _a.name, id = _a.id, icon = _a.icon, wechatId = _a.wechatId;
+        var x = _a.x, y = _a.y, wechatNick = _a.wechatNick, id = _a.id, headImageUrl = _a.headImageUrl, wechatId = _a.wechatId;
         var _this = _super.call(this) || this;
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_game/skins/headIcon1.exml";
         _this.x = x;
         _this.y = y;
-        _this._name.text = name;
+        _this._name.text = wechatNick;
         _this._id.text = "id:" + id;
-        _this._icon.source = icon;
-        _this._name1 = name;
-        _this._icon1 = icon;
+        _this._icon.source = headImageUrl;
+        _this._name1 = wechatNick;
+        _this._icon1 = headImageUrl;
         _this._wechatid = wechatId;
         return _this;
     }

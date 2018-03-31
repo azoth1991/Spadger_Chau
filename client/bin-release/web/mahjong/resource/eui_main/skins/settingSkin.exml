@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="settingSkin"  width="1334" height="750" xmlns:e="http://ns.egret.com/eui">
+	<e:Image source="dialog-s-top_png" x="359" y="143"/>
+	<e:Image source="dialog-s-bg_png" x="376.5" y="167"/>
+    <e:Button id="_close" y="155" x="302.5">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="close_png" source.down="cloase_down_png"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Group xmlns:e="http://ns.egret.com/eui" y="216" x="454" anchorOffsetX="0" width="456" anchorOffsetY="0" height="52">
+        <e:Label text="音乐"  y="8" x="30"/>
+        <e:RadioButton id="_bgmOpen" groupName="cn1" label="开" skinName="skins.RadioButtonSkin" y="12"  x="132"/>
+        <e:RadioButton id="_bgmClose" groupName="cn1" label="关" skinName="skins.RadioButtonSkin" x="323" y="14"/>
+    </e:Group>
+    <e:Group xmlns:e="http://ns.egret.com/eui" y="272" x="454" anchorOffsetX="0" width="456" anchorOffsetY="0" height="52">
+        <e:Label text="音效"  y="10" x="30"/>
+        <e:RadioButton id="_effectOpen" groupName="cn2" label="开" skinName="skins.RadioButtonSkin" y="12" x="132"/>
+        <e:RadioButton id="_effectClose" groupName="cn2" label="关" skinName="skins.RadioButtonSkin" x="323" y="14"/>
+    </e:Group>
+	<e:Button id="_confirmSetting" x="586.5" y="414">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" currentState="up" xmlns:w="http://ns.egret.com/wing">
+                <e:Image width.down="100%" height.down="100%" source="dialog-button_png"
+                         source.down="dialog-button-select_png" />
+                <e:Label fontFamily="微软雅黑" text="确定" width="100%" height="90%" textAlign="center" size="20" verticalAlign="middle"  textColor="0xffffff"/>
+            </e:Skin>
+		</e:skinName>
+	</e:Button>
+</e:Skin>

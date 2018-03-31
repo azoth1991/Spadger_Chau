@@ -27,6 +27,7 @@ var GameMode = (function () {
     GameMode.currentPlayer = '';
     GameMode.upList = [];
     GameMode.userInfo = {};
+    GameMode.startGame = false;
     return GameMode;
 }());
 __reflect(GameMode.prototype, "GameMode");

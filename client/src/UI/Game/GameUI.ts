@@ -38,7 +38,7 @@ class GameUI extends eui.Component {
         console.log('getdiscardSPs',evt);
         var pos = 0;
         GameMode.playerList.forEach((v,k)=>{
-            if (v.name == evt.data.pos){
+            if (v.wechatId == evt.data.pos){
                 pos = k;
             }
         });
@@ -61,7 +61,7 @@ class GameUI extends eui.Component {
     
         this._discardSPList0.forEach((value,key)=>{
             value.forEach((v,k)=>{
-                var discardSP = new CardUI(1,v,0,scale);
+                var discardSP = new CardUI(1,v,2,scale);
                 discardSP.x = 1194-(k+key*0.1+sum0)*79*scale;
                 discardSP.y = 620;         
                 this._discardSPsBox.addChild(discardSP);
@@ -70,7 +70,7 @@ class GameUI extends eui.Component {
         });
         this._discardSPList1.forEach((value,key)=>{
             value.forEach((v,k)=>{
-                var discardSP = new CardUI(1,v,1,scale);
+                var discardSP = new CardUI(1,v,3,scale);
                 discardSP.x = 195;
                 discardSP.y = 562-(k+key*0.1+sum1)*79*scale;     
                 this._discardSPsBox.addChild(discardSP);
@@ -79,7 +79,7 @@ class GameUI extends eui.Component {
         });
         this._discardSPList2.forEach((value,key)=>{
             value.forEach((v,k)=>{            
-                var discardSP = new CardUI(1,v,2,scale);
+                var discardSP = new CardUI(1,v,0,scale);
                 discardSP.x = 1194-(k+key*0.1+sum2)*79*scale;
                 discardSP.y = 128;          
                 this._discardSPsBox.addChild(discardSP);
@@ -89,9 +89,9 @@ class GameUI extends eui.Component {
         });
         this._discardSPList3.forEach((value,key)=>{
             value.forEach((v,k)=>{   
-                var discardSP = new CardUI(1,v,3,scale);
-                discardSP.x = 195;
-                discardSP.y = 1140-(k+key*0.1+sum3)*79*scale;   
+                var discardSP = new CardUI(1,v,1,scale);
+                discardSP.x = 1150;
+                discardSP.y = 554-(k+key*0.1+sum3)*79*scale;   
                 this._discardSPsBox.addChild(discardSP);
             });
             sum3 += value.length;
@@ -113,7 +113,7 @@ class GameUI extends eui.Component {
             var posName = evt.data.prevailing;
             var pos = 0;
             GameMode.playerList.forEach((v,k)=>{
-                if (v.name == posName){
+                if (v.wechatId == posName){
                     pos = k;
                 }
             });
@@ -160,6 +160,7 @@ class GameUI extends eui.Component {
     }
 
     private initGameUI() {
+        GameMode.startGame = true;
         this._gameBox = new eui.Component();
         this._discardSPsBox = new eui.Component();
         this._otherCardBox = new eui.Component();
@@ -214,7 +215,7 @@ class GameUI extends eui.Component {
     }
 
     public startGameUI(evt):void {
-        console.log('startGameUI',evt.data);
+        console.log('startGameUI',evt.data,GameMode.playerList);
         this.joinGame();
         if (GameMode.option.length>0){
             // 断线重连
@@ -228,7 +229,7 @@ class GameUI extends eui.Component {
             GameMode.isDiscard = true;
         }
         // 倒数计时
-        this.count();
+        // this.count();
         
         var position:Array<any> = [
             { x: 60, y: 597 },
@@ -261,9 +262,11 @@ class GameUI extends eui.Component {
     public getdiscardPos(evt) {
         console.log('getdiscardPos',evt);
         // 重新定位后重新计时
-        this.count();
-        var pos = 0;
+        // this.count();
+        var pos = 1;
+        GameMode.isDiscard = false;
         GameMode.playerList.forEach((v,k)=>{
+            console.log(11111,v,k,evt.data.pos)
             if(v.wechatId == evt.data.pos) {
                 switch (k){
                     case 0:
@@ -278,6 +281,7 @@ class GameUI extends eui.Component {
                         break;
                     case 3:
                         pos = 2;
+                        break;
                 }
             }
         })
@@ -304,12 +308,13 @@ class GameUI extends eui.Component {
     // 获取
     public getCards(arr:Array<any>){
         var res = [];
-        if (!GameMode.draw || GameMode.draw==-1) {
+        if ((!GameMode.draw || GameMode.draw==-1)&& GameMode.isDiscard&& GameMode.startGame) {
             arr.forEach((v,k)=>{
                 if (v>0){
                     GameMode.draw = k;
                 }
             });
+            GameMode.startGame = false;
         }
         // 如果是要出的牌剔除
         arr = arr.map((v,k)=>{
@@ -343,32 +348,12 @@ class GameUI extends eui.Component {
     // 游戏结束
     public gameOver(evt){
         console.log('gameOver',evt);
-        var gameoverInfo = evt.data.info;
-        gameoverInfo = {
-            status: 0,
-            type: 121,
-            result:[
-                {
-                    fan:1,
-                    points: -16,
-                    name: 'a1',
-                },
-                {
-                    fan:2,
-                    points: -16,
-                    name: 'a2',
-                },
-                {
-                    fan:1,
-                    points: -16,
-                    name: 'a3',
-                },
-                {
-                    fan:4,
-                    points: +48,
-                    name: 'a4',
-                }
-            ]
+        var info = evt.data.info;
+        var point = info.model.filter(v=>v.wechatId==GameMode.wechatId)[0]['points'];
+        let gameoverInfo = {
+            status: parseInt(point),
+            type: info.huType,
+            result: info.model,
         }
         this._gameOverUI = new GameOverUI(gameoverInfo);
         this.addChild(this._gameOverUI);
@@ -458,7 +443,7 @@ class GameUI extends eui.Component {
 
     // 画弃牌
     private drawDiscard(discards:Array<any>,pos) {
-        console.log('pos=>',pos)
+        console.log('discardspos=>',pos)
         var desx,desy,startx,starty,type,drection,anchorOffsetX,anchorOffsetY;
         desx = 35;
         desy = 55;

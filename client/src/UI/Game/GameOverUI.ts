@@ -17,28 +17,16 @@ class GameOverUI extends eui.Component {
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.BACK_HOME});
     }
     private init(){
-        switch (this._result.status) {
-            case 0:
-                this._bg.source = 'bai_gameover_bg_jpg';
-                break;
-            case 1:
-                this._bg.source = 'ping_gameover_bg_jpg';
-                break;
-            case 2:
-                this._bg.source = 'ying_gameover_bg_jpg';
-                break;
+        if (this._result.status == 0){
+            this._bg.source = 'ping_gameover_bg_jpg';
         }
-        switch (this._result.type) {
-            case 121:
-                this._title.text = '红中发财杠';
-                break;
-            case 122:
-                this._title.text = '前痞后赖';
-                break;
-            case 123:
-                this._title.text = '武汉晃晃';
-                break;
+        if (this._result.status < 0){
+            this._bg.source = 'bai_gameover_bg_jpg';
         }
+        if (this._result.status > 0){
+            this._bg.source = 'ying_gameover_bg_jpg';
+        }
+        this._title.text = this._result.type;
     }
     private renderItem(){
         this._result.result.forEach((v,k)=>{
@@ -69,7 +57,7 @@ class ResultItem extends eui.Component{
     }
     uiCompHandler() {
         // setTimeout(()=>{
-            this._name.text = this._item.name;
+            this._name.text = this._item.wechatId;
             this._res.text = `x${this._item.fan}`;
             this._num.text = this._item.points;
             if (Number(`${this._item.points}`)<0){

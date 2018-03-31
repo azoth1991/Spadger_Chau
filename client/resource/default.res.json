@@ -9,7 +9,7 @@
 			"name": "loading"
 		},
 		{
-			"keys": "dipai1_png,dipai2_png,dipai3_png,dipai4_png,dipai5_png,8_png,9_png,4_png,5_png,7_png,6_png,2_png,3_png,1_png,0_png,bei_img_png,bei_zhongjian_png,chi_fbtn_down_png,chi_fbtn_png,chongzhi_btn_down_png,chongzhi_btn_png,dangqianweizhi_img_png,daoju_btn_down_png,daoju_btn_png,dong_zhongjian_png,fenshu_bg_png,game_bg_jpg,gang_fbtn_down_png,gang_fbtn_png,hu_fbtn_down_png,hu_fbtn_png,jishi_img_png,liaotian_btn_down_png,liaotian_btn_png,nan_zhongjian_png,peng_fbtn_down_png,peng_fbtn_png,setting_btn_png,touxiang_bg_png,wenzi_bg_png,xi_zhongjian_png,zhuang_png,zhuangshi_img_png,chat-bg2_png,chat-btn-down_png,chat-btn_png,chat-left-bg_png,chat-line_png,chat-right-bg_png,expression-i1_png,expression-i2_png,expression-i3_png,e1_png,e10_png,e11_png,e12_png,e13_png,e14_png,e2_png,e3_png,e4_png,e5_png,e6_png,e7_png,e8_png,e9_png,p4_png,p3_png,p5_png,p1_png,p7_png,p6_png,p2_png,p0_png,p8_png,p14_png,p17_png,p10_png,p16_png,p11_png,p13_png,p9_png,p15_png,p12_png,p25_png,p23_png,p24_png,p20_png,p21_png,p22_png,p19_png,p26_png,p27_png,p18_png,p28_png,p29_png,p30_png,p31_png,p32_png,p33_png,bai_gameover_bg_jpg,ping_gameover_bg_jpg,ying_gameover_bg_jpg,joker1_png,joker2_png",
+			"keys": "dipai1_png,dipai2_png,dipai3_png,dipai4_png,dipai5_png,8_png,9_png,4_png,5_png,7_png,6_png,2_png,3_png,1_png,0_png,bei_img_png,bei_zhongjian_png,chi_fbtn_down_png,chi_fbtn_png,chongzhi_btn_down_png,chongzhi_btn_png,dangqianweizhi_img_png,daoju_btn_down_png,daoju_btn_png,dong_zhongjian_png,fenshu_bg_png,game_bg_jpg,gang_fbtn_down_png,gang_fbtn_png,hu_fbtn_down_png,hu_fbtn_png,jishi_img_png,liaotian_btn_down_png,liaotian_btn_png,nan_zhongjian_png,peng_fbtn_down_png,peng_fbtn_png,setting_btn_png,touxiang_bg_png,wenzi_bg_png,xi_zhongjian_png,zhuang_png,zhuangshi_img_png,chat-bg2_png,chat-btn-down_png,chat-btn_png,chat-left-bg_png,chat-line_png,chat-right-bg_png,expression-i1_png,expression-i2_png,expression-i3_png,e1_png,e10_png,e11_png,e12_png,e13_png,e14_png,e2_png,e3_png,e4_png,e5_png,e6_png,e7_png,e8_png,e9_png,p4_png,p3_png,p5_png,p1_png,p7_png,p6_png,p2_png,p0_png,p8_png,p14_png,p17_png,p10_png,p16_png,p11_png,p13_png,p9_png,p15_png,p12_png,p25_png,p23_png,p24_png,p20_png,p21_png,p22_png,p19_png,p26_png,p27_png,p18_png,p28_png,p29_png,p30_png,p31_png,p32_png,p33_png,bai_gameover_bg_jpg,ping_gameover_bg_jpg,ying_gameover_bg_jpg,joker1_png,joker2_png,guo_fbtn_png,guo_fbtn_down_png",
 			"name": "game"
 		},
 		{
@@ -1012,6 +1012,16 @@
 			"url": "eui_game/imgs/pai/joker2.png",
 			"type": "image",
 			"name": "joker2_png"
+		},
+		{
+			"url": "eui_game/imgs/guo_fbtn.png",
+			"type": "image",
+			"name": "guo_fbtn_png"
+		},
+		{
+			"url": "eui_game/imgs/guo_fbtn_down.png",
+			"type": "image",
+			"name": "guo_fbtn_down_png"
 		}
 	]
 }

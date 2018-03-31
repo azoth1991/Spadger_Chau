@@ -1,15 +1,15 @@
 class FriendIcon extends eui.Component {
-    constructor(type, {x,y,name,id,icon,wechatId}) {
+    constructor(type, {x,y,wechatNick,id,headImageUrl,wechatId}) {
         super();
         this.addEventListener( eui.UIEvent.COMPLETE, this.uiCompHandler, this );
         this.skinName = "resource/eui_game/skins/headIcon1.exml";
         this.x = x;
         this.y = y;
-        this._name.text = name;
+        this._name.text = wechatNick;
         this._id.text = `id:${id}`;
-        this._icon.source = icon;
-        this._name1 = name;
-        this._icon1 = icon;
+        this._icon.source = headImageUrl;
+        this._name1 = wechatNick;
+        this._icon1 = headImageUrl;
         this._wechatid = wechatId;
     }
 

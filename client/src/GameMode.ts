@@ -24,4 +24,5 @@ class GameMode{
     public static currentPlayer = '';
     public static upList = [];
     public static userInfo = {};
+    public static startGame = false;
 }
