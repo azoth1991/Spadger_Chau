@@ -62,7 +62,7 @@ class Main extends eui.UILayer {
         // 获取用户信息
         var request = new egret.HttpRequest();
         request.responseType = egret.HttpResponseType.TEXT;
-        request.open(encodeURI(`http://101.37.151.85:8080/socket/getWXInfo?openid=${GameMode.wechatId}`),egret.HttpMethod.GET);
+        request.open(encodeURI(`http://101.37.151.85:8008/socket/getWXInfo?openid=${GameMode.wechatId}`),egret.HttpMethod.GET);
         request.send();
         request.addEventListener(egret.Event.COMPLETE,(evt)=>{
             var response = <egret.HttpRequest>evt.currentTarget;
@@ -77,24 +77,24 @@ class Main extends eui.UILayer {
         // wx
         var request2 = new egret.HttpRequest();
         request2.responseType = egret.HttpResponseType.TEXT;
-        request2.open(encodeURI(`http://101.37.151.85:8080/socket/getWXSign`),egret.HttpMethod.GET);
+        request2.open(encodeURI(`http://101.37.151.85:8008/socket/getWXSign?url=${window.location.href}`),egret.HttpMethod.GET);
         request2.send();
         request2.addEventListener(egret.Event.COMPLETE,(evt)=>{
             var response = <egret.HttpRequest>evt.currentTarget;
             var res = JSON.parse(response.response);
             if (res.code == 1) {
                 console.log('wxconfig',res.result);
-                res = {
-                    "code": 1,
-                    "more": null,
-                    "result": {
-                        "id": 0,
-                        "appId": "wx49be95151bbf5a65",
-                        "timeStamp": 1522772821,
-                        "nonceStr": "bmmn30q50lnb3ai0hlxlsco4zwytgrao",
-                        "signature": "243ed492bf20f61066d6d6c2cf6e151e5414fc33"
-                    }
-                };
+                // res = {
+                //     "code": 1,
+                //     "more": null,
+                //     "result": {
+                //         "id": 0,
+                //         "appId": "wx49be95151bbf5a65",
+                //         "timeStamp": 1522772821,
+                //         "nonceStr": "bmmn30q50lnb3ai0hlxlsco4zwytgrao",
+                //         "signature": "243ed492bf20f61066d6d6c2cf6e151e5414fc33"
+                //     }
+                // };
                 wx.config({
                     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                     appId: res.result.appId, // 必填，公众号的唯一标识

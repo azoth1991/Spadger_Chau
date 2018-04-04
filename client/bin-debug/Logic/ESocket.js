@@ -4,7 +4,7 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 var ESocket = (function () {
     function ESocket() {
         this.totalNum = 3;
-        this._websocket = new WebSocket("ws://101.37.151.85:8080//socket/maj/room");
+        this._websocket = new WebSocket("ws://101.37.151.85:8008//socket/maj/room");
         this.watchSocket();
     }
     ESocket.prototype.onReceiveMessage = function (_a) {

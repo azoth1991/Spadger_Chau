@@ -4,7 +4,7 @@ class ESocket {
     private totalNum = 3;
     private ext;
     constructor() {
-        this._websocket = new WebSocket("ws://101.37.151.85:8080//socket/maj/room");
+        this._websocket = new WebSocket("ws://101.37.151.85:8008//socket/maj/room");
         this.watchSocket();
     }
 
