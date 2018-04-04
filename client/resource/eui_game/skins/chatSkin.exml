@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="chatSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*">
 	<e:Image source="chat-bg2_png" x="0" y="10"/>
-	<e:ToggleButton id="_biaoqing" x="0" y="10" >
+	<!--<e:ToggleButton id="_biaoqing" x="0" y="10" >
 		<e:skinName>
 			<e:Skin states="up,down,disabled,disabledAndSelected" minHeight="50" minWidth="100">
 				<e:Image source.disabledAndSelected="mbtn_BgFc_png" source="chat-btn_png" source.down="chat-btn-down_png"/>
@@ -16,8 +16,8 @@
 				<e:Image source="expression-i2_png" y="18" x="38"/>
 			</e:Skin>
 		</e:skinName>
-	</e:ToggleButton>
-    <e:ToggleButton id="_chatlist" x="500" y="10" >
+	</e:ToggleButton>-->
+    <e:ToggleButton id="_chatlist" x="0" y="10" >
 		<e:skinName>
 			<e:Skin states="up,down,disabled,disabledAndSelected" minHeight="50" minWidth="100">
 				<e:Image source.disabledAndSelected="chat-btn_png" source="chat-btn_png" source.down="chat-btn-down_png"/>

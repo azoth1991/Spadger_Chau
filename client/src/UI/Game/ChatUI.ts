@@ -9,7 +9,7 @@ class ChatUI extends eui.Component {
 
     uiCompHandler() {
         console.log('chatui')
-        this._buttons = [this._biaoqing, this._quickchat, this._chatlist];
+        this._buttons = [this._chatlist];
         this._chatlist.selected = true;
         
         this.initItem();
@@ -53,7 +53,6 @@ class ChatUI extends eui.Component {
                             var serverId = res.serverId; // 返回音频的服务器端ID
                             // 发送服务消息
                             MessageCenter.getInstance().sendMessage( GameEvents.WS_SEND_CHAT, {info: serverId} );
-                            
                         }
                     });
                 }
@@ -87,12 +86,12 @@ class ChatUI extends eui.Component {
         evt.target.selected = true;
 
         switch (evt.target) {
-            case this._biaoqing:
-                this.currentBox = this._chatExListUI;
-                break;
-            case this._quickchat:
-                this.currentBox = this._chatListUI;
-                break;
+            // case this._biaoqing:
+            //     this.currentBox = this._chatExListUI;
+            //     break;
+            // case this._quickchat:
+            //     this.currentBox = this._chatListUI;
+            //     break;
             case this._chatlist:
                 this.currentBox = this._chatListUI;
                 break;
@@ -108,8 +107,8 @@ class ChatUI extends eui.Component {
     protected createChildren():void {
         super.createChildren();
     }
-    private _biaoqing:eui.ToggleButton;
-    private _quickchat:eui.ToggleButton;
+    // private _biaoqing:eui.ToggleButton;
+    // private _quickchat:eui.ToggleButton;
     private _chatlist:eui.ToggleButton;
     private _id:eui.Label;
     private _count:eui.Label;

@@ -9,8 +9,8 @@
 
 	<e:Image source="zhuangshi_img_png" x="0" y="0"/>
 	<e:Image source="zhuangshi_img_png" x="1334" y="0" scaleX="-1"/>
-	<!--<e:Image source="wenzi_bg_png" x="396.5" y="420" />-->
-    <!--<e:Label text="局数:0/4 底分:10" y="427" size="20" x="600"/>                    -->
+	<e:Image source="wenzi_bg_png" x="396.5" y="420" />
+    <e:Label id="_gameinfo" text="" y="427" size="20" x="570"/>                    
     <e:Button id="chongzhi" y="7" x="1118">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">

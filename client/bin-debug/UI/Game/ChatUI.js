@@ -20,7 +20,7 @@ var ChatUI = (function (_super) {
     ChatUI.prototype.uiCompHandler = function () {
         var _this = this;
         console.log('chatui');
-        this._buttons = [this._biaoqing, this._quickchat, this._chatlist];
+        this._buttons = [this._chatlist];
         this._chatlist.selected = true;
         this.initItem();
         this._buttons.forEach(function (btn) {
@@ -90,12 +90,12 @@ var ChatUI = (function (_super) {
         });
         evt.target.selected = true;
         switch (evt.target) {
-            case this._biaoqing:
-                this.currentBox = this._chatExListUI;
-                break;
-            case this._quickchat:
-                this.currentBox = this._chatListUI;
-                break;
+            // case this._biaoqing:
+            //     this.currentBox = this._chatExListUI;
+            //     break;
+            // case this._quickchat:
+            //     this.currentBox = this._chatListUI;
+            //     break;
             case this._chatlist:
                 this.currentBox = this._chatListUI;
                 break;

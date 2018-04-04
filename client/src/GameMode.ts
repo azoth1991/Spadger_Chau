@@ -18,7 +18,7 @@ class GameMode{
     public static draw = -1; //出的牌
     public static isSP = false; // 只有特殊操作的时候才可以选中多张
     public static gangNum = -1;
-    public static chiNum = -1;
+    public static chiNum = 0;
     public static canChowChoice = [[]];
     public static option = [];
     public static currentPlayer = '';
@@ -26,4 +26,5 @@ class GameMode{
     public static userInfo = {};
     public static startGame = false;
     public static actionCard = -1;
+    public static gameInfo = '';
 }

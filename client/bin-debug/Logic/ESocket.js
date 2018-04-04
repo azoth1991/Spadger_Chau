@@ -13,7 +13,7 @@ var ESocket = (function () {
         var info = JSON.parse(data);
         GameMode.draw = -1;
         GameMode.canChowChoice = [];
-        GameMode.chiNum = -1;
+        GameMode.chiNum = 0;
         GameMode.gangNum = -1;
         GameMode.actionCard = -1;
         if (info.actionCard) {
@@ -45,6 +45,9 @@ var ESocket = (function () {
                         //     newlist.push('');
                         // }
                         // GameMode.playerList = [...newlist,...GameMode.playerList.slice(1)]
+                        if (!GameMode.gameInfo) {
+                            GameMode.gameInfo = info.gameType + " " + info.pointType + " " + info.winPoint;
+                        }
                         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, { type: GamePages.CREATE_ROOM });
                         GameMode.inRoom = true;
                     }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="enterRoomSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui">
+	
+	<e:Image source="papper-bg_jpg" x="249.73" y="134" anchorOffsetY="0" height="508"/>
+	<e:Image source="papper-bg_jpg" x="1066.09" y="134" anchorOffsetY="0" height="508" rotation="180" scaleY="-1"/>
+	<e:Image source="paper_jpg" x="398" y="134" rotation="360" anchorOffsetX="0" width="516" anchorOffsetY="0" height="508"/>
+	<e:Image source="enterroom-bg_png" x="1118" y="152"/> 
+    <e:Image source="dialog-bg2_png" x="0" y="186"/>   
+    <e:Button id="_back" y="0" x="0">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="back-btn_png" />
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Label text="房间号" x="405.73" y="270" />
+    <e:TextInput id="_input" x="517" y="265">
+	</e:TextInput>
+	<e:Button id="_enterRoom" y="387" x="683" anchorOffsetX="166" anchorOffsetY="48">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="enterroom-btn_png" />
+				<e:Label text="加入房间"  y="34" x="92"/>				
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+</e:Skin>

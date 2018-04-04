@@ -1,0 +1,16 @@
+{
+	"initial": [
+		"js/egret.min_cbeb05c3.js",
+		"js/egret.web.min_af52805a.js",
+		"js/eui.min_407717cb.js",
+		"js/assetsmanager.min_e1030274.js",
+		"js/tween.min_6c5a88f9.js",
+		"js/game.min_5eb26499.js",
+		"js/socket.min_8e6dede.js",
+		"js/promise.min_83a6a5d.js"
+	],
+	"game": [
+		"js/default.thm_68c667bd.js",
+		"js/main.min_eace013.js"
+	]
+}

@@ -69,7 +69,7 @@ var CardUI = (function (_super) {
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CARD, { discardNum: this._num });
                     }
                     else {
-                        var extkey = -1;
+                        var extkey = 0;
                         for (var i = 0; i < GameMode.canChowChoice.length; i++) {
                             if (GameMode.canChowChoice[i].indexOf(this._num) > -1) {
                                 GameMode.chiNum = i;

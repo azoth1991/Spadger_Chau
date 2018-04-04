@@ -171,6 +171,7 @@ class GameUI extends eui.Component {
         this.addChild(this.discardBox);
         let that = this;
         console.log('dslist',GameMode.playerList)
+        this._gameinfo.text = GameMode.gameInfo;
         GameMode.playerList.map( (v,k) => {
             if (v) {
                 this[`_icon${k}`] = new FriendIcon(1, {...GameMode.playerList[k],...this.startPosition[k]});
@@ -584,6 +585,7 @@ class GameUI extends eui.Component {
     private _jokerPi = [];
     private _count:eui.Label;
     private countlistener;
+    private _gameinfo:eui.Label;
 
 }
 

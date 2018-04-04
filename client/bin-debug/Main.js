@@ -127,6 +127,17 @@ var Main = (function (_super) {
                             var res = JSON.parse(response.response);
                             if (res.code == 1) {
                                 console.log('wxconfig', res.result);
+                                res = {
+                                    "code": 1,
+                                    "more": null,
+                                    "result": {
+                                        "id": 0,
+                                        "appId": "wx49be95151bbf5a65",
+                                        "timeStamp": 1522772821,
+                                        "nonceStr": "bmmn30q50lnb3ai0hlxlsco4zwytgrao",
+                                        "signature": "243ed492bf20f61066d6d6c2cf6e151e5414fc33"
+                                    }
+                                };
                                 wx.config({
                                     debug: true,
                                     appId: res.result.appId,

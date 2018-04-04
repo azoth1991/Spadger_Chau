@@ -203,6 +203,7 @@ var GameUI = (function (_super) {
         this.addChild(this.discardBox);
         var that = this;
         console.log('dslist', GameMode.playerList);
+        this._gameinfo.text = GameMode.gameInfo;
         GameMode.playerList.map(function (v, k) {
             if (v) {
                 _this["_icon" + k] = new FriendIcon(1, __assign({}, GameMode.playerList[k], _this.startPosition[k]));

@@ -21,7 +21,7 @@ var GameMode = (function () {
     GameMode.draw = -1; //出的牌
     GameMode.isSP = false; // 只有特殊操作的时候才可以选中多张
     GameMode.gangNum = -1;
-    GameMode.chiNum = -1;
+    GameMode.chiNum = 0;
     GameMode.canChowChoice = [[]];
     GameMode.option = [];
     GameMode.currentPlayer = '';
@@ -29,6 +29,7 @@ var GameMode = (function () {
     GameMode.userInfo = {};
     GameMode.startGame = false;
     GameMode.actionCard = -1;
+    GameMode.gameInfo = '';
     return GameMode;
 }());
 __reflect(GameMode.prototype, "GameMode");

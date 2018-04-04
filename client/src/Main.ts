@@ -84,6 +84,17 @@ class Main extends eui.UILayer {
             var res = JSON.parse(response.response);
             if (res.code == 1) {
                 console.log('wxconfig',res.result);
+                res = {
+                    "code": 1,
+                    "more": null,
+                    "result": {
+                        "id": 0,
+                        "appId": "wx49be95151bbf5a65",
+                        "timeStamp": 1522772821,
+                        "nonceStr": "bmmn30q50lnb3ai0hlxlsco4zwytgrao",
+                        "signature": "243ed492bf20f61066d6d6c2cf6e151e5414fc33"
+                    }
+                };
                 wx.config({
                     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                     appId: res.result.appId, // 必填，公众号的唯一标识
@@ -92,6 +103,7 @@ class Main extends eui.UILayer {
                     signature: res.result.signature,// 必填，签名
                     jsApiList: ['chooseWXPay','startRecord','stopRecord','playVoice','uploadVoice'] // 必填，需要使用的JS接口列表
                 });
+                
             } else {
                 alert('请在微信中打开')
             }
