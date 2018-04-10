@@ -3,10 +3,12 @@ class HeadUI extends eui.Component {
     private _addMoney:eui.Button;
     private _addCard:eui.Button;
     private _shopType:string;
+    private info;
     constructor() {
         super();
         this.addEventListener( eui.UIEvent.COMPLETE, this.uiCompHandler, this );
         this.skinName = "resource/eui_main/skins/headSkin.exml";
+        this.info = {...GameMode.accountInfo,...GameMode.userInfo};
         
     }
 

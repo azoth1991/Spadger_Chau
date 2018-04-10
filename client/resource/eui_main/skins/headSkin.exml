@@ -26,10 +26,10 @@
 			</e:Skin>
 		</e:skinName>
 	</e:Button>
-	<e:Label text="Label" x="162.5" y="18"/>
-	<e:Label text="Label" x="162.5" y="48"/>
-	<e:Label text="Label" x="510.5" y="32"/>
-	<e:Label text="Label" x="821" y="32"/>
-	<e:Label text="Label" x="1126.5" y="32"/>
+	<e:Label text="{info.wechatNick}" x="162.5" y="18"/>
+	<e:Label text="{'id:'+info.id}" x="162.5" y="48"/>
+	<e:Label text="{info.point}" x="510.5" y="32"/>
+	<e:Label text="{info.dimond}" x="821" y="32"/>
+	<e:Label text="{info.dimond}" x="1126.5" y="32"/>
 
 </e:Skin>

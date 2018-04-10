@@ -30,6 +30,7 @@ var GameMode = (function () {
     GameMode.startGame = false;
     GameMode.actionCard = -1;
     GameMode.gameInfo = '';
+    GameMode.accountInfo = {};
     return GameMode;
 }());
 __reflect(GameMode.prototype, "GameMode");

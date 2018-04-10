@@ -27,4 +27,5 @@ class GameMode{
     public static startGame = false;
     public static actionCard = -1;
     public static gameInfo = '';
+    public static accountInfo = {};
 }

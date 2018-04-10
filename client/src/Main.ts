@@ -60,6 +60,19 @@ class Main extends eui.UILayer {
     private async runGame() {
         GameMode.wechatId = this.getUrlParam('wechatId');
         // 获取用户信息
+        this.getUser();
+        // wx
+        this.getWx();
+        // 获取账户信息
+        this.getAccount();
+        await this.loadResource()
+        this.createGameScene();
+        const result = await RES.getResAsync("description_json")
+        await platform.login();
+        const userInfo = await platform.getUserInfo();
+        console.log(userInfo);
+    }
+    private getUser() {
         var request = new egret.HttpRequest();
         request.responseType = egret.HttpResponseType.TEXT;
         request.open(encodeURI(`http://101.37.151.85:8008/socket/getWXInfo?openid=${GameMode.wechatId}`),egret.HttpMethod.GET);
@@ -74,10 +87,11 @@ class Main extends eui.UILayer {
                 alert('请在微信中打开')
             }
         },this);
-        // wx
+    }
+    private getWx(){
         var request2 = new egret.HttpRequest();
         request2.responseType = egret.HttpResponseType.TEXT;
-        request2.open(encodeURI(`http://101.37.151.85:8008/socket/getWXSign?url=${window.location.href}`),egret.HttpMethod.GET);
+        request2.open(encodeURI(`http://101.37.151.85:8008/socket/getWXSign?url=${encodeURIComponent(window.location.href)}`),egret.HttpMethod.GET);
         request2.send();
         request2.addEventListener(egret.Event.COMPLETE,(evt)=>{
             var response = <egret.HttpRequest>evt.currentTarget;
@@ -108,12 +122,23 @@ class Main extends eui.UILayer {
                 alert('请在微信中打开')
             }
         },this);
-        await this.loadResource()
-        this.createGameScene();
-        const result = await RES.getResAsync("description_json")
-        await platform.login();
-        const userInfo = await platform.getUserInfo();
-        console.log(userInfo);
+    }
+
+    private getAccount(){
+        var request = new egret.HttpRequest();
+        request.responseType = egret.HttpResponseType.TEXT;
+        request.open(encodeURI(`http://101.37.151.85:8008/socket/queryAccount?wechatId=${GameMode.wechatId}`),egret.HttpMethod.GET);
+        request.send();
+        request.addEventListener(egret.Event.COMPLETE,(evt)=>{
+            var response = <egret.HttpRequest>evt.currentTarget;
+            var res = JSON.parse(response.response);
+            if (res.code == 1) {
+                console.log('accountinfo',res.result);
+                GameMode.accountInfo = res.result;
+            } else {
+                alert('请在微信中打开')
+            }
+        },this);
     }
     private getUrlParam(name){
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
