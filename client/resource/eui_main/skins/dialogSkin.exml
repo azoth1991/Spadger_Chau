@@ -8,7 +8,7 @@
 	<e:Image source="papper-bg_jpg" x="1066.09" y="134" anchorOffsetY="0" height="508" rotation="180" scaleY="-1"/>
 	<e:Image source="paper_jpg" x="642" y="134" rotation="360" anchorOffsetX="0" width="272" anchorOffsetY="0" height="508"/>
 	<e:Image source="rule-bg_png" x="1118" y="152"/>
-    <e:Button id="_back" y="0" x="0">
+    <e:Button class="skins.ButtonSkin" id="_back" y="0" x="0">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
 				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="back-btn_png" />
