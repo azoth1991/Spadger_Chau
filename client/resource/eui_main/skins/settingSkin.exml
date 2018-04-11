@@ -2,7 +2,7 @@
 <e:Skin class="settingSkin"  width="1334" height="750" xmlns:e="http://ns.egret.com/eui">
 	<e:Image source="dialog-s-top_png" x="359" y="143"/>
 	<e:Image source="dialog-s-bg_png" x="376.5" y="167"/>
-    <e:Button id="_close" y="155" x="302.5">
+    <e:Button id="_close" y="155" x="928.5">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
 				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="close_png" source.down="cloase_down_png"/>
