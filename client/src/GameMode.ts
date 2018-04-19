@@ -3,7 +3,7 @@ class GameMode{
     public static type = 121;// 121:红中发财 122:前痞后赖 123 武汉晃晃
     public static winPoints = 1; //1 16 32 64
     public static limitPoints = 300; //300 500
-    public static pointType = 131;// 131 132
+    public static pointType = 131;// 131开口番 132口口番 
     public static totalNum = 4;
     public static roomId;
     public static wechatId;
@@ -28,4 +28,8 @@ class GameMode{
     public static actionCard = -1;
     public static gameInfo = '';
     public static accountInfo = {};
+    public static hornorJoker = false;
+    public static originJoker = false;
+    public static isUnderTake = false;
+
 }

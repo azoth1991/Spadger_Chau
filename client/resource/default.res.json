@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,egret_icon_png,description_json,setting-i-down_png,tools-i-down_png,play-i-down_png,my-i-down_png,news-i-down_png,zhanji-i-down_png,plus-b-down_png,plus-b_png,green_btn_down_png,green_btn_png,yellow_btn_down_png,yellow_btn_png,cloase_down_png,close_png,dialog-button-select_png,dialog-button_png,dialog-s-bg_png,dialog-s-top_png,hall_bg_mp3,click_mp3",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,egret_icon_png,description_json,setting-i-down_png,tools-i-down_png,play-i-down_png,my-i-down_png,news-i-down_png,zhanji-i-down_png,plus-b-down_png,plus-b_png,green_btn_down_png,green_btn_png,yellow_btn_down_png,yellow_btn_png,cloase_down_png,close_png,dialog-button-select_png,dialog-button_png,dialog-s-bg_png,dialog-s-top_png,hall_bg_mp3,click_mp3,icon-left_png,enterroom-btn-down_png,enterroom-btn_png,setting_selected_png,setting_btn_bg_png,setting_selected2_png,select_bg_png",
 			"name": "preload"
 		},
 		{
@@ -13,7 +13,7 @@
 			"name": "game"
 		},
 		{
-			"keys": "back-btn-down_png,back-btn_png,dialog-bg-bottom_png,dialog-bg_jpg,dialog-bg2_png,dialog-left-bg_png,dialog-left_png,dialog-middle_png,dialog-right-bg_png,dialog-right_png,paper_jpg,papper-bg_jpg,rule-bg_png,enterroom-btn-down_png,input-bg_png,enterroom-btn_png,enterroom-bg_png,shop-bg_png,shopContent-bg_png,shopContent-icon_png,mail-bg_png,mailItem-bg_png,mail_opened_png,mail_closed_png",
+			"keys": "back-btn-down_png,back-btn_png,dialog-bg-bottom_png,dialog-bg_jpg,dialog-bg2_png,dialog-left-bg_png,dialog-left_png,dialog-middle_png,dialog-right-bg_png,dialog-right_png,paper_jpg,papper-bg_jpg,rule-bg_png,input-bg_png,enterroom-bg_png,shop-bg_png,shopContent-bg_png,shopContent-icon_png,mail-bg_png,mailItem-bg_png,mail_opened_png,mail_closed_png",
 			"name": "dialog"
 		}
 	],
@@ -1022,6 +1022,31 @@
 			"url": "eui_game/imgs/guo_fbtn_down.png",
 			"type": "image",
 			"name": "guo_fbtn_down_png"
+		},
+		{
+			"url": "eui_main/imgs/icon-left.png",
+			"type": "image",
+			"name": "icon-left_png"
+		},
+		{
+			"url": "eui_main/imgs/setting_selected.png",
+			"type": "image",
+			"name": "setting_selected_png"
+		},
+		{
+			"url": "eui_main/imgs/setting_btn_bg.png",
+			"type": "image",
+			"name": "setting_btn_bg_png"
+		},
+		{
+			"url": "eui_game/imgs/setting_selected.png",
+			"type": "image",
+			"name": "setting_selected2_png"
+		},
+		{
+			"name": "select_bg_png",
+			"type": "image",
+			"url": "eui_main/imgs/select_bg.png"
 		}
 	]
 }

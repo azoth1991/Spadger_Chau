@@ -8,7 +8,7 @@ var GameMode = (function () {
     GameMode.type = 121; // 121:红中发财 122:前痞后赖 123 武汉晃晃
     GameMode.winPoints = 1; //1 16 32 64
     GameMode.limitPoints = 300; //300 500
-    GameMode.pointType = 131; // 131 132
+    GameMode.pointType = 131; // 131开口番 132口口番 
     GameMode.totalNum = 4;
     GameMode.inRoom = false;
     GameMode.playerList = [];
@@ -31,6 +31,9 @@ var GameMode = (function () {
     GameMode.actionCard = -1;
     GameMode.gameInfo = '';
     GameMode.accountInfo = {};
+    GameMode.hornorJoker = false;
+    GameMode.originJoker = false;
+    GameMode.isUnderTake = false;
     return GameMode;
 }());
 __reflect(GameMode.prototype, "GameMode");

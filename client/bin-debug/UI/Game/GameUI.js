@@ -406,7 +406,7 @@ var GameUI = (function (_super) {
             return GameMode.joker.length > 0 && GameMode.joker.indexOf(value) >= 0;
         }).forEach(function (value, key) {
             var card = new CardUI(2, value);
-            var scale = 0.8;
+            var scale = 0.9;
             card.scaleX = scale;
             card.scaleY = scale;
             card.x = 159 + key * des * scale;
@@ -416,7 +416,7 @@ var GameUI = (function (_super) {
         // jokerpi
         this._jokerPi.forEach(function (value, key) {
             var card = new CardUI(2, value);
-            var scale = 0.8;
+            var scale = 0.9;
             card.scaleX = scale;
             card.scaleY = scale;
             card.x = 159 + (key + _this._joker.length) * des * scale;
@@ -432,7 +432,7 @@ var GameUI = (function (_super) {
             return (GameMode.jokerPi.indexOf(value) < 0 && GameMode.joker.indexOf(value) < 0);
         }).forEach(function (value, key) {
             var card = new CardUI(2, value);
-            var scale = 0.8;
+            var scale = 0.9;
             card.scaleX = scale;
             card.scaleY = scale;
             card.x = 159 + (key + _this._jokerPi.length + _this._joker.length) * des * scale;
@@ -452,7 +452,7 @@ var GameUI = (function (_super) {
         console.log('draw', GameMode.draw);
         if (GameMode.draw > -1) {
             var card = new CardUI(2, GameMode.draw);
-            var scale = 0.8;
+            var scale = 0.9;
             card.scaleX = scale;
             card.scaleY = scale;
             card.x = 169 + cards.length * des * scale;

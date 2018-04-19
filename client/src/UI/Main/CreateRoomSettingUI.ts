@@ -21,10 +21,10 @@ class CreateRoomSettingUI extends eui.Component {
             rd.addEventListener( egret.TouchEvent.TOUCH_TAP, (evt)=>{
                 switch(evt.currentTarget) {
                     case  this.radio1_1:
-                        GameMode.billingMode = 1;
+                        GameMode.pointType = 131;
                         break;
                     case  this.radio1_2:
-                        GameMode.billingMode = 2;
+                        GameMode.pointType = 132;
                         break;
                     case  this.radio2_1:
                         GameMode.type = 121;
@@ -56,10 +56,34 @@ class CreateRoomSettingUI extends eui.Component {
                 }
             }, this );
         })
+        var toggleList = [this.radio5_1, this.radio5_2, this.radio5_3];
+        toggleList.forEach(tg=>{
+            tg.addEventListener( egret.TouchEvent.TOUCH_TAP, (evt)=>{
+                switch(evt.currentTarget) {
+                    case  this.radio5_1:
+                        GameMode.hornorJoker = evt.currentTarget.selected;
+                        break;
+                    case  this.radio5_2:
+                        GameMode.originJoker = evt.currentTarget.selected;
+                        break;
+                    case  this.radio5_3:
+                        GameMode.isUnderTake = evt.currentTarget.selected;
+                        break;
+                }
+            }, this );
+        })
     }
 
     private sendCreateRoom() {
-        var params = JSON.stringify({host:GameMode.wechatId,billingMode:GameMode.billingMode,type:GameMode.type,winPoints:GameMode.winPoints,limitPoints:GameMode.limitPoints,pointType:GameMode.pointType});
+        var params = JSON.stringify({
+            host:GameMode.wechatId,billingMode:GameMode.billingMode,
+            type:GameMode.type,winPoints:GameMode.winPoints,
+            limitPoints:GameMode.limitPoints,
+            pointType:GameMode.pointType,
+            hornorJoker:GameMode.hornorJoker,
+            originJoker:GameMode.originJoker,
+            isUnderTake:GameMode.isUnderTake,
+        });
         var request = new egret.HttpRequest();
         request.responseType = egret.HttpResponseType.TEXT;
         console.log('gameparams',params)
@@ -99,4 +123,7 @@ class CreateRoomSettingUI extends eui.Component {
     private radio3_4:eui.RadioButton;
     private radio4_1:eui.RadioButton;
     private radio4_2:eui.RadioButton;
+    private radio5_1:eui.RadioButton;
+    private radio5_2:eui.RadioButton;
+    private radio5_3:eui.RadioButton;
 }

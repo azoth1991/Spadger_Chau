@@ -382,7 +382,7 @@ class GameUI extends eui.Component {
             return GameMode.joker.length>0 && GameMode.joker.indexOf(value) >=0;
         }).forEach((value,key)=>{
             var card = new CardUI(2,value);
-            var scale = 0.8;
+            var scale = 0.9;
             card.scaleX = scale;
             card.scaleY = scale;
             card.x = 159 + key*des*scale;
@@ -392,7 +392,7 @@ class GameUI extends eui.Component {
         // jokerpi
         this._jokerPi.forEach((value,key)=>{
             var card = new CardUI(2,value);
-            var scale = 0.8;
+            var scale = 0.9;
             card.scaleX = scale;
             card.scaleY = scale;
             card.x = 159 + (key+this._joker.length)*des*scale;
@@ -409,7 +409,7 @@ class GameUI extends eui.Component {
             return ( GameMode.jokerPi.indexOf(value) < 0 && GameMode.joker.indexOf(value) < 0)
         }).forEach((value, key)=>{
             var card = new CardUI(2,value);
-            var scale = 0.8;
+            var scale = 0.9;
             card.scaleX = scale;
             card.scaleY = scale;
             card.x = 159 + (key+this._jokerPi.length+this._joker.length)*des*scale;
@@ -430,7 +430,7 @@ class GameUI extends eui.Component {
         console.log('draw',GameMode.draw);
         if (GameMode.draw >-1) {
             var card = new CardUI(2, GameMode.draw);
-            var scale = 0.8;
+            var scale = 0.9;
             card.scaleX = scale;
             card.scaleY = scale;
             card.x = 169 + cards.length*des*scale;
