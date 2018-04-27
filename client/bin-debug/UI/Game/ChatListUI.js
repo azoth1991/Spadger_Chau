@@ -73,7 +73,7 @@ var ChatlistIRUI = (function (_super) {
             success: function (res) {
                 var localId = res.localId; // 返回音频的本地ID
                 wx.playVoice({
-                    localId: '' // 需要播放的音频的本地ID，由stopRecord接口获得
+                    localId: localId,
                 });
             }
         });

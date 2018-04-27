@@ -43,7 +43,7 @@ class DialogUI extends eui.Component {
             this.generateHistoryState();
         }
         if(this._shopScroller) {
-            this._labelContainer = [this._firstBuy, this._addCard, this._addMoney, this._addTool]
+            this._labelContainer = [this._firstBuy, this._addMoney, this._addCard,this._addTool]
             this.generateShopState();
         }
         if (this._roomScroller) {
@@ -68,31 +68,64 @@ class DialogUI extends eui.Component {
         MessageCenter.getInstance().sendMessage( GameEvents.WS_ENTER_ROOM, {type:GamePages.CREATE_ROOM});
     }
 
+    private buyList0 = [
+            { icon: "head-i-2_png", purpose: "牌局消耗的道具", desc: "钻石6个", price: "6元"}
+        ];
+
+    private buyList1 = [
+        { icon: "12_png", purpose: "牌局消耗的道具", desc: "钻石6个", price: "6元"}
+        , { icon: "22_png", purpose: "牌局消耗的道具", desc: "钻石18个", price: "18元" }
+        , { icon: "32_png", purpose: "牌局消耗的道具", desc: "钻石36个", price: "36元" }
+        , { icon: "42_png", purpose: "牌局消耗的道具", desc: "钻石69个", price: "69元" }
+        , { icon: "52_png", purpose: "牌局消耗的道具", desc: "钻石98个", price: "98元" },
+        { icon: "62_png", purpose: "牌局消耗的道具", desc: "钻石198个", price: "198元" },
+    ];
+
+    private buyList2 = [
+        { icon: "card_png", purpose: "牌局消耗的道具", desc: "钻石6个", price: "6元"}
+        , { icon: "card_png", purpose: "牌局消耗的道具", desc: "钻石18个", price: "18元" }
+        , { icon: "card_png", purpose: "牌局消耗的道具", desc: "钻石36个", price: "36元" }
+        , { icon: "card_png", purpose: "牌局消耗的道具", desc: "钻石69个", price: "69元" }
+        , { icon: "card_png", purpose: "牌局消耗的道具", desc: "钻石98个", price: "98元" },
+        { icon: "card_png", purpose: "牌局消耗的道具", desc: "钻石198个", price: "198元" },
+    ];
+
+    private buyList3 = [
+        { icon: "boom_png", purpose: "牌局可使用的道具", desc: "炸弹=10钻石", price: "购买"}
+        , { icon: "shit_png", purpose: "牌局可使用的道具", desc: "便便=10钻石", price: "购买" }
+        , { icon: "egg_png", purpose: "牌局可使用的道具", desc: "臭鸡蛋=10钻石", price: "购买" }
+        , { icon: "rose_png", purpose: "牌局可使用的道具", desc: "玫瑰=10钻石", price: "购买" },
+        { icon: "kiss_png", purpose: "牌局可使用的道具", desc: "吻=10钻石", price: "购买" },
+        { icon: "papa_png", purpose: "牌局可使用的道具", desc: "鼓掌=10钻石", price: "购买" },
+    ];
+
     private generateShopState() {
         const shopType = this._headerMessage.shopType;
+        console.log(11111,shopType)
         switch (shopType) {
             case ShopTypes.ADDCARD: 
                 this._addCard.selected = true;
+                this.showList(this.buyList2);
                 break;
             case ShopTypes.ADDMONEY:
                 this._addMoney.selected = true;
+                this.showList(this.buyList1);
                 break;
             case ShopTypes.ADDTOOL:
                 this._addTool.selected = true;
+                this.showList(this.buyList3);
                 break;
             default :
                 this._firstBuy.selected = true;
+                this.showList(this.buyList0);
                 break;
         }
-        var dsShopContents:Array<Object> = [
-            { icon: "head-i-2_png", purpose: "伊文捷琳", desc: "评价：樱桃小丸子", price: "10元"}
-            , { icon: "head-i-2_png", purpose: "史帝文", desc: "评价：咖啡不加糖", price: "20元" }
-            , { icon: "head-i-2_png", purpose: "哈瑞斯", desc: "评价：猪一样的队友", price: "30元" }
-            , { icon: "head-i-2_png", purpose: "史帝文", desc: "评价：咖啡不加糖", price: "20元" }
-            , { icon: "head-i-2_png", purpose: "哈瑞斯", desc: "评价：猪一样的队友", price: "30元" },
-            { icon: "head-i-2_png", purpose: "史帝文", desc: "评价：咖啡不加糖", price: "20元" }
-            , { icon: "head-i-2_png", purpose: "哈瑞斯", desc: "评价：猪一样的队友", price: "30元" }
-        ];
+        
+        
+    }
+    private showList(list) {
+        console.log(3333,list)
+        var dsShopContents:Array<Object> = list;
         this._shopContents.dataProvider = new eui.ArrayCollection( dsShopContents );
         this._shopContents.itemRenderer = ShopContentIRUI;
     }
@@ -156,8 +189,11 @@ class DialogUI extends eui.Component {
 
     private switchLabel(e:egret.TouchEvent):void {
         const target = e.currentTarget;
-        this._labelContainer = this._labelContainer.map(label => {
+        this._labelContainer = this._labelContainer.map((label, key) => {
             label.selected = label === target;
+            if (label === target){
+                this.showList(this[`buyList${key}`]);
+            }
             return label;
         })
     }
@@ -194,11 +230,31 @@ class ShopContentIRUI extends eui.ItemRenderer {
         this.skinName = "resource/eui_main/skins/shopContentIRSkin.exml";
     }
 
-
     private uiCompHandler() {
+        this._buyTool.addEventListener( egret.TouchEvent.TOUCH_TAP, this.buyToolfunc, this );
         setTimeout(() => {
             this._buyTool.$children[1].text = this._price.text;
         }, 0);
+    }
+    private buyToolfunc(){
+        var request = new egret.HttpRequest();
+        request.responseType = egret.HttpResponseType.TEXT;
+        request.open(encodeURI(`http://101.37.151.85:8008/socket/wx/preOrder`),egret.HttpMethod.GET);
+        request.send();
+        request.addEventListener(egret.Event.COMPLETE,(evt)=>{
+            var response = <egret.HttpRequest>evt.currentTarget;
+            var res = JSON.parse(response.response);
+            wx.chooseWXPay({  
+                timestamp: res.timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符  
+                nonceStr: res.nonce_str, // 支付签名随机串，不长于 32 位  
+                package: res.prepay_id, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）  
+                signType: 'SHA1', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'  
+                paySign: res.sign, // 支付签名  
+                success: function (res) {
+                    // 支付成功后的回调函数  
+                }  
+            });  
+        },this);
     }
     private _buyTool:eui.Button;
     private _price:eui.Label;
