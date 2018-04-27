@@ -72,6 +72,11 @@ var MainLogic = (function () {
         MessageCenter.getInstance().addEventListener(GameEvents.TOGGLE_USETOOL, this.toggleUseToolUI, this);
         MessageCenter.getInstance().addEventListener(GameEvents.DOWN_CARDS, this.downCards, this);
         MessageCenter.getInstance().addEventListener(GameEvents.HIDE_DISCARDSP, this.hideDiscardsp, this);
+        MessageCenter.getInstance().addEventListener(GameEvents.WS_CONTINUE, this.continue, this);
+    };
+    MainLogic.prototype.continue = function (evt) {
+        this._gameUI = new GameUI();
+        this._websocket.enterRoom();
     };
     MainLogic.prototype.hideDiscardsp = function (evt) {
         this._gameUI.hideDiscardsp(evt);

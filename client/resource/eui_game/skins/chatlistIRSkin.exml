@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="chatlistIRSkin" xmlns:e="http://ns.egret.com/eui">
-	<e:Image source="{data.icon}" x="0" y="0"/>
+	<e:Image source="{data.icon}" x="0" y="0" anchorOffsetX="0" width="63" anchorOffsetY="0" height="63"/>
 	<e:Image id="chatBg" fillMode="scale" source="chat-left-bg_png" height="60" x="69" y="0" scale9Grid='17,46,5,5'/>
     <e:Label id="chatLabel" text="{data.count}" height="60" y="22" size="20" x="90" lineSpacing="34"/>    
 </e:Skin>

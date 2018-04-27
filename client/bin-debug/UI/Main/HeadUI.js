@@ -23,6 +23,7 @@ var HeadUI = (function (_super) {
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_main/skins/headSkin.exml";
         _this.info = __assign({}, GameMode.accountInfo, GameMode.userInfo);
+        console.log(11111, _this.info);
         return _this;
     }
     HeadUI.prototype.uiCompHandler = function () {

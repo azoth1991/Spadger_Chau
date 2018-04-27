@@ -85,6 +85,13 @@ class MainLogic
         MessageCenter.getInstance().addEventListener( GameEvents.TOGGLE_USETOOL, this.toggleUseToolUI, this );
         MessageCenter.getInstance().addEventListener( GameEvents.DOWN_CARDS, this.downCards, this );
         MessageCenter.getInstance().addEventListener( GameEvents.HIDE_DISCARDSP, this.hideDiscardsp, this );
+        MessageCenter.getInstance().addEventListener( GameEvents.WS_CONTINUE, this.continue, this );
+        
+    }
+
+    private continue(evt) {
+        this._gameUI = new GameUI();
+        this._websocket.enterRoom();
     }
     private hideDiscardsp(evt){
         this._gameUI.hideDiscardsp(evt);

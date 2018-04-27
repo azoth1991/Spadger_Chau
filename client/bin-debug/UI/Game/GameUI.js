@@ -56,6 +56,9 @@ var GameUI = (function (_super) {
     // 加入游戏
     GameUI.prototype.joinGame = function () {
         var _this = this;
+        if (this.contains(this._gameOverUI)) {
+            this.removeChild(this._gameOverUI);
+        }
         console.log('joinGame', GameMode.playerList);
         var that = this;
         // if (this.contains(this._gameBox)){

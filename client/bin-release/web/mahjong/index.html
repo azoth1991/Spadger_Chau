@@ -35,6 +35,8 @@
          data-show-fps="false" data-show-log="false"
          data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
     var loadScript = function (list, callback) {
         var loaded = 0;
@@ -90,6 +92,34 @@
         });
     });
     xhr.send(null);
+
+    var setWxShare = function (wxShare) {
+        $.ajax({ url: "http://101.37.151.85:8008/socket/getWXSign?url="+encodeURIComponent(window.location.href), context: document.body, success: function(data){
+            wx.config({
+              debug: false,
+              appId: data.result.appId,
+              timestamp: data.result.timeStamp,
+              nonceStr: data.result.nonceStr,
+              signature: data.result.signature,
+              // signature: '85e92f4e7c6d833fb7c89a3a0679f00d4af4e974',
+              jsApiList:['chooseWXPay','startRecord','stopRecord','playVoice','uploadVoice','downloadVoice']
+          });
+            wx.onMenuShareTimeline({
+              title: wxShare.title,
+              link: window.location.href,
+              imgUrl: wxShare.img,
+            });
+            wx.onMenuShareAppMessage({
+              title: wxShare.title,
+              link: window.location.href,
+              imgUrl: wxShare.img,
+            });
+        }});
+    }
+    setWxShare({
+            title: '好运 plus+',
+            img: 'http://game.goodluck78.com/wechat/content/images/img-logo.png',
+        });
 </script>
 </body>
 

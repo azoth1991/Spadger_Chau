@@ -18,6 +18,9 @@ class GameUI extends eui.Component {
     }
     // 加入游戏
     public joinGame() {
+        if (this.contains(this._gameOverUI)){
+            this.removeChild(this._gameOverUI);
+        }
         console.log('joinGame',GameMode.playerList)
         let that = this;
         // if (this.contains(this._gameBox)){

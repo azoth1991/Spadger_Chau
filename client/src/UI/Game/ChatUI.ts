@@ -21,8 +21,9 @@ class ChatUI extends eui.Component {
         this._record.addEventListener( egret.TouchEvent.TOUCH_END, this.endRecord, this);
     }
 
+    // GameMode.playerList[0].icon
     public sendMsg(info) {
-        this._chatListUI.pushChat({ icon: "head-i-2_png", count: info});
+        this._chatListUI.pushChat({ icon: GameMode.userInfo.headImageUrl, count: info, type: '0'});
     }
     // 开始录音
     private startRecord(evt:egret.Event){
@@ -34,7 +35,6 @@ class ChatUI extends eui.Component {
         // 录音时间超过一分钟没有停止的时候会执行 complete 回调
             complete: function (res) {
                 var localId = res.localId;
-
             }
         });
     }
@@ -50,9 +50,9 @@ class ChatUI extends eui.Component {
                         localId: localId, // 需要上传的音频的本地ID，由stopRecord接口获得
                         isShowProgressTips: 0, // 默认为1，显示进度提示
                         success: function (res) {
-                            var serverId = res.serverId; // 返回音频的服务器端ID
+                            var serverId = res.serverId; // 返回音频的服务器s端ID
                             // 发送服务消息
-                            MessageCenter.getInstance().sendMessage( GameEvents.WS_SEND_CHAT, {info: serverId} );
+                            MessageCenter.getInstance().sendMessage( GameEvents.WS_SEND_CHAT, {info: `@&#$${serverId}`} );
                         }
                     });
                 }

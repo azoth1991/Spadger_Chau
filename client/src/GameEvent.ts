@@ -29,4 +29,5 @@ class GameEvents{
     public static DOWN_CARDS:string = "DOWN_CARDS";
     public static WS_GANG_NUM:string = "WS_GANG_NUM";
     public static HIDE_DISCARDSP:string = "HIDE_DISCARDSP";
+    public static WS_CONTINUE:string = "WS_CONTINUE";
 }

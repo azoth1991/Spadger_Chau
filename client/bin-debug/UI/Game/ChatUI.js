@@ -30,8 +30,9 @@ var ChatUI = (function (_super) {
         this._record.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.startRecord, this);
         this._record.addEventListener(egret.TouchEvent.TOUCH_END, this.endRecord, this);
     };
+    // GameMode.playerList[0].icon
     ChatUI.prototype.sendMsg = function (info) {
-        this._chatListUI.pushChat({ icon: "head-i-2_png", count: info });
+        this._chatListUI.pushChat({ icon: GameMode.userInfo.headImageUrl, count: info, type: '0' });
     };
     // 开始录音
     ChatUI.prototype.startRecord = function (evt) {
@@ -58,9 +59,9 @@ var ChatUI = (function (_super) {
                         localId: localId,
                         isShowProgressTips: 0,
                         success: function (res) {
-                            var serverId = res.serverId; // 返回音频的服务器端ID
+                            var serverId = res.serverId; // 返回音频的服务器s端ID
                             // 发送服务消息
-                            MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CHAT, { info: serverId });
+                            MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CHAT, { info: "@&#$" + serverId });
                         }
                     });
                 }

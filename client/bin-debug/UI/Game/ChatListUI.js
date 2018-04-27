@@ -23,7 +23,7 @@ var ChatListUI = (function (_super) {
         this.listChat.itemRenderer = ChatlistIRUI;
     };
     ChatListUI.prototype.pushChat = function (data) {
-        console.log('pushChat123');
+        console.log('pushChat123', data);
         this.listChat.dataProvider.addItem(data);
         // this.listChat.itemRenderer = ChatlistIRUI;                     
     };
@@ -37,6 +37,7 @@ var ChatlistIRUI = (function (_super) {
     __extends(ChatlistIRUI, _super);
     function ChatlistIRUI() {
         var _this = _super.call(this) || this;
+        _this.serverId = '';
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_game/skins/chatlistIRSkin.exml";
         return _this;
@@ -47,6 +48,7 @@ var ChatlistIRUI = (function (_super) {
         var maxWidth = 580;
         var l;
         setTimeout(function () {
+            console.log('seltime', _this);
             l = parseInt("" + _this.chatLabel.width / maxWidth);
             if (l > 0) {
                 _this.chatBg.width = maxWidth + 30;
@@ -57,7 +59,24 @@ var ChatlistIRUI = (function (_super) {
             }
             _this.chatLabel.height = height * (l + 1);
             _this.chatBg.height = height * (l + 1);
+            if (_this.data.count.indexOf('@&#$') > -1) {
+                _this.serverId = _this.data.count.split('@&#$')[1];
+                _this.chatLabel.text = '点击播放';
+                _this.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.play, _this);
+            }
         }, 20);
+    };
+    ChatlistIRUI.prototype.play = function () {
+        wx.downloadVoice({
+            serverId: this.serverId,
+            isShowProgressTips: 1,
+            success: function (res) {
+                var localId = res.localId; // 返回音频的本地ID
+                wx.playVoice({
+                    localId: '' // 需要播放的音频的本地ID，由stopRecord接口获得
+                });
+            }
+        });
     };
     ChatlistIRUI.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);

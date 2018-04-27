@@ -33,6 +33,7 @@ var GameEvents = (function () {
     GameEvents.DOWN_CARDS = "DOWN_CARDS";
     GameEvents.WS_GANG_NUM = "WS_GANG_NUM";
     GameEvents.HIDE_DISCARDSP = "HIDE_DISCARDSP";
+    GameEvents.WS_CONTINUE = "WS_CONTINUE";
     return GameEvents;
 }());
 __reflect(GameEvents.prototype, "GameEvents");

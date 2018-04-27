@@ -12,7 +12,15 @@ class GameOverUI extends eui.Component {
         this.renderItem();
         this.init();
         this._back.addEventListener( egret.TouchEvent.TOUCH_TAP, this.backHome, this );
+        this._continue.addEventListener( egret.TouchEvent.TOUCH_TAP, this.continue, this );
     }
+    private continue(e:egret.TouchEvent):void {
+        GameMode.inRoom = false;
+        MessageCenter.getInstance().sendMessage( GameEvents.WS_ENTER_ROOM, {type:GamePages.CREATE_ROOM});
+        // MessageCenter.getInstance().sendMessage( GameEvents.WS_CONTINUE, {});
+        
+    }
+
     private backHome(e:egret.TouchEvent):void {
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.BACK_HOME});
     }
@@ -46,6 +54,7 @@ class GameOverUI extends eui.Component {
     private _bg;
     private _title;
     private _back;
+    private _continue;
     
 }
 class ResultItem extends eui.Component{
