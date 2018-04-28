@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="dialogSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui">
+	<e:Image source="dialog-left-bg_png" x="248" y="132"/>
+	<e:Image source="dialog-left-bg_png" x="476" y="639.66" anchorOffsetY="0" height="-42" rotation="179.66"/>
+	<e:Image source="dialog-right-bg_png" x="249.73" y="156" anchorOffsetY="0" height="459"/>
+	<e:Image source="dialog-bg2_png" x="0" y="186"/>
+	<e:Image source="papper-bg_jpg" x="486" y="134" anchorOffsetY="0" height="508"/>
+	<e:Image source="papper-bg_jpg" x="1066.09" y="134" anchorOffsetY="0" height="508" rotation="180" scaleY="-1"/>
+	<e:Image source="paper_jpg" x="642" y="134" rotation="360" anchorOffsetX="0" width="272" anchorOffsetY="0" height="508"/>
+	<e:Image source="rule-bg_png" x="1118" y="152"/>
+    <e:Button id="_back" y="0" x="0">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="back-btn_png" />
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Scroller id="" height="473" width="560" x="506" y="152">
+		<e:viewport>
+			<e:List id="_mailContents" height="131">
+				<e:layout> 
+					<e:VerticalLayout/>
+				</e:layout>
+			</e:List>
+		</e:viewport>
+	</e:Scroller>
+</e:Skin>

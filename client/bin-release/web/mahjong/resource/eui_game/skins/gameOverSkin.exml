@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="gameOverSkin"  width="1334" height="750" xmlns:e="http://ns.egret.com/eui">
+	<e:Image id="_bg" source="ying_gameover_bg_jpg"/>
+    <e:Label id="_title" text="碰碰胡" x="667" y="130" anchorOffsetX="0" width="344" anchorOffsetY="0" height="62" bold="true" border="true" borderColor="0x161313" textColor="0xf2dcdc" size="60" textAlign="center" italic="true"/>
+    <e:Button id="_back" y="690" x="1052" anchorOffsetX="166" anchorOffsetY="48">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="enterroom-btn_png" />
+				<e:Label text="返回"  y="34" x="122"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="_continue" y="690" x="732" anchorOffsetX="166" anchorOffsetY="48">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="enterroom-btn_png" />
+				<e:Label text="继续游戏"  y="34" x="92"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+</e:Skin>

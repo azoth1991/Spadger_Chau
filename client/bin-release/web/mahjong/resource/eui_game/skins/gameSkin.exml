@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="gameSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*">
+	<e:Image source="jishi_img_png" x="613" y="290"/>
+	<e:Image id="_zj2" source="bei_zhongjian_png" x="613" y="290"/>
+	<e:Image id="_zj3" source="dong_zhongjian_png" x="613" y="290"/>
+	<e:Image id="_zj1" source="xi_zhongjian_png" x="613" y="290"/>
+	<e:Image id="_zj4" source="nan_zhongjian_png" x="613" y="290"/>
+	<e:Label id="_count" textAlign="center" y="333" size="25" x="658" width="28"/>
+
+	<e:Image source="zhuangshi_img_png" x="0" y="0"/>
+	<e:Image source="zhuangshi_img_png" x="1334" y="0" scaleX="-1"/>
+	<e:Image source="wenzi_bg_png" x="396.5" y="420" />
+    <e:Label id="_gameinfo" text="" y="427" size="20" x="570"/>                    
+    <e:Button id="chongzhi" y="7" x="1118">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="chongzhi_btn_png"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+    <e:Button id="_setting" y="7" x="1205">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="setting_btn_png"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+    <e:Button id="_chat" y="633" x="1222">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="liaotian_btn_png"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+    <e:Button id="_useTool" y="533" x="1222">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="daoju_btn_png"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+    <e:Button id="_start" y="455" x="545.5">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="yellow_btn_down_png"/>
+	            <e:Label text="开始游戏" y="40" size="20" x="90"/>                
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="_ready" y="550" x="546">
+		<e:skinName>
+		<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+			<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="yellow_btn_png" source.down="yellow_btn_down_png"/>
+			<e:Label id="_readyText" text="准备" y="38.5" size="20" x="109.5" textAlign="center"/>
+		</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="_invest" y="642" x="546">
+		<e:skinName>
+		<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+			<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="yellow_btn_png" source.down="yellow_btn_down_png"/>
+			<e:Label text="邀请" y="38.5" size="20" x="109.5" textAlign="center"/>
+		</e:Skin>
+		</e:skinName>
+	</e:Button>
+    <e:Button id="_back" y="0" x="0">
+		<e:skinName>
+			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
+				<e:Image width.down="100%" height.down="100%" horizontalCenter="0" verticalCenter="0" source="close_png" source.down="cloase_down_png" source.disabled="cloase_down_png"/>               
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+</e:Skin>
