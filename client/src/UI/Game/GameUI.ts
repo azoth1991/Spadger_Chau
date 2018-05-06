@@ -65,6 +65,9 @@ class GameUI extends eui.Component {
         this._discardSPList0.forEach((value,key)=>{
             value.forEach((v,k)=>{
                 var discardSP = new CardUI(1,v,0,scale);
+                if (v == -2) {
+                    discardSP = new CardUI(4,null);
+                }
                 discardSP.x = 1194-(k+key*0.1+sum0)*79*scale;
                 discardSP.y = 620;         
                 this._discardSPsBox.addChild(discardSP);

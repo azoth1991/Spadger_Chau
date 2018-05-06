@@ -185,7 +185,6 @@ class ESocket {
                         GameMode.isDiscard = false;
                     }
                     
-                    
                     // 谁出牌
                     // GameMode.pos = info.currentPlayer;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, {pos:info.currentPlayer});
@@ -200,9 +199,41 @@ class ESocket {
                     // }
                     
                     break;
+                case 48:
+                    // 暗杠 流程
+                    // 显示出牌
+                    GameMode.draw = info.draw;
+                    // 显示牌组
+                    if(info.model.cards){
+                        var cards = info.model.cards;
+                        var discard = info.discard;
+                        var prevailing = info.prevailing;
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, {cards,prevailing});
+                    }
+                    if (info.model.status ==23) {
+                        GameMode.isDiscard = true;
+                    } else {
+                        GameMode.isDiscard = false;
+                    }
+                    
+                    // 谁出牌
+                    // GameMode.pos = info.currentPlayer;
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, {pos:info.currentPlayer});
+                    // 显示吃
+                    // console.log(info.actionCard);
+                    if (info.actionResult&&info.actionResult.length){
+                        // GameMode.pos = info.prevailing;
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, {pos:info.prevailing,actionResult:[-2,-2,-2,-2]});
+                    } 
+                    // if(info.actionCard) {
+                    //     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, {cards,discard:info.actionCard,prevailing});
+                    // }
+                    
+                    break;
                 case 43:
                     // 吃 流程
                     // 显示牌组
+                    GameMode.draw = info.draw;
                     if(info.model.cards){
                         var cards = info.model.cards;
                         var prevailing = info.prevailing;
@@ -222,6 +253,7 @@ class ESocket {
                 case 42:
                     // 碰 流程
                     // 显示牌组
+                    GameMode.draw = info.draw;
                     if(info.model.cards){
                         var cards = info.model.cards;
                         var prevailing = info.prevailing;
@@ -242,7 +274,22 @@ class ESocket {
                     // 过 流程
                     // 谁出牌
                     // GameMode.pos = info.currentPlayer;
+                    GameMode.draw = info.draw;
+                    if(info.model.cards){
+                        var cards = info.model.cards;
+                        var prevailing = info.prevailing;
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, {cards,prevailing});
+                    }
+                    if (info.model.status ==23) {
+                        GameMode.isDiscard = true;
+                    } else {
+                        GameMode.isDiscard = false;
+                    }
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, {pos:info.currentPlayer});
+                    if(info.model.option.length > 0){
+                        // 显示碰杠吃
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:info.model.option});
+                    }
                     break;
 
                 case 45:

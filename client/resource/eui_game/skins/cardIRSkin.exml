@@ -2,5 +2,5 @@
 <e:Skin id="card" class="cardIRSkin" xmlns:e="http://ns.egret.com/eui">
 	<e:Image id="_bg" />
 	<e:Image id="_cardBg"/>
-	<e:Image id="_joker"/>
+	<e:Image id="_joker" x="49" y="4"/>
 </e:Skin>

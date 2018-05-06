@@ -53,6 +53,13 @@ class DiscardStatusUI extends eui.Component {
                     // this._gang.x = this.pos + k*this.des;
                     // this._gang.y = 494;
                     break;
+                case 48:
+                    this._gang.selected = true;
+                    this._gang.touchEnabled = true;
+                    // this._gang.visible = true;
+                    // this._gang.x = this.pos + k*this.des;
+                    // this._gang.y = 494;
+                    break;
                 case 45:
                     this._hu.selected = true;
                     this._hu.touchEnabled = true;

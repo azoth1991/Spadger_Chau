@@ -66,6 +66,13 @@ var DiscardStatusUI = (function (_super) {
                     // this._gang.x = this.pos + k*this.des;
                     // this._gang.y = 494;
                     break;
+                case 48:
+                    _this._gang.selected = true;
+                    _this._gang.touchEnabled = true;
+                    // this._gang.visible = true;
+                    // this._gang.x = this.pos + k*this.des;
+                    // this._gang.y = 494;
+                    break;
                 case 45:
                     _this._hu.selected = true;
                     _this._hu.touchEnabled = true;
