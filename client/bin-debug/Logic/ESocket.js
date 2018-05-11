@@ -16,6 +16,7 @@ var ESocket = (function () {
         GameMode.chiNum = 0;
         GameMode.gangNum = -1;
         GameMode.actionCard = -1;
+        GameMode.option = [];
         if (info.actionCard) {
             GameMode.actionCard = info.actionCard;
         }
@@ -247,7 +248,7 @@ var ESocket = (function () {
                 case 42:
                     // 碰 流程
                     // 显示牌组
-                    GameMode.draw = info.draw;
+                    // GameMode.draw = info.draw;
                     if (info.model.cards) {
                         var cards = info.model.cards;
                         var prevailing = info.prevailing;
@@ -269,6 +270,7 @@ var ESocket = (function () {
                     // 过 流程
                     // 谁出牌
                     // GameMode.pos = info.currentPlayer;
+                    GameMode.draw = info.draw;
                     if (info.model.cards) {
                         var cards = info.model.cards;
                         var prevailing = info.prevailing;
@@ -293,10 +295,10 @@ var ESocket = (function () {
         }
     };
     ESocket.prototype.setJoker = function (info) {
-        if (info.joker > 0) {
+        if (info.joker >= 0) {
             GameMode.joker = [info.joker];
         }
-        if (info.jokerPi[0] > 0) {
+        if (info.jokerPi[0] >= 0) {
             GameMode.jokerPi = info.jokerPi;
         }
     };

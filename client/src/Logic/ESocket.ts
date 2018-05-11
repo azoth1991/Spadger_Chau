@@ -16,6 +16,7 @@ class ESocket {
         GameMode.chiNum = 0;
         GameMode.gangNum = -1;
         GameMode.actionCard = -1;
+        GameMode.option = [];
         if (info.actionCard) {
             GameMode.actionCard = info.actionCard;
         }
@@ -253,7 +254,7 @@ class ESocket {
                 case 42:
                     // 碰 流程
                     // 显示牌组
-                    GameMode.draw = info.draw;
+                    // GameMode.draw = info.draw;
                     if(info.model.cards){
                         var cards = info.model.cards;
                         var prevailing = info.prevailing;
@@ -299,10 +300,10 @@ class ESocket {
         }
     }
     private setJoker(info){
-        if (info.joker>0){
+        if (info.joker>=0){
             GameMode.joker = [info.joker];
         }
-        if (info.jokerPi[0]>0){
+        if (info.jokerPi[0]>=0){
             GameMode.jokerPi = info.jokerPi;
         }
     }

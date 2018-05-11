@@ -19,6 +19,7 @@
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
+		"bin-debug/PlayTypes.js",
 		"bin-debug/ShopTypes.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/TrueLoadingUI.js",
@@ -41,6 +42,7 @@
 		"bin-debug/UI/Main/FriendIRUI.js",
 		"bin-debug/UI/Main/HeadUI.js",
 		"bin-debug/UI/Main/MainUI.js",
+		"bin-debug/UI/Main/PlayInfoUI.js",
 		"bin-debug/UI/Main/SettingUI.js"
 	]
 }
