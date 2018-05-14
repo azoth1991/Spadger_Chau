@@ -14,7 +14,6 @@ class ESocket {
         GameMode.draw = -1;
         GameMode.canChowChoice = [];
         GameMode.chiNum = 0;
-        GameMode.gangNum = -1;
         GameMode.actionCard = -1;
         GameMode.option = [];
         if (info.actionCard) {

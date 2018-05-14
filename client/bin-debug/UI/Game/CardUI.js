@@ -28,7 +28,15 @@ var CardUI = (function (_super) {
         return _this;
     }
     CardUI.prototype.upCard = function () {
-        if (this.status == 'down') {
+        var _this = this;
+        var canUp = false;
+        GameMode.canChowChoice.forEach(function (arr) {
+            if ((arr.indexOf(_this._num) > -1) && (_this._num != GameMode.actionCard)) {
+                canUp = true;
+            }
+        });
+        console.log('upcard', GameMode.canChowChoice, this._num, GameMode.actionCard, GameMode.isSP);
+        if ((this.status == 'down' && !GameMode.isSP) || ((this.status == 'down' && GameMode.isSP) && (canUp || (GameMode.joker.indexOf(this._num) > -1 || GameMode.jokerPi.indexOf(this._num) > -1)))) {
             this.y = this.y - 28;
             this.status = 'up';
         }
@@ -36,8 +44,10 @@ var CardUI = (function (_super) {
     CardUI.prototype.handleClick = function () {
         var _this = this;
         console.log('handleclick', GameMode.isDiscard, this.status);
+        if (!(this.scaleX == 0.9)) {
+            return;
+        }
         // 皮赖杠，没有按起 可以出牌 出的皮赖 唤起弹框
-        GameMode.gangNum = -1;
         GameMode.chiNum = 0;
         if (this.status == 'down' && GameMode.isDiscard && (GameMode.joker.indexOf(this._num) > -1 || GameMode.jokerPi.indexOf(this._num) > -1)) {
             // 唤起弹窗
@@ -64,9 +74,9 @@ var CardUI = (function (_super) {
             if (GameMode.isDiscard) {
                 // 可以吃、杠的时候点击牌可以直接出牌
                 if (GameMode.isSP) {
-                    if (GameMode.gangNum >= 0) {
+                    if (GameMode.joker.indexOf(this._num) > -1 || GameMode.jokerPi.indexOf(this._num) > -1) {
                         // 杠直接点是当普通牌出
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CARD, { discardNum: this._num });
+                        // MessageCenter.getInstance().sendMessage( GameEvents.WS_SEND_CARD, {discardNum:this._num} );
                     }
                     else {
                         var extkey = 0;
@@ -92,6 +102,7 @@ var CardUI = (function (_super) {
         }
     };
     CardUI.prototype.downCard = function () {
+        GameMode.gangNum = -1;
         if (this.status == 'up') {
             this.y = this.y + 28;
             this.status = 'down';

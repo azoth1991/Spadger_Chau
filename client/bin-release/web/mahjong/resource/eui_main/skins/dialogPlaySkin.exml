@@ -7,7 +7,7 @@
 	<e:Image source="papper-bg_jpg" x="486" y="134" anchorOffsetY="0" height="508"/>
 	<e:Image source="papper-bg_jpg" x="1066.09" y="134" anchorOffsetY="0" height="508" rotation="180" scaleY="-1"/>
 	<e:Image source="paper_jpg" x="642" y="134" rotation="360" anchorOffsetX="0" width="272" anchorOffsetY="0" height="508"/>
-	<e:Image source="shop-bg_png" x="1118" y="152"/>
+	<e:Image x="1118" y="152" source="rule-bg_png"/>
     <e:Button id="_back" y="0" x="0">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">
@@ -49,7 +49,7 @@
 	</e:ToggleButton>
 	<e:Scroller height="450" width="509" x="519" y="160" anchorOffsetX="0" anchorOffsetY="0">
 		<e:viewport>
-		<e:Label id="_playLabel" text="" x="5" y="0" anchorOffsetX="0" width="523" height="500" anchorOffsetY="0" textColor="0x000000" size="14"/>
+		<e:Label id="_playLabel" text="" x="5" y="0" anchorOffsetX="0" width="523" height="500" anchorOffsetY="0" textColor="0x000000" size="16"/>
 		</e:viewport>
 	</e:Scroller>
 </e:Skin>

@@ -15,16 +15,27 @@ class CardUI extends eui.Component {
     }
 
     public upCard(){
-        if(this.status == 'down'){
+        let canUp = false;
+        GameMode.canChowChoice.forEach((arr)=>{
+            if ((arr.indexOf(this._num)>-1)&&(this._num!=GameMode.actionCard)){
+                canUp = true;
+            }
+        })
+        console.log('upcard',GameMode.canChowChoice,this._num,GameMode.actionCard,GameMode.isSP)
+        if((this.status == 'down' &&!GameMode.isSP) || ((this.status == 'down' && GameMode.isSP) && (canUp || (GameMode.joker.indexOf(this._num)>-1||GameMode.jokerPi.indexOf(this._num)>-1)))){
             this.y = this.y - 28;
             this.status = 'up';
         }
     }
     private handleClick() {
         console.log('handleclick',GameMode.isDiscard,this.status);
+        if(!(this.scaleX==0.9)){
+            return ;
+        }
         // 皮赖杠，没有按起 可以出牌 出的皮赖 唤起弹框
-        GameMode.gangNum = -1;
+        
         GameMode.chiNum = 0;
+
         if (this.status == 'down'&&GameMode.isDiscard&&(GameMode.joker.indexOf(this._num)>-1||GameMode.jokerPi.indexOf(this._num)>-1)) {
             // 唤起弹窗
             GameMode.gangNum = this._num;
@@ -49,9 +60,9 @@ class CardUI extends eui.Component {
             if (GameMode.isDiscard) {
                 // 可以吃、杠的时候点击牌可以直接出牌
                 if(GameMode.isSP){
-                    if (GameMode.gangNum>=0){
+                    if (GameMode.joker.indexOf(this._num)>-1||GameMode.jokerPi.indexOf(this._num)>-1){
                         // 杠直接点是当普通牌出
-                        MessageCenter.getInstance().sendMessage( GameEvents.WS_SEND_CARD, {discardNum:this._num} );
+                        // MessageCenter.getInstance().sendMessage( GameEvents.WS_SEND_CARD, {discardNum:this._num} );
                     } else {
                         var extkey = 0;
                         for (var i=0;i<GameMode.canChowChoice.length;i++){
@@ -78,6 +89,7 @@ class CardUI extends eui.Component {
     }
 
     public downCard(){
+        GameMode.gangNum = -1;
         if (this.status == 'up'){
             this.y = this.y + 28;
             this.status = 'down';   
