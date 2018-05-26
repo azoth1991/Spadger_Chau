@@ -194,6 +194,10 @@ class ESocket {
                         // GameMode.pos = info.prevailing;
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, {pos:info.prevailing,actionResult:info.actionResult});
                     } 
+                    if(info.model.option.length > 0){
+                        // 显示碰杠吃
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:info.model.option});
+                    }
                     // if(info.actionCard) {
                     //     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, {cards,discard:info.actionCard,prevailing});
                     // }
