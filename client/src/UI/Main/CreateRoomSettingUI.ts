@@ -87,7 +87,7 @@ class CreateRoomSettingUI extends eui.Component {
         var request = new egret.HttpRequest();
         request.responseType = egret.HttpResponseType.TEXT;
         console.log('gameparams',params)
-        request.open(encodeURI(`http://101.37.151.85:8008/socket/create?param=${params}`),egret.HttpMethod.GET);
+        request.open(encodeURI(`http://101.37.151.85:8008/socket/create?param=${params}&wechatId=${GameMode.wechatId}`),egret.HttpMethod.GET);
         request.send();
         request.addEventListener(egret.Event.COMPLETE,(evt)=>{
             var response = <egret.HttpRequest>evt.currentTarget;

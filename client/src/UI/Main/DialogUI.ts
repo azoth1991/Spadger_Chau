@@ -497,7 +497,7 @@ class ShopContentIRUI extends eui.ItemRenderer {
     private buyToolfunc(){
         var request = new egret.HttpRequest();
         request.responseType = egret.HttpResponseType.TEXT;
-        request.open(encodeURI(`http://101.37.151.85:8008/socket/wx/preOrder?openid=${GameMode.wechatId}&buyNum=0.01`),egret.HttpMethod.GET);
+        request.open(encodeURI(`http://101.37.151.85:8008/socket/wx/preOrder?openid=${GameMode.wechatId}&buyNum=1`),egret.HttpMethod.GET);
         request.send();
         request.addEventListener(egret.Event.COMPLETE,(evt)=>{
             var response = <egret.HttpRequest>evt.currentTarget;
