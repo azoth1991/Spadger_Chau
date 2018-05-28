@@ -146,7 +146,14 @@ var Main = (function (_super) {
     Main.prototype.getAccount = function () {
         var request = new egret.HttpRequest();
         request.responseType = egret.HttpResponseType.TEXT;
-        request.open(encodeURI("http://101.37.151.85:8008/socket/queryAccount?wechatId=" + GameMode.wechatId), egret.HttpMethod.GET);
+        var url = '';
+        if (this.getUrlParam('sourceWechatId')) {
+            url = encodeURI("http://101.37.151.85:8008/socket/queryAccount?wechatId=" + GameMode.wechatId + "&sourceWechatId=" + this.getUrlParam('sourceWechatId'));
+        }
+        else {
+            url = encodeURI("http://101.37.151.85:8008/socket/queryAccount?wechatId=" + GameMode.wechatId);
+        }
+        request.open(url, egret.HttpMethod.GET);
         request.send();
         request.addEventListener(egret.Event.COMPLETE, function (evt) {
             var response = evt.currentTarget;

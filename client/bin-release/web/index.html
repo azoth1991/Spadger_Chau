@@ -23,6 +23,7 @@
 </head>
 
 <body>
+<!--<div class="test" onclick="paytest()">支付测试</div>-->
     <div style="margin: auto;width: 100%;height: 100%;" class="egret-player"
          data-entry-class="Main"
          data-orientation="auto"
@@ -120,6 +121,43 @@
             title: '好运 plus+',
             img: 'http://game.goodluck78.com/wechat/content/images/img-logo.png',
         });
+
+    function getUrlParam(name){
+      var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+      var r = window.location.search.substr(1).match(reg);
+      // if (r!=null) return unescape(r[2]);
+      if (r!=null) return r[2];
+      return null;
+    }
+
+    var paytest = function() {
+      $.ajax({ url: 'http://101.37.151.85:8008/socket/wx/preOrder?openid='+this.getUrlParam('wechatId')+'&buyNum=1', context: document.body, success: function(res){
+//        wx.chooseWXPay({
+//          timestamp: res.timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+//          nonceStr: res.nonce_str, // 支付签名随机串，不长于 32 位
+//          package: 'prepay_id='+res.prepay_id, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+//          signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+//          paySign: res.sign, // 支付签名
+//          success: function (res) {
+//            // 支付成功后的回调函数
+//          }
+//        });
+        WeixinJSBridge.invoke(
+          'getBrandWCPayRequest', {
+            "appId":res.appid,     //公众号名称，由商户传入
+            "timeStamp":res.timestamp,         //时间戳，自1970年以来的秒数
+            "nonceStr":res.nonce_str, //随机串
+            "package":'prepay_id='+res.prepay_id,
+            "signType":"MD5",         //微信签名方式：
+            "paySign":res.sign, //微信签名
+          },
+          function(res){
+            if(res.err_msg == "get_brand_wcpay_request:ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+          }
+        );
+      }});
+
+    }
 </script>
 </body>
 

@@ -93,6 +93,14 @@
     });
     xhr.send(null);
 
+    function getUrlParam(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        // if (r!=null) return unescape(r[2]);
+        if (r!=null) return r[2];
+        return null;
+    }
+
     var setWxShare = function (wxShare) {
         $.ajax({ url: "http://101.37.151.85:8008/socket/getWXSign?url="+encodeURIComponent(window.location.href), context: document.body, success: function(data){
             wx.config({
@@ -106,12 +114,12 @@
           });
             wx.onMenuShareTimeline({
               title: wxShare.title,
-              link: window.location.href,
+              link: `http://wechat.goodluck78.com/home?sourceWechatId=${getUrlParam('wechatId')}`,
               imgUrl: wxShare.img,
             });
             wx.onMenuShareAppMessage({
               title: wxShare.title,
-              link: window.location.href,
+              link: `http://wechat.goodluck78.com/home?sourceWechatId=${getUrlParam('wechatId')}`,
               imgUrl: wxShare.img,
             });
         }});

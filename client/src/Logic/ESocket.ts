@@ -165,7 +165,7 @@ class ESocket {
                         // 显示碰杠吃
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:info.model.option});
                     }
-                    
+        
                     
                     break;
                 case 44:
