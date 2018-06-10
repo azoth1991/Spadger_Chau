@@ -150,9 +150,8 @@ var ESocket = (function () {
                     }
                     if (info.model.cards) {
                         var cards = info.model.cards;
-                        var discard = info.discard;
                         var prevailing = info.prevailing;
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, discard: discard, prevailing: prevailing });
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, discard: info.playsInfo, prevailing: prevailing });
                     }
                     // 谁出牌
                     // GameMode.pos = info.currentPlayer;
@@ -170,9 +169,8 @@ var ESocket = (function () {
                     // 显示牌组
                     if (info.model.cards) {
                         var cards = info.model.cards;
-                        var discard = info.discard;
                         var prevailing = info.prevailing;
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, prevailing: prevailing });
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, discard: info.playsInfo, prevailing: prevailing });
                     }
                     if (info.model.status == 23) {
                         GameMode.isDiscard = true;
@@ -185,10 +183,7 @@ var ESocket = (function () {
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
                     // 显示吃
                     // console.log(info.actionCard);
-                    if (info.actionResult && info.actionResult.length) {
-                        // GameMode.pos = info.prevailing;
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { pos: info.prevailing, actionResult: info.actionResult });
-                    }
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { playsInfo: info.playsInfo });
                     if (info.model.option.length > 0) {
                         // 显示碰杠吃
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, { option: info.model.option });
@@ -204,9 +199,8 @@ var ESocket = (function () {
                     // 显示牌组
                     if (info.model.cards) {
                         var cards = info.model.cards;
-                        var discard = info.discard;
                         var prevailing = info.prevailing;
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, prevailing: prevailing });
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, discard: info.playsInfo, prevailing: prevailing });
                     }
                     if (info.model.status == 23) {
                         GameMode.isDiscard = true;
@@ -219,10 +213,7 @@ var ESocket = (function () {
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
                     // 显示吃
                     // console.log(info.actionCard);
-                    if (info.actionResult && info.actionResult.length) {
-                        // GameMode.pos = info.prevailing;
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { pos: info.prevailing, actionResult: [-2, -2, -2, -2] });
-                    }
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { playsInfo: info.playsInfo });
                     // if(info.actionCard) {
                     //     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, {cards,discard:info.actionCard,prevailing});
                     // }
@@ -234,7 +225,7 @@ var ESocket = (function () {
                     if (info.model.cards) {
                         var cards = info.model.cards;
                         var prevailing = info.prevailing;
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, prevailing: prevailing });
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, discard: info.playsInfo, prevailing: prevailing });
                     }
                     if (info.model.status == 23) {
                         GameMode.isDiscard = true;
@@ -245,8 +236,7 @@ var ESocket = (function () {
                     // 谁出牌
                     // GameMode.pos = info.currentPlayer;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
-                    // 显示吃
-                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { pos: info.prevailing, actionResult: info.actionResult });
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { playsInfo: info.playsInfo });
                     break;
                 case 42:
                     // 碰 流程
@@ -255,7 +245,7 @@ var ESocket = (function () {
                     if (info.model.cards) {
                         var cards = info.model.cards;
                         var prevailing = info.prevailing;
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, prevailing: prevailing });
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, discard: info.playsInfo, prevailing: prevailing });
                     }
                     if (info.model.status == 23) {
                         GameMode.isDiscard = true;
@@ -266,8 +256,7 @@ var ESocket = (function () {
                     // 谁出牌
                     // GameMode.pos = info.currentPlayer;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
-                    // 显示吃
-                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { pos: info.prevailing, actionResult: info.actionResult });
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, { playsInfo: info.playsInfo });
                     break;
                 case 46:
                     // 过 流程
@@ -277,7 +266,7 @@ var ESocket = (function () {
                     if (info.model.cards) {
                         var cards = info.model.cards;
                         var prevailing = info.prevailing;
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, prevailing: prevailing });
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, discard: info.playsInfo, prevailing: prevailing });
                     }
                     if (info.model.status == 23) {
                         GameMode.isDiscard = true;

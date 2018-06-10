@@ -64,6 +64,9 @@ var ChatUI = (function (_super) {
                             MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_CHAT, { info: "@&#$" + serverId });
                         }
                     });
+                },
+                fail: function (res) {
+                    alert('录音失败，请在微信中打开');
                 }
             });
         });

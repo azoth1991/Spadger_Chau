@@ -39,14 +39,18 @@ class GameUI extends eui.Component {
     }
     public getdiscardSPs(evt) {
         console.log('getdiscardSPs',evt);
-        var pos = 0;
-        GameMode.playerList.forEach((v,k)=>{
-            if (v.wechatId == evt.data.pos){
-                pos = k;
-            }
-        });
-        var actionResult = evt.data.actionResult;
-        this[`_discardSPList${pos}`].push(actionResult);
+        var playsInfo = evt.data.playsInfo;
+
+        playsInfo.map((v)=>{
+            var pos = 0;
+            GameMode.playerList.forEach(function (val, k) {
+                if (val.wechatId == v.wechatId) {
+                    pos = k;
+                }
+            });
+            this[`_discardSPList${pos}`] = v.actionCardList;
+        }, this);
+        // this[`_discardSPList${pos}`].push(actionResult);
         this.drawDiscardSPs();
         this.drawOtherCard();
     }
@@ -65,11 +69,8 @@ class GameUI extends eui.Component {
         this._discardSPList0.forEach((value,key)=>{
             value.forEach((v,k)=>{
                 var discardSP = new CardUI(1,v,0,scale);
-                if (v == -2) {
-                    discardSP = new CardUI(4,null);
-                }
                 discardSP.x = 1194-(k+key*0.1+sum0)*79*scale;
-                discardSP.y = 620;         
+                discardSP.y = 620;
                 this._discardSPsBox.addChild(discardSP);
             });
             sum0 += value.length;
@@ -107,26 +108,40 @@ class GameUI extends eui.Component {
         console.log('getCard',evt)
         // 画牌  
         var cards = this.getCards(evt.data.cards);
+        var discardList = evt.data.discard;
         this._gameBox.removeChild(this.cardsBox);
         this.cardsBox = new eui.Component();
         this.drawCard(cards);
         this._gameBox.addChild(this.cardsBox);
         // 弃牌
         // this.discardBox.removeChildren();
-        if (evt.data.discard && evt.data.discard>0){
-            var discard = evt.data.discard;
-            // this._gameBox.removeChild(this.discardBox);
-            var posName = evt.data.prevailing;
+        discardList.map((v)=>{
             var pos = 0;
-            GameMode.playerList.forEach((v,k)=>{
-                if (v.wechatId == posName){
+            GameMode.playerList.forEach((val,k)=>{
+                if (v.wechatId == val.wechatId){
                     pos = k;
                 }
             });
-            this[`_discardList${pos}`].push(discard);
+            
+            this[`_discardList${pos}`] = v.disCardsNum;
             this.drawDiscard(this[`_discardList${pos}`],pos);
             // this._gameBox.addChild(this.discardBox);
-        }
+        });
+
+        // if (evt.data.discard && evt.data.discard>0){
+        //     var discard = evt.data.discard;
+        //     // this._gameBox.removeChild(this.discardBox);
+        //     var posName = evt.data.prevailing;
+        //     var pos = 0;
+        //     GameMode.playerList.forEach((v,k)=>{
+        //         if (v.wechatId == posName){
+        //             pos = k;
+        //         }
+        //     });
+        //     this[`_discardList${pos}`].push(discard);
+        //     this.drawDiscard(this[`_discardList${pos}`],pos);
+        //     // this._gameBox.addChild(this.discardBox);
+        // }
         this.drawOtherCard();
 
     }
@@ -272,7 +287,6 @@ class GameUI extends eui.Component {
         // this.count();
         var pos = 1;
         GameMode.playerList.forEach((v,k)=>{
-            console.log(11111,v,k,evt.data.pos)
             if(v.wechatId == evt.data.pos) {
                 switch (k){
                     case 0:
@@ -365,7 +379,11 @@ class GameUI extends eui.Component {
     }
 
     private handleStart(e:egret.TouchEvent):void {
-        MessageCenter.getInstance().sendMessage( GameEvents.WS_START, {id:GameMode.roomId});        
+        MessageCenter.getInstance().sendMessage( GameEvents.WS_START, {id:GameMode.roomId});      
+        window.setWxShare({
+            title: `房间号${GameMode.roomId},进入游戏后加入房间`,
+            img: 'http://game.goodluck78.com/wechat/content/images/img-logo.png',
+        });
     }
     private handleReady(e:egret.TouchEvent):void {
         MessageCenter.getInstance().sendMessage( GameEvents.WS_READY, {id:GameMode.roomId});

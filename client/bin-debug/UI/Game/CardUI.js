@@ -20,10 +20,17 @@ var CardUI = (function (_super) {
         _this.status = 'down';
         _this.scaleX = scale;
         _this.scaleY = scale;
+        if (_this._num == -1) {
+            _this._type = 4;
+            _this._num = null;
+            _this.scaleX = scale * 115 / 80;
+            _this.scaleY = scale * 115 / 80;
+        }
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         if (num || num == 0) {
             _this.addEventListener('touchTap', _this.handleClick, _this);
         }
+        _this.rotation = parseInt(_this._deraction) * 90;
         _this.skinName = "resource/eui_game/skins/cardIRSkin.exml";
         return _this;
     }
@@ -112,7 +119,6 @@ var CardUI = (function (_super) {
         console.log('clickCard');
     };
     CardUI.prototype.uiCompHandler = function () {
-        var _this = this;
         this._bg.source = "dipai" + this._type + "_png";
         if (this._num || this._num == 0) {
             this._cardBg.source = "p" + this._num + "_png";
@@ -123,9 +129,11 @@ var CardUI = (function (_super) {
         if (GameMode.jokerPi.indexOf(this._num) >= 0) {
             this._joker.source = 'joker1_png';
         }
-        setTimeout(function () {
-            _this.rotation = parseInt(_this._deraction) * 90;
-        }, 10);
+        if (this._num == -1) {
+            this._bg.source = "dipai4_png";
+            this._joker.source = '';
+            this._cardBg.source = '';
+        }
         // switch (this._deraction) {
         //     case 1:
         //         this._cardBg.rotation = 90;

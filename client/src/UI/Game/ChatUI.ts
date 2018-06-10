@@ -55,6 +55,9 @@ class ChatUI extends eui.Component {
                             MessageCenter.getInstance().sendMessage( GameEvents.WS_SEND_CHAT, {info: `@&#$${serverId}`} );
                         }
                     });
+                },
+                fail: function(res) {     //录音失败
+                    alert('录音失败，请在微信中打开');
                 }
             });
         });

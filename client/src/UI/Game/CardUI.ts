@@ -7,10 +7,17 @@ class CardUI extends eui.Component {
         this.status = 'down';
         this.scaleX = scale;
         this.scaleY = scale;
+        if (this._num == -1) {
+            this._type = 4;
+            this._num = null;
+            this.scaleX = scale*115/80;
+            this.scaleY = scale*115/80;
+        }
         this.addEventListener( eui.UIEvent.COMPLETE, this.uiCompHandler, this );
         if (num||num==0) {
             this.addEventListener('touchTap', this.handleClick, this);
         }
+        this.rotation = parseInt(this._deraction)*90;
         this.skinName = "resource/eui_game/skins/cardIRSkin.exml";
     }
 
@@ -112,9 +119,12 @@ class CardUI extends eui.Component {
         if (GameMode.jokerPi.indexOf(this._num)>=0){
             this._joker.source = 'joker1_png';
         }
-        setTimeout(()=>{
-            this.rotation = parseInt(this._deraction)*90;
-        },10);
+        if (this._num == -1) {
+            this._bg.source = `dipai4_png`;
+            this._joker.source = '';
+            this._cardBg.source = '';
+        }
+        
 
         // switch (this._deraction) {
         //     case 1:
