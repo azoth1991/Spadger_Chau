@@ -23,6 +23,7 @@ class GameOverUI extends eui.Component {
 
     private backHome(e:egret.TouchEvent):void {
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.BACK_HOME});
+        GameMode.showZhanji = true;
     }
     private init(){
         if (this._result.status == 0){

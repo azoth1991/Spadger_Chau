@@ -134,6 +134,7 @@ var HomeUI = (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        console.log('handleDialog');
                         this._dialogName = evt.data.type;
                         trueLoadingUI = new TrueLoadingUI();
                         _a.label = 1;

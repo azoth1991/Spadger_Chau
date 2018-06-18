@@ -34,6 +34,7 @@ var GameMode = (function () {
     GameMode.hornorJoker = false;
     GameMode.originJoker = false;
     GameMode.isUnderTake = false;
+    GameMode.showZhanji = true;
     return GameMode;
 }());
 __reflect(GameMode.prototype, "GameMode");

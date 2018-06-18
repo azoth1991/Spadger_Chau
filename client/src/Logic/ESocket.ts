@@ -257,10 +257,15 @@ class ESocket {
                     } else {
                         GameMode.isDiscard = false;
                     }
+                    if(info.model.option.length > 0){
+                        // 显示碰杠吃
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:info.model.option});
+                    }
                     // 谁出牌
                     // GameMode.pos = info.currentPlayer;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, {pos:info.currentPlayer});
-                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, {playsInfo: info.playsInfo});break;
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSPS, {playsInfo: info.playsInfo});
+                    break;
                 case 46:
                     // 过 流程
                     // 谁出牌

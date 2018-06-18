@@ -45,6 +45,7 @@ class HomeUI extends eui.Component {
     }
 
     public async handleDialog(evt:egret.Event) {
+        console.log('handleDialog')
         this._dialogName = evt.data.type;
         const trueLoadingUI = new TrueLoadingUI();           
         try {

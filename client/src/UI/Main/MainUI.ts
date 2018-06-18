@@ -6,6 +6,14 @@ class MainUI extends eui.Component {
     }
 
     uiCompHandler() {
+        // 如果要展示战绩
+        if (GameMode.showZhanji) {
+            setTimeout(function() {
+                console.log('jumpzhanji')
+                MessageCenter.getInstance().sendMessage(MessageCenter.EVT_SHOW_DIALOG, {type:DialogTypes.ZHANJI,data:{}});
+                GameMode.showZhanji = false;
+            }, 2000);
+        }
         // header
         this._headui = new HeadUI();
 

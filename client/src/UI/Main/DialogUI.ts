@@ -166,21 +166,28 @@ class DialogUI extends eui.Component {
     private generateHistoryState() {
         var request = new egret.HttpRequest();
         request.responseType = egret.HttpResponseType.TEXT;
-        request.open(encodeURI(`http://101.37.151.85:8008/socket/queryBunko?wechatId=${GameMode.wechatId}`),egret.HttpMethod.GET);
+        request.open(encodeURI(`http://101.37.151.85:8008/socket/getRecord?wechatId=${GameMode.wechatId}`),egret.HttpMethod.GET);
         request.send();
         request.addEventListener(egret.Event.COMPLETE,(evt)=>{
             var response = <egret.HttpRequest>evt.currentTarget;
             var res = JSON.parse(response.response);
             if (res.code == 1) {
                 console.log('history',res.result);
-                var history:Array<Object> = [
-                    {roomId: 1000, roomOwner: '陈志伟', gameCount: 1, gameDuration: '10分钟', overTime: '2017-02-12 10:23:23', record: 20},
-                    {roomId: 1230, roomOwner: '周菲特', gameCount: 4, gameDuration: '30分钟', overTime: '2017-02-12 10:23:23', record: -20},
-                    {roomId: 1430, roomOwner: '阳神', gameCount: 5, gameDuration: '2分钟', overTime: '2017-02-12 10:23:23', record: 3},
-                    {roomId: 1023, roomOwner: '一点兄', gameCount: 12, gameDuration: '23分钟', overTime: '2017-02-12 10:23:23', record: 210},
-                    {roomId: 1120, roomOwner: '解老', gameCount: 14, gameDuration: '43分钟', overTime: '2017-02-12 10:23:23', record: -121},
-                    {roomId: 1002, roomOwner: '春节', gameCount: 111, gameDuration: '23分钟', overTime: '2017-02-12 10:23:23', record: 302},            
-                ]
+                // var history:Array<Object> = [
+                //     {roomId: 1000, roomOwner: '陈志伟', gameCount: 1, gameDuration: '10分钟', overTime: '2017-02-12 10:23:23', record: 20},
+                //     {roomId: 1230, roomOwner: '周菲特', gameCount: 4, gameDuration: '30分钟', overTime: '2017-02-12 10:23:23', record: -20},
+                //     {roomId: 1430, roomOwner: '阳神', gameCount: 5, gameDuration: '2分钟', overTime: '2017-02-12 10:23:23', record: 3},
+                //     {roomId: 1023, roomOwner: '一点兄', gameCount: 12, gameDuration: '23分钟', overTime: '2017-02-12 10:23:23', record: 210},
+                //     {roomId: 1120, roomOwner: '解老', gameCount: 14, gameDuration: '43分钟', overTime: '2017-02-12 10:23:23', record: -121},
+                //     {roomId: 1002, roomOwner: '春节', gameCount: 111, gameDuration: '23分钟', overTime: '2017-02-12 10:23:23', record: 302},            
+                // ];
+                var history:Array<Object> = res.result.map((v)=>{
+                    return {
+                        ...v,
+                        enddate: this.timetrans(v.end_time),
+                    }
+                });
+            
                 this._gameHistory.dataProvider = new eui.ArrayCollection( history );
                 this._gameHistory.itemRenderer = GameHistoryIRUI;
             } else {
@@ -188,6 +195,16 @@ class DialogUI extends eui.Component {
             }
         },this);
 
+    }
+    private timetrans(date){
+        var date = new Date(date);//如果date为13位不需要乘1000
+        var Y = date.getFullYear() + '-';
+        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+        var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+        var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+        var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
+        return Y+M+D+h+m+s;
     }
 
     private generateMailState() {

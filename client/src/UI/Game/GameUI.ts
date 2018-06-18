@@ -75,9 +75,9 @@ class GameUI extends eui.Component {
             });
             sum0 += value.length;
         });
-        this._discardSPList1.forEach((value,key)=>{
+        this._discardSPList3.forEach((value,key)=>{
             value.forEach((v,k)=>{
-                var discardSP = new CardUI(1,v,1,scale);
+                var discardSP = new CardUI(1,v,3,scale);
                 discardSP.x = 195;
                 discardSP.y = 562-(k+key*0.1+sum1)*79*scale;     
                 this._discardSPsBox.addChild(discardSP);
@@ -94,9 +94,9 @@ class GameUI extends eui.Component {
             sum2 += value.length;
             
         });
-        this._discardSPList3.forEach((value,key)=>{
+        this._discardSPList1.forEach((value,key)=>{
             value.forEach((v,k)=>{   
-                var discardSP = new CardUI(1,v,3,scale);
+                var discardSP = new CardUI(1,v,1,scale);
                 discardSP.x = 1150;
                 discardSP.y = 554-(k+key*0.1+sum3)*79*scale;   
                 this._discardSPsBox.addChild(discardSP);
@@ -114,7 +114,7 @@ class GameUI extends eui.Component {
         this.drawCard(cards);
         this._gameBox.addChild(this.cardsBox);
         // 弃牌
-        // this.discardBox.removeChildren();
+        this.discardBox.removeChildren();
         discardList.map((v)=>{
             var pos = 0;
             GameMode.playerList.forEach((val,k)=>{
@@ -220,6 +220,27 @@ class GameUI extends eui.Component {
     private backHome(e:egret.TouchEvent):void {
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.BACK_HOME});
     }
+    private posSource1 = ['xi_zhongjian_png', 'bei_zhongjian_png', 'dong_zhongjian_png', 'nan_zhongjian_png'];
+    private posSource2 = ['bei_zhongjian_png', 'dong_zhongjian_png', 'nan_zhongjian_png', 'xi_zhongjian_png'];
+    private posSource3 = ['dong_zhongjian_png', 'nan_zhongjian_png', 'xi_zhongjian_png', 'bei_zhongjian_png'];
+    private posSource4 = ['nan_zhongjian_png', 'xi_zhongjian_png', 'bei_zhongjian_png', 'dong_zhongjian_png'];
+
+    private posbgSource1 = ['xi_zhongjian_select_png', 'bei_zhongjian_select_png', 'dong_zhongjian_select_png', 'nan_zhongjian_select_png'];
+    private posbgSource2 = ['bei_zhongjian_select_png', 'dong_zhongjian_select_png', 'nan_zhongjian_select_png', 'xi_zhongjian_select_png'];
+    private posbgSource3 = ['dong_zhongjian_select_png', 'nan_zhongjian_select_png', 'xi_zhongjian_select_png', 'bei_zhongjian_select_png'];
+    private posbgSource4 = ['nan_zhongjian_select_png', 'xi_zhongjian_select_png', 'bei_zhongjian_select_png', 'dong_zhongjian_select_png'];
+    private setZj(pos) {
+        console.log('setzj',pos)
+        let posNum = pos-1;
+        this[`_zjbg1`].source = this.posSource1[posNum];
+        this[`_zjbg2`].source = this.posSource2[posNum];
+        this[`_zjbg3`].source =  this.posSource3[posNum];
+        this[`_zjbg4`].source =  this.posSource4[posNum];
+        this[`_zj1`].source = this.posbgSource1[posNum];
+        this[`_zj2`].source = this.posbgSource2[posNum];
+        this[`_zj3`].source =  this.posbgSource3[posNum];
+        this[`_zj4`].source =  this.posbgSource4[posNum];
+    }
 
     // 显示中间的方向
     private showZj(num) {
@@ -228,7 +249,14 @@ class GameUI extends eui.Component {
         this[`_zj2`].visible = false;
         this[`_zj3`].visible = false;
         this[`_zj4`].visible = false;
-        this[`_zj${num}`].visible = true;
+        let shownum = num;
+        if (num == 2) {
+            shownum = 4;
+        }
+        if (num == 4) {
+            shownum = 2;
+        }
+        this[`_zj${shownum}`].visible = true;
     }
 
     public sendCardStatus(evt){
@@ -246,10 +274,12 @@ class GameUI extends eui.Component {
         if (GameMode.currentPlayer){
             MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, {pos:GameMode.currentPlayer});            
         }
+        this.setZj(evt.data.pos);
         this.showZj(evt.data.pos)
         if (evt.data.pos == 1){
             GameMode.isDiscard = true;
         }
+
         // 倒数计时
         // this.count();
         
@@ -260,9 +290,9 @@ class GameUI extends eui.Component {
             { x: 1209, y: 295 },
         ]
         this._icon0.changeSkin(position[0]);
-        this._icon1.changeSkin(position[1]);
+        this._icon1.changeSkin(position[3]);
         this._icon2.changeSkin(position[2]);
-        this._icon3.changeSkin(position[3]);
+        this._icon3.changeSkin(position[1]);
         var models = evt.data.cards;
         var cards = this.getCards(models);
         // 移除按钮
@@ -476,22 +506,30 @@ class GameUI extends eui.Component {
                 starty = 424;
                 break;
             case 1:
-                startx = 520;
-                starty = 256;
+                startx = 776;
+                starty = 385; 
                 break;
             case 2:
                 startx = 770;
                 starty = 250;   
                 break;
             case 3:
-                startx = 776;
-                starty = 385;       
+                startx = 520;
+                starty = 256;
+                      
                 break;
         }
         
         discards.forEach((value, key) => {
             var scale = 0.45;            
-            var card = new CardUI(type,value,pos,scale);
+            let showPos = pos;
+            if (pos == 1) {
+                showPos = 3;
+            }
+            if (pos == 3) {
+                showPos = 1;
+            }
+            var card = new CardUI(type,value,showPos,scale);
             switch (pos){
                 case 0:
                     card.x = startx + (key%8)*desx;
@@ -526,13 +564,13 @@ class GameUI extends eui.Component {
             var sum3=0;
             // 左边
             this._discardSPList1.forEach((v)=>{
-                sum1+=v.length;
+                sum3+=v.length;
             });
             this._discardSPList2.forEach((v)=>{
                 sum2+=v.length;
             });
             this._discardSPList3.forEach((v)=>{
-                sum3+=v.length;
+                sum1+=v.length;
             });
             if (cardLength<13-sum1){
                 var letfCard = new CardUI(5,null);
@@ -584,6 +622,10 @@ class GameUI extends eui.Component {
     private _zj1;
     private _zj2;
     private _zj3;
+    private _zjbg4;
+    private _zjbg1;
+    private _zjbg2;
+    private _zjbg3;
 
     private startPosition:Array<Object> = [
             { x: 158, y: 576 },

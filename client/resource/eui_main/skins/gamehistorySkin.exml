@@ -3,7 +3,6 @@
 	<e:Image source="papper-bg_jpg" x="254.02" y="134" anchorOffsetY="0" height="500"/>
 	<e:Image source="papper-bg_jpg" x="1066.02" y="134" anchorOffsetY="0" height="500" rotation="180" scaleY="-1"/>
 	<e:Image source="paper_jpg" x="410.02" y="134" rotation="360" anchorOffsetX="0" width="500" anchorOffsetY="0" height="500"/>
-	<e:Image x="1118" y="152" source="gameHistory-bg_png"/>
     <e:Button id="_back" y="0" x="0">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">

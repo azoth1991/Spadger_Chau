@@ -31,5 +31,6 @@ class GameMode{
     public static hornorJoker = false;
     public static originJoker = false;
     public static isUnderTake = false;
+    public static showZhanji = false;
 
 }

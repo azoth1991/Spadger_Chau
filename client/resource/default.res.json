@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,egret_icon_png,description_json,setting-i-down_png,tools-i-down_png,play-i-down_png,my-i-down_png,news-i-down_png,zhanji-i-down_png,plus-b-down_png,plus-b_png,green_btn_down_png,green_btn_png,yellow_btn_down_png,yellow_btn_png,cloase_down_png,close_png,dialog-button-select_png,dialog-button_png,dialog-s-bg_png,dialog-s-top_png,hall_bg_mp3,click_mp3,icon-left_png,enterroom-btn-down_png,enterroom-btn_png,setting_selected_png,setting_btn_bg_png,setting_selected2_png,select_bg_png,42_png,52_png,62_png,22_png,32_png,12_png,boom_png,cannon_png,card_png,egg_png,kiss_png,papa_png,rose_png,shit_png",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,egret_icon_png,description_json,setting-i-down_png,tools-i-down_png,play-i-down_png,my-i-down_png,news-i-down_png,zhanji-i-down_png,plus-b-down_png,plus-b_png,green_btn_down_png,green_btn_png,yellow_btn_down_png,yellow_btn_png,cloase_down_png,close_png,dialog-button-select_png,dialog-button_png,dialog-s-bg_png,dialog-s-top_png,hall_bg_mp3,click_mp3,icon-left_png,enterroom-btn-down_png,enterroom-btn_png,setting_selected_png,setting_btn_bg_png,setting_selected2_png,select_bg_png,42_png,52_png,62_png,22_png,32_png,12_png,boom_png,cannon_png,card_png,egg_png,kiss_png,papa_png,rose_png,shit_png,bei_zhongjian_select_png,dong_zhongjian_select_png,nan_zhongjian_select_png,xi_zhongjian_select_png",
 			"name": "preload"
 		},
 		{
@@ -1117,6 +1117,26 @@
 			"name": "shit_png",
 			"type": "image",
 			"url": "eui_main/imgs/diamond/shit.png"
+		},
+		{
+			"name": "bei_zhongjian_select_png",
+			"type": "image",
+			"url": "eui_game/imgs/bei_zhongjian_select.png"
+		},
+		{
+			"name": "dong_zhongjian_select_png",
+			"type": "image",
+			"url": "eui_game/imgs/dong_zhongjian_select.png"
+		},
+		{
+			"name": "nan_zhongjian_select_png",
+			"type": "image",
+			"url": "eui_game/imgs/nan_zhongjian_select.png"
+		},
+		{
+			"name": "xi_zhongjian_select_png",
+			"type": "image",
+			"url": "eui_game/imgs/xi_zhongjian_select.png"
 		}
 	]
 }

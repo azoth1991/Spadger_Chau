@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="gameSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*">
 	<e:Image source="jishi_img_png" x="613" y="290"/>
-	<e:Image id="_zj2" source="bei_zhongjian_png" x="613" y="290"/>
-	<e:Image id="_zj3" source="dong_zhongjian_png" x="613" y="290"/>
-	<e:Image id="_zj1" source="xi_zhongjian_png" x="613" y="290"/>
-	<e:Image id="_zj4" source="nan_zhongjian_png" x="613" y="290"/>
+	<e:Image id="_zjbg4" source="bei_zhongjian_png" x="733" y="290" rotation="90"/>
+	<e:Image id="_zjbg1" source="dong_zhongjian_png" x="614.5" y="291" rotation="0"/>
+	<e:Image id="_zjbg3" source="xi_zhongjian_png" x="733.5" y="411" rotation="180"/>
+	<e:Image id="_zjbg2" source="nan_zhongjian_png" x="613" y="412" rotation="270"/>
+
+	<e:Image id="_zj4" source="bei_zhongjian_select_png" x="733" y="290" rotation="90"/>
+	<e:Image id="_zj1" source="dong_zhongjian_select_png" x="614.5" y="291" rotation="0"/>
+	<e:Image id="_zj3" source="xi_zhongjian_select_png" x="733.5" y="411" rotation="180"/>
+	<e:Image id="_zj2" source="nan_zhongjian_select_png" x="613" y="412" rotation="270"/>
 	<e:Label id="_count" textAlign="center" y="333" size="25" x="658" width="28"/>
 
 	<e:Image source="zhuangshi_img_png" x="0" y="0"/>
