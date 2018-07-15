@@ -2,5 +2,6 @@
 <e:Skin class="headIcon2" xmlns:e="http://ns.egret.com/eui">
     <e:Image id="_icon" source="head-i-2_png" height="70" width="70" x="4"/>
 	<e:Image source="fenshu_bg_png" y="74"/>
+	<e:Image id="_zhuang" source="zhuang_png" y="-3" x="51" visible="false"/>
 	<e:Label id="_count" text="Label" x="4" y="79" size="13" textAlign="center" anchorOffsetX="0" width="71" anchorOffsetY="0" height="13"/>
 </e:Skin>

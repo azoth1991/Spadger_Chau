@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="friendIRSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="myRoomIRSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 <e:Image source="mailItem-bg_png" x="0" y="0" width="547" height="127" scale9Grid="70,40,10,40" />
 	<e:Image source="free-seat_jpg" x="172.5" y="29"/>
 <e:Label fontFamily="微软雅黑" text="房间号" textColor="0xa58e6f" x="80" y="33" size="20" width="191" textAlign="left" verticalAlign="middle" anchorOffsetX="0" anchorOffsetY="0" height="23"/>

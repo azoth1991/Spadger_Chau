@@ -11,7 +11,7 @@ r.prototype = e.prototype, t.prototype = new r();
 var FriendIcon = (function (_super) {
     __extends(FriendIcon, _super);
     function FriendIcon(type, _a) {
-        var x = _a.x, y = _a.y, wechatNick = _a.wechatNick, id = _a.id, headImageUrl = _a.headImageUrl, wechatId = _a.wechatId;
+        var x = _a.x, y = _a.y, wechatNick = _a.wechatNick, id = _a.id, headImageUrl = _a.headImageUrl, wechatId = _a.wechatId, pos = _a.pos;
         var _this = _super.call(this) || this;
         _this.addEventListener(eui.UIEvent.COMPLETE, _this.uiCompHandler, _this);
         _this.skinName = "resource/eui_game/skins/headIcon1.exml";
@@ -26,6 +26,9 @@ var FriendIcon = (function (_super) {
         return _this;
     }
     FriendIcon.prototype.uiCompHandler = function () {
+        if (this._wechatid == GameMode.zhuangid) {
+            this._zhuang.visible = true;
+        }
     };
     FriendIcon.prototype.changeSkin = function (_a) {
         var x = _a.x, y = _a.y;

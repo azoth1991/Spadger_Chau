@@ -18,12 +18,11 @@ class GameOverUI extends eui.Component {
         GameMode.inRoom = false;
         MessageCenter.getInstance().sendMessage( GameEvents.WS_ENTER_ROOM, {type:GamePages.CREATE_ROOM});
         // MessageCenter.getInstance().sendMessage( GameEvents.WS_CONTINUE, {});
-        
     }
 
     private backHome(e:egret.TouchEvent):void {
+        GameMode.showZhanji = true;        
         MessageCenter.getInstance().sendMessage(MessageCenter.EVT_LOAD_PAGE, {type:GamePages.BACK_HOME});
-        GameMode.showZhanji = true;
     }
     private init(){
         if (this._result.status == 0){

@@ -97,7 +97,7 @@ var GameUI = (function (_super) {
         }, this);
         // this[`_discardSPList${pos}`].push(actionResult);
         this.drawDiscardSPs();
-        this.drawOtherCard();
+        this.drawOtherCard(playsInfo);
     };
     // 画丢弃的牌
     GameUI.prototype.drawDiscardSPs = function () {
@@ -107,30 +107,56 @@ var GameUI = (function (_super) {
         // this.addChild(this._discardSPsBox);
         this._discardSPsBox.removeChildren();
         var sum0 = 0;
+        var sum01 = 0;
         var sum1 = 0;
+        var sum11 = 0;
         var sum2 = 0;
+        var sum21 = 0;
         var sum3 = 0;
+        var sum31 = 0;
         var scale = 0.4;
-        this._discardSPList0.forEach(function (value, key) {
+        var desy = 55;
+        this._discardSPList0.filter(function (v) { return GameMode.jokerPi.indexOf(v[0]) == -1; }).forEach(function (value, key) {
             value.forEach(function (v, k) {
                 var discardSP = new CardUI(1, v, 0, scale);
                 discardSP.x = 1194 - (k + key * 0.1 + sum0) * 79 * scale;
-                discardSP.y = 620;
+                discardSP.y = 625;
                 _this._discardSPsBox.addChild(discardSP);
             });
             sum0 += value.length;
         });
-        this._discardSPList3.forEach(function (value, key) {
+        // 0的皮上移
+        this._discardSPList0.filter(function (v) { return GameMode.jokerPi.indexOf(v[0]) > -1; }).forEach(function (value, key) {
             value.forEach(function (v, k) {
-                var discardSP = new CardUI(1, v, 3, scale);
+                var discardSP = new CardUI(1, v, 0, scale);
+                discardSP.x = 1194 - (k + key * 0.1 + sum01) * 79 * scale;
+                discardSP.y = 625 - desy;
+                _this._discardSPsBox.addChild(discardSP);
+            });
+            sum01 += value.length;
+        });
+        this._discardSPList3.filter(function (v) { return GameMode.jokerPi.indexOf(v[0]) == -1; }).forEach(function (value, key) {
+            var arr = value.find(function (v) { return v == -1; }) ? [-1, -1, -1, -1] : value;
+            arr.forEach(function (v, k) {
+                var discardSP = new CardUI(1, v, 1, scale);
                 discardSP.x = 195;
                 discardSP.y = 562 - (k + key * 0.1 + sum1) * 79 * scale;
                 _this._discardSPsBox.addChild(discardSP);
             });
             sum1 += value.length;
         });
-        this._discardSPList2.forEach(function (value, key) {
+        this._discardSPList3.filter(function (v) { return GameMode.jokerPi.indexOf(v[0]) > -1; }).forEach(function (value, key) {
             value.forEach(function (v, k) {
+                var discardSP = new CardUI(1, v, 1, scale);
+                discardSP.x = 195 + desy;
+                discardSP.y = 562 - (k + key * 0.1 + sum11) * 79 * scale;
+                _this._discardSPsBox.addChild(discardSP);
+            });
+            sum11 += value.length;
+        });
+        this._discardSPList2.filter(function (v) { return GameMode.jokerPi.indexOf(v[0]) == -1; }).forEach(function (value, key) {
+            var arr = value.find(function (v) { return v == -1; }) ? [-1, -1, -1, -1] : value;
+            arr.forEach(function (v, k) {
                 var discardSP = new CardUI(1, v, 2, scale);
                 discardSP.x = 1194 - (k + key * 0.1 + sum2) * 79 * scale;
                 discardSP.y = 128;
@@ -138,14 +164,33 @@ var GameUI = (function (_super) {
             });
             sum2 += value.length;
         });
-        this._discardSPList1.forEach(function (value, key) {
+        this._discardSPList2.filter(function (v) { return GameMode.jokerPi.indexOf(v[0]) > -1; }).forEach(function (value, key) {
             value.forEach(function (v, k) {
-                var discardSP = new CardUI(1, v, 1, scale);
+                var discardSP = new CardUI(1, v, 2, scale);
+                discardSP.x = 1194 - (k + key * 0.1 + sum21) * 79 * scale;
+                discardSP.y = 128 + desy;
+                _this._discardSPsBox.addChild(discardSP);
+            });
+            sum21 += value.length;
+        });
+        this._discardSPList1.filter(function (v) { return GameMode.jokerPi.indexOf(v[0]) == -1; }).forEach(function (value, key) {
+            var arr = value.find(function (v) { return v == -1; }) ? [-1, -1, -1, -1] : value;
+            arr.forEach(function (v, k) {
+                var discardSP = new CardUI(1, v, 3, scale);
                 discardSP.x = 1150;
                 discardSP.y = 554 - (k + key * 0.1 + sum3) * 79 * scale;
                 _this._discardSPsBox.addChild(discardSP);
             });
             sum3 += value.length;
+        });
+        this._discardSPList1.filter(function (v) { return GameMode.jokerPi.indexOf(v[0]) > -1; }).forEach(function (value, key) {
+            value.forEach(function (v, k) {
+                var discardSP = new CardUI(1, v, 3, scale);
+                discardSP.x = 1150 - desy;
+                discardSP.y = 554 - (k + key * 0.1 + sum31) * 79 * scale;
+                _this._discardSPsBox.addChild(discardSP);
+            });
+            sum31 += value.length;
         });
     };
     GameUI.prototype.getCard = function (evt) {
@@ -185,7 +230,7 @@ var GameUI = (function (_super) {
         //     this.drawDiscard(this[`_discardList${pos}`],pos);
         //     // this._gameBox.addChild(this.discardBox);
         // }
-        this.drawOtherCard();
+        this.drawOtherCard(evt.data.discard);
     };
     GameUI.prototype.dropCard = function (pos, num) {
     };
@@ -229,6 +274,8 @@ var GameUI = (function (_super) {
         this.addChild(this._gameBox);
         this.addChild(this._discardSPsBox);
         this.addChild(this.discardBox);
+        this._roomId.text = GameMode.roomId;
+        this._total.text = GameMode.totalCard;
         var that = this;
         console.log('dslist', GameMode.playerList);
         this._gameinfo.text = GameMode.gameInfo;
@@ -283,6 +330,7 @@ var GameUI = (function (_super) {
             shownum = 2;
         }
         this["_zj" + shownum].visible = true;
+        this._total.text = "" + GameMode.totalCard;
     };
     GameUI.prototype.sendCardStatus = function (evt) {
         console.log('cardStatus', evt);
@@ -298,11 +346,18 @@ var GameUI = (function (_super) {
         if (GameMode.currentPlayer) {
             MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: GameMode.currentPlayer });
         }
-        this.setZj(evt.data.pos);
-        this.showZj(evt.data.pos);
-        if (evt.data.pos == 1) {
+        this.setZj(evt.data.model.pos);
+        this.showZj(evt.data.model.pos);
+        if (evt.data.model.pos == 1) {
             GameMode.isDiscard = true;
         }
+        // 画赖子
+        var jokerDisplay = new CardUI(2, GameMode.joker[0]);
+        jokerDisplay.x = 1222;
+        jokerDisplay.y = 445;
+        jokerDisplay.scaleX = 0.7;
+        jokerDisplay.scaleY = 0.7;
+        this.addChild(jokerDisplay);
         // 倒数计时
         // this.count();
         var position = [
@@ -315,7 +370,7 @@ var GameUI = (function (_super) {
         this._icon1.changeSkin(position[3]);
         this._icon2.changeSkin(position[2]);
         this._icon3.changeSkin(position[1]);
-        var models = evt.data.cards;
+        var models = evt.data.model.cards;
         var cards = this.getCards(models);
         // 移除按钮
         this.removeChild(this._ready);
@@ -327,7 +382,7 @@ var GameUI = (function (_super) {
         this.drawCard(cards);
         this._gameBox.addChild(this.cardsBox);
         // 画其他三家
-        this.drawOtherCard();
+        this.drawOtherCard(evt.data.discard);
         // 弃牌
         // this._gameBox.addChild(this.discardBox);
     };
@@ -378,14 +433,14 @@ var GameUI = (function (_super) {
     // 获取
     GameUI.prototype.getCards = function (arr) {
         var res = [];
-        if ((!GameMode.draw || GameMode.draw == -1) && GameMode.isDiscard && GameMode.startGame) {
-            arr.forEach(function (v, k) {
-                if (v > 0) {
-                    GameMode.draw = k;
-                }
-            });
-            GameMode.startGame = false;
-        }
+        // if ((!GameMode.draw || GameMode.draw==-1)&& GameMode.isDiscard&& GameMode.startGame) {
+        //     arr.forEach((v,k)=>{
+        //         if (v>0){
+        //             GameMode.draw = k;
+        //         }
+        //     });
+        //     GameMode.startGame = false;
+        // }
         // 如果是要出的牌剔除
         arr = arr.map(function (v, k) {
             if (k == GameMode.draw) {
@@ -446,6 +501,7 @@ var GameUI = (function (_super) {
         this._joker = [];
         this._jokerPi = [];
         var isShowDraw = false;
+        this.hideChowChoice();
         //画pi
         cards.filter(function (value, key) {
             if (GameMode.joker.length > 0 && GameMode.joker.indexOf(value) >= 0) {
@@ -491,14 +547,21 @@ var GameUI = (function (_super) {
             _this.cardsBox.addChild(card);
             // 吃的时候弹起
             // if (GameMode.canChowChoice[0].indexOf(value)>-1){
-            GameMode.canChowChoice.forEach(function (arr) {
-                if ((arr.indexOf(value) > -1) && (value != GameMode.actionCard)) {
-                    console.log('upcard');
-                    card.upCard();
-                }
-            });
+            // GameMode.canChowChoice.forEach((arr)=>{
+            //     if ((arr.indexOf(value)>-1)&&(value!=GameMode.actionCard)){
+            //         console.log('upcard')
+            //         card.upCard();
+            //     }
+            // })
+            // console.log(GameMode.canKongChoice, value)
+            // if (GameMode.canKongChoice.indexOf(value)>-1) {
+            //     console.log('upcard')
+            //     card.upCard();
+            // }
             // }
         });
+        // 画弹起的吃的牌
+        this.showChowChoice();
         // 出牌
         console.log('draw', GameMode.draw);
         if (GameMode.draw > -1) {
@@ -508,7 +571,44 @@ var GameUI = (function (_super) {
             card.scaleY = scale;
             card.x = 169 + cards.length * des * scale;
             card.y = 591;
+            if (GameMode.canKongChoice.indexOf(GameMode.draw) > -1) {
+                console.log('upcard');
+                card.upCard();
+            }
             this.cardsBox.addChild(card);
+        }
+    };
+    GameUI.prototype.hideChowChoice = function () {
+        if (this.contains(this.chowContainer)) {
+            this.removeChild(this.chowContainer);
+        }
+    };
+    GameUI.prototype.showChowChoice = function () {
+        var _this = this;
+        var des = 80;
+        this.chowContainer = new eui.Component();
+        if (this.contains(this.chowContainer)) {
+            this.removeChild(this.chowContainer);
+        }
+        this.addChild(this.chowContainer);
+        if (GameMode.canChowChoice.length > 0) {
+            GameMode.canChowChoice.forEach(function (arr, arrkey) {
+                arr.map(function (v, k) {
+                    var card = new CardUI(2, v);
+                    _this.chowContainer.addChild(card);
+                    var scale = 0.7;
+                    card.scaleX = scale;
+                    card.scaleY = scale;
+                    card.x = 159 + k * des * scale + arrkey * 20 + arrkey * 3 * des * scale;
+                    card.y = 495;
+                    card.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+                        GameMode.chiNum = arrkey;
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, { type: GameEvents.WS_CHI });
+                        GameMode.isSP = false;
+                        MessageCenter.getInstance().sendMessage(GameEvents.HIDE_DISCARDSP, null);
+                    }, _this);
+                });
+            });
         }
     };
     // 画弃牌
@@ -547,7 +647,7 @@ var GameUI = (function (_super) {
                 showPos = 1;
             }
             var card = new CardUI(type, value, showPos, scale);
-            switch (pos) {
+            switch (showPos) {
                 case 0:
                     card.x = startx + (key % 8) * desx;
                     card.y = starty + parseInt("" + key / 8) * desy;
@@ -568,42 +668,56 @@ var GameUI = (function (_super) {
             _this.discardBox.addChild(card);
         });
     };
-    GameUI.prototype.drawOtherCard = function () {
-        console.log('drawOtherCard', this._discardSPList1.length, this._discardSPList2.length, this._discardSPList3.length);
+    GameUI.prototype.drawOtherCard = function (discardList) {
         // this.removeChild(this._otherCardBox);
         // this._otherCardBox = new eui.Component();
         this._otherCardBox.removeChildren();
         var desX = 29;
         var desY = 52;
-        for (var cardLength = 0; cardLength < 13; cardLength++) {
-            var sum1 = 0;
-            var sum2 = 0;
-            var sum3 = 0;
-            // 左边
-            this._discardSPList1.forEach(function (v) {
-                sum3 += v.length;
+        var sumObj = {
+            sum1: 0,
+            sum2: 0,
+            sum3: 0
+        };
+        // var sum1=0;
+        // var sum2=0;
+        // var sum3=0;
+        discardList.map(function (v) {
+            var pos = 0;
+            GameMode.playerList.forEach(function (val, k) {
+                if (val.wechatId == v.wechatId) {
+                    pos = k;
+                }
+                sumObj["sum" + pos] = v.cardsNum;
             });
-            this._discardSPList2.forEach(function (v) {
-                sum2 += v.length;
-            });
-            this._discardSPList3.forEach(function (v) {
-                sum1 += v.length;
-            });
-            if (cardLength < 13 - sum1) {
+        }, this);
+        console.log(1111, sumObj);
+        for (var cardLength = 0; cardLength < 15; cardLength++) {
+            // // 左边
+            // this._discardSPList1.forEach((v)=>{
+            //     sum3+=v.length;
+            // });
+            // this._discardSPList2.forEach((v)=>{
+            //     sum2+=v.length;
+            // });
+            // this._discardSPList3.forEach((v)=>{
+            //     sum1+=v.length;
+            // });
+            if (cardLength < sumObj.sum1) {
                 var letfCard = new CardUI(5, null);
                 letfCard.x = 145;
                 letfCard.y = 128 + cardLength * desX;
                 this._otherCardBox.addChild(letfCard);
             }
             // 右边
-            if (cardLength < 13 - sum3) {
+            if (cardLength < sumObj.sum3) {
                 var rightCard = new CardUI(5, null);
                 rightCard.x = 1168;
                 rightCard.y = 128 + cardLength * desX;
                 this._otherCardBox.addChild(rightCard);
             }
             // 上面
-            if (cardLength < 13 - sum2) {
+            if (cardLength < sumObj.sum2) {
                 var letfCard = new CardUI(4, null);
                 letfCard.x = 322 + cardLength * desY;
                 letfCard.y = 53;

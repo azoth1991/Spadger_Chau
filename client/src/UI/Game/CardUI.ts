@@ -28,6 +28,10 @@ class CardUI extends eui.Component {
                 canUp = true;
             }
         })
+        if ((GameMode.canKongChoice.indexOf(this._num)>-1)&&(this._num!=GameMode.actionCard)){
+            canUp = true;
+        }
+
         console.log('upcard',GameMode.canChowChoice,this._num,GameMode.actionCard,GameMode.isSP)
         if((this.status == 'down' &&!GameMode.isSP) || ((this.status == 'down' && GameMode.isSP) && (canUp || (GameMode.joker.indexOf(this._num)>-1||GameMode.jokerPi.indexOf(this._num)>-1)))){
             this.y = this.y - 28;
@@ -75,11 +79,14 @@ class CardUI extends eui.Component {
                         for (var i=0;i<GameMode.canChowChoice.length;i++){
                             if(GameMode.canChowChoice[i].indexOf(this._num)>-1){
                                 GameMode.chiNum = i;
+                                MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_CHI});                                                    
                                 break;
                             }
                         }
-                        
-                        MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_CHI});                    
+                        if(GameMode.canKongChoice.indexOf(this._num)>-1){
+                            GameMode.gangNum = this._num;
+                            MessageCenter.getInstance().sendMessage(GameEvents.WS_SEND_DISCARDSTATUS, {type:GameEvents.WS_GANG});
+                        }                    
                     }
                     GameMode.isSP = false;
                     MessageCenter.getInstance().sendMessage( GameEvents.HIDE_DISCARDSP, null ); 

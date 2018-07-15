@@ -47,7 +47,7 @@ class MainUI extends eui.Component {
         this.enterRoom.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
 
         // dialog点击
-        this._myI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
+        // this._myI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
         this._toolsI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
         this._zhanjiI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );
         this._newsI.addEventListener( egret.TouchEvent.TOUCH_TAP, this.dialogHandler, this );

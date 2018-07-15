@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="gameSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*">
+<e:Skin class="gameSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
 	<e:Image source="jishi_img_png" x="613" y="290"/>
 	<e:Image id="_zjbg4" source="bei_zhongjian_png" x="733" y="290" rotation="90"/>
 	<e:Image id="_zjbg1" source="dong_zhongjian_png" x="614.5" y="291" rotation="0"/>
@@ -14,8 +14,12 @@
 
 	<e:Image source="zhuangshi_img_png" x="0" y="0"/>
 	<e:Image source="zhuangshi_img_png" x="1334" y="0" scaleX="-1"/>
-	<e:Image source="wenzi_bg_png" x="396.5" y="420" />
-    <e:Label id="_gameinfo" text="" y="427" size="20" x="570"/>                    
+	<!--<e:Image source="wenzi_bg_png" x="396.5" y="420" />-->
+    <e:Label id="_gameinfo" text="" y="37" size="20" x="570"/>                    
+    <e:Label text="房间号：" y="7" size="20" x="559"/>
+	<e:Label text="剩余牌数：" y="7" size="20" x="685"/>                    
+    <e:Label id="_roomId" text="1234" y="7" size="20" x="634"/>
+	<e:Label id="_total" text="82" y="7" size="20" x="779"/>                    
     <e:Button id="chongzhi" y="7" x="1118">
 		<e:skinName>
 			<e:Skin states="up,down,disabled" xmlns:w="http://ns.egret.com/wing">

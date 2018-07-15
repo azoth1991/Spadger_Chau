@@ -1,5 +1,5 @@
 class FriendIcon extends eui.Component {
-    constructor(type, {x,y,wechatNick,id,headImageUrl,wechatId}) {
+    constructor(type, {x,y,wechatNick,id,headImageUrl,wechatId,pos}) {
         super();
         this.addEventListener( eui.UIEvent.COMPLETE, this.uiCompHandler, this );
         this.skinName = "resource/eui_game/skins/headIcon1.exml";
@@ -14,6 +14,9 @@ class FriendIcon extends eui.Component {
     }
 
     uiCompHandler() {
+        if (this._wechatid == GameMode.zhuangid){
+            this._zhuang.visible = true;
+        }
     }
 
     public changeSkin({x,y}){
@@ -34,5 +37,6 @@ class FriendIcon extends eui.Component {
     private _name1;
     private _icon1;
     private _wechatid;
+    private _zhuang:eui.Image;
 
 }

@@ -7,7 +7,7 @@ var GameMode = (function () {
     GameMode.billingMode = 1; // 1:aa 2:房主
     GameMode.type = 121; // 121:红中发财 122:前痞后赖 123 武汉晃晃
     GameMode.winPoints = 1; //1 16 32 64
-    GameMode.limitPoints = 300; //300 500
+    GameMode.limitPoints = 400; //400 500
     GameMode.pointType = 131; // 131开口番 132口口番 
     GameMode.totalNum = 4;
     GameMode.inRoom = false;
@@ -22,7 +22,9 @@ var GameMode = (function () {
     GameMode.isSP = false; // 只有特殊操作的时候才可以选中多张
     GameMode.gangNum = -1;
     GameMode.chiNum = 0;
+    GameMode.kongNum = 0;
     GameMode.canChowChoice = [[]];
+    GameMode.canKongChoice = [];
     GameMode.option = [];
     GameMode.currentPlayer = '';
     GameMode.upList = [];
@@ -34,7 +36,9 @@ var GameMode = (function () {
     GameMode.hornorJoker = false;
     GameMode.originJoker = false;
     GameMode.isUnderTake = false;
-    GameMode.showZhanji = true;
+    GameMode.showZhanji = false;
+    GameMode.totalCard = '82';
+    GameMode.zhuangid = '';
     return GameMode;
 }());
 __reflect(GameMode.prototype, "GameMode");

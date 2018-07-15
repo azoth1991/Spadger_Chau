@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="friendIRSkin" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="shopContentIRSkin" xmlns:e="http://ns.egret.com/eui">
     <e:Image source="shopContent-bg_png" x="0" y="0" width="550" height="127" scale9Grid="70,40,50,40" />
     <e:Image source="shopContent-icon_png" x="55" y="5" />
 	<e:Image source="{data.icon}" x="71" y="20" width="80" height="80"/>

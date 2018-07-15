@@ -13,9 +13,13 @@ class ESocket {
         const info = JSON.parse(data);
         GameMode.draw = -1;
         GameMode.canChowChoice = [];
+        GameMode.canKongChoice = [];
         GameMode.chiNum = 0;
         GameMode.actionCard = -1;
         GameMode.option = [];
+        if (info.cardsTotal) {
+            GameMode.totalCard = info.cardsTotal;
+        }
         if (info.actionCard) {
             GameMode.actionCard = info.actionCard;
         }
@@ -82,6 +86,7 @@ class ESocket {
                     break;
                 case 7:
                     console.log(`sendMessage=>开始游戏`)
+                    GameMode.draw = info.draw;
                     this.setJoker(info.model);
                     var playerList = GameMode.playerList;
                     var index = info.positionMap[GameMode.wechatId];
@@ -94,7 +99,9 @@ class ESocket {
                         }
                     });
                     GameMode.playerList = newplist;
-                    MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, info.model);
+
+                    GameMode.zhuangid = info.playsInfo.find(v=>v.pos == 1).wechatId;
+                    MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, {model:info.model,discard: info.playsInfo});
                     break;
                 case 10:
                     console.log(`重连`);
@@ -148,6 +155,9 @@ class ESocket {
                     if (info.model.canChowChoice&& info.model.canChowChoice.length>0){
                         GameMode.canChowChoice = info.model.canChowChoice;
                     }
+                    if (info.model.canKongChoice&& info.model.canKongChoice.length>0){
+                        GameMode.canKongChoice = info.model.canKongChoice;
+                    }
                     if(info.model.cards){
                         var cards = info.model.cards;
                         var prevailing = info.prevailing;
@@ -171,6 +181,9 @@ class ESocket {
                     // 杠 流程
                     // 显示出牌
                     GameMode.draw = info.draw;
+                    if (info.model.canKongChoice&& info.model.canKongChoice.length>0){
+                        GameMode.canKongChoice = info.model.canKongChoice;
+                    }
                     // 显示牌组
                     if(info.model.cards){
                         var cards = info.model.cards;
@@ -213,6 +226,9 @@ class ESocket {
                     } else {
                         GameMode.isDiscard = false;
                     }
+                    if (info.model.canKongChoice&& info.model.canKongChoice.length>0){
+                        GameMode.canKongChoice = info.model.canKongChoice;
+                    }
                     
                     // 谁出牌
                     // GameMode.pos = info.currentPlayer;
@@ -239,6 +255,9 @@ class ESocket {
                     } else {
                         GameMode.isDiscard = false;
                     }
+                    if (info.model.canKongChoice&& info.model.canKongChoice.length>0){
+                        GameMode.canKongChoice = info.model.canKongChoice;
+                    }
                     // 谁出牌
                     // GameMode.pos = info.currentPlayer;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, {pos:info.currentPlayer});
@@ -246,12 +265,16 @@ class ESocket {
                 case 42:
                     // 碰 流程
                     // 显示牌组
+                    if (info.model.canKongChoice&& info.model.canKongChoice.length>0){
+                        GameMode.canKongChoice = info.model.canKongChoice;
+                    }
                     // GameMode.draw = info.draw;
                     if(info.model.cards){
                         var cards = info.model.cards;
                         var prevailing = info.prevailing;
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, {cards,discard: info.playsInfo,prevailing});
                     }
+                    
                     if (info.model.status ==23) {
                         GameMode.isDiscard = true;
                     } else {
@@ -287,7 +310,32 @@ class ESocket {
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:info.model.option});
                     }
                     break;
-
+                case 7:
+                console.log('出牌');
+                    // 显示出牌
+                    GameMode.draw = info.draw;
+                    if (info.model.status ==23) {
+                        GameMode.isDiscard = true;
+                    } else {
+                        GameMode.isDiscard = false;
+                    }
+                    
+                    if(info.model.cards){
+                        var cards = info.model.cards;
+                        var prevailing = info.prevailing;
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, {cards,discard: info.playsInfo,prevailing});
+                    }
+                    
+                    // 谁出牌
+                    // GameMode.pos = info.currentPlayer;
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, {pos:info.currentPlayer});
+                    // MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:[42,43,44,45]});
+                    // 平局显示10秒牌转跳到结果页
+                    setTimeout(() =>{
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GAMEOVER, {info:info});
+                    },1000*10);
+                    break;
+                    
                 case 45:
                     // 胡牌 游戏结束
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GAMEOVER, {info:info});
@@ -396,6 +444,9 @@ class ESocket {
         }
         if (actionid == 44){
             info.discardNum = GameMode.gangNum;
+            if (info.discardNum < 0) {
+                info.discardNum = GameMode.canKongChoice[0];
+            }
         }
         this._websocket.send(JSON.stringify(info));
     }

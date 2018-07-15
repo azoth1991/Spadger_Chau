@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="dialogSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="dialogShopSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui">
 	<e:Image source="dialog-left-bg_png" x="248" y="132"/>
 	<e:Image source="dialog-left-bg_png" x="476" y="639.66" anchorOffsetY="0" height="-42" rotation="179.66"/>
 	<e:Image source="dialog-right-bg_png" x="249.73" y="156" anchorOffsetY="0" height="459"/>

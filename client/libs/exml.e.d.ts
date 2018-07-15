@@ -82,13 +82,31 @@ declare class usetoolSkin extends eui.Skin{
 }
 declare class settingSkin extends eui.Skin{
 }
+declare class dialogMailSkin extends eui.Skin{
+}
+declare class dialogPlaySkin extends eui.Skin{
+}
+declare class dialogShopSkin extends eui.Skin{
+}
 declare class dialogSkin extends eui.Skin{
 }
 declare class enterRoomSkin extends eui.Skin{
 }
 declare class friendIRSkin extends eui.Skin{
 }
+declare class gameHistoryIRSkin extends eui.Skin{
+}
+declare class gameHistorySkin extends eui.Skin{
+}
 declare class headSkin extends eui.Skin{
 }
+declare class mailContentIRSkin extends eui.Skin{
+}
 declare class mainSkin extends eui.Skin{
+}
+declare class myRoomIRSkin extends eui.Skin{
+}
+declare class myRoomSkin extends eui.Skin{
+}
+declare class shopContentIRSkin extends eui.Skin{
 }

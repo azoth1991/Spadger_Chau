@@ -4,5 +4,5 @@
     <e:Label id="_name" text="阿静"  x="85"/>
 	<e:Image source="bei_img_png" x="86" y="39"/>
     <e:Label id="_res" text="x1" x="116" y="37"/>
-    <e:Label id="_num" text="+18"  x="669" y="10" size="50" textColor="0xdd6316"/>
+    <e:Label id="_num" text="+18"  x="573" y="10" size="50" textColor="0xdd6316" anchorOffsetX="0" width="181"/>
 </e:Skin>

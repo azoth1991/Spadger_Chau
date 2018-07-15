@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="friendIRSkin" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="mailContentIRSkin" xmlns:e="http://ns.egret.com/eui">
 <e:Image source="mailItem-bg_png" x="0" y="0" width="770" height="127" scale9Grid="70,40,10,40" />
 <e:Image x="54.5" y="13.5"  source="{data.mailIcon}"/>
 <e:Label fontFamily="微软雅黑" text="{data.mailInfo}" textColor="0x831A05" x="152.5" y="52" size="20" width="191" textAlign="left"

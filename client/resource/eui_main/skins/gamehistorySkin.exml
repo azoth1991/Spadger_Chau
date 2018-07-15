@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="dialogSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui">
+<e:Skin class="gameHistorySkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui">
 	<e:Image source="papper-bg_jpg" x="254.02" y="134" anchorOffsetY="0" height="500"/>
 	<e:Image source="papper-bg_jpg" x="1066.02" y="134" anchorOffsetY="0" height="500" rotation="180" scaleY="-1"/>
 	<e:Image source="paper_jpg" x="410.02" y="134" rotation="360" anchorOffsetX="0" width="500" anchorOffsetY="0" height="500"/>

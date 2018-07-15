@@ -13,9 +13,13 @@ var ESocket = (function () {
         var info = JSON.parse(data);
         GameMode.draw = -1;
         GameMode.canChowChoice = [];
+        GameMode.canKongChoice = [];
         GameMode.chiNum = 0;
         GameMode.actionCard = -1;
         GameMode.option = [];
+        if (info.cardsTotal) {
+            GameMode.totalCard = info.cardsTotal;
+        }
         if (info.actionCard) {
             GameMode.actionCard = info.actionCard;
         }
@@ -83,6 +87,7 @@ var ESocket = (function () {
                     break;
                 case 7:
                     console.log("sendMessage=>\u5F00\u59CB\u6E38\u620F");
+                    GameMode.draw = info.draw;
                     this.setJoker(info.model);
                     var playerList = GameMode.playerList;
                     var index = info.positionMap[GameMode.wechatId];
@@ -96,7 +101,8 @@ var ESocket = (function () {
                         }
                     });
                     GameMode.playerList = newplist;
-                    MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, info.model);
+                    GameMode.zhuangid = info.playsInfo.find(function (v) { return v.pos == 1; }).wechatId;
+                    MessageCenter.getInstance().sendMessage(MessageCenter.GAME_START, { model: info.model, discard: info.playsInfo });
                     break;
                 case 10:
                     console.log("\u91CD\u8FDE");
@@ -148,6 +154,9 @@ var ESocket = (function () {
                     if (info.model.canChowChoice && info.model.canChowChoice.length > 0) {
                         GameMode.canChowChoice = info.model.canChowChoice;
                     }
+                    if (info.model.canKongChoice && info.model.canKongChoice.length > 0) {
+                        GameMode.canKongChoice = info.model.canKongChoice;
+                    }
                     if (info.model.cards) {
                         var cards = info.model.cards;
                         var prevailing = info.prevailing;
@@ -166,6 +175,9 @@ var ESocket = (function () {
                     // 杠 流程
                     // 显示出牌
                     GameMode.draw = info.draw;
+                    if (info.model.canKongChoice && info.model.canKongChoice.length > 0) {
+                        GameMode.canKongChoice = info.model.canKongChoice;
+                    }
                     // 显示牌组
                     if (info.model.cards) {
                         var cards = info.model.cards;
@@ -208,6 +220,9 @@ var ESocket = (function () {
                     else {
                         GameMode.isDiscard = false;
                     }
+                    if (info.model.canKongChoice && info.model.canKongChoice.length > 0) {
+                        GameMode.canKongChoice = info.model.canKongChoice;
+                    }
                     // 谁出牌
                     // GameMode.pos = info.currentPlayer;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
@@ -233,6 +248,9 @@ var ESocket = (function () {
                     else {
                         GameMode.isDiscard = false;
                     }
+                    if (info.model.canKongChoice && info.model.canKongChoice.length > 0) {
+                        GameMode.canKongChoice = info.model.canKongChoice;
+                    }
                     // 谁出牌
                     // GameMode.pos = info.currentPlayer;
                     MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
@@ -241,6 +259,9 @@ var ESocket = (function () {
                 case 42:
                     // 碰 流程
                     // 显示牌组
+                    if (info.model.canKongChoice && info.model.canKongChoice.length > 0) {
+                        GameMode.canKongChoice = info.model.canKongChoice;
+                    }
                     // GameMode.draw = info.draw;
                     if (info.model.cards) {
                         var cards = info.model.cards;
@@ -283,6 +304,30 @@ var ESocket = (function () {
                         // 显示碰杠吃
                         MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, { option: info.model.option });
                     }
+                    break;
+                case 7:
+                    console.log('出牌');
+                    // 显示出牌
+                    GameMode.draw = info.draw;
+                    if (info.model.status == 23) {
+                        GameMode.isDiscard = true;
+                    }
+                    else {
+                        GameMode.isDiscard = false;
+                    }
+                    if (info.model.cards) {
+                        var cards = info.model.cards;
+                        var prevailing = info.prevailing;
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_CARD, { cards: cards, discard: info.playsInfo, prevailing: prevailing });
+                    }
+                    // 谁出牌
+                    // GameMode.pos = info.currentPlayer;
+                    MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDPOS, { pos: info.currentPlayer });
+                    // MessageCenter.getInstance().sendMessage(GameEvents.WS_GET_DISCARDSTATUS, {option:[42,43,44,45]});
+                    // 平局显示10秒牌转跳到结果页
+                    setTimeout(function () {
+                        MessageCenter.getInstance().sendMessage(GameEvents.WS_GAMEOVER, { info: info });
+                    }, 1000 * 10);
                     break;
                 case 45:
                     // 胡牌 游戏结束
@@ -390,6 +435,9 @@ var ESocket = (function () {
         }
         if (actionid == 44) {
             info.discardNum = GameMode.gangNum;
+            if (info.discardNum < 0) {
+                info.discardNum = GameMode.canKongChoice[0];
+            }
         }
         this._websocket.send(JSON.stringify(info));
     };

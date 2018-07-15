@@ -519,7 +519,7 @@ class ShopContentIRUI extends eui.ItemRenderer {
         request.addEventListener(egret.Event.COMPLETE,(evt)=>{
             var response = <egret.HttpRequest>evt.currentTarget;
             var res = JSON.parse(response.response);
-            wx.chooseWXPay({  
+            wx.chooseWXPay({
                 timestamp: res.timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符  
                 nonceStr: res.nonce_str, // 支付签名随机串，不长于 32 位  
                 package: `prepay_id=${res.prepay_id}`, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）  

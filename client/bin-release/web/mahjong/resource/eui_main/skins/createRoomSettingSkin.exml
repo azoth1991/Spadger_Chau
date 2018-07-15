@@ -44,7 +44,7 @@
         <e:RadioButton id="radio3_4" groupName="cn3" label="64倍" skinName="skins.RadioButtonSkin" x="385" y="10"/>
     </e:Group>
     <e:Group xmlns:e="http://ns.egret.com/eui" y="466" x="466" anchorOffsetX="0" width="456" anchorOffsetY="0" height="52">
-        <e:RadioButton id="radio4_1" groupName="cn4" label="300倍封顶" skinName="skins.RadioButtonSkin" y="12"/>
+        <e:RadioButton id="radio4_1" groupName="cn4" label="400倍封顶" skinName="skins.RadioButtonSkin" y="12"/>
         <e:RadioButton id="radio4_2" groupName="cn4" label="500倍封顶" skinName="skins.RadioButtonSkin" x="255" y="14"/>
     </e:Group>
 

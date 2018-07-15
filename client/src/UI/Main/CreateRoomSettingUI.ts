@@ -48,7 +48,7 @@ class CreateRoomSettingUI extends eui.Component {
                         GameMode.winPoints = 64;
                         break;
                     case  this.radio4_1:
-                        GameMode.limitPoints = 300;
+                        GameMode.limitPoints = 400;
                         break;
                     case  this.radio4_2:
                         GameMode.limitPoints = 500;
